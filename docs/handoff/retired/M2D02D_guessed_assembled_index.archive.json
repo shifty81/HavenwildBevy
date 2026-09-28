@@ -1,0 +1,422 @@
+{
+  "schema": "havenwild.elizawy.assembled_certification_scene.v1",
+  "authority": "source_addressed_assembled_visual_test_zero_promotions",
+  "generatedSceneSize": [
+    72,
+    28
+  ],
+  "catalogSha256": "5b4bc8bc506268104bdd88629a6481511937ee7708e7d42949fc988824a214d1",
+  "summerInventorySha256": "6cbfe8ed5c77bfdc226768c262fb0d8812b9b90f20b311454f58ab784c0136a2",
+  "totalCoreAssets": 349,
+  "terrainSourceSheetsAvailableInBrowser": 29,
+  "summerRecoveredSourceCells": 305,
+  "summerTransparentSourceCells": 111,
+  "summerSourceCellsActuallyUsed": 51,
+  "certifiedRecipeMasks": 0,
+  "fixtureZone": {
+    "origin": [
+      16,
+      0
+    ],
+    "sizeCells": [
+      40,
+      28
+    ],
+    "sourceFixture": "content/scenes/summer_river.scene.json",
+    "sourceFixtureSha256": "9e5ade01d388c6184984c61c8bf97cd3dafcb436a4c9c060b8db9e3c842b09e7"
+  },
+  "testZone": {
+    "origin": [
+      0,
+      0
+    ],
+    "sizeCells": [
+      72,
+      28
+    ]
+  },
+  "visualSamples": [
+    {
+      "id": "woods.tree.00",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        1,
+        2
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.01",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        5,
+        3
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.02",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        10,
+        1
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.03",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        2,
+        11
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.04",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        8,
+        13
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.05",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        1,
+        22
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.06",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        60,
+        1
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.07",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        65,
+        3
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.08",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        58,
+        16
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.09",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        65,
+        19
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.10",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        69,
+        1
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "woods.tree.11",
+      "label": "Summer broadleaf",
+      "sourceAsset": "Terrain/trees_summer.png",
+      "sourceRect": [
+        128,
+        0,
+        96,
+        128
+      ],
+      "origin": [
+        61,
+        23
+      ],
+      "sizeCells": [
+        3,
+        4
+      ],
+      "purpose": "woodland_composition",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.00",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        11,
+        8
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.01",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        3,
+        17
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.02",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        8,
+        23
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.03",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        58,
+        4
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.04",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        65,
+        14
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    },
+    {
+      "id": "scree.boulder.05",
+      "label": "Grassland boulder",
+      "sourceAsset": "Terrain/Rocks, Grasslands.png",
+      "sourceRect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "origin": [
+        61,
+        20
+      ],
+      "sizeCells": [
+        3,
+        3
+      ],
+      "purpose": "rock_selection_transparency_and_footprint",
+      "reviewState": "visual_integration_draft_not_certified"
+    }
+  ],
+  "backgroundSource": "Terrain/terrain_summer.png",
+  "originalSourcesUnchanged": true,
+  "sampleFixtureUnchanged": true,
+  "instruction": "This is assembled scenery, not a source board. Select a tree/rock to inspect or remove this visual instance. Ground tile changes and hidden sample IDs save only to an independent derived draft. No recipe/structural certification is inferred."
+}

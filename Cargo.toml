@@ -1,0 +1,17 @@
+[package]
+name = "havenwild_bevy"
+version = "0.5.6"
+edition = "2021"
+rust-version = "1.95"
+publish = false
+
+[workspace]
+resolver = "2"
+
+[dependencies]
+bevy = "=0.19.0"
+bevy_egui = "=0.42.0"
+forge_gui_chrome = { git = "https://github.com/shifty81/ForgeGUI_Core", rev = "eafa8e78efd54142a19e66d8be7b7d3985af23d2" }
+forge_gui_theme = { git = "https://github.com/shifty81/ForgeGUI_Core", rev = "eafa8e78efd54142a19e66d8be7b7d3985af23d2" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

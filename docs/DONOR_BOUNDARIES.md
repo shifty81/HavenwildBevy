@@ -1,0 +1,9 @@
+# Donor policy and clean-room boundary
+
+Original Havenwild is independent, untouched, and *never* a live dependency or Git submodule of this fresh base. This ZIP was authored from user-supplied original asset archives, project design direction, and verified observations of the earlier experimental Bevy candidate. Do not imply full current donor code was copied. All Rust `src/` here is newly scaffolded; the old source extraction kit, diagnostic PCC helpers, arbitrary validation and audit scripts, patch files, donor snapshots and Bevy 06R1 source are deliberately absent.
+
+When needed, donor-port these IDEAS/APIs after an explicit review: Atlas Mapper source-linked `AssemblyPiece`/layer/drag/undo patterns; Pixel Studio raster/document/animation workflows; native Havenwild world descriptor, authored capital and estate semantics; certified terrain recipes and collision/nav; ForgeGUI CanvasDesktop shell code when implemented. Preserve provenance, tests relevant to the transferred function and source licensing, but do not copy dependency trees, assets from unrelated collections or old experimental safety gates indiscriminately.
+
+ForgeGUI_Core is an external pinned Rust dependency at `eafa8e78efd54142a19e66d8be7b7d3985af23d2`. It is not vendored and first build needs network or an appropriate local Cargo cache. Bevy 0.19/wgpu Vulkan validation on the user's GPU was observed in prior experimental work; DX12 is initial development backend until retested. This is one renderer with selectable GPU backend, not separate scene mapping lanes.
+
+`Characters.zip` is not required in source control; ForgePY may copy it from the authoritative asset source and hydrate it locally on demand. `FourSeasonAlternative.zip` is likewise an intentionally separate local source option, never a silent canonical replacement. External license/legal review remains required for releases; keep all local credits verbatim.

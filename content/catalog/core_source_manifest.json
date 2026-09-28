@@ -1,0 +1,4819 @@
+{
+  "schema": "havenwild.bevy.asset_manifest.v1",
+  "description": "Canonical non-character ElizaWy/LPC Revised source manifest used by ForgePY asset hydration. Source files remain external to source-only handoffs.",
+  "activeFamily": "LPC Revised / ElizaWy collection (multi-artist)",
+  "count": 349,
+  "entries": [
+    {
+      "id": "elizawy:Terrain/cliff_autumn.png",
+      "path": "Terrain/cliff_autumn.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 73667,
+      "sha256": "9535548bd6bee63155f0fa508a7249c3baf87f7bfc4ed0b75b69ed3df7fda3ed",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/cliff_spring.png",
+      "path": "Terrain/cliff_spring.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 74056,
+      "sha256": "f39b288da35fe38d62bb11f0f8a5ab803daf1a23f081cea15c18fc54f0b65ad4",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/cliff_summer.png",
+      "path": "Terrain/cliff_summer.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 73503,
+      "sha256": "94bd2ddb2c51677498453486092ef28e57e0c1880f4334359189229590298147",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/cliff_winter.png",
+      "path": "Terrain/cliff_winter.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 73122,
+      "sha256": "5eb9c10ba5dff5952e84efc24362336e68c4a57c7d4f6b3c6c33cbb8b738ac01",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/cliff_winter_ice.png",
+      "path": "Terrain/cliff_winter_ice.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 70181,
+      "sha256": "81a0dd8f5e641c98a0bfb078a7097ac7974ba38a6431724b647bcd2ea34557ea",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/Credits.txt",
+      "path": "Terrain/Credits.txt",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3405,
+      "sha256": "955d40a17e361fa2837d2af83917b07043ca078da096bd48c5b4a8c7004eebbf",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/flowers.png",
+      "path": "Terrain/flowers.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 30094,
+      "sha256": "e698d0db83e5238ea3fcc8783f1294b70312e2170a8856cb5a99ca40e7f6cddb",
+      "imageSizePx": [
+        352,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/ice-shallows.png",
+      "path": "Terrain/ice-shallows.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5644,
+      "sha256": "127e57afb9406d2e4ec973857b5d9e4125dddacbb40157853decd7c52570c0cd",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/mushrooms.png",
+      "path": "Terrain/mushrooms.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6915,
+      "sha256": "b83d21f0ffbbe5d21963d4ccc1f28baae6cca6bedc901cd54924f9a3c370354a",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/plants_autumn.png",
+      "path": "Terrain/plants_autumn.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 26604,
+      "sha256": "7d9e3c1292b0924953b72779cc9455a26721a4e13b698185c52361bc425297ef",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/plants_spring.png",
+      "path": "Terrain/plants_spring.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 26878,
+      "sha256": "b4e29171f99b90cb1a73a1ea5ac120c75439208c15ca5cac33048656e630b63d",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/plants_summer.png",
+      "path": "Terrain/plants_summer.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 26593,
+      "sha256": "66ca3a60067d123c02cbae5874c17da1c7a3f0da4142066b9711de79f99228d7",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/plants_winter.png",
+      "path": "Terrain/plants_winter.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 20124,
+      "sha256": "b2f3cbdd12d61aeaba64c16f036a0b90fd0a3bd89e9767b161c0820dcb179db7",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/Rocks, Cliffs.png",
+      "path": "Terrain/Rocks, Cliffs.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9774,
+      "sha256": "aa7b4cb7e20ca8f95071eaa41373ecdacf8995a440595d58b10ec7d1ad243256",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/Rocks, Grasslands.png",
+      "path": "Terrain/Rocks, Grasslands.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 29365,
+      "sha256": "615a67744c0c57d14d009ced1ea4fab34b24560ad9c08812da7eb01f80082c1b",
+      "imageSizePx": [
+        192,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/terrain_autumn.png",
+      "path": "Terrain/terrain_autumn.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 71855,
+      "sha256": "c72e7faa08c52c0ac3e3b5e6fc86ca96baed66b05962b014466cca5a84304e52",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/terrain_spring.png",
+      "path": "Terrain/terrain_spring.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 72987,
+      "sha256": "48d6a4ac0143ee0b514d893115d8de033ec4ca271a44134f70cfd198d6b8d749",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/terrain_summer.png",
+      "path": "Terrain/terrain_summer.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 71578,
+      "sha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/terrain_winter.png",
+      "path": "Terrain/terrain_winter.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 70557,
+      "sha256": "cf7d8e73a45c3bcea9e12290eef5c758971976a2e8abce42b01c5f910c559c4c",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/terrain_winter_ice.png",
+      "path": "Terrain/terrain_winter_ice.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 63175,
+      "sha256": "518b7de5da7b3f45a88cc64f7beb149243f2b9c7bdff23101c6b514f255ab78f",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/tilled_soil.png",
+      "path": "Terrain/tilled_soil.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 18243,
+      "sha256": "4b2bfa6d9b7140f50cdba08a39472e745f065bba65002fe331bcf39580e1a09f",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/trees_autumn.png",
+      "path": "Terrain/trees_autumn.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 46176,
+      "sha256": "935f84761b070f3188d634c7a31057aca99ee529686de1835e0d73ef00709846",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/trees_spring.png",
+      "path": "Terrain/trees_spring.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 50440,
+      "sha256": "c8bd8c9a8f892b9384cee14f0459cd2dbe112a24adcad47728a4c28f8636b47d",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/trees_summer.png",
+      "path": "Terrain/trees_summer.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 46291,
+      "sha256": "c00e3728ea975c05b77972e3bff1162ddb7eebcaf626046d1f0c81c6824af674",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/trees_winter.png",
+      "path": "Terrain/trees_winter.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 49345,
+      "sha256": "a76faeacc70f8d73fdc1d0a5171d6c143c0619b0694439c31f42c0f40ffefd0d",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/Waterfall.png",
+      "path": "Terrain/Waterfall.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 49349,
+      "sha256": "5225ab0a7451a90d3b9b4cad37188b63467dc61797369fcec746b583a270dcb6",
+      "imageSizePx": [
+        512,
+        608
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/wildflowers_autumn.png",
+      "path": "Terrain/wildflowers_autumn.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3812,
+      "sha256": "1e61e4f338e75f834800ff76349f9a4b616192d0d98d5336074f976f5fe2a5cf",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/wildflowers_spring.png",
+      "path": "Terrain/wildflowers_spring.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3826,
+      "sha256": "1ef87b8ef854b850d0eb32be3c9e0e57a8c96d9419d2630c97568616ff592e3d",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/wildflowers_summer.png",
+      "path": "Terrain/wildflowers_summer.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3924,
+      "sha256": "ec0774429f514ae192f25466ccfd5cbaa3426f23e4533df7621e2d42e3de9f3a",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Terrain/wildflowers_winter.png",
+      "path": "Terrain/wildflowers_winter.png",
+      "pack": "Terrain.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1914,
+      "sha256": "b5b81c8ec43bfd47efca1727059c66adedc074dbfb16591906df0991c543087f",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Credits.txt",
+      "path": "Structure/Bridges/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1014,
+      "sha256": "c85e1ed68bacecd837a944469a89d46a537f20c6c0b19851fe07d78e7293ab61",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Drawbridge A.png",
+      "path": "Structure/Bridges/Drawbridge A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2103,
+      "sha256": "23c7805444acd46dfa6c1bf4f3c9e4b2a3241029eab4ac64c6075ec79351a5ad",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Rope Bridge A - No Rails.png",
+      "path": "Structure/Bridges/Rope Bridge A - No Rails.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2265,
+      "sha256": "a490a5bc6b75515442099813d0f2df5294c7734e0c663ebe944c28e7555b9131",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Rope Bridge A - Rails.png",
+      "path": "Structure/Bridges/Rope Bridge A - Rails.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6034,
+      "sha256": "9d10a27aae2028f41a762c7b0974748f32fdd59f6db4ecc4bef4acd88bccaeed",
+      "imageSizePx": [
+        160,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Wood Bridge A - No Rails.png",
+      "path": "Structure/Bridges/Wood Bridge A - No Rails.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9943,
+      "sha256": "f514822ea07fad29cdcf53c3e819f3c38fd49c20d9f74962cef806ed53425093",
+      "imageSizePx": [
+        320,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Bridges/Wood Bridge A - Rails.png",
+      "path": "Structure/Bridges/Wood Bridge A - Rails.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 13743,
+      "sha256": "e390086ef0a6c02799006cc0a63ad6554e1fd90cb9f2c623bfd0c6c1b33fad1a",
+      "imageSizePx": [
+        320,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/12 Panel Door A.png",
+      "path": "Structure/Doors/32x48px Doors/12 Panel Door A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 53094,
+      "sha256": "6618554708d2f3a56079bc2c9bc6b3ea68ec479c7649531614611a68bab643e6",
+      "imageSizePx": [
+        896,
+        768
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/12 Panel Door B.png",
+      "path": "Structure/Doors/32x48px Doors/12 Panel Door B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 54735,
+      "sha256": "66fb2be3e1dd30e684de5473c060fd3692dcaa4098493c645d64bb7796863df2",
+      "imageSizePx": [
+        896,
+        768
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/Barred Prison Door A.png",
+      "path": "Structure/Doors/32x48px Doors/Barred Prison Door A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2924,
+      "sha256": "5a75a53f1efbd5813eeb4eb16287e810a288dc6e450993d605a8fa0cca45dc92",
+      "imageSizePx": [
+        448,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/Doorframe A Shadows.png",
+      "path": "Structure/Doors/32x48px Doors/Doorframe A Shadows.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 389,
+      "sha256": "3be1891661253e16f2bc3b7627cfe2501a17ef882478980917ee9c147f2a6d6a",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/Doorframe A.png",
+      "path": "Structure/Doors/32x48px Doors/Doorframe A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4609,
+      "sha256": "59de6835afb9f36ed540b982b9842e3d98b3b1cbed31c7782755857d97e3ea4f",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/DoorFrame B Shadows.png",
+      "path": "Structure/Doors/32x48px Doors/DoorFrame B Shadows.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 442,
+      "sha256": "ec143e22a695be586ee12d350816e982a28ef0522eaf85f2ebde7fc51740bac4",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x48px Doors/Doorframe B.png",
+      "path": "Structure/Doors/32x48px Doors/Doorframe B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 392,
+      "sha256": "d15bfede3e1de214a7fe7612935501267d7266b25025fd933f9181a9bd4b2d3b",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x64px Doors/15 Panel Door A.png",
+      "path": "Structure/Doors/32x64px Doors/15 Panel Door A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 61040,
+      "sha256": "9976d8a675105414a9894f11399a11eba4b194e31b75bccc92fe2132ebcb615f",
+      "imageSizePx": [
+        896,
+        1024
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x64px Doors/Doorframe A Shadows.png",
+      "path": "Structure/Doors/32x64px Doors/Doorframe A Shadows.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 420,
+      "sha256": "e9ba645bdbf2b7bc61b9c22fdacb298afa914b7569920a19da14688c10f66ba6",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/32x64px Doors/Doorframe A.png",
+      "path": "Structure/Doors/32x64px Doors/Doorframe A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4664,
+      "sha256": "23873c3414aeed5224197f57df02662a5d29db0f770a2b3b126961742183e198",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Doorway A Shadows.png",
+      "path": "Structure/Doors/64x64px Arched Doors/Arched Doorway A Shadows.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 820,
+      "sha256": "115991c08608c11900eb61bf7ec752bb5c1de666d4ceed551cbef357fafbd1ae",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Doorway A.png",
+      "path": "Structure/Doors/64x64px Arched Doors/Arched Doorway A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3093,
+      "sha256": "8d714e1f33e4f7a91d1b52ffc555bc400043dd934c53e1a8c456adc7ebb1a595",
+      "imageSizePx": [
+        160,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Double Doors A.png",
+      "path": "Structure/Doors/64x64px Arched Doors/Arched Double Doors A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 14077,
+      "sha256": "4dc3ca6bfcaea86961793d09273f8db5cd53e8bd4a3b799215885cbd5cc720cd",
+      "imageSizePx": [
+        256,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/Credits.txt",
+      "path": "Structure/Doors/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1757,
+      "sha256": "7597f592a73a475aa2166c5329652d081d7ae00f977e878a7933ac2b0c15b0db",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Doors/Door 32x64 Swing Example.gif",
+      "path": "Structure/Doors/Door 32x64 Swing Example.gif",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 15407,
+      "sha256": "ef7a1be2f64da5a6b75f06dbe3b46156237f8138e179abda7cf65184a6c93fb6",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Fences/Credits.txt",
+      "path": "Structure/Fences/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 740,
+      "sha256": "ed869025f2ccbe8a18dd7cddbc7d93ce6ff7e4e87f342e1c17ee3cb100218233",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Fences/Ornamental Fence A.png",
+      "path": "Structure/Fences/Ornamental Fence A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1946,
+      "sha256": "5bd584f915d4d52ddaefae9775947aff50c0619fdd252ed80182d23400b5d711",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Fences/Ornamental Fence B.png",
+      "path": "Structure/Fences/Ornamental Fence B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1304,
+      "sha256": "7b6131b70929463fb02d6c32d1ce3e5dc40aec76eeb6ac2c5020809fb4919cdc",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Fences/Plain Fence A.png",
+      "path": "Structure/Fences/Plain Fence A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1410,
+      "sha256": "75c4675199e3bac5f60ebab6092b64f05b285dc68397595d80be119635599c2f",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Credits.txt",
+      "path": "Structure/Floor/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3051,
+      "sha256": "85f13844bbdf0dea4fb45c37fd0811a47d55301fb02c67cd51fa07ee2f12d772",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Diamond Tile A.png",
+      "path": "Structure/Floor/Diamond Tile A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8946,
+      "sha256": "8e726bfc0635eca2db9444c14e7ad9381d27c86a9a2b92f039fb2cb5c86c2d2c",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Diamond Tile B.png",
+      "path": "Structure/Floor/Diamond Tile B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7672,
+      "sha256": "e04fa0fc35cf08eb4e19a0d9bf7fe1e356a7e2b92fa3a3edfb622217c03b8957",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Diamond Tile C.png",
+      "path": "Structure/Floor/Diamond Tile C.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4683,
+      "sha256": "69a627140ee97d19f9f571f2b5a372f7dfbe04019454cb0169aa1d725e5184f1",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Floral Carpet A.png",
+      "path": "Structure/Floor/Floral Carpet A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 51579,
+      "sha256": "1d8b0b39e459d74d7d5d5795d832e5051a15d6c16497560612f1800364014a67",
+      "imageSizePx": [
+        1120,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Floral Carpet B.png",
+      "path": "Structure/Floor/Floral Carpet B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 81763,
+      "sha256": "398ec53078f9340f7756a7595a8d9f3d5858a92911aff99a4b67cbae34afb9d5",
+      "imageSizePx": [
+        1120,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Geometric Carpet A.png",
+      "path": "Structure/Floor/Geometric Carpet A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 129575,
+      "sha256": "7ded08111fa19182a284626be55461052336ae6fc335dc081e4e42c9677e0b99",
+      "imageSizePx": [
+        2016,
+        672
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Geometric Carpet B.png",
+      "path": "Structure/Floor/Geometric Carpet B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 131229,
+      "sha256": "0b92d06f0242d3ff4985c828262ee13dbf6033c828d1d55ccb013a6e8e406833",
+      "imageSizePx": [
+        2016,
+        672
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Geometric Carpet C.png",
+      "path": "Structure/Floor/Geometric Carpet C.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 10655,
+      "sha256": "61cf5ea0c38cb5a29fba0726d969ab0b09b8e3f4cc76cc525f99d71dd64a0747",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Gritty Dirt.png",
+      "path": "Structure/Floor/Gritty Dirt.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3019,
+      "sha256": "54dc6fff9802f358ece4512fbfe4c2721e71ab53be7933dc65f9ee5a8bec2ccc",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Herringbone A.png",
+      "path": "Structure/Floor/Herringbone A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2165,
+      "sha256": "250375b18208e694102b855ab0a9da65e288f52d8bf4a5bf12a2955cbd451e6b",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Subfloor.png",
+      "path": "Structure/Floor/Subfloor.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 852,
+      "sha256": "10dc49d10f9ee5925fc880ddc9a8f4473e0c44ce9aaf76f387e9b150dcff6651",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Tile A.png",
+      "path": "Structure/Floor/Tile A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1395,
+      "sha256": "3ba4879c03e8d3c2334bfc87540a9a51dcec08b8ea877330d0ad0e6afd37ba1f",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Tile B.png",
+      "path": "Structure/Floor/Tile B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1078,
+      "sha256": "57bdf4da621ec0cf7e8996e8bdbe2767e4c7f81a4cf7f59091b8358d2ce7db65",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Tile C.png",
+      "path": "Structure/Floor/Tile C.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5642,
+      "sha256": "9d6981cc0bad03a48889aa020d1df032245a8f1fcac587a11763457d9a2ad762",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Wood Floor A.png",
+      "path": "Structure/Floor/Wood Floor A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2036,
+      "sha256": "dbce22679bc0469c4063c626504d98b469b2fdf279e9630b7021ffbcfb113f9d",
+      "imageSizePx": [
+        160,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Floor/Wood Floor B.png",
+      "path": "Structure/Floor/Wood Floor B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1183,
+      "sha256": "0c9e5393b22c3fb63f498d41b7ec6b61d441ca5b750f9f249635420943f498f0",
+      "imageSizePx": [
+        64,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Credits.txt",
+      "path": "Structure/Misc/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1314,
+      "sha256": "9d7daafc8e3e0f88f8d3715c88461fdd9588f831feeda54d1e75bfde904995f3",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Drain A.png",
+      "path": "Structure/Misc/Drain A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1319,
+      "sha256": "685d773604004f9ce5b59de53ee691d57d370b69d4488d371308e6b7c5784cf9",
+      "imageSizePx": [
+        32,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Fountain A.png",
+      "path": "Structure/Misc/Fountain A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3305,
+      "sha256": "32eb7173038aa43e9cc24f143639882950ce200d14b207a65fb11368b5509c77",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Pool A.png",
+      "path": "Structure/Misc/Pool A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 995,
+      "sha256": "b9070a1203da2a5f415efcc667e4c6fca71a51cc43aaea7c61ca8121c41e4655",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Prison A.png",
+      "path": "Structure/Misc/Prison A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1292,
+      "sha256": "e35d40deb911e169407d20b6e3ccb9efc05af33c700c59adfb0edc8a93260923",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Misc/Trellis A.png",
+      "path": "Structure/Misc/Trellis A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7422,
+      "sha256": "f27ba58b3363914db58dbefcf7e967cd59f64d21564a62a1912cd8d3bc216b9a",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Pillars/Credits.txt",
+      "path": "Structure/Pillars/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 571,
+      "sha256": "82076e607ef21b0153cb8de47598a3f30abef7f44e08dc10e4c4ed47762b567f",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Pillars/Floral Pillar A.png",
+      "path": "Structure/Pillars/Floral Pillar A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 26789,
+      "sha256": "8e5e37e4e298b04c965c7a9629cb43f926c7db87114abcb816c2ae9a1bece2d0",
+      "imageSizePx": [
+        320,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Pillars/Stone Pillar A.png",
+      "path": "Structure/Pillars/Stone Pillar A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 20711,
+      "sha256": "9fa1c4e00ca64ab47834b9ada4eee4dd21d675a90b257eb84bb8d0a1bc2c2b11",
+      "imageSizePx": [
+        288,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Platforms/Cement Platform A.png",
+      "path": "Structure/Platforms/Cement Platform A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4915,
+      "sha256": "b62180208fa210b01ea9e5fc9e162e65d3ac2faadf1ee70c8615808b1e3b225b",
+      "imageSizePx": [
+        96,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Platforms/Credits.txt",
+      "path": "Structure/Platforms/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 568,
+      "sha256": "84eb28ea1d7ded70407fc24fd8162d7b437b48ce378c6b718ec0a3670cc93f2b",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Platforms/Dias with Steps A.png",
+      "path": "Structure/Platforms/Dias with Steps A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 679,
+      "sha256": "27c0a3705906ced8cd3824799e36c9853f9a2ad4a7c9c123e0d67307c279d70c",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Adobe Brick Roof.png",
+      "path": "Structure/Roofing/Adobe Brick Roof.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8686,
+      "sha256": "7a2ed0d493454ab785f576c7779fe6658748bcd0a38f5ba74092384b77a9f3c3",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Adobe Stucco Roof.png",
+      "path": "Structure/Roofing/Adobe Stucco Roof.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3945,
+      "sha256": "6d40a67dd00f7eefa2c0d5b3310ea70d9834ace20ba523eef16541199deb18f0",
+      "imageSizePx": [
+        416,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Brick Chimney A.png",
+      "path": "Structure/Roofing/Brick Chimney A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5861,
+      "sha256": "5b428207b5aacbea65ca7b462049ee85b035b336affcb8ad7db91deacc7abdb3",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Credits.txt",
+      "path": "Structure/Roofing/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1991,
+      "sha256": "d0d717afb550e0faa0c2f506aa8b1c99fa4f15aeb3cc6d5cb2a1dc080d7c83fd",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Flat Shingle Roof A.png",
+      "path": "Structure/Roofing/Flat Shingle Roof A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 18157,
+      "sha256": "9e0e44086d5ae9528473e58c5a66d2b2d943e40d7f0208a7832d937e913b7d98",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Gable Shingle Roof A.png",
+      "path": "Structure/Roofing/Gable Shingle Roof A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 38326,
+      "sha256": "d78e0a048e9b449e1f45ae5bfd31878d9979c879f53a4332a7f3713e9c089ca7",
+      "imageSizePx": [
+        768,
+        480
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Hipped Shingle Roof A.png",
+      "path": "Structure/Roofing/Hipped Shingle Roof A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 71222,
+      "sha256": "fbc3b32a439f1906cc567a5da2540fd76e4825a7f496abb99b4a2ce38b060fa5",
+      "imageSizePx": [
+        960,
+        480
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Roofing/Roof Trim.png",
+      "path": "Structure/Roofing/Roof Trim.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 14679,
+      "sha256": "3c47784210ebbc79f7ff4e8815b238b8cfc0af88af0b0cabd7012e94b74a88c8",
+      "imageSizePx": [
+        1536,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Signs/Credits.txt",
+      "path": "Structure/Signs/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 639,
+      "sha256": "41f84092daa8fea473f3491c09e578f721e9bb2018a10f0e404e4996b7b4c327",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Signs/Sign Backgrounds A.png",
+      "path": "Structure/Signs/Sign Backgrounds A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 794,
+      "sha256": "9508252c25b2d3640decbb19a32d59617d81d33a80a1c253d7256db18a9b6123",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Signs/Sign Icons A.png",
+      "path": "Structure/Signs/Sign Icons A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2133,
+      "sha256": "60b5ade8f65fafc32f48292e20398df33e1e39a6614ec5ad3a8c9135c7f15f21",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Cement Stairs A.png",
+      "path": "Structure/Stairs/Cement Stairs A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4886,
+      "sha256": "334bd35c6483202cb727a6819439f9809cc756134fc79dd37a746a236a60b192",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Credits.txt",
+      "path": "Structure/Stairs/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1697,
+      "sha256": "9eb23f00f01e503a04a448846f6a692b45e1f625ced258154e0a2ab638608102",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Formal Interior Stairs A.png",
+      "path": "Structure/Stairs/Formal Interior Stairs A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 12343,
+      "sha256": "e4d19187d9ce7a41227e2ff840ca260c2c1c37eb45f5f047ce419bf0214b93da",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Short Steps A.png",
+      "path": "Structure/Stairs/Short Steps A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2432,
+      "sha256": "55cc3b06a3026d2132253f266d7317181dda97b8e6fe2e765d24cbba1a5a99e4",
+      "imageSizePx": [
+        224,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Wood Interior Stairs A.png",
+      "path": "Structure/Stairs/Wood Interior Stairs A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9179,
+      "sha256": "e770327488445c7257ebeeb55364e46ba5751e74f1a3917d377ed843cdfd30eb",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Wood Interior Stairs B.png",
+      "path": "Structure/Stairs/Wood Interior Stairs B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 12014,
+      "sha256": "e9de5788d0fdb8a5342cf6e4220967dc6874513a7c48ffbe1943cc20ab671772",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Stairs/Wood Interior Stairs Wall.png",
+      "path": "Structure/Stairs/Wood Interior Stairs Wall.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1999,
+      "sha256": "561aaa03e9b321d358cb5ccfd19b1fc2a5d66a0f0d938fce128f4e3e50ed9bc4",
+      "imageSizePx": [
+        254,
+        251
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Structures/Brick House A.png",
+      "path": "Structure/Structures/Brick House A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7940,
+      "sha256": "6396c0c396fec2956ff5617df20a2061fc1650c4f585ac41962f12634c9150c1",
+      "imageSizePx": [
+        256,
+        224
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Structures/Brick House B.png",
+      "path": "Structure/Structures/Brick House B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4764,
+      "sha256": "bfac6cbb375bcd775b3e184f5ba31bae03287e58a26b97af72b386bbbfba0259",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Structures/Credits.txt",
+      "path": "Structure/Structures/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1003,
+      "sha256": "f49851b77fe90bf386803707728b1c0f905422728e7feb169fb9382b0ae05ebf",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Structures/Paneled House A.png",
+      "path": "Structure/Structures/Paneled House A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3545,
+      "sha256": "576434a3c3079259e8a503827e54a2eed1bd9ee8beae48f060c634d13ea2cdac",
+      "imageSizePx": [
+        160,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Credits.txt",
+      "path": "Structure/Wall Borders/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1594,
+      "sha256": "96a6be222e7ab229d8a2c8c94d7b41ba061193ecdd0d8582aaa3a0c625329f87",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Decorative Border A.png",
+      "path": "Structure/Wall Borders/Decorative Border A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2125,
+      "sha256": "947069ac6fdaf17faa1643a19590e8eeae8c69ca96d0d05a950c78480d084722",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Formal Crown Molding.png",
+      "path": "Structure/Wall Borders/Formal Crown Molding.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1217,
+      "sha256": "96efe18d0e6f807a1e432f4a0611a94c5ba52aa47d493c8ec36f1199fff070e5",
+      "imageSizePx": [
+        192,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Pillar Crown Molding.png",
+      "path": "Structure/Wall Borders/Pillar Crown Molding.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2561,
+      "sha256": "c8638b73e76f1fc06d3d1f7839cc67401ecb38579f8d5f3d9e8b50aaf3fd0d18",
+      "imageSizePx": [
+        160,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Plain Edged Border - A.png",
+      "path": "Structure/Wall Borders/Plain Edged Border - A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1631,
+      "sha256": "7fb9d8fa0ad742351604a83cec169b20ac9984db54cfbb0b685f4a1383fab1de",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Plain Edged Border.png",
+      "path": "Structure/Wall Borders/Plain Edged Border.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8982,
+      "sha256": "6989abe97ff2a2d76df5313a2c7f654e719ddf09cbb15238868dd3f97bf2f002",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Plain Smooth Border.png",
+      "path": "Structure/Wall Borders/Plain Smooth Border.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 11713,
+      "sha256": "50a38480b9d7baee27a38c4034ac75e34f3981677aac7256fd5c89fdd4b0a987",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Wall Borders/Textured Wood Border.png",
+      "path": "Structure/Wall Borders/Textured Wood Border.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 20359,
+      "sha256": "c4fd829545999a3b347a9b755346b2dbbb28679f5bcd51c74f87ebd427b05f2f",
+      "imageSizePx": [
+        768,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Adobe Brick Wall.png",
+      "path": "Structure/Walls/Adobe Brick Wall.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1976,
+      "sha256": "54d636b25d1ea199627d6910b661fc2ddaddf27a2685e2be457bcaf251ad072a",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Adobe Stucco Wall.png",
+      "path": "Structure/Walls/Adobe Stucco Wall.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4509,
+      "sha256": "c6bc0ba4e77620d9cacfefb60b1a7db62a5adfc40b6c9615e3c25e10af805609",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Brick Wall A.png",
+      "path": "Structure/Walls/Brick Wall A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3900,
+      "sha256": "bbfbb14a2ecf2319d0fb2cfbd026e3f8c26cd555bd932ef4afd757cf637350fe",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Brick Wall B.png",
+      "path": "Structure/Walls/Brick Wall B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7730,
+      "sha256": "1080633322d230c8caf43dd0c818ecc5b4b258e49d8eb65c733ddf8350dc04d9",
+      "imageSizePx": [
+        384,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Brick Wall Block Edging.png",
+      "path": "Structure/Walls/Brick Wall Block Edging.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7468,
+      "sha256": "14baa1c4a5b0c3688230530c0421cf62dc90c9227bec2203e2f325b9cb3dcf07",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Credits.txt",
+      "path": "Structure/Walls/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4312,
+      "sha256": "42a374c9036f11ea59620188b3cb33670a07700c0e0ae08032b27a20c696a55d",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/CutawayOverlay.png",
+      "path": "Structure/Walls/CutawayOverlay.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 359,
+      "sha256": "2f8f650d4b5323d469f321023f6d9d3d4f3399f9374526de00ac14b416419c26",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Diamond Wallpaper.png",
+      "path": "Structure/Walls/Diamond Wallpaper.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 154078,
+      "sha256": "eea0a98eead12aea418969647cb724b1652a85d2f799b7ae1aa14ab70fdb0d3a",
+      "imageSizePx": [
+        1152,
+        1280
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Drywall.png",
+      "path": "Structure/Walls/Drywall.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1832,
+      "sha256": "46a4e9502542f941551aa50d6cbbc7a73aaf3c1e5e56bcfdcd6ec5c9db7e9349",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Floral Wallpaper A.png",
+      "path": "Structure/Walls/Floral Wallpaper A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 71050,
+      "sha256": "c75a00628a9535d1c1bd41b504e10de7046358d2cfde99cd3682f8cb55823620",
+      "imageSizePx": [
+        960,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Floral Wallpaper B.png",
+      "path": "Structure/Walls/Floral Wallpaper B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4362,
+      "sha256": "ed89330905de3b85f46c569ebda8209e74b7b74354d939d9110fc35f8a4ee2aa",
+      "imageSizePx": [
+        192,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Grainy Plain Wall.png",
+      "path": "Structure/Walls/Grainy Plain Wall.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7101,
+      "sha256": "9f5b04740b7c551fd5b27636baea5f2dae5996ff0501b035fc61d50cb3867a9b",
+      "imageSizePx": [
+        576,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Half-Wall Paneling A.png",
+      "path": "Structure/Walls/Half-Wall Paneling A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1371,
+      "sha256": "a6c37e99959ae16d3df731b04d7af245a72767130e696b08b6475aa883675c91",
+      "imageSizePx": [
+        288,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Jagged Stone Walls.png",
+      "path": "Structure/Walls/Jagged Stone Walls.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5523,
+      "sha256": "1ee2577aeda6bac783dad9ce986c6f754ee7b5f9f4aa2451691e146ed37fa12a",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Molding.png",
+      "path": "Structure/Walls/Molding.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1073,
+      "sha256": "7c9713c1a320bd1c7f816deb23b1cb45a0e041e2f43c3184d19f69a9878f262e",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Painted Walls.png",
+      "path": "Structure/Walls/Painted Walls.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 11791,
+      "sha256": "93303c755db676a7010d2b40ae9d050e12541494e5734a3019c0b608145c9ce3",
+      "imageSizePx": [
+        1536,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Panels A.png",
+      "path": "Structure/Walls/Panels A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1761,
+      "sha256": "3c61ce8ff88fd4bc97a3e3bd5af40b361afc697a06602024e9c7a14c131203e5",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Siding, Plain.png",
+      "path": "Structure/Walls/Siding, Plain.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 43801,
+      "sha256": "1f09561bbaf8d21da6b12f9b178540e7249b3c9a675ca5f2b27ad8bd6c921c19",
+      "imageSizePx": [
+        1600,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Striped Wallpaper A.png",
+      "path": "Structure/Walls/Striped Wallpaper A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9490,
+      "sha256": "dc172121906cecb03a9291d84308873d91c8c31116d6e325821eb40b99f15f8e",
+      "imageSizePx": [
+        1056,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Striped Wallpaper B.png",
+      "path": "Structure/Walls/Striped Wallpaper B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9162,
+      "sha256": "6ef6a3bd29408497d3a944e3ed66d08b2cd160ab0553ca7e2d29754be76a8da8",
+      "imageSizePx": [
+        1056,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Walls/Striped Wallpaper C.png",
+      "path": "Structure/Walls/Striped Wallpaper C.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 10977,
+      "sha256": "fbc13a8f3dbf0fd97ef42705cb67e1ebdd8ae213a898c0b3b9edf043b391d57c",
+      "imageSizePx": [
+        1152,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Credits.txt",
+      "path": "Structure/Windows/Credits.txt",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1288,
+      "sha256": "0117cbedf1aaeace45dc91a51341fdc58572a696d2277b0caff0dddb4e7aa8cd",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Ornamental Windows A - Emission.png",
+      "path": "Structure/Windows/Ornamental Windows A - Emission.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 504,
+      "sha256": "7d7260ed8df72b8afc33a5daa2b996392c611daf16a529d7a9a5074ad2429c35",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Ornamental Windows A.png",
+      "path": "Structure/Windows/Ornamental Windows A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1512,
+      "sha256": "42343e001ffb121a6b751c8cf2391e02ce269a30ec2268de340419f99fd8eaae",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Ornamental Windows B - Emission.png",
+      "path": "Structure/Windows/Ornamental Windows B - Emission.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 667,
+      "sha256": "00021cf74489463fa86c54c65a9a1c9792502d33bff3f551d11b9a44e4ad250d",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Ornamental Windows B.png",
+      "path": "Structure/Windows/Ornamental Windows B.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1697,
+      "sha256": "688ea2b7aff0156021481d948d535d7f26a808a4719bea5a464f1850c7d6df56",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Stone Windows A - Emission.png",
+      "path": "Structure/Windows/Stone Windows A - Emission.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 502,
+      "sha256": "574d5aecd57cb4c1345e2886f9d91dbd22c12669622ee5e22b8821af121664e4",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Stone Windows A.png",
+      "path": "Structure/Windows/Stone Windows A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1357,
+      "sha256": "1b3644e696570fed11a748f76c3ca16b4bfe0b53b2ad0782b30a246dbfdfb4d1",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Structure/Windows/Window Awnings A.png",
+      "path": "Structure/Windows/Window Awnings A.png",
+      "pack": "Structure.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 12732,
+      "sha256": "f8f9f3acc2165d371bb0e1861c1e7b42f342b6484eff079379af0e8cf6ca3b62",
+      "imageSizePx": [
+        288,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Barrel.png",
+      "path": "Objects/Furniture/Barrel.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5452,
+      "sha256": "d6416ffdb15762f572a9a850b155207d05d50e2fe6c66bcdbd9a2dfc79df20d2",
+      "imageSizePx": [
+        160,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Child Headboards.png",
+      "path": "Objects/Furniture/Beds/Beds, Child Headboards.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5353,
+      "sha256": "32b87c4b1eef594404db030f0fd3ad3ecf65b8cbc0009b87e928ea825f99fc13",
+      "imageSizePx": [
+        160,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Child Mattresses.png",
+      "path": "Objects/Furniture/Beds/Beds, Child Mattresses.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1645,
+      "sha256": "a54cab71245056c8b30b89135b97418f063b578b179eff237a1b8e2b42461d7e",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Child.png",
+      "path": "Objects/Furniture/Beds/Beds, Child.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 28006,
+      "sha256": "755208cdcff0b98e91b115d03fcc963b9b0c6765551dd6c728ddbbf3473b4911",
+      "imageSizePx": [
+        768,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double B.png",
+      "path": "Objects/Furniture/Beds/Beds, Double B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 38057,
+      "sha256": "417649b5d3501700d82c294110756a149d3f617d155adc47d6c17acd98a5fd68",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double C - Overlays.png",
+      "path": "Objects/Furniture/Beds/Beds, Double C - Overlays.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4060,
+      "sha256": "f200fe92adef2b8374d4dc1c555b6e31aac2f8111d186a7b45b486704ca7b3a6",
+      "imageSizePx": [
+        320,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double C.png",
+      "path": "Objects/Furniture/Beds/Beds, Double C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 38455,
+      "sha256": "94fb1c79257b6467b36f0f0c5200fb693f7dd437a4fd87e181e78185a30d3617",
+      "imageSizePx": [
+        512,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double Headboards.png",
+      "path": "Objects/Furniture/Beds/Beds, Double Headboards.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3549,
+      "sha256": "6e79d6c7c9bc998820fca7fcb216dde9c91a1329a82b5cdba7a8926c4b44db0b",
+      "imageSizePx": [
+        192,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double Mattresses.png",
+      "path": "Objects/Furniture/Beds/Beds, Double Mattresses.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2218,
+      "sha256": "d4a7a66a71239a55c416f7ce74bdb26dcbc01dd2709f0b0e311d5202bd3c59d9",
+      "imageSizePx": [
+        224,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Double.png",
+      "path": "Objects/Furniture/Beds/Beds, Double.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 22361,
+      "sha256": "b988e8434d3025c19e587a0ee863d953c9ec03f038be39eb7f41a8cda57a6750",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Single  A.png",
+      "path": "Objects/Furniture/Beds/Beds, Single  A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 31746,
+      "sha256": "d58e55afc4abbe8782bfd28116bbf4b63e9f1e1c088209fd2bff4f26c6c6a84c",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Single B.png",
+      "path": "Objects/Furniture/Beds/Beds, Single B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 32465,
+      "sha256": "f49959d936a85bc424f183e2ba650f5a9e6d98bd362163fbf2e63afe6966856d",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Single C.png",
+      "path": "Objects/Furniture/Beds/Beds, Single C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9887,
+      "sha256": "9bb7c3af89d9de6887bf188499f9ad8b93946edecd4aee4dd7d4b41a8b608abb",
+      "imageSizePx": [
+        256,
+        224
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Single Headboards.png",
+      "path": "Objects/Furniture/Beds/Beds, Single Headboards.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5807,
+      "sha256": "c647f1999a76c5138c5493ee112a2c2e6af629d3de33966b41e74b0b8800eccb",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Beds, Single Mattresses.png",
+      "path": "Objects/Furniture/Beds/Beds, Single Mattresses.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2099,
+      "sha256": "fdd4e2078daccfc92a5ef1a721235daa0c1fbe5f99eafea57bfd64f71f3276b9",
+      "imageSizePx": [
+        224,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Credits.txt",
+      "path": "Objects/Furniture/Beds/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3041,
+      "sha256": "7d2c794643c1fff493246682b34899194a914e9f769ca693d4c66d01859f67bb",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Beds/Single Beds B.png",
+      "path": "Objects/Furniture/Beds/Single Beds B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 43260,
+      "sha256": "735ace32064063fb1d7bb586c7992762481ca3ffd5bb2d91a33e56368dfaaa7f",
+      "imageSizePx": [
+        640,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Bin.png",
+      "path": "Objects/Furniture/Bin.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3501,
+      "sha256": "fee18b7481d36c8aa99329d5c4360b89fa2bcba5337e53c2ec9c5d89798ddd3b",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Cabinet.png",
+      "path": "Objects/Furniture/Cabinet.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8996,
+      "sha256": "1d3e959626365e288bb7e0b7b89dd65a6b422fe8d17e9f8599c5a1a8e0f2935a",
+      "imageSizePx": [
+        224,
+        288
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Cauldron.png",
+      "path": "Objects/Furniture/Cauldron.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3333,
+      "sha256": "561a383053ffea228f764317af77f0d3834b549ec147660fc835255282a230e4",
+      "imageSizePx": [
+        32,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Chest.png",
+      "path": "Objects/Furniture/Chest.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4556,
+      "sha256": "4a2982eccfdae791240e69125537071cd2d4406d7a516d8e0914c8a0589c1f7e",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Christmas Tree.png",
+      "path": "Objects/Furniture/Christmas Tree.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7197,
+      "sha256": "3d78fac2afb485c345e6ffcc8419181e0396e2d5d1ff2b9f0a3fa51bcf0fda8f",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Clock, Grandfather.png",
+      "path": "Objects/Furniture/Clock, Grandfather.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1240,
+      "sha256": "2e48831aa80bc7600dd7e827745e001debd5cea06f09071652e8f45b472ab80a",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Copy Machine.png",
+      "path": "Objects/Furniture/Copy Machine.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1404,
+      "sha256": "31293ff9ae02bbe0b6ca2354c0444fab3a4a83d2a0fcd1f483760feca014661a",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Countertop.png",
+      "path": "Objects/Furniture/Countertop.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4796,
+      "sha256": "d3ff59068bd4aafada8fe162cc3aeefa7ea04ab58093d4be44ac6791ad70a264",
+      "imageSizePx": [
+        192,
+        224
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Crate.png",
+      "path": "Objects/Furniture/Crate.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5872,
+      "sha256": "cc618819a17a823ba846938e4dabfe51a7eb624815a3e4c9509f725dc7f0362f",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Credits.txt",
+      "path": "Objects/Furniture/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9688,
+      "sha256": "a4b352ac75dd1df94e9b683102813fafd973990cbd95a3c1f2032236a0a3fe6d",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Desk, Office.png",
+      "path": "Objects/Furniture/Desk, Office.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2742,
+      "sha256": "670e1d6ca399f2207ea4c074d8e29c7ddc6fff92c58752ecdd0b076a67a39eda",
+      "imageSizePx": [
+        256,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Desk, Vanity.png",
+      "path": "Objects/Furniture/Desk, Vanity.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1178,
+      "sha256": "8c59b2b64c1f244eb79b8b5a07893a8de4f5b23a3d6567c1d485e64a79d29120",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Dresser.png",
+      "path": "Objects/Furniture/Dresser.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8034,
+      "sha256": "a2ba85b9b3e478711f07c07c4040c71d3864f46d06d22d56d56b30f3e809db2f",
+      "imageSizePx": [
+        384,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/End Table.png",
+      "path": "Objects/Furniture/End Table.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2939,
+      "sha256": "9aa5ffd054cd65915e758ec6b9da4e46af035ad210c5c2c5cd3cf1674c41b57d",
+      "imageSizePx": [
+        64,
+        224
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Fireplace, Cast Iron.png",
+      "path": "Objects/Furniture/Fireplace, Cast Iron.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2143,
+      "sha256": "36c9be7277b56b1bb5f871ea40d4bb58b6aa9256acb723239d475a5b470db7e2",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Fireplace.png",
+      "path": "Objects/Furniture/Fireplace.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4864,
+      "sha256": "8536955ed50a551b8417c620b387f32fcfd5bb9a26acdef18fe159379f71144b",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Fridge.png",
+      "path": "Objects/Furniture/Fridge.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1132,
+      "sha256": "1502a0402a008973cc4d52421be360b1c2d111c224057a8cbb216764eeecd2f3",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Ladder.png",
+      "path": "Objects/Furniture/Ladder.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1225,
+      "sha256": "8ad361399f0170fd0ce233804d8676b79fbdbee151cda0675553ec43d498e3b2",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Lighting, Floor.png",
+      "path": "Objects/Furniture/Lighting, Floor.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7654,
+      "sha256": "f07f83b5cd3819deb9d50de0f08d40b21d47542470833ffde2ebbb657fb2c13c",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Lighting, Outdoors.png",
+      "path": "Objects/Furniture/Lighting, Outdoors.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1301,
+      "sha256": "189037e31c5a50653d140c0b93647d3419c8e77006f6950bd6f669f67a749053",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Mirror, Standing.png",
+      "path": "Objects/Furniture/Mirror, Standing.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3190,
+      "sha256": "3a431606ee7cbffe19168ad67f82d5124112a9c223bd08dc6fbe7910c82cf932",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Oven, Modern.png",
+      "path": "Objects/Furniture/Oven, Modern.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 580,
+      "sha256": "d0ad7d31eb11b02f91e1c6b4934c664d49f26820b9ec39505a3b2238e1f73c97",
+      "imageSizePx": [
+        32,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Planter.png",
+      "path": "Objects/Furniture/Planter.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8570,
+      "sha256": "f48ea3ec96136aa8935abdfd69bf53b6211c2c9866cb4c5b94ac135bc5151fdc",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Rugs/Credits.txt",
+      "path": "Objects/Furniture/Rugs/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 562,
+      "sha256": "3bb4f1e95de305c7576f0855a6380de84a81dd0c2cefcf3bd0e2955a2884ded0",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Rugs/Diamond Rug, tiling.png",
+      "path": "Objects/Furniture/Rugs/Diamond Rug, tiling.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5815,
+      "sha256": "b12ca267d19f343f535f90b910004aa0b29629ab97d5fc52525ff5cf47d8612b",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Rugs/Rainbow Checkered Rug.png",
+      "path": "Objects/Furniture/Rugs/Rainbow Checkered Rug.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1396,
+      "sha256": "8d9a2ac95ab52179dfd3a95bacecef788563a524d73b5bba8072525e34237b4d",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Rugs/Rainbow Rug.png",
+      "path": "Objects/Furniture/Rugs/Rainbow Rug.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6145,
+      "sha256": "51cbf518fd3e92bf6c90c9c0f7e57388c9fe59de2293cde0b97bee9ffd6e848c",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Rugs/Swirling Vine Rug.png",
+      "path": "Objects/Furniture/Rugs/Swirling Vine Rug.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6843,
+      "sha256": "40255017b36b59fbd08166dd77195df7b12397d69912a6f8395ece3dfebcef1d",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sawhorse.png",
+      "path": "Objects/Furniture/Sawhorse.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1697,
+      "sha256": "a76bd9d529159a34b9f8120b78f2c99b732a31ee762419a7f9448c823178c8ac",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Bar Stools.png",
+      "path": "Objects/Furniture/Seating/Bar Stools.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2399,
+      "sha256": "b9b98695eb5fbdf14ee4108b0c34bf7245954510447d65b23e2bb5b503f2b42c",
+      "imageSizePx": [
+        256,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining A.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8567,
+      "sha256": "af76ce09777e65143f89201648a023ef68587ea1db5a248b06beb2581c381c33",
+      "imageSizePx": [
+        224,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining B.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8437,
+      "sha256": "4e8183d8150eea93105b348676dd16a446a4a2e11d3b3986a8a383356f46673e",
+      "imageSizePx": [
+        224,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining C.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5595,
+      "sha256": "030ccacf5d4e3c9f035284a5944f42305494ddb7be36dbf2510608e5dd432c3c",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining D.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining D.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7682,
+      "sha256": "02ceac716b03b0112a14f998208c8de0e990e2d7fffed9991baef562c1904a9f",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining E.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining E.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6501,
+      "sha256": "0736f7f45d6567fefadde7614a093e8ba5ccc7bed24a870355c02a3875688500",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Dining F.png",
+      "path": "Objects/Furniture/Seating/Chair, Dining F.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7779,
+      "sha256": "db0a8d96ba0145f13ebc6e619d1854ff219d5bd009df762ae7eb40ea9aaae64e",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Office.png",
+      "path": "Objects/Furniture/Seating/Chair, Office.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2088,
+      "sha256": "49c613015588eca836b0c10bf8337f680c1f66359b9da159793344ec8ece6edb",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa A.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6588,
+      "sha256": "705f377ebaf24a583fb618202a800c9c6488d541d3b612fac3f5f9bf33fd4201",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa B.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 12611,
+      "sha256": "d072cda8899892b20c8a509f3a37c2361ba3e14f13d2457faf496b7313f49c03",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa C.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 27134,
+      "sha256": "1314f96ae1bbc275ac61e6c31c4c5d1472a983303b04481cd84884c20fdeb097",
+      "imageSizePx": [
+        320,
+        512
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa D.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa D.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 17142,
+      "sha256": "bab1857d5625555a5b413b77a1fd8ae1e0da82d1b7d5802baa59de916087be62",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa E.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa E.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 13357,
+      "sha256": "22b35c61699f7806587cfe99b3b778220981a47285ff7a2f1481a30598b55afe",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa F.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa F.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 12893,
+      "sha256": "2eb485e57f6ed2b37cdadac9fcb5a8e755ef9dadcc82bb5ea230a2f23a4548ba",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Chair, Sofa G.png",
+      "path": "Objects/Furniture/Seating/Chair, Sofa G.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 17319,
+      "sha256": "97097bd22b49a956425ef64e2dfb4066a1792a619ec02057735956c372abe318",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Credits.txt",
+      "path": "Objects/Furniture/Seating/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2558,
+      "sha256": "cb32a889d7b0d886bb306f04d1eb2a76719695e09b225d74b1274d1c29ebb31b",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned A.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 25006,
+      "sha256": "4e7a35ff21f37cda44c1e92600c4c627e569459a609e927480abd331125ab079",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned B.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 15461,
+      "sha256": "b887258c718fe912a45d88f75af858adb813d46b6ad9eaa7aade664124ece528",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned C.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 14991,
+      "sha256": "ea59b5a3de16c18de11756c2e74bbc5d09078aae97411fd3f64e66b26002eee5",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned D.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned D.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 24301,
+      "sha256": "74603e3d8d3032becc9c5e65751afcc14fadc3584425d3db7070ef4636de8edc",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid A.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 15860,
+      "sha256": "15a35f492f06073414548605cb0ebe586a94e4b1301c68a8c96ac685799f3b03",
+      "imageSizePx": [
+        256,
+        384
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid B.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 14793,
+      "sha256": "2e5c5bc5b1e6498a89613114e5bb06ef6a28e20cff3721bafa43d1cdb5f4f7be",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid C.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 13902,
+      "sha256": "c04fd07c8697b754b2f82b3e2e6ecccaccb2d55241db4d75cd9a460f3154b04a",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Formal A.png",
+      "path": "Objects/Furniture/Seating/Loveseat, Small - Formal A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 19892,
+      "sha256": "b89b06f97e1ec39e2ba4edbfbe09a3ba5601af4f8c54364d3c0f77a4d3a89a78",
+      "imageSizePx": [
+        256,
+        320
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Ottoman, Long A.png",
+      "path": "Objects/Furniture/Seating/Ottoman, Long A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4954,
+      "sha256": "892ce2bdffa9cf82f459c4f19266a70e79679384d10a6c193cc61dd637c2dd3e",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Ottoman, Medium A.png",
+      "path": "Objects/Furniture/Seating/Ottoman, Medium A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4501,
+      "sha256": "a0fd7d6871dea40f6346e32c7f1596668eefd1322204f336ae28cf2b1b545883",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Ottoman, Small A.png",
+      "path": "Objects/Furniture/Seating/Ottoman, Small A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1871,
+      "sha256": "74bf6bfa999936631a34f11657e6ccda632d20499b8b499f59cc55af77ea93ff",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Ottoman, Small B.png",
+      "path": "Objects/Furniture/Seating/Ottoman, Small B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2493,
+      "sha256": "354acebffcc0e7b55d86e4fe0b7ce27254c2b801fbd7fa7a2adb66c82a2647b0",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Sofa Set, Casual A.png",
+      "path": "Objects/Furniture/Seating/Sofa Set, Casual A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4240,
+      "sha256": "2bdee3c65d9ae65a4cec3c627249f6f3fb983838b95772cc666aeeb0635cb1b6",
+      "imageSizePx": [
+        416,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Sofa, Casual A.png",
+      "path": "Objects/Furniture/Seating/Sofa, Casual A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 17278,
+      "sha256": "81636f0850643d2fb4fbc612182c72ec0500cc876e5449e8bbd55751c706829e",
+      "imageSizePx": [
+        480,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Seating/Thrones.png",
+      "path": "Objects/Furniture/Seating/Thrones.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6204,
+      "sha256": "7b68db99ba76ea5c60afab8ec2f91b4fb777c824f01bf1af7d2bce7bfebab89e",
+      "imageSizePx": [
+        320,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Credits.txt",
+      "path": "Objects/Furniture/Sewing & Weaving/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1226,
+      "sha256": "2e05583e826a0a9183f0c1151559029b101c79e076d29bb018fe082bf483225e",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Dress Form.png",
+      "path": "Objects/Furniture/Sewing & Weaving/Dress Form.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3768,
+      "sha256": "e69d19f1cd08762995bd83133a84fe0daaab278ab75ec2d4b4b619f2fb95ec7a",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Loom.png",
+      "path": "Objects/Furniture/Sewing & Weaving/Loom.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6897,
+      "sha256": "6d74da58994db8bea2d02c953847db1e779fdd7e8187f6a981d1ec35b6b51d36",
+      "imageSizePx": [
+        512,
+        320
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Spinning Wheel.png",
+      "path": "Objects/Furniture/Sewing & Weaving/Spinning Wheel.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3689,
+      "sha256": "d45580649bd8453cb8d9440dbd2bd969d9124838e047f2eac85eb4cd5e2f525d",
+      "imageSizePx": [
+        320,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Workbench, Sewing Machine.png",
+      "path": "Objects/Furniture/Sewing & Weaving/Workbench, Sewing Machine.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1330,
+      "sha256": "f357928b5624e23065b4960fab68ba0694ac4a1811924c16b562744ce1c661ca",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sewing & Weaving/Workbench, Sewing.png",
+      "path": "Objects/Furniture/Sewing & Weaving/Workbench, Sewing.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3833,
+      "sha256": "10f0b76e07931d8af67d92a05114bf1adbdab0bc467e8e209f0ccf68ef08669a",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Shavehorse.png",
+      "path": "Objects/Furniture/Shavehorse.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1770,
+      "sha256": "20ead545b870cc4285bc4b4babd58ea91235c420984fce725a63717614ffdf67",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Shelf.png",
+      "path": "Objects/Furniture/Shelf.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1735,
+      "sha256": "7e2bed1a15206af3d3024c8caedcf6809566024bf849911c9bd40ccdbf7ca01e",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sink, Countertop.png",
+      "path": "Objects/Furniture/Sink, Countertop.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1760,
+      "sha256": "f6ade47e6db97bea3fe5e57e0f7a6b41c0061e8572767ac954fe2f05bb6a4189",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Sink, Pedestal.png",
+      "path": "Objects/Furniture/Sink, Pedestal.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4338,
+      "sha256": "da8036767cd3454114929cf6b1186435ab71605c3259ecefac7bd7675f34bf29",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Anvils.png",
+      "path": "Objects/Furniture/Smithing/Anvils.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2040,
+      "sha256": "0c6062c22bf63691b3f2698b46963a57f1b479dff343e871d6b331be78052afc",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Bellows.png",
+      "path": "Objects/Furniture/Smithing/Bellows.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2128,
+      "sha256": "8b289d1453b44fdbcbcb84e8279391c44be57d8367390cd05856138a2f42c74b",
+      "imageSizePx": [
+        256,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Coal Piles.png",
+      "path": "Objects/Furniture/Smithing/Coal Piles.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 10839,
+      "sha256": "6bdbc01d9c2bb231328a9c4ab33ffc4479e6facb5c8a13be321d7f1853d7d32e",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Credits.txt",
+      "path": "Objects/Furniture/Smithing/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1767,
+      "sha256": "6ab82e8430de827c23298f423c4e678f00b57152a1476aaf20e21975e62b0b66",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Forge A.png",
+      "path": "Objects/Furniture/Smithing/Forge A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 19990,
+      "sha256": "2c5b0ae2abcb811ed3f96e8d85b9f6f210ab81104536dae09ee7c1fe98eeaeb0",
+      "imageSizePx": [
+        512,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Furnace A.png",
+      "path": "Objects/Furniture/Smithing/Furnace A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8984,
+      "sha256": "2a85cbf079bd434fce8f369a3826fa98d3878501f940c952842fcdd0f2c8503e",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Grindstone.png",
+      "path": "Objects/Furniture/Smithing/Grindstone.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1423,
+      "sha256": "b4ac0fd6cdcf9813e1c36a1844bf8080d2cbda413cc5ef193d98d1230e115028",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Smelter.png",
+      "path": "Objects/Furniture/Smithing/Smelter.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3188,
+      "sha256": "3bd0ebc55b51b526044f641262e2fd3b1d930a201674929fc79575c63e3b1804",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Smithing/Workbench, Smith.png",
+      "path": "Objects/Furniture/Smithing/Workbench, Smith.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8043,
+      "sha256": "2b6a6381ee3b0c15c84144eec77ead9dac1701ea6a745433c110258650c16b8b",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Standing Screen.png",
+      "path": "Objects/Furniture/Standing Screen.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4726,
+      "sha256": "bb68819d53c8ef63de3160f9def771f58e1b1c6229b0eab7baa25d4b9c96c53b",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Stone Slab.png",
+      "path": "Objects/Furniture/Stone Slab.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2043,
+      "sha256": "e608c2e98d8d5f6e1fedfa349826eed6d408beaf56b91afd036b9825d5491279",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Table, Card.png",
+      "path": "Objects/Furniture/Table, Card.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2201,
+      "sha256": "8802b24e1ac57694c8b641600833d68f5d7e8c02591c860c202d6f627c87a300",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Table, Ornate Wood.png",
+      "path": "Objects/Furniture/Table, Ornate Wood.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4129,
+      "sha256": "6ff69cbbc6fe292a337802bf302b6d408f35266fa40ea6c17d9d1ec9680e0ba3",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Table, Rough Wood.png",
+      "path": "Objects/Furniture/Table, Rough Wood.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5826,
+      "sha256": "bb1a846dbab420a3d2670937f4892265eb5f33814f9b556a486fa307977c7590",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Table, Workshop.png",
+      "path": "Objects/Furniture/Table, Workshop.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2525,
+      "sha256": "89720d42c4100926d5d73729020009a3d27ce910dcf44db9da80e7d18da994e1",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Trough.png",
+      "path": "Objects/Furniture/Trough.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 21683,
+      "sha256": "96a8ccc78d38631e554170ddccb119a0c7f9d487edd4150f3be268302e5fd954",
+      "imageSizePx": [
+        320,
+        320
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/TV, Widescreen - No Service.png",
+      "path": "Objects/Furniture/TV, Widescreen - No Service.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 42513,
+      "sha256": "58af949994d1252cc5c22b044aa4cd0d593e66646823909f15d1211febd3c63a",
+      "imageSizePx": [
+        448,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/TV, Widescreen.png",
+      "path": "Objects/Furniture/TV, Widescreen.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 986,
+      "sha256": "04f8e05c9f5270b7daef937cd54abf4c2b6aff1ec57a6d916474f47d72870e6e",
+      "imageSizePx": [
+        448,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Vase-Studies.png",
+      "path": "Objects/Furniture/Vase-Studies.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6740,
+      "sha256": "df38e2e031e9ce9e4c98029b465bfcf612ee5706f4456028e41cd9bddb8e1e4c",
+      "imageSizePx": [
+        128,
+        320
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Vending Machine.png",
+      "path": "Objects/Furniture/Vending Machine.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2284,
+      "sha256": "17204482c7059b60b0aad5c39d959008f6a8709f44dfc65db599f8634c233046",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Water Cooler.png",
+      "path": "Objects/Furniture/Water Cooler.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1391,
+      "sha256": "c5f6422b7c00ac02d020af1544fad53b598833fe314d2fb90f5d434663fd00b9",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Wolf Stone.png",
+      "path": "Objects/Furniture/Wolf Stone.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7382,
+      "sha256": "55c3a6ae42157bd36452029f503888941cd9e674e5f89c8a1e3b4b28d88f8579",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Workbench, Carpentry.png",
+      "path": "Objects/Furniture/Workbench, Carpentry.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3303,
+      "sha256": "82c237c507c40855642ce947008e42fbd7b609ebeb62c23eb363a35eca860298",
+      "imageSizePx": [
+        128,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Furniture/Workbench, Wire Drawing.png",
+      "path": "Objects/Furniture/Workbench, Wire Drawing.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2277,
+      "sha256": "2d6acec3f330d68e4dbd2db2f712abfb54e401af316d2d9b82cc2ba7dd7f0ebc",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Credits.txt",
+      "path": "Objects/Moveable/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 275,
+      "sha256": "cd224a0c17943e31689496e9020ef50db50fa9062e039ae81946b3c13403285e",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Shopping Cart.png",
+      "path": "Objects/Moveable/Shopping Cart.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1405,
+      "sha256": "798228967fde68767ae89060c7d671dbdd1f64ec5c1d8396f1b87b81d4b42143",
+      "imageSizePx": [
+        32,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Wheelchair, Black.png",
+      "path": "Objects/Moveable/Wheelchair, Black.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5602,
+      "sha256": "1a94cf2e4b307fa47b833884468da3e19e245c8a4aeb1d32e3de8421d2477db8",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Wheelchair, Blue.png",
+      "path": "Objects/Moveable/Wheelchair, Blue.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5904,
+      "sha256": "0c16a78b0e91630642528aafbb2b89c2f44a00b440132c6653edb10da36bf2b7",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Wheelchair, Pink.png",
+      "path": "Objects/Moveable/Wheelchair, Pink.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5809,
+      "sha256": "af583781099ba9661c9e9cf4d7a5342918f7dfc2524428e027b1ad426ac64f5f",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Wheelchair, Tan.png",
+      "path": "Objects/Moveable/Wheelchair, Tan.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5911,
+      "sha256": "a9529d5d129d02688f7aea5363c801e01e35167b742d84b8d4183b7172e0dd37",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Moveable/Wheelchair, White.png",
+      "path": "Objects/Moveable/Wheelchair, White.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5929,
+      "sha256": "7e8e1ae92592d1caae47de7ca36d001b7962d3be48bead4dbbd83440af2d6905",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Baskets A.png",
+      "path": "Objects/Small Items/Baskets A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3945,
+      "sha256": "4530ed48a053ad3221e896d8c743e035948b911fd19c3948c4b66e577116003e",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Boxes.png",
+      "path": "Objects/Small Items/Boxes.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1251,
+      "sha256": "8c24b264b22183c9db18f0c9d7ae47fa8b284daac9e16b8bee0ad07a119b71af",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Buckets.png",
+      "path": "Objects/Small Items/Buckets.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4062,
+      "sha256": "dc35c4e1cc69494b45aec6cfaa1613d6692cd69626fab0177e56e37d1fe88af4",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Coffee Maker.png",
+      "path": "Objects/Small Items/Coffee Maker.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1373,
+      "sha256": "92d5dfa5a89428e84cbc6d765a564b970f7dd26c9b7c2a6469ef017d07952fcc",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Credits.txt",
+      "path": "Objects/Small Items/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6339,
+      "sha256": "9236254e6ef8ed68291a9254baaa1fbe9b511fad02c9f647a92fe2fda934da6b",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Dishes A.png",
+      "path": "Objects/Small Items/Dishes A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2539,
+      "sha256": "88221d8d7b8b710c3929d3557caa7585cdd5af12f5108a4c008b83cde9098f34",
+      "imageSizePx": [
+        256,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Dungeon Elements.png",
+      "path": "Objects/Small Items/Dungeon Elements.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2543,
+      "sha256": "8ea088abd1737d70eed2993c0394e6d625a358e88271f829127f0c6d34c7d894",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Blankets, Crumpled.png",
+      "path": "Objects/Small Items/Fabric/Blankets, Crumpled.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 18870,
+      "sha256": "55578a233c501872b60c571a42d1a017af9f05d0df4813aacc2edce63071b8b1",
+      "imageSizePx": [
+        512,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Credits.txt",
+      "path": "Objects/Small Items/Fabric/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1024,
+      "sha256": "65d9f4997cd79650b86762aa27d110d4f61a163a37c80bbf3dcf0c10c0cdfe04",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Fabric Baskets.png",
+      "path": "Objects/Small Items/Fabric/Fabric Baskets.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9145,
+      "sha256": "a290c2ad8aeee81b5868f6d67fcf5bca2669f51727411bccd302cbbf02cd38e4",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Fabric Rolls, Groups.png",
+      "path": "Objects/Small Items/Fabric/Fabric Rolls, Groups.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4524,
+      "sha256": "e0f31859cb5cbacfc00c8d1a2cceff7629bb98bb73eaa8c95af518fc98abbe26",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Fabric Rolls.png",
+      "path": "Objects/Small Items/Fabric/Fabric Rolls.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 22475,
+      "sha256": "f6208c7a15c43ebd8ef1cae329fb8aa28487828e7d88861bece5a39510c031de",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fabric/Fabril Rolls, Mounted.png",
+      "path": "Objects/Small Items/Fabric/Fabril Rolls, Mounted.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3922,
+      "sha256": "543966a9a0337d45ad5ceda866f87c4a80f88e36447506dfa943dae9ba24e0b6",
+      "imageSizePx": [
+        256,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fire, Camp.png",
+      "path": "Objects/Small Items/Fire, Camp.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3310,
+      "sha256": "affd9567d0062c7791bc49553b1e64b7ac6eed2b77e71daae71843f331b1bea7",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fire, Fireplace.png",
+      "path": "Objects/Small Items/Fire, Fireplace.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4546,
+      "sha256": "df74ef7d2b60a0d7dd1029ef2f10cf1d2caccfb3e4bbb97b9e87ad22c0aa4240",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Fireplace, Accessories A.png",
+      "path": "Objects/Small Items/Fireplace, Accessories A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 903,
+      "sha256": "fc24919ca5b275c1547325900fd2963444b0106f2fafa1e0a4d78dfd0e18d74a",
+      "imageSizePx": [
+        64,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Flowers.png",
+      "path": "Objects/Small Items/Flowers.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4029,
+      "sha256": "e5e54d428557c50e779695747834e66e5c0d34c9f0472767ed69585579f26c63",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Bread A.png",
+      "path": "Objects/Small Items/Food/Bread A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1444,
+      "sha256": "6a8265edcd9456bf45ccd9f6c0c1eb1e795d0ea3e784ddad1796231a49d0ecd1",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Bread B.png",
+      "path": "Objects/Small Items/Food/Bread B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5426,
+      "sha256": "a527136434e9173e4324a463a22238fff28225b608ea4080d837b3473bf3b174",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Bread C.png",
+      "path": "Objects/Small Items/Food/Bread C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5048,
+      "sha256": "0f116976b82e157b6ec0108f397e80b25f56c0600ff873350f5f7671a6b51ed9",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Butter.png",
+      "path": "Objects/Small Items/Food/Butter.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1119,
+      "sha256": "e3a893154e8c9f85d885f5b4c54ed8645dfc6f83962b0764564eec212b511195",
+      "imageSizePx": [
+        32,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Cheese A.png",
+      "path": "Objects/Small Items/Food/Cheese A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2621,
+      "sha256": "2aa50cdfa90c5ac2ea5abfb3cbd15f2d6b077d2cc2cc36ae4a8b1b3a8ae1b2e9",
+      "imageSizePx": [
+        192,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Cheese B.png",
+      "path": "Objects/Small Items/Food/Cheese B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3529,
+      "sha256": "ffd508e8dc2d9c887c15ca1fd3f47417341114b9b1698c3ddf830c3d60ae5717",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Credits.txt",
+      "path": "Objects/Small Items/Food/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8851,
+      "sha256": "c6f19393c2d7fdeee9ca9317928c2c40bbe31a10898c7044fe931daa402dac01",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Dessert.png",
+      "path": "Objects/Small Items/Food/Dessert.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2520,
+      "sha256": "97847ad388909d81c58a896d55c945a6d233b7652ccba12acd2b6280847a23c2",
+      "imageSizePx": [
+        160,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Eggs.png",
+      "path": "Objects/Small Items/Food/Eggs.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2473,
+      "sha256": "36ef4e63c5b09dfae94057080ad59cba40ffbd81a999e1932ecf890f1d3c0d98",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Fruit A.png",
+      "path": "Objects/Small Items/Food/Fruit A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7873,
+      "sha256": "e95500c3c8643d6d88f22e98fdcb5a3336493ce670942e24bb20e95676e53c99",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Fruit B.png",
+      "path": "Objects/Small Items/Food/Fruit B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 99979,
+      "sha256": "c72ebf7db542f27c5ebbaf9b920792505dc0b20ab2dd2a2078f11d62139712a1",
+      "imageSizePx": [
+        480,
+        480
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Grains, Grasses.png",
+      "path": "Objects/Small Items/Food/Grains, Grasses.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6594,
+      "sha256": "01bd886b24701f8399ec5c667edbda749b1d24346a5826f5e39749c5fa3e87c8",
+      "imageSizePx": [
+        320,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Grains, Rice, Noodles.png",
+      "path": "Objects/Small Items/Food/Grains, Rice, Noodles.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2678,
+      "sha256": "24a581a30d0703d58fbac365d82525a54f4ea382f21f4e421683949aeb2cb606",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Hamburgers.png",
+      "path": "Objects/Small Items/Food/Hamburgers.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3998,
+      "sha256": "e55c2202c528f86a707b758a712b7d0fb18f430cb318bd60d0349938401b87fd",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Herbs & Spices.png",
+      "path": "Objects/Small Items/Food/Herbs & Spices.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 71104,
+      "sha256": "3eab6259ff7734e07f70bf4b690b3dd8edc78d6d3ae5b0ffb11c2375ee82b4c5",
+      "imageSizePx": [
+        480,
+        320
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Meals.png",
+      "path": "Objects/Small Items/Food/Meals.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8115,
+      "sha256": "2b58872b34d3c09ceaa9fa1c6a07e51cdcccaf44d8681c83802b340dec3da61c",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Meats A.png",
+      "path": "Objects/Small Items/Food/Meats A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4028,
+      "sha256": "748e7c619ad525cadee9b59dd1a5025bdb6933197d74a7e480a551d69f7e57dc",
+      "imageSizePx": [
+        160,
+        352
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Meats B.png",
+      "path": "Objects/Small Items/Food/Meats B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5170,
+      "sha256": "b334318875121be687adb8e744e62e23adc43d6ac0e30082467a8f04da41c65a",
+      "imageSizePx": [
+        352,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Mushrooms.png",
+      "path": "Objects/Small Items/Food/Mushrooms.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5398,
+      "sha256": "abefaa15e12d03a36d5ba0aa10491bcdd64c57a80cf3e1d132f0bf11be6c8c25",
+      "imageSizePx": [
+        320,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Nuts.png",
+      "path": "Objects/Small Items/Food/Nuts.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 18685,
+      "sha256": "9df2d917212a27a8c9caa73a74861e901f75c675b248834d952f564a106b040c",
+      "imageSizePx": [
+        288,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Seafood A.png",
+      "path": "Objects/Small Items/Food/Seafood A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 23604,
+      "sha256": "0c76f2c6b52cc18a15002b57c7f08e19b4efb59b8939bc11ea9434e28c645c8f",
+      "imageSizePx": [
+        384,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Tea, Coffee, Medicinal Herbs.png",
+      "path": "Objects/Small Items/Food/Tea, Coffee, Medicinal Herbs.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5484,
+      "sha256": "7a710daf816c492c8eb7772ebca1b3d4782c13a6217773a22a3b38d031826e95",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Tortillas.png",
+      "path": "Objects/Small Items/Food/Tortillas.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1199,
+      "sha256": "4b5196534551ea0a1087543e4c103b2ac315927afe725c6e336a9bb36447524a",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Vegetables A.png",
+      "path": "Objects/Small Items/Food/Vegetables A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 11498,
+      "sha256": "265feb85d2516e8c97f200557d7bc4fd6cfa29a1bd48a5cb07348d27a820655d",
+      "imageSizePx": [
+        384,
+        448
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Vegetables B.png",
+      "path": "Objects/Small Items/Food/Vegetables B.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5628,
+      "sha256": "18e0eeef085d9654076cc925d9e329e944704bc215843e69fbd8c9bb4104792e",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Food/Vegetables C.png",
+      "path": "Objects/Small Items/Food/Vegetables C.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 106858,
+      "sha256": "2210818ce785772980264ef0fd5029738194885d532b5309b0728956926404d6",
+      "imageSizePx": [
+        576,
+        480
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Games.png",
+      "path": "Objects/Small Items/Games.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 350,
+      "sha256": "f2676b138fa1ab1c68ac2f56f5d1e1ad88547303874743e343e5a666d5398f8d",
+      "imageSizePx": [
+        32,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Hay & Straw.png",
+      "path": "Objects/Small Items/Hay & Straw.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4759,
+      "sha256": "fc7c37215c369b501c63e2bad54b8380cdff4cfc013d95a09235d2979730d230",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Kitchen Clutter A.png",
+      "path": "Objects/Small Items/Kitchen Clutter A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8494,
+      "sha256": "6b4d0b97b9498bf733943de00b6c3a307d5be2a6794e7c9b4287399e21f6c6e2",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Laptop.png",
+      "path": "Objects/Small Items/Laptop.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2448,
+      "sha256": "84c945708f74497540906f700c22f54c15c3e2d4016ae46903b1375ca0b197da",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Lighting, Table.png",
+      "path": "Objects/Small Items/Lighting, Table.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6959,
+      "sha256": "16a90021cabee1a5878fd5b6f23ce9d10fea461496062b1b62a1b983706e18ad",
+      "imageSizePx": [
+        256,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Loose Paper.png",
+      "path": "Objects/Small Items/Loose Paper.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1584,
+      "sha256": "3da8463b310f8e71175b69ec3aac64c2f45efe7f89c783eaa94c24f60b7bb9ba",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Lumber.png",
+      "path": "Objects/Small Items/Lumber.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4915,
+      "sha256": "9c703031e6e8c03d596244980cad2aec6688c83b38bf5449d09dd5deba6dba76",
+      "imageSizePx": [
+        320,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Alloys.png",
+      "path": "Objects/Small Items/Ores & Ingots/Alloys.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2317,
+      "sha256": "d3cc687659b51d588824f64656a33db4919b01d62f7a67206a03b2e41a37a961",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Credits.txt",
+      "path": "Objects/Small Items/Ores & Ingots/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 209,
+      "sha256": "a86a138a88a747fd3dc8a0cc51ae3dbcaff2c5dd2fd0be2098dd0d7469b24597",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Coal.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Coal.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 4232,
+      "sha256": "0ed144e740fca205549e90771e05b8864c4d34634c5487ec9831ab21844fa15f",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Copper.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Copper.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7146,
+      "sha256": "4733d38df45d0adba95ed417adfc6a0758944b26131852120f3089bfc66a39f4",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Gold.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Gold.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6859,
+      "sha256": "ac7a4b20a14b23db57261356ac12eb15bb98ac9c03bccc25e27b20ef364f45d1",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Iron.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Iron.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5266,
+      "sha256": "6b771f203793e6cc6fbf4bd2a22f06856c0b45ee2288ccad18c395c721231720",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Silver.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Silver.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7273,
+      "sha256": "0ef7345ed51045e6abd2cde64e7e27e152691d3a36b111ad28c1b1430d14b34a",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Stone.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Stone.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3937,
+      "sha256": "2c90aafbe8e287d4c49a1c45015bdaaa60152af9baaa1f4e19aebbd4d783a41a",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Tin.png",
+      "path": "Objects/Small Items/Ores & Ingots/Ore, Tin.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6378,
+      "sha256": "6f87f12db7b26fb7bb6b4c9431245b3873f72420a5753d8a9fe6ac04e5e5852e",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Pillows.png",
+      "path": "Objects/Small Items/Pillows.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7585,
+      "sha256": "e91b0993e38bb8cd906b57024dbc0cc8d0fd5b579973e185dbdede544658a6f4",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Presents.png",
+      "path": "Objects/Small Items/Presents.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7438,
+      "sha256": "497f416f0d01dec72a40043bcf46c752345e133c89ab349fd3640ebd745928a8",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Rotary Phones.png",
+      "path": "Objects/Small Items/Rotary Phones.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2759,
+      "sha256": "57060493cab2c8fcc6e3bf33ee8a2ce13e7fb1649ecc10e7ef2ea49ff092bcaa",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Sawdust.png",
+      "path": "Objects/Small Items/Sawdust.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 613,
+      "sha256": "dedc9fecdbb48223c94378584026eae7e943f0eb7363ff586a6abc1aa098d850",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Skeletons A.png",
+      "path": "Objects/Small Items/Skeletons A.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3585,
+      "sha256": "649f5cbf972ce00b1db4b8402fe0ee0a53e2f8d4d70514bdc13f1df049097597",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Tabletop Portraits.png",
+      "path": "Objects/Small Items/Tabletop Portraits.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1458,
+      "sha256": "afcc4cfe05e734d6672a1f2b18fce3a840d10b88b58c059558836c8ffdcfbba3",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Tools, Carpentry.png",
+      "path": "Objects/Small Items/Tools, Carpentry.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 14190,
+      "sha256": "5bd5ce07ad8e632aa23b10f5f1a7c9588eaea84a1bf66a68bc37c62afd730ff1",
+      "imageSizePx": [
+        416,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Tools, Sewing.png",
+      "path": "Objects/Small Items/Tools, Sewing.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9036,
+      "sha256": "a38c940d0d4625b200a567aa5370b04750bfb36c39439d58be1a17852bc01800",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Small Items/Tools, Smithing.png",
+      "path": "Objects/Small Items/Tools, Smithing.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8584,
+      "sha256": "74f07b16d6c4874cbe7166250c03fccfa30ed404e5cd60269e66f87623050062",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Christmas Wall Decor.png",
+      "path": "Objects/Wall Items/Christmas Wall Decor.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6088,
+      "sha256": "0406d6a2efe52bdf22657154aced437a5d127a37093d33a797d87a887ad78ab5",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Credits.txt",
+      "path": "Objects/Wall Items/Credits.txt",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2764,
+      "sha256": "ea7748bbc814543297b8671542f4cdaa55056246921299affe6ce991f82f115b",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Curtains.png",
+      "path": "Objects/Wall Items/Curtains.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 36055,
+      "sha256": "6eccf8ce365aa56fb7c1397a7608c592a57efc102fec83c5c0a6e333a8a94963",
+      "imageSizePx": [
+        768,
+        416
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Graffiti Elements.png",
+      "path": "Objects/Wall Items/Graffiti Elements.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 9121,
+      "sha256": "787aab3215d3efdde0313c85d50b4cbcd9f48aaf39850554c7e2b357fa9196eb",
+      "imageSizePx": [
+        320,
+        256
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Graffiti.png",
+      "path": "Objects/Wall Items/Graffiti.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 10544,
+      "sha256": "4ab603e56fd9ece7c2f2b81e54c5fa2b2ddc9c2602bbdff5cdef95d02c42b24c",
+      "imageSizePx": [
+        352,
+        160
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Lighting, Wall.png",
+      "path": "Objects/Wall Items/Lighting, Wall.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 2844,
+      "sha256": "33ec7027db9abe6e0725dae83d309abc7f34f34d0086639ea13d311fc708fc83",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Mailboxes (tiling).png",
+      "path": "Objects/Wall Items/Mailboxes (tiling).png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 527,
+      "sha256": "1ce08faf43d204b6182d06dd0de47d3b607825edc28858f832274ded09b6e839",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Mirrors.png",
+      "path": "Objects/Wall Items/Mirrors.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1915,
+      "sha256": "96083be6e683de8cc2a9fa5277010daf1af739603b26e6f477c43cb0336e7e12",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Paintings, Abstract.png",
+      "path": "Objects/Wall Items/Paintings, Abstract.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 6432,
+      "sha256": "85375981f491ee44173eaf3cf9307dfb96056a746dc1a28776399aae5fe6dad4",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Paintings, Landscape.png",
+      "path": "Objects/Wall Items/Paintings, Landscape.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 8258,
+      "sha256": "93c6e7a4f1bb3365e4a5ef60ccf8dcacc0bf19d27a2cbd578f1aff1b631735c8",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Paintings, Portraits.png",
+      "path": "Objects/Wall Items/Paintings, Portraits.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 7110,
+      "sha256": "833056185812f382a17b28da1aab35390fed64b8886e3bc48a5c52bc58b30e17",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Paintings, Still Life.png",
+      "path": "Objects/Wall Items/Paintings, Still Life.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 5194,
+      "sha256": "953b5bc48a01b121bcab3eb79dee8637f06a2f324dd25531d8ceaa25c7787004",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Posters.png",
+      "path": "Objects/Wall Items/Posters.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 3936,
+      "sha256": "5c9211b58424f3024ba87332ca4f4e9ea856bfd250d0c168118a0fed8003a546",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:Objects/Wall Items/Pride Flags.png",
+      "path": "Objects/Wall Items/Pride Flags.png",
+      "pack": "Objects.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1556,
+      "sha256": "b49ff5dbd360387b3d35138203540ec5a921c0360fc95ee4efb73d074ddb89da",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/Credits.txt",
+      "path": "FX/Credits.txt",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 695,
+      "sha256": "5c26ddc76c64371ca668ec65474cacc7c70c32004cc8ba8a4d2bd23b4370c170",
+      "imageSizePx": null,
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/Splash.png",
+      "path": "FX/Splash.png",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1093,
+      "sha256": "3cd918a3857c3f31f8243199b6b5a291bf50988d1accf61210c2529c26d331e9",
+      "imageSizePx": [
+        384,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/Splash_Back.png",
+      "path": "FX/Splash_Back.png",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 1356,
+      "sha256": "98dfcf8a54afd209e1fa43e3a8e6df1a94c4077c44182673ad8ddb19caec36a4",
+      "imageSizePx": [
+        384,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/Water Reflections.png",
+      "path": "FX/Water Reflections.png",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 751,
+      "sha256": "3b6601fb1a75b0dd37a16711e582ee8a242e624c04caadaefa41555cc63adfa7",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/WaterRipple.png",
+      "path": "FX/WaterRipple.png",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 375,
+      "sha256": "0157ad0bb20361c6788f56642033dbd10ea5c4114317e82f179d0dcaa3b5bd92",
+      "imageSizePx": [
+        128,
+        32
+      ],
+      "stage": "source_only"
+    },
+    {
+      "id": "elizawy:FX/WaterRipple_Back.png",
+      "path": "FX/WaterRipple_Back.png",
+      "pack": "FX.zip",
+      "availability": "unpacked",
+      "archive": null,
+      "bytes": 471,
+      "sha256": "c2cd736aa9ff7d73fca565e0e7aa84a745a29b1118d4d8629520ab93e81f2c1d",
+      "imageSizePx": [
+        128,
+        32
+      ],
+      "stage": "source_only"
+    }
+  ],
+  "optionalArchives": {
+    "Characters.zip": {
+      "bytes": 299252779,
+      "sha256": "0de481a33c458d600fb3adaed043dcd953f58dec436dac0ca241c7dc5a0368f9",
+      "policy": "optional_on_demand_hydration"
+    },
+    "FourSeasonAlternative.zip": {
+      "bytes": 8118638,
+      "sha256": "d3be5d27b1c75b6420f7784369e8939a5a02c0ad78e3995800b0a6b5079c559c",
+      "policy": "optional_never_auto_merge"
+    }
+  }
+}

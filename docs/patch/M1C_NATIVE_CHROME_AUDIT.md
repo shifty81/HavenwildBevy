@@ -1,0 +1,1 @@
+M1C aligns the source structural audit with M1B native Windows chrome. The removed custom title panel is forbidden; the action/status/mapper panels remain required. No runtime, mapping, or Cargo files are changed. Run FULL GATE then test window controls interactively.

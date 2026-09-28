@@ -1,0 +1,13 @@
+{
+  "schema": "havenwild.terrain.fixture.v1",
+  "id": "diagonal_ne_sw",
+  "description": "Forces central mask 0110 so diagonal support must be classified explicitly.",
+  "width": 2,
+  "height": 2,
+  "foreground": "Grass",
+  "background": "Void",
+  "cells": [
+    [0, 1],
+    [1, 0]
+  ]
+}

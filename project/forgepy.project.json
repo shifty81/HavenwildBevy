@@ -1,0 +1,76 @@
+{
+  "schema": "havenwild.forgepy.project.v2",
+  "projectId": "havenwild-bevy",
+  "displayName": "Havenwild Bevy",
+  "projectKind": "game_and_authoring_studio",
+  "engine": {
+    "name": "Bevy",
+    "version": "0.19.0",
+    "rustMinimum": "1.95"
+  },
+  "gui": {
+    "framework": "bevy_egui + ForgeGUI_Core",
+    "forgeGuiRevision": "eafa8e78efd54142a19e66d8be7b7d3985af23d2",
+    "bevyEguiVersion": "0.42.0"
+  },
+  "entrypoints": {
+    "control": "ProjectControlCenter.py",
+    "windowsLauncher": "ForgePY.cmd",
+    "studioLauncher": "Studio.cmd",
+    "rustBinary": "havenwild_bevy",
+    "controlLauncher": "PCC.cmd",
+    "backend": "ForgePY.py"
+  },
+  "assets": {
+    "policy": "forgepy_hydrated_local_copy",
+    "runtimeRoot": "assets/elizawy",
+    "coreManifest": "content/catalog/core_source_manifest.json",
+    "activeSheets": "content/catalog/active_sheets.json",
+    "generatedCatalog": "content/catalog/source_index.local.json",
+    "characters": "local_hydration_63991_files_metadata_catalog_no_per_file_sha256",
+    "seasonalAlternative": "never_auto_merge",
+    "characterCatalog": "content/catalog/characters_index.local.json",
+    "handoffPolicy": "source_only_no_asset_payloads"
+  },
+  "authoredContent": {
+    "sceneRoot": "content/scenes",
+    "initialScene": "content/scenes/elizawy_mapping_certification.scene.json",
+    "visualTestFixture": "content/scenes/summer_river.scene.json"
+  },
+  "sourceControl": {
+    "provider": "github",
+    "remote": "origin",
+    "branchPolicy": "current_checked_out_branch",
+    "buildRefresh": "safe_fast_forward_when_clean",
+    "dirtyPolicy": "never_stash_reset_rebase_or_overwrite; skip refresh and build local worktree",
+    "repositoryUrl": "auto-detect-from-git-origin"
+  },
+  "forgepyVersion": "0.4.6",
+  "pcc": {
+    "version": "1.2.6",
+    "logs": ".pcc/logs",
+    "receipts": ".pcc/receipts",
+    "debugBundles": ".pcc/debug",
+    "updateInbox": "updates/inbox",
+    "patchSchema": "havenwild.bevy.pcc.patch.v1",
+    "failurePolicy": "child failures are captured; interactive host remains open; debug bundle auto-generated",
+    "assetBoundary": "source-only; hydrated art is excluded from patches/packages/debug bundles",
+    "telemetry": "phased full gate with unique phase receipts, exact-version governed patch chaining, Windows-safe patch identity checks, post-apply hashes, Cargo-free Rust source/module/dependency audit, authored-scene source-rect validation, Summer mapping recovery validation, 16-mask semantic resolver-lab validation, full resolved semantic-to-recipe edge/corner + bit-orientation pipeline validation, full core-asset hash certification, Cargo.lock snapshot + --locked metadata verification, per-job heartbeat, active-job recovery, gate receipts, recent-log diagnostics; runtime-generation handshake prevents pre-update PCC processes from certifying post-update source"
+  },
+  "terrain": {
+    "contract": "content/terrain/dual_grid_contract.v1.json",
+    "initialRecipeFamily": "content/terrain/recipes/summer_grass_void.v1.json",
+    "status": "DG-03 verified shared resolver: 305/305 non-transparent Summer source cells preserved as source evidence; semantic-only 5x5 lab covers all 16 masks; shared semantic->vertex->recipe resolver drives the full 6x6 vertex preview; all 25 semantic cells are checked for exact four-vertex invalidation and corner-bit orientation; recipe certification remains manual/source-backed",
+    "fixtureCoverage": "16/16 topology masks covered by checked-in fixtures and the immutable semantic resolver seed; editor experiments persist separately under .forgepy",
+    "mapper": "src/terrain_mapper.rs + dockable responsive Terrain Mapper with 29-sheet Terrain catalog, resolved output preview, semantic undo/redo, dirty-vertex highlighting, and editable composite parts",
+    "summerRecovery": "content/terrain/recovery/summer_source_cells.v1.json",
+    "historicalAuthority": "content/terrain/recovery/historical_authority.v1.json",
+    "legacyRecoveryTool": "tools/recover_legacy_mapping.py",
+    "confidencePolicy": "certified/reviewed/source_mapped/candidate/ambiguous/unsupported/unmapped; historical evidence never auto-promotes to certification",
+    "resolver": "src/terrain.rs::corner_mask_for_vertex + src/terrain_resolver.rs::resolve_semantic_lab; shared UI/runtime-facing vertex resolution consumes semantic-only cells and recipe state",
+    "semanticLabSeed": "content/terrain/previews/dg01_grass_void.semantic_lab.v1.json",
+    "semanticLabLocal": ".forgepy/semantic_lab.local.json",
+    "runtimeResolver": "src/terrain_resolver.rs"
+  },
+  "sourceVersion": "0.5.6"
+}

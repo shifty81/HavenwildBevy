@@ -1,0 +1,16 @@
+{
+  "schema": "havenwild.terrain.fixture.v1",
+  "id": "dual_grid_reference",
+  "description": "Checked-in semantic regression pattern derived from the dual-grid planning target. This is a topology fixture, not source artwork.",
+  "width": 4,
+  "height": 5,
+  "foreground": "Grass",
+  "background": "Void",
+  "cells": [
+    [0, 0, 1, 1],
+    [1, 0, 1, 1],
+    [1, 1, 1, 1],
+    [0, 1, 1, 1],
+    [0, 0, 1, 1]
+  ]
+}

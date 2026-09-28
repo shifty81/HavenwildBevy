@@ -1,0 +1,21 @@
+{
+  "schema": "havenwild.bevy.source.checkpoint.v1",
+  "checkpoint": "HW-BEVY-M2D02-E-SOURCE-EXACT-RECOVERY-20260928",
+  "source_version": "0.5.6",
+  "pcc_version": "1.2.6",
+  "forgepy_version": "0.4.6",
+  "parent_checkpoint": "HW-BEVY-M2D02-D-ASSEMBLED-ELIZAWY-CERTIFICATION-20260928",
+  "parent_source_rollup_sha256": "9878d4c5d5b7d5f7493e768e8a92dc5048034aba8711f4dd5e7fa4f23abd5fb3",
+  "state": "source-exact-original-authored-fixture-only",
+  "native_windows_full_gate": "PENDING",
+  "migration": "Original M2D02-D scene/index archived byte-exact; old user local derived draft preserved at its former path; fresh draft uses separate source_exact path.",
+  "artifacts": {
+    "active_scene": "content/scenes/elizawy_mapping_certification.scene.json",
+    "active_index": "content/scenes/elizawy_mapping_certification.index.json",
+    "retired_scene": "docs/handoff/retired/M2D02D_guessed_assembled_scene.archive.json",
+    "retired_index": "docs/handoff/retired/M2D02D_guessed_assembled_index.archive.json"
+  },
+  "pinned_fixture_sha256": "9e5ade01d388c6184984c61c8bf97cd3dafcb436a4c9c060b8db9e3c842b09e7",
+  "asset_mutations": 0,
+  "recipe_promotions": 0
+}

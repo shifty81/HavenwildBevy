@@ -1,0 +1,44 @@
+/target/
+/.vs/
+/.idea/
+/.vscode/
+/artifacts/
+/.forgepy/
+*.log
+
+# ForgePY-hydrated local source assets. Canonical art stays external/read-only;
+# ForgePY copies verified local working copies here.
+/assets/elizawy/
+/assets/optional/
+/reference/
+/content/catalog/source_index.local.json
+/content/catalog/characters_index.local.json
+
+# Keep the source-controlled hydration contract/readme.
+!/assets/README.md
+
+# One-time local asset-seed overlay markers; never part of source history.
+/LOCAL_SEED_MANIFEST.json
+/LOCAL_SEED_OVERLAY_README.txt
+
+# Project Control Center local operational state and consumed update payloads.
+/.pcc/
+/updates/inbox/*.zip
+/updates/archive/
+/updates/rejected/
+/*.pccpatch.zip
+
+# Retired generated catalogs from the pre-source-only baseline.
+/content/catalog/source_index.json
+/content/catalog/source_collisions.json
+
+# Workstation-local authored mapping-lab drafts. Promote reviewed scenes explicitly;
+# do not silently publish private corrections or stale atlas-board drafts.
+/content/scenes/derived/
+/pcc_patch.json
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/

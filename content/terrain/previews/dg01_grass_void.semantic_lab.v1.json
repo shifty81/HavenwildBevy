@@ -1,0 +1,14 @@
+{
+  "schema": "havenwild.terrain.semantic_lab.v1",
+  "id": "dg01.grass_void.coverage_lab",
+  "foreground": "Grass",
+  "background": "Void",
+  "size": [5, 5],
+  "cells": [
+    false, true,  true,  false, true,
+    false, false, false, true,  false,
+    false, true,  false, true,  true,
+    false, true,  true,  true,  true,
+    true,  false, false, true,  false
+  ]
+}

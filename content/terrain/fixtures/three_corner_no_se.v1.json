@@ -1,0 +1,13 @@
+{
+  "schema": "havenwild.terrain.fixture.v1",
+  "id": "three_corner_no_se",
+  "description": "Forces central mask 0111 to close the initial 16-mask fixture coverage gap.",
+  "width": 2,
+  "height": 2,
+  "foreground": "Grass",
+  "background": "Void",
+  "cells": [
+    [1, 1],
+    [1, 0]
+  ]
+}

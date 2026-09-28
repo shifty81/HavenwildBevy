@@ -1,0 +1,110 @@
+{
+  "schema": "havenwild.terrain.historical_mapping_authority.v1",
+  "purpose": "Carry forward verified historical Havenwild mapping evidence into the standalone Bevy lane without silently promoting evidence to current recipe certification.",
+  "canonicalSummer": {
+    "path": "Terrain/terrain_summer.png",
+    "sha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
+    "grid": [
+      16,
+      26
+    ],
+    "sourceCells": 416,
+    "nonTransparentCellsMapped": 305,
+    "transparentCells": 111,
+    "structuralTransparentHistorical": 14,
+    "unusedTransparentHistorical": 97,
+    "authority": "pixel-replay + historical build evidence",
+    "currentImportState": "source_inventory_recovered"
+  },
+  "historicalEvidence": [
+    {
+      "id": "pass103_summer_complete_map",
+      "date": "2026-07-18",
+      "authority": "historical build validation",
+      "facts": {
+        "nonTransparentMapped": 305,
+        "nonTransparentTotal": 305
+      },
+      "currentImportState": "count_and_source_inventory_recovered",
+      "note": "Exact semantic role document is not present in the standalone source; do not infer missing labels."
+    },
+    {
+      "id": "pass106_seasonal_topology",
+      "date": "2026-07-18",
+      "authority": "historical build validation",
+      "facts": {
+        "topologyFamilies": 20,
+        "seasonalSheets": 5
+      },
+      "currentImportState": "evidence_only",
+      "note": "Raw topology-family artifact must be recovered from an older Havenwild source tree before recipes are promoted."
+    },
+    {
+      "id": "pass90_ordered_transitions",
+      "date": "2026-07-18",
+      "authority": "historical build validation",
+      "facts": {
+        "orderedPairTransitionVariants": 176
+      },
+      "currentImportState": "evidence_only"
+    },
+    {
+      "id": "pass108_edge_signatures",
+      "date": "2026-07-18",
+      "authority": "historical build validation",
+      "facts": {
+        "outerVariants": 144,
+        "innerCorners": 32
+      },
+      "currentImportState": "evidence_only"
+    },
+    {
+      "id": "pass114_exact_tuples_snapshot",
+      "date": "2026-07-18",
+      "authority": "historical build validation",
+      "facts": {
+        "exactTuples": 5617,
+        "pureFillVariants": 57
+      },
+      "currentImportState": "evidence_only",
+      "note": "Historical mapped-terrain snapshot; not automatically equivalent to the new Summer Grass/Void 16-mask recipe."
+    },
+    {
+      "id": "b48r15_summer_mapper",
+      "date": "2026-09-19",
+      "authority": "historical mapper test status",
+      "facts": {
+        "summerCrosswalkEntries": 641,
+        "seasonalSourceAddresses": 1781
+      },
+      "currentImportState": "evidence_only",
+      "note": "The old status explicitly called the 641 entries source-address hints, not semantic cliff/water approval."
+    },
+    {
+      "id": "later_terrain_v7_authority",
+      "date": "2026-08-26",
+      "authority": "later Havenwild terrain authority",
+      "facts": {
+        "terrainMaterials": 34,
+        "uniqueExactTupleSignatures": 15562
+      },
+      "currentImportState": "separate_authority_layer",
+      "note": "Later terrain-v7 authority is valuable but must not silently overwrite Summer ElizaWy presentation recipes."
+    }
+  ],
+  "confidenceStates": [
+    "certified",
+    "reviewed",
+    "source_mapped",
+    "candidate",
+    "ambiguous",
+    "unsupported",
+    "unmapped"
+  ],
+  "rules": {
+    "historicalEvidenceIsNotCurrentCertification": true,
+    "sourceArtworkImmutable": true,
+    "missingRawArtifactsAreNotReconstructedByGuessing": true,
+    "laterTerrainV7AuthorityDoesNotReplaceSummerPresentationByDefault": true
+  }
+}

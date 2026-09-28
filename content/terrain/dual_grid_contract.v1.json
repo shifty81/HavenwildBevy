@@ -1,0 +1,59 @@
+{
+  "schema": "havenwild.terrain.dual_grid_contract.v1",
+  "tileSizePx": 32,
+  "semanticGrid": "world_cells",
+  "renderGrid": "terrain_vertices_offset_half_cell",
+  "cornerBits": {
+    "NW": 1,
+    "NE": 2,
+    "SW": 4,
+    "SE": 8
+  },
+  "binaryMasks": [
+    "0000",
+    "0001",
+    "0010",
+    "0011",
+    "0100",
+    "0101",
+    "0110",
+    "0111",
+    "1000",
+    "1001",
+    "1010",
+    "1011",
+    "1100",
+    "1101",
+    "1110",
+    "1111"
+  ],
+  "dirtyVertexOffsetsForChangedCell": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "rules": {
+    "savedWorldContainsAtlasCoordinates": false,
+    "rendererPerformsTopologyResolution": false,
+    "terrainAndElevationResolversAreSeparate": true,
+    "waterAndWaterfallResolutionAreSeparate": true,
+    "traversalIsSemanticNotInferredFromPixels": true,
+    "chunkHaloIsReadOnlyContext": true,
+    "sourceArtworkIsImmutable": true,
+    "authoringSemanticResolverLab": true,
+    "authoringResolvedSourcePreview": true
+  }
+}

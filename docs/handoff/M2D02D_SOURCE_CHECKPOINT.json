@@ -1,0 +1,34 @@
+{
+  "schema": "havenwild.bevy.source.checkpoint.v1",
+  "checkpoint": "HW-BEVY-M2D02-D-ASSEMBLED-ELIZAWY-CERTIFICATION-20260928",
+  "source_version": "0.5.6",
+  "pcc_version": "1.2.6",
+  "forgepy_version": "0.4.6",
+  "bevy_version": "0.19.0",
+  "starting_installed_baseline": "M2D02-C unified atlas-board patch already applied",
+  "installation": "One incremental M2D02-D .pccpatch.zip on top of installed C; no old dependent patch replay",
+  "lineage": [
+    {
+      "checkpoint": "base",
+      "archive_sha256": "58be5a5d62a7b1dce6a4487788a3c4341bb7262c7411f07cfc5d526f94b77cc8"
+    },
+    {
+      "checkpoint": "M2D01",
+      "archive_sha256": "3acc8a70335b37095b463cae91fabded2060fde816c8056f4983f4173b2aa3bd"
+    },
+    {
+      "checkpoint": "M2D02-A",
+      "archive_sha256": "0de42a92aecb8de8907605092f99499235a1c6d3c99f32775b2d4adad33d68ea"
+    },
+    {
+      "checkpoint": "M2D02-A1+B1+B2+C",
+      "archive_sha256": "d25d352046b340a55e383dffbb07af4b512a1475b9450317413c598904659c15"
+    }
+  ],
+  "native_windows_full_gate": "PENDING; Python source tests and PCC clean-staged apply only",
+  "reference_fixture_sha256": "9e5ade01d388c6184984c61c8bf97cd3dafcb436a4c9c060b8db9e3c842b09e7",
+  "generated_scene": "content/scenes/elizawy_mapping_certification.scene.json",
+  "derived_scene_local_only": "content/scenes/derived/elizawy_mapping_certification.assembled.draft.json",
+  "original_sources_included": false,
+  "promotion_count": 0
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "havenwild.retired_failed_visual_baseline.v1",
+  "sourcePatch": "HW-BEVY-M2D02-D-ASSEMBLED-ELIZAWY-CERTIFICATION-20260928",
+  "originalSourceHashes": {
+    "content/scenes/elizawy_mapping_certification.scene.json": "e9c85931e3a147e5bda6ac671c72edaca409ee76b25a148aea059c79967a0f5b",
+    "content/scenes/elizawy_mapping_certification.index.json": "1748abcac25c5683666b97e9312e70a21cd7ba141bfc4fc83f629b7cfd3afdc0"
+  },
+  "archivedCopies": {
+    "docs/handoff/retired/M2D02D_guessed_assembled_scene.archive.json": "e9c85931e3a147e5bda6ac671c72edaca409ee76b25a148aea059c79967a0f5b",
+    "docs/handoff/retired/M2D02D_guessed_assembled_index.archive.json": "1748abcac25c5683666b97e9312e70a21cd7ba141bfc4fc83f629b7cfd3afdc0"
+  },
+  "notes": "These were guessed visual integration drafts. They are retained for audit, are not read by Studio and must not become mapping authority."
+}

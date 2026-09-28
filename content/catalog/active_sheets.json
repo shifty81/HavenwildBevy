@@ -1,0 +1,42 @@
+{
+  "schema": "elizawy.active_sheets.v1",
+  "sourceFamily": "ElizaWy/LPC Revised",
+  "sheets": [
+    {
+      "path": "Terrain/cliff_summer.png",
+      "sizePx": [
+        512,
+        448
+      ],
+      "sha256": "94bd2ddb2c51677498453486092ef28e57e0c1880f4334359189229590298147",
+      "mapping": "source_only"
+    },
+    {
+      "path": "Terrain/plants_summer.png",
+      "sizePx": [
+        512,
+        160
+      ],
+      "sha256": "66ca3a60067d123c02cbae5874c17da1c7a3f0da4142066b9711de79f99228d7",
+      "mapping": "source_only"
+    },
+    {
+      "path": "Terrain/terrain_summer.png",
+      "sizePx": [
+        512,
+        832
+      ],
+      "sha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
+      "mapping": "source_only"
+    },
+    {
+      "path": "Terrain/Waterfall.png",
+      "sizePx": [
+        512,
+        608
+      ],
+      "sha256": "5225ab0a7451a90d3b9b4cad37188b63467dc61797369fcec746b583a270dcb6",
+      "mapping": "source_only"
+    }
+  ]
+}

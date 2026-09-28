@@ -1,0 +1,18 @@
+{
+  "activeSourceEntries": 64340,
+  "sourcePacks": {
+    "Terrain.zip": 30,
+    "Structure.zip": 113,
+    "Objects.zip": 200,
+    "FX.zip": 6,
+    "Characters.zip": 63991
+  },
+  "seasonalAlternateEntries": 2630,
+  "sameNameSameBytes": 178,
+  "alternateOnlyEntries": 493,
+  "canonicalSummerSha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
+  "draftSceneCells": 1120,
+  "totalCoreAssetsMB": 4.33,
+  "charactersArchiveMB": 299.25,
+  "samePathDifferentBytes": 1959
+}

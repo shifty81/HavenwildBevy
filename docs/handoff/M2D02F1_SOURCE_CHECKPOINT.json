@@ -1,0 +1,23 @@
+{
+  "schema": "havenwild.bevy.source.checkpoint.v1",
+  "checkpoint": "HW-BEVY-M2D02-F1-SOURCE-SCENE-PIE-20260928",
+  "parent_checkpoint": "HW-BEVY-M2D02-E-SOURCE-EXACT-RECOVERY-20260928",
+  "parent_source_rollup_sha256": "fc350bb247f461cbf3ebd49a30584b93c46025464094ca0c54694cd091f04957",
+  "source_version": "0.5.6",
+  "pcc_version": "1.2.6",
+  "forgepy_version": "0.4.6",
+  "native_windows_full_gate": "PENDING",
+  "state": "source-addressed-river-pie-prototype",
+  "active_scene": "content/scenes/elizawy_mapping_certification.scene.json",
+  "active_scene_sha256": "a698bf14b4a9ab5390f37d4471ccffad5d394ab9aac43957326b747969785c31",
+  "demo_reference_only": "docs/research/ELIZAWY_ORIGINAL_DEMO_REFERENCES.json",
+  "playtest": "in-process Bevy Studio snapshot (provisional v1 terrain-hint traversal; debug player marker)",
+  "original_asset_mutations": 0,
+  "scene_fixture_mutations": 0,
+  "recipe_promotions": 0,
+  "known_limitations": [
+    "No editable source demo map in uploaded archive; original screenshot cannot be treated as scene",
+    "PIE preview is not a separate game-client executable",
+    "V1 hints do not certify structural collision or traversal"
+  ]
+}

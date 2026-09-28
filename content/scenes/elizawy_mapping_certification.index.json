@@ -1,0 +1,68 @@
+{
+  "schema": "havenwild.elizawy.assembled_certification_scene.v1",
+  "authority": "pinned_authored_fixture_no_guessed_compositions_zero_promotions",
+  "generatedSceneSize": [
+    40,
+    28
+  ],
+  "catalogSha256": "5b4bc8bc506268104bdd88629a6481511937ee7708e7d42949fc988824a214d1",
+  "summerInventorySha256": "6cbfe8ed5c77bfdc226768c262fb0d8812b9b90f20b311454f58ab784c0136a2",
+  "totalCoreAssets": 349,
+  "terrainSourceSheetsAvailableInBrowser": 29,
+  "summerRecoveredSourceCells": 305,
+  "summerTransparentSourceCells": 111,
+  "summerSourceCellsActuallyUsed": 51,
+  "certifiedRecipeMasks": 0,
+  "fixtureZone": {
+    "origin": [
+      0,
+      0
+    ],
+    "sizeCells": [
+      40,
+      28
+    ],
+    "sourceFixture": "content/scenes/summer_river.scene.json",
+    "sourceFixtureSha256": "9e5ade01d388c6184984c61c8bf97cd3dafcb436a4c9c060b8db9e3c842b09e7"
+  },
+  "testZone": {
+    "origin": [
+      0,
+      0
+    ],
+    "sizeCells": [
+      40,
+      28
+    ]
+  },
+  "visualSamples": [],
+  "retiredGuessedVisualSampleIds": [
+    "woods.tree.00",
+    "woods.tree.01",
+    "woods.tree.02",
+    "woods.tree.03",
+    "woods.tree.04",
+    "woods.tree.05",
+    "woods.tree.06",
+    "woods.tree.07",
+    "woods.tree.08",
+    "woods.tree.09",
+    "woods.tree.10",
+    "woods.tree.11",
+    "scree.boulder.00",
+    "scree.boulder.01",
+    "scree.boulder.02",
+    "scree.boulder.03",
+    "scree.boulder.04",
+    "scree.boulder.05"
+  ],
+  "retiredGeneratedDocuments": [
+    "docs/handoff/retired/M2D02D_guessed_assembled_scene.archive.json",
+    "docs/handoff/retired/M2D02D_guessed_assembled_index.archive.json"
+  ],
+  "retiredLocalDraftPreserved": "content/scenes/derived/elizawy_mapping_certification.assembled.draft.json",
+  "activeDerivedDraft": "content/scenes/derived/elizawy_mapping_certification.source_exact.draft.json",
+  "originalSourcesUnchanged": true,
+  "sampleFixtureUnchanged": true,
+  "instruction": "Source-addressed authoring fixture only. No guessed rock/tree crops, extra grass fill, or fake certified scenery. Originals and existing M2D02-D derived drafts are not modified. Exact source demo images are comparison evidence only."
+}

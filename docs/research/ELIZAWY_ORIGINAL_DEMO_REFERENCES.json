@@ -1,0 +1,33 @@
+{
+  "schema": "havenwild.source_demo_reference_inventory.v1",
+  "originArchive": "user-supplied HavenwildBevyLatest.zip",
+  "authority": "visual_reference_only_not_tile_source_or_editable_scene",
+  "files": [
+    {
+      "archivePath": "reference/demo_scenes/_ Test Scenes/DemoGame - 1 - Spring.png",
+      "sha256": "15ea3f97988c47ef2913344d62fa14587fd28db4052481ff8a0bca0997865b81",
+      "bytes": 295377
+    },
+    {
+      "archivePath": "reference/demo_scenes/_ Test Scenes/DemoGame - 2 - Summer.png",
+      "sha256": "0cd146b765a9c5acaef03ab140d969a76acad989cd3294268bbe8c2193a336c7",
+      "bytes": 296311
+    },
+    {
+      "archivePath": "reference/demo_scenes/_ Test Scenes/DemoGame - 3 - Autumn.png",
+      "sha256": "a68c085b1dab935c955c4c90f395041e9b9ed0434b9dc967356fef510070ff22",
+      "bytes": 297077
+    },
+    {
+      "archivePath": "reference/demo_scenes/_ Test Scenes/DemoGame - 4 - Winter.png",
+      "sha256": "b5a7cc6e281b6112451e1f50f5c9583cc7cb153b92be7c7bb913608c8bc76e5d",
+      "bytes": 285680
+    },
+    {
+      "archivePath": "reference/demo_scenes/_ Test Scenes/Test Landscape.png",
+      "sha256": "3eabde7ed7ce0b88ee14eddcc0ffad93a6259ef2dcd694319661d06398267d26",
+      "bytes": 124875
+    }
+  ],
+  "policy": "These exact original composition previews may inform audited source rules but are not flattened production scene data; do not re-create author intent by guessing sprites."
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "havenwild.terrain.recipe_family.v1",
+  "id": "summer.grass_void",
+  "foreground": "Grass",
+  "background": "Void",
+  "season": "Summer",
+  "tileSizePx": 32,
+  "sourceAuthority": "hydrated ElizaWy source; mappings must be manually/source-certified",
+  "states": {
+    "0000": {"resolution": "unmapped"},
+    "0001": {"resolution": "unmapped"},
+    "0010": {"resolution": "unmapped"},
+    "0011": {"resolution": "unmapped"},
+    "0100": {"resolution": "unmapped"},
+    "0101": {"resolution": "unmapped"},
+    "0110": {"resolution": "unmapped", "note": "diagonal topology; sprite/composite/unsupported must be source-certified"},
+    "0111": {"resolution": "unmapped"},
+    "1000": {"resolution": "unmapped"},
+    "1001": {"resolution": "unmapped", "note": "diagonal topology; sprite/composite/unsupported must be source-certified"},
+    "1010": {"resolution": "unmapped"},
+    "1011": {"resolution": "unmapped"},
+    "1100": {"resolution": "unmapped"},
+    "1101": {"resolution": "unmapped"},
+    "1110": {"resolution": "unmapped"},
+    "1111": {"resolution": "unmapped"}
+  }
+}

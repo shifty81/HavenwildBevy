@@ -1,0 +1,732 @@
+{
+  "schema": "havenwild.elizawy.external_tiled_concordance.v1",
+  "status": "external_derivative_evidence_only",
+  "originalSourceRevision": "f07f7f5892e67c932c68f70bb04472f2c64e46bc",
+  "externalSource": "https://opengameart.org/content/lpc-revised-fully-configured-4-seasons-tilesets-for-tiled-map-editor",
+  "upstreamSource": "https://github.com/ElizaWy/LPC/tree/f07f7f5892e67c932c68f70bb04472f2c64e46bc",
+  "archiveSha256": "f0236c16b272a7328dad66772e4f971513bc508cb69a56c60d736264a3a5b43a",
+  "matchesAuditedUpload": true,
+  "seasonProfiles": {
+    "summer": {
+      "tsxFile": "lpc-tileset-terrain-summer.tsx",
+      "tsxSha256": "6261982fad28ee031196cc97aa0f6bdd13f49499acc0edba9aa61c59a4b538bb",
+      "imageFile": "lpc-tileset-terrain-summer.png",
+      "imageSha256": "15dc6b9a1c904a4b9944555baca93cdf622e117a88ceb52a5a5b32eab06e2f2e",
+      "tileSize": [
+        32,
+        32
+      ],
+      "atlasSize": [
+        2048,
+        2048
+      ],
+      "wangSets": {
+        "Terrain": {
+          "type": "corner",
+          "colors": [
+            "Grass",
+            "Sand",
+            "Dirt",
+            "Light Till",
+            "Deep Till",
+            "Shallow Water",
+            "Deep Water",
+            "Melted Ice",
+            "Deep Sand",
+            "Mountain",
+            "Grassy Mountain",
+            "Vine"
+          ],
+          "assignments": 331
+        },
+        "Walls": {
+          "type": "corner",
+          "colors": [
+            "Smithy Walls",
+            "Stone Platform"
+          ],
+          "assignments": 24
+        },
+        "Fences": {
+          "type": "edge",
+          "colors": [
+            "Wood Fence",
+            "Metal Fence",
+            "Fancy Fence",
+            "Fancy Fence Base"
+          ],
+          "assignments": 60
+        }
+      },
+      "animatedTiles": 325,
+      "collisionObjectGroups": 1461,
+      "tileTypes": {
+        "unspecified": 1194,
+        "above": 609,
+        "bridge": 282,
+        "wood": 38,
+        "dirt": 4,
+        "grass": 6,
+        "tile": 53,
+        "stone": 55,
+        "stairs": 47,
+        "lumber": 26,
+        "fire": 4
+      }
+    },
+    "spring": {
+      "tsxFile": "lpc-tileset-terrain-spring.tsx",
+      "tsxSha256": "ad08b18b3f11181f5ce62b5699c4499ebd9ed1144305822c7a7bd86e5796587e",
+      "imageFile": "lpc-tileset-terrain-spring.png",
+      "imageSha256": "7f79da5bc88f04dc106dee933cd06fbf84518ecc8e4be67ef6765aa1c08ac572",
+      "tileSize": [
+        32,
+        32
+      ],
+      "atlasSize": [
+        2048,
+        2048
+      ],
+      "wangSets": {
+        "Terrain": {
+          "type": "corner",
+          "colors": [
+            "Grass",
+            "Sand",
+            "Dirt",
+            "Light Till",
+            "Deep Till",
+            "Shallow Water",
+            "Deep Water",
+            "Melted Ice",
+            "Deep Sand",
+            "Mountain",
+            "Grassy Mountain",
+            "Vine"
+          ],
+          "assignments": 331
+        },
+        "Walls": {
+          "type": "corner",
+          "colors": [
+            "Smithy Walls",
+            "Stone Platform"
+          ],
+          "assignments": 24
+        },
+        "Fences": {
+          "type": "edge",
+          "colors": [
+            "Wood Fence",
+            "Metal Fence",
+            "Fancy Fence",
+            "Fancy Fence Base"
+          ],
+          "assignments": 60
+        }
+      },
+      "animatedTiles": 325,
+      "collisionObjectGroups": 1461,
+      "tileTypes": {
+        "unspecified": 1194,
+        "above": 609,
+        "bridge": 282,
+        "wood": 38,
+        "dirt": 4,
+        "grass": 6,
+        "tile": 53,
+        "stone": 55,
+        "stairs": 47,
+        "lumber": 26,
+        "fire": 4
+      }
+    },
+    "autumn": {
+      "tsxFile": "lpc-tileset-terrain-autumn-old.tsx",
+      "tsxSha256": "77493afe99f6acdd8ef45eb76511db485c8feac7880bf746960f206a36629d49",
+      "imageFile": "lpc-tileset-terrain-autumn.png",
+      "imageSha256": "e29277a97a0e4b177ea274f624c19a6076c25e6adf9289cd5a097f32346ad9ec",
+      "tileSize": [
+        32,
+        32
+      ],
+      "atlasSize": [
+        2048,
+        2048
+      ],
+      "wangSets": {
+        "Terrain": {
+          "type": "corner",
+          "colors": [
+            "Grass",
+            "Sand",
+            "Dirt",
+            "Light Till",
+            "Deep Till",
+            "Shallow Water",
+            "Deep Water",
+            "Melted Ice",
+            "Deep Sand"
+          ],
+          "assignments": 281
+        },
+        "Walls": {
+          "type": "corner",
+          "colors": [
+            "Smithy Walls",
+            "Stone Platform"
+          ],
+          "assignments": 24
+        }
+      },
+      "animatedTiles": 214,
+      "collisionObjectGroups": 1365,
+      "tileTypes": {
+        "unspecified": 1110,
+        "above": 650,
+        "bridge": 282,
+        "wood": 38,
+        "fire": 4,
+        "dirt": 4,
+        "grass": 6,
+        "tile": 53,
+        "stone": 55,
+        "stairs": 47,
+        "lumber": 26
+      }
+    },
+    "winter": {
+      "tsxFile": "lpc-tileset-terrain-winter.tsx",
+      "tsxSha256": "cd90512ebefea37a69901e8c8914a551479e72fc3cb99732b7c8c899c94ecf16",
+      "imageFile": "lpc-tileset-terrain-winter.png",
+      "imageSha256": "0b20228f655393cb782af0c5d21612ac412d605063d44d1311432a7c4788f915",
+      "tileSize": [
+        32,
+        32
+      ],
+      "atlasSize": [
+        2048,
+        2048
+      ],
+      "wangSets": {
+        "Terrain": {
+          "type": "corner",
+          "colors": [
+            "Grass",
+            "Sand",
+            "Snow",
+            "Light Till",
+            "Deep Till",
+            "Shallow Water",
+            "Deep Water",
+            "Ice",
+            "Deep Sand",
+            "Mountain",
+            "Grassy Mountain",
+            "Vine"
+          ],
+          "assignments": 331
+        },
+        "Walls": {
+          "type": "corner",
+          "colors": [
+            "Smithy Walls",
+            "Stone Platform"
+          ],
+          "assignments": 24
+        },
+        "Fences": {
+          "type": "edge",
+          "colors": [
+            "Wood Fence",
+            "Metal Fence",
+            "Fancy Fence",
+            "Fancy Fence Base"
+          ],
+          "assignments": 60
+        }
+      },
+      "animatedTiles": 325,
+      "collisionObjectGroups": 1461,
+      "tileTypes": {
+        "unspecified": 1194,
+        "above": 609,
+        "bridge": 282,
+        "wood": 38,
+        "dirt": 4,
+        "grass": 6,
+        "tile": 53,
+        "stone": 55,
+        "stairs": 47,
+        "lumber": 26,
+        "fire": 4
+      }
+    }
+  },
+  "buildingProfile": {
+    "source": "lpc-tileset-buildings.tsx",
+    "sourceSha256": "1aabcbeb74ab9985ce4ea576465a9989350d6ae6d17fa3415ad94ba6c3e854f5",
+    "imageSha256": "e16b9537e0cf6cf4870d99d2050695fb0cbb1804c481c77cbf97ae4402bb5e8c",
+    "wangSets": {
+      "Brick Walls": {
+        "type": "corner",
+        "colors": [
+          "White Brick w/Shadow",
+          "White Brick w/Border",
+          "White Brick w/Edge",
+          "White Jagged",
+          "Gray Brick w/Shadow",
+          "Gray Brick w/Border",
+          "Gray Brick w/Edge",
+          "Gray Jagged",
+          "Blue Brick w/Shadow",
+          "Blue Brick w/Border",
+          "Blue Brick w/Edge",
+          "Blue Jagged",
+          "Brown Brick w/Shadow",
+          "Brown Brick w/Border",
+          "Brown Brick w/Edge",
+          "Gold Jagged",
+          "Black Brick w/Shadow",
+          "Black Brick w/Border",
+          "Black Brick w/Edge",
+          "Black Jacked",
+          "Red Brick w/Shadow",
+          "Red Brick w/Border",
+          "Red Brick w/Edge",
+          "Orange Jagged"
+        ],
+        "assignments": 216
+      },
+      "Flat Roofs": {
+        "type": "mixed",
+        "colors": [
+          "White Flat Roof",
+          "Light Brown Flat Roof",
+          "Gray Flat Roof",
+          "Brown Flat Roof",
+          "Black Flat Roof",
+          "Orange Flat Roof",
+          "Light Adobe Roof",
+          "Dark Adobe Roof",
+          "Stucco Roof"
+        ],
+        "assignments": 417
+      },
+      "Angled Roof": {
+        "type": "mixed",
+        "colors": [
+          "Light Angled Roof",
+          "Light Brown Angled Roof",
+          "Gray Angled Roof",
+          "Brown Angled Roof",
+          "Black Angled Roof",
+          "Red Angled Roof"
+        ],
+        "assignments": 54
+      },
+      "Adobe Walls": {
+        "type": "mixed",
+        "colors": [
+          "Light Adobe Brick Wall",
+          "Dark Adobe Brick Wall",
+          "Adobe Stucco Wall",
+          "Adobe Cracked Stucco Wall"
+        ],
+        "assignments": 45
+      }
+    },
+    "animatedTiles": 0,
+    "collisionObjectGroups": 1117,
+    "policy": "architecture_reference_only_not_terrain_authority"
+  },
+  "comparison": {
+    "spring": {
+      "Terrain": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Grass",
+          "Sand",
+          "Dirt",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Melted Ice",
+          "Deep Sand",
+          "Mountain",
+          "Grassy Mountain",
+          "Vine"
+        ],
+        "summerColorNames": [
+          "Grass",
+          "Sand",
+          "Dirt",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Melted Ice",
+          "Deep Sand",
+          "Mountain",
+          "Grassy Mountain",
+          "Vine"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 331,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      },
+      "Walls": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "summerColorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 24,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      },
+      "Fences": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Wood Fence",
+          "Metal Fence",
+          "Fancy Fence",
+          "Fancy Fence Base"
+        ],
+        "summerColorNames": [
+          "Wood Fence",
+          "Metal Fence",
+          "Fancy Fence",
+          "Fancy Fence Base"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 60,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      }
+    },
+    "autumn": {
+      "Terrain": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Grass",
+          "Sand",
+          "Dirt",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Melted Ice",
+          "Deep Sand"
+        ],
+        "summerColorNames": [
+          "Grass",
+          "Sand",
+          "Dirt",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Melted Ice",
+          "Deep Sand",
+          "Mountain",
+          "Grassy Mountain",
+          "Vine"
+        ],
+        "semanticNamesIdentical": false,
+        "commonTileIdCount": 273,
+        "missingIds": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          145,
+          146,
+          147,
+          149,
+          150,
+          336,
+          337,
+          338,
+          339,
+          340,
+          341,
+          342,
+          400,
+          401,
+          402,
+          403,
+          404,
+          405,
+          406,
+          465,
+          466,
+          467,
+          469,
+          470,
+          720,
+          721,
+          722,
+          723,
+          724,
+          784,
+          785,
+          786,
+          848,
+          849,
+          850,
+          912,
+          913,
+          914,
+          1616,
+          1617,
+          1618,
+          1678,
+          1680,
+          1681
+        ],
+        "missingCount": 58,
+        "extraIds": [
+          1484,
+          1485,
+          1548,
+          1549,
+          1612,
+          1613,
+          1676,
+          1677
+        ],
+        "extraCount": 8,
+        "changedIds": [
+          1486,
+          1487,
+          1550,
+          1551,
+          1552,
+          1553,
+          1554,
+          1614,
+          1615,
+          1679
+        ],
+        "changedCount": 10
+      },
+      "Walls": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "summerColorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 24,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      },
+      "Fences": {
+        "missingEntireSet": true,
+        "missingIds": [
+          735,
+          736,
+          737,
+          738,
+          799,
+          800,
+          801,
+          802,
+          863,
+          864,
+          865,
+          866,
+          928,
+          929,
+          930,
+          931,
+          992,
+          993,
+          994,
+          995,
+          1056,
+          1057,
+          1058,
+          1059,
+          1119,
+          1120,
+          1121,
+          1122,
+          1123,
+          1183,
+          1184,
+          1185,
+          1186,
+          1187,
+          1247,
+          1248,
+          1249,
+          1250,
+          1251,
+          1311,
+          1312,
+          1313,
+          1314,
+          1375,
+          1376,
+          1377,
+          1439,
+          1440,
+          1441,
+          1503,
+          1504,
+          1505,
+          1567,
+          1568,
+          1569,
+          1631,
+          1632,
+          1633,
+          1695,
+          1697
+        ],
+        "missingCount": 60,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedCount": 0
+      }
+    },
+    "winter": {
+      "Terrain": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Grass",
+          "Sand",
+          "Snow",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Ice",
+          "Deep Sand",
+          "Mountain",
+          "Grassy Mountain",
+          "Vine"
+        ],
+        "summerColorNames": [
+          "Grass",
+          "Sand",
+          "Dirt",
+          "Light Till",
+          "Deep Till",
+          "Shallow Water",
+          "Deep Water",
+          "Melted Ice",
+          "Deep Sand",
+          "Mountain",
+          "Grassy Mountain",
+          "Vine"
+        ],
+        "semanticNamesIdentical": false,
+        "commonTileIdCount": 331,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      },
+      "Walls": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "summerColorNames": [
+          "Smithy Walls",
+          "Stone Platform"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 24,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      },
+      "Fences": {
+        "missingEntireSet": false,
+        "colorNames": [
+          "Wood Fence",
+          "Metal Fence",
+          "Fancy Fence",
+          "Fancy Fence Base"
+        ],
+        "summerColorNames": [
+          "Wood Fence",
+          "Metal Fence",
+          "Fancy Fence",
+          "Fancy Fence Base"
+        ],
+        "semanticNamesIdentical": true,
+        "commonTileIdCount": 60,
+        "missingIds": [],
+        "missingCount": 0,
+        "extraIds": [],
+        "extraCount": 0,
+        "changedIds": [],
+        "changedCount": 0
+      }
+    }
+  },
+  "pixelConcordance": {
+    "state": "not_requested",
+    "matches": {},
+    "certifiedRoles": 0
+  },
+  "historicalMapState": "sha256_verified",
+  "warnings": [
+    "autumn: only legacy '-old.tsx' definition supplied; do not assume current/full seasonal metadata",
+    "Autumn terrain Wang coverage differs from Summer; do not manufacture missing assignments",
+    "Autumn fence Wang set missing, although its PNG exists",
+    "Winter numeric Wang IDs match Summer, but several material names differ; never infer semantic equality from tile IDs"
+  ],
+  "errors": [],
+  "certifiedMappingsAdded": 0,
+  "runtimeChanged": false,
+  "sourceFilesMutated": false
+}
