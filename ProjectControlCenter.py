@@ -36,7 +36,7 @@ import traceback
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-PCC_VERSION = "1.3.4"
+PCC_VERSION = "1.3.5"
 STATE_ROOT = ROOT / ".pcc"
 LOG_ROOT = STATE_ROOT / "logs"
 RECEIPT_ROOT = STATE_ROOT / "receipts"
@@ -57,6 +57,7 @@ TERRAIN_VALIDATOR = ROOT / "tools" / "terrain_validate.py"
 LEGACY_MAPPING_RECOVERY = ROOT / "tools" / "recover_legacy_mapping.py"
 SUMMER_FLATWORLD_MAPPER = ROOT / "tools" / "build_summer_flatworld_mapping.py"
 NATIVE_SUMMER_CONVERGENCE = ROOT / "tools" / "converge_native_summer_authority.py"
+CLIFF_SUMMER_AUTHORITY = ROOT / "tools" / "build_cliff_summer_authority.py"
 PATCH_SELFTEST = ROOT / "tools" / "pcc_patch_selftest.py"
 RUST_SOURCE_AUDIT = ROOT / "tools" / "rust_source_audit.py"
 ELIZAWY_AUDIT = ROOT / "tools" / "audit_elizawy_concordance.py"
@@ -78,6 +79,9 @@ FORBIDDEN_PATCH_EXACT = {
     "content/catalog/characters_index.local.json",
     "LOCAL_SEED_MANIFEST.json",
     "LOCAL_SEED_OVERLAY_README.txt",
+    # Manual extract/overwrite fallback may leave the patch manifest at root. It is
+    # deployment metadata, never publishable project source.
+    "pcc_patch.json",
 }
 
 GIT_PUBLISH_FORBIDDEN_ROOTS = {
@@ -464,6 +468,17 @@ def run_native_summer_convergence(args: list[str], *, label: str, debug_on_fail:
         return 2
     return run_stream(
         [python_cmd(), str(NATIVE_SUMMER_CONVERGENCE), *args],
+        label=label,
+        debug_on_fail=debug_on_fail,
+    )
+
+
+def run_cliff_summer_authority(args: list[str], *, label: str, debug_on_fail: bool = True) -> int:
+    if not CLIFF_SUMMER_AUTHORITY.is_file():
+        pcc_print(f"[MISSING] {CLIFF_SUMMER_AUTHORITY.relative_to(ROOT)}")
+        return 2
+    return run_stream(
+        [python_cmd(), str(CLIFF_SUMMER_AUTHORITY), *args],
         label=label,
         debug_on_fail=debug_on_fail,
     )
@@ -1140,16 +1155,40 @@ def dashboard() -> int:
     return 0
 
 
+def _zip_has_patch_manifest(path: Path) -> bool:
+    """Return True when a ZIP advertises itself as a governed PCC patch.
+
+    Root-drop intake is manifest-first rather than filename-first. This handles
+    browser-renamed downloads such as ``foo.pccpatch (1).zip`` without treating
+    ordinary source/debug ZIPs as patches. Explicit ``*.pccpatch.zip`` names are
+    still surfaced even when corrupt so status can report them as INVALID.
+    """
+    try:
+        with zipfile.ZipFile(path) as z:
+            info = z.getinfo("pcc_patch.json")
+            return not info.is_dir()
+    except (OSError, zipfile.BadZipFile, KeyError):
+        return False
+
+
 def discover_updates() -> list[Path]:
     ensure_dirs()
-    found = list(UPDATE_INBOX.glob("*.zip")) + list(ROOT.glob("*.pccpatch.zip"))
+    # Anything placed in updates/inbox is an explicit operator request and is
+    # therefore surfaced for validation. Root ZIPs are discovered by internal
+    # manifest, with the legacy canonical suffix retained as an INVALID-visible
+    # hint if the archive itself is damaged.
+    found = list(UPDATE_INBOX.glob("*.zip"))
+    for candidate in ROOT.glob("*.zip"):
+        lower = candidate.name.lower()
+        if lower.endswith(".pccpatch.zip") or _zip_has_patch_manifest(candidate):
+            found.append(candidate)
     unique = {}
-    for p in found:
+    for item in found:
         try:
-            unique[str(p.resolve()).lower()] = p
+            unique[str(item.resolve()).lower()] = item
         except OSError:
-            unique[str(p).lower()] = p
-    return sorted(unique.values(), key=lambda p: p.name.lower())
+            unique[str(item).lower()] = item
+    return sorted(unique.values(), key=lambda item: item.name.lower())
 
 
 def safe_patch_id(value: object) -> str:
@@ -1205,6 +1244,72 @@ def patch_compatibility_error(manifest: dict) -> str | None:
     if not isinstance(target, dict) or any(not str(target.get(key, "")).strip() for key in ("source", "forgepy", "pcc")):
         return "patch manifest requires complete to source/forgepy/pcc versions"
     return None
+
+
+def _numeric_version(value: object) -> tuple[int, ...] | None:
+    text = str(value or "").strip()
+    if not re.fullmatch(r"\d+(?:\.\d+)*", text):
+        return None
+    return tuple(int(part) for part in text.split("."))
+
+
+def patch_target_state(manifest: dict) -> tuple[str, str]:
+    """Classify a validated patch against the currently installed versions."""
+    current = installed_patch_state()
+    target = manifest.get("to") or {}
+    required = manifest.get("from") or {}
+    if all(str(target.get(key, "")).strip() == current.get(key) for key in ("source", "forgepy", "pcc")):
+        return "target-current", "target versions are already installed"
+    if all(str(required.get(key, "")).strip() == current.get(key) for key in ("source", "forgepy", "pcc")):
+        return "from-current", "exact installed state matches patch source versions"
+
+    comparisons = []
+    for key in ("source", "forgepy", "pcc"):
+        target_version = _numeric_version(target.get(key))
+        current_version = _numeric_version(current.get(key))
+        if target_version is None or current_version is None:
+            return "other", patch_compatibility_error(manifest) or "version relation is ambiguous"
+        comparisons.append((target_version, current_version))
+    if all(target <= current_version for target, current_version in comparisons) and any(
+        target < current_version for target, current_version in comparisons
+    ):
+        return "superseded", "patch target is older than the installed project state"
+    return "other", patch_compatibility_error(manifest) or "patch does not match the installed project state"
+
+
+def patch_payload_matches_installed(manifest: dict) -> tuple[bool, str]:
+    """Verify manual extract/overwrite produced the exact declared target bytes."""
+    for entry in manifest.get("files") or []:
+        rel = safe_rel(str(entry.get("path", "")))
+        dst = ensure_patch_destination(rel)
+        if not dst.is_file():
+            return False, f"target version is installed but patch file is missing: {rel.as_posix()}"
+        actual = hashlib.sha256(dst.read_bytes()).hexdigest()
+        if actual != str(entry.get("sha256", "")).lower():
+            return False, f"target version is installed but patch bytes differ: {rel.as_posix()}"
+    for raw in manifest.get("delete") or []:
+        rel = safe_rel(str(raw))
+        if ensure_patch_destination(rel).exists():
+            return False, f"target version is installed but declared deletion remains: {rel.as_posix()}"
+    return True, "manual extract/overwrite bytes match the governed manifest"
+
+
+def _archive_nonpending_patch(path: Path, manifest: dict, *, status: str, reason: str) -> None:
+    ensure_dirs()
+    patch_id = safe_patch_id(manifest.get("id"))
+    archived = UPDATE_ARCHIVE / f"{now_id()}_{path.name}"
+    shutil.move(str(path), str(archived))
+    receipt = {
+        "schema": "havenwild.bevy.pcc.patch_reconcile_receipt.v1",
+        "patchId": patch_id,
+        "reconciledAt": iso_now(),
+        "status": status,
+        "reason": reason,
+        "archive": str(archived.relative_to(ROOT)),
+        "from": manifest.get("from"),
+        "to": manifest.get("to"),
+    }
+    write_json(RECEIPT_ROOT / f"{now_id()}_patch_reconcile_{patch_id}.json", receipt)
 
 
 def validate_patch_archive(path: Path, *, require_compatible: bool = True) -> tuple[dict, dict[str, zipfile.ZipInfo]]:
@@ -1425,15 +1530,25 @@ def updates_status() -> int:
     pending = discover_updates()
     if not pending:
         pcc_print("UPDATE INBOX: no governed patches pending")
+        pcc_print("ROOT ZIP INTAKE: manifest-first; browser-renamed governed ZIPs are supported.")
+        pcc_print("MANUAL FALLBACK: extract/overwrite is supported; run Full Gate afterward to certify the resulting source.")
         return 0
-    pcc_print(f"UPDATE INBOX: {len(pending)} governed patch(es)")
+    pcc_print(f"UPDATE INBOX: {len(pending)} governed patch candidate(s)")
     current = installed_patch_state()
     pcc_print(f"INSTALLED: source={current['source']} ForgePY={current['forgepy']} PCC={current['pcc']}")
     for patch in pending:
         try:
             manifest, _ = validate_patch_archive(patch, require_compatible=False)
-            error = patch_compatibility_error(manifest)
-            state = "READY" if error is None else f"BLOCKED ({error})"
+            relation, reason = patch_target_state(manifest)
+            if relation == "from-current":
+                state = "READY"
+            elif relation == "target-current":
+                matches, detail = patch_payload_matches_installed(manifest)
+                state = "ALREADY INSTALLED / RECONCILABLE" if matches else f"BLOCKED ({detail})"
+            elif relation == "superseded":
+                state = "SUPERSEDED / ARCHIVABLE"
+            else:
+                state = f"BLOCKED ({reason})"
             target = manifest.get("to") or {}
             pcc_print(
                 f"  {patch.name}: {state} -> "
@@ -1441,16 +1556,16 @@ def updates_status() -> int:
             )
         except Exception as exc:
             pcc_print(f"  {patch.name}: INVALID ({exc})")
-    pcc_print("Only exact-version-compatible governed patches are eligible for application.")
-    pcc_print("Assets/reference/generated local catalogs are forbidden patch destinations.")
+    pcc_print("Root ZIP discovery uses the internal pcc_patch.json manifest, not only the filename.")
+    pcc_print("Manual extract/overwrite remains supported; exact target bytes are reconciled instead of re-applied.")
+    pcc_print("Assets/reference/generated local catalogs remain forbidden patch destinations.")
     return 0
 
 
 def updates_apply_all() -> int:
-    # Apply exactly one compatible patch per controller generation. If that patch
-    # updates PCC, the caller restarts immediately and the new controller selects
-    # the next compatible link in the chain. This prevents a stale updater from
-    # consuming patches that depend on updater rules it has not loaded yet.
+    # Apply exactly one compatible patch per controller generation. Already-manually
+    # installed patches are verified byte-for-byte and archived without reapplying;
+    # older superseded root handoffs are archived so they cannot poison Full Gate.
     pending = discover_updates()
     if not pending:
         pcc_print("UPDATE INBOX: no governed patches pending")
@@ -1459,21 +1574,29 @@ def updates_apply_all() -> int:
     compatible: list[tuple[Path, dict]] = []
     invalid: list[tuple[Path, str]] = []
     blocked: list[tuple[Path, str]] = []
+    reconciled: list[tuple[Path, dict, str]] = []
+    superseded: list[tuple[Path, dict, str]] = []
     for patch in pending:
         try:
             manifest, _ = validate_patch_archive(patch, require_compatible=False)
         except Exception as exc:
             invalid.append((patch, str(exc)))
             continue
-        error = patch_compatibility_error(manifest)
-        if error is None:
+        relation, reason = patch_target_state(manifest)
+        if relation == "from-current":
             compatible.append((patch, manifest))
+        elif relation == "target-current":
+            matches, detail = patch_payload_matches_installed(manifest)
+            if matches:
+                reconciled.append((patch, manifest, detail))
+            else:
+                blocked.append((patch, detail))
+        elif relation == "superseded":
+            superseded.append((patch, manifest, reason))
         else:
-            blocked.append((patch, error))
+            blocked.append((patch, reason))
 
     if invalid:
-        # Malformed archives can never become compatible through another patch.
-        # Move them aside deterministically so they cannot poison every FULL run.
         for patch, reason in invalid:
             pcc_print(f"PATCH REJECTED: {patch.name}: {reason}")
             target = UPDATE_REJECTED / f"{now_id()}_{patch.name}"
@@ -1483,15 +1606,28 @@ def updates_apply_all() -> int:
                 pass
         return 4
 
+    for patch, manifest, reason in reconciled:
+        pcc_print(f"PATCH RECONCILED: {patch.name}: {reason}")
+        _archive_nonpending_patch(patch, manifest, status="ALREADY_INSTALLED", reason=reason)
+    for patch, manifest, reason in superseded:
+        pcc_print(f"PATCH SUPERSEDED: {patch.name}: {reason}")
+        _archive_nonpending_patch(patch, manifest, status="SUPERSEDED", reason=reason)
+
     if len(compatible) > 1:
         names = ", ".join(path.name for path, _ in compatible)
         pcc_print(f"UPDATE BLOCKED: multiple patches claim the same installed state: {names}")
         return 5
     if not compatible:
-        pcc_print("UPDATE BLOCKED: no pending patch matches the installed source/ForgePY/PCC state")
-        for patch, reason in blocked:
-            pcc_print(f"  {patch.name}: {reason}")
-        return 5
+        if blocked:
+            pcc_print("UPDATE BLOCKED: no pending patch matches the installed source/ForgePY/PCC state")
+            for patch, reason in blocked:
+                pcc_print(f"  {patch.name}: {reason}")
+            return 5
+        if reconciled or superseded:
+            pcc_print("UPDATE INBOX: reconciled/archived; no patch application required")
+        else:
+            pcc_print("UPDATE INBOX: no compatible patch requires application")
+        return 0
 
     patch, _ = compatible[0]
     return apply_patch(patch)
@@ -1767,10 +1903,14 @@ def audit_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d07_world_contract_selftest.py")], label="m2d07-world-contract-selftest", debug_on_fail=False)),
         ("M2D080 Native Summer source authority", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d080_native_summer_authority_selftest.py")], label="m2d080-native-summer-selftest", debug_on_fail=False)),
-        ("M2D081 Summer complete profile deterministic check", lambda: run_stream(
+        ("M2D081C Summer profile / static-water authority check", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/build_summer_complete_runtime.py"), "--check"], label="m2d081-summer-profile-check", debug_on_fail=False)),
-        ("M2D081 Summer completion + water animation", lambda: run_stream(
+        ("M2D081C Summer completion + water authority repair", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d081_summer_complete_selftest.py")], label="m2d081-summer-complete-selftest", debug_on_fail=False)),
+        ("M2D082 Summer cliff source authority deterministic check", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/build_cliff_summer_authority.py"), "--check"], label="m2d082-cliff-source-check", debug_on_fail=False)),
+        ("M2D082 Summer cliff source authority contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082_cliff_source_authority_selftest.py")], label="m2d082-cliff-source-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="audit-terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="audit-terrain-resolver", debug_on_fail=False)),
@@ -1918,10 +2058,14 @@ def full_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d07_world_contract_selftest.py")], label="m2d07-world-contract-selftest", debug_on_fail=False)),
         ("M2D080 Native Summer source authority", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d080_native_summer_authority_selftest.py")], label="m2d080-native-summer-selftest", debug_on_fail=False)),
-        ("M2D081 Summer complete profile deterministic check", lambda: run_stream(
+        ("M2D081C Summer profile / static-water authority check", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/build_summer_complete_runtime.py"), "--check"], label="m2d081-summer-profile-check", debug_on_fail=False)),
-        ("M2D081 Summer completion + water animation", lambda: run_stream(
+        ("M2D081C Summer completion + water authority repair", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d081_summer_complete_selftest.py")], label="m2d081-summer-complete-selftest", debug_on_fail=False)),
+        ("M2D082 Summer cliff source authority deterministic check", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/build_cliff_summer_authority.py"), "--check"], label="m2d082-cliff-source-check", debug_on_fail=False)),
+        ("M2D082 Summer cliff source authority contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082_cliff_source_authority_selftest.py")], label="m2d082-cliff-source-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="terrain-resolver", debug_on_fail=False)),
@@ -2384,6 +2528,7 @@ def terrain_menu() -> int:
         pcc_print(" 9. ONE-PASS Native -> Bevy Summer authority convergence")
         pcc_print("10. Native Summer convergence status")
         pcc_print("11. Legacy pixel-classifier diagnostic (not runtime authority)")
+        pcc_print("12. Summer cliff source authority / evidence status")
         pcc_print(" 0. Back")
         choice = input("> ").strip()
         if choice == "0": return 0
@@ -2407,6 +2552,8 @@ def terrain_menu() -> int:
             run_native_summer_convergence(["status"], label="terrain-native-summer-status", debug_on_fail=False)
         elif choice == "11":
             run_summer_flatworld_mapper(["build", "--dry-run"], label="terrain-summer-classifier-diagnostic", debug_on_fail=False)
+        elif choice == "12":
+            run_cliff_summer_authority(["--check"], label="terrain-cliff-source-authority", debug_on_fail=False)
         input("Press Enter...")
 
 

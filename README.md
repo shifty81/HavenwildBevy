@@ -1,6 +1,16 @@
 # Havenwild Bevy — standalone source
 
-**Current deploy checkpoint:** source **0.8.1**, ForgePY **0.4.10**, PCC **1.3.4**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+**Current deploy checkpoint:** source **0.8.4**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+
+
+### M2D081C water authority + PCC manifest-first intake
+
+- `summer_water_fill` remains an eight-cell recovered **RepeatableFill** source group, but it is no longer treated as an ordered temporal animation.
+- Normal homogeneous RiverWater now uses one conservative static source fill. The other seven cells remain available as explicit source/detail regions for later deliberate placement.
+- RiverWater animation is disabled until source evidence identifies an explicitly ordered frame sequence.
+- PCC root-drop discovery is manifest-first: any root ZIP containing a valid root `pcc_patch.json` is discovered even if the browser renamed it. Ordinary source/debug ZIPs remain ignored.
+- Manual extract/overwrite remains supported. If the installed target versions and exact declared file hashes already match a governed patch, PCC reconciles/archives that handoff instead of trying to apply it again. Older superseded patch handoffs are archived rather than poisoning Full Gate.
+- M2D082 cliff groundwork is now deterministic: `Terrain/cliff_summer.png` exposes **205 canonical 32x32 cliff source cells** and **212 retained historical reference entries** across five evidence families, with zero semantic/runtime promotions until topology is classified.
 
 Large ElizaWy/LPC source assets remain local/hydrated and are intentionally not included in this repository handoff.
 

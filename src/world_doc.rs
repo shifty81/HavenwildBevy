@@ -553,15 +553,11 @@ impl WorldDocument {
         };
         let role_refs = [nw.as_str(), ne.as_str(), sw.as_str(), se.as_str()];
         if role_refs.iter().all(|role| *role == role_refs[0]) {
-            let entry = if role_refs[0] == "RiverWater" {
-                elapsed_ms
-                    .and_then(|ms| authority.summer_flatworld_animation_frame("RiverWater", ms))
-                    .or_else(|| {
-                        authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, world)
-                    })
-            } else {
-                authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, world)
-            };
+            // M2D081C: homogeneous terrain is spatial, not temporal. RiverWater
+            // remains on the conservative static source fill until explicit
+            // ordered animation evidence exists.
+            let _ = elapsed_ms;
+            let entry = authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, world);
             return entry.map(|entry| {
                 vec![SummerVisualPart {
                     source: entry.binding(),

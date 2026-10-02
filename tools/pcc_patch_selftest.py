@@ -71,6 +71,58 @@ def expect_reject(path: Path, contains: str) -> None:
     raise AssertionError(f"validator accepted unsafe fixture {path.name}")
 
 
+
+def expect_manifest_first_discovery(root: Path, payload: bytes) -> None:
+    original_root = pcc.ROOT
+    original_inbox = pcc.UPDATE_INBOX
+    try:
+        pcc.ROOT = root
+        pcc.UPDATE_INBOX = root / "updates" / "inbox"
+        pcc.UPDATE_INBOX.mkdir(parents=True, exist_ok=True)
+        valid_entry = entry("docs/discovery.txt", payload)
+        renamed = archive(
+            root,
+            "Havenwild patch download.pccpatch (1).zip",
+            manifest("SelfTest-RenamedDiscovery", [valid_entry]),
+            {"docs/discovery.txt": payload},
+        )
+        ordinary = root / "ordinary-source-rollup.zip"
+        with zipfile.ZipFile(ordinary, "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr("README.md", "not a patch\n")
+        found = pcc.discover_updates()
+        if renamed not in found:
+            raise AssertionError("manifest-first root discovery missed a browser-renamed governed patch ZIP")
+        if ordinary in found:
+            raise AssertionError("manifest-first root discovery misclassified an ordinary ZIP as a patch")
+    finally:
+        pcc.ROOT = original_root
+        pcc.UPDATE_INBOX = original_inbox
+
+
+def expect_manual_overwrite_relation(root: Path, payload: bytes) -> None:
+    current = dict(CURRENT)
+    doc = manifest("SelfTest-ManualOverwrite", [entry("docs/manual.txt", payload)])
+    doc["to"] = dict(current)
+    relation, _ = pcc.patch_target_state(doc)
+    if relation != "target-current":
+        raise AssertionError(f"manual-overwrite relation not recognized: {relation}")
+
+    original_root = pcc.ROOT
+    try:
+        pcc.ROOT = root
+        target = root / "docs" / "manual.txt"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(payload)
+        matches, reason = pcc.patch_payload_matches_installed(doc)
+        if not matches:
+            raise AssertionError(f"manual-overwrite payload should reconcile: {reason}")
+        target.write_bytes(b"drifted\n")
+        matches, _ = pcc.patch_payload_matches_installed(doc)
+        if matches:
+            raise AssertionError("manual-overwrite reconciliation accepted drifted bytes")
+    finally:
+        pcc.ROOT = original_root
+
 def main() -> int:
     payload = b"validator-selftest\n"
     with tempfile.TemporaryDirectory(prefix="havenwild-pcc-selftest-") as tmp:
@@ -134,7 +186,14 @@ def main() -> int:
         )
         expect_reject(extra, "undeclared files")
 
-    print("PCC PATCH VALIDATOR SELF-TEST: PASS (valid fixture accepted; 10 unsafe classes rejected)")
+        discovery_root = root / "discovery"
+        discovery_root.mkdir()
+        expect_manifest_first_discovery(discovery_root, payload)
+        manual_root = root / "manual"
+        manual_root.mkdir()
+        expect_manual_overwrite_relation(manual_root, payload)
+
+    print("PCC PATCH VALIDATOR SELF-TEST: PASS (valid fixture accepted; 10 unsafe classes rejected; manifest-first renamed-ZIP discovery; manual-overwrite reconciliation)")
     return 0
 
 

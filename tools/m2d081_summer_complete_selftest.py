@@ -19,7 +19,7 @@ def require(ok, msg):
 
 def main():
     profile, runtime, donor = map(load, (PROFILE, RUNTIME, DONOR))
-    require(profile.get("version") == 4, "runtime profile is not v4")
+    require(profile.get("version") == 5, "runtime profile is not v5 water-authority repair")
     require(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor is not 305/305")
     groups = profile.get("sourceGroups", {})
     require(len(groups) == 41, f"expected 41 Summer groups, got {len(groups)}")
@@ -43,10 +43,11 @@ def main():
     require(sum(1 for k in comps if len(set(k.split("|"))) == 3) == 36, "three-material junction count is not 36")
 
     variants = profile.get("fillVariants", {})
-    require([len(variants.get(r, [])) for r in ("Grass","MudBank","RiverWater")] == [6,6,8], "fill variant counts changed")
-    water = profile.get("animations", {}).get("RiverWater", {})
-    require(water.get("frameDurationMs") == 220 and len(water.get("frames", [])) == 8, "water cycle must be 8 source-backed phases @ 220 ms")
-    require(water.get("visualCertification") == "runtime_candidate_requires_user_visual_review", "water candidate review marker missing")
+    require([len(variants.get(r, [])) for r in ("Grass","MudBank","RiverWater")] == [6,6,1], "fill variant counts changed")
+    require("RiverWater" not in profile.get("animations", {}), "RepeatableFill water variants must not be promoted into temporal animation")
+    water_group = groups.get("summer_water_fill", {})
+    require(water_group.get("classification") == "RepeatableFill" and water_group.get("cellCount") == 8, "water source variants must remain cataloged as eight static RepeatableFill cells")
+    require(variants["RiverWater"][0].get("sourceRectPx") == [384,512,32,32], "conservative RiverWater base fill changed")
 
     # Checkerboard regression: Dirt is isolated in Grass; Grass/Dirt are isolated in Water.
     expected_background = {
@@ -72,21 +73,21 @@ def main():
     main_text = MAIN.read_text(encoding="utf-8")
     gen_text = GEN.read_text(encoding="utf-8")
     require("summer_flatworld_fill_for_world" in auth_text, "deterministic fill variation API missing")
-    require("summer_flatworld_animation_frame" in auth_text, "water animation API missing")
+    require("RepeatableFill variants are static source/detail choices" in auth_text, "water animation evidence gate missing")
     require("contains_source_slice" in auth_text, "canonical source-slice authority API missing")
     require("resolved_visual_parts_with_authority_at" in world_text, "time-aware world resolver missing")
     require("strict Summer flatworld paint must resolve visual parts" in world_text, "flatworld source-sheet regression is not composite-aware")
     require("a.contains_source_slice(&part.source)" in world_text, "flatworld regression does not validate canonical source slices")
     require("strict Summer flatworld paint must resolve\")" not in world_text, "stale single-binding flatworld regression remains")
-    require("Some(state.water_animation_ms)" in main_text, "world renderer is not passing animation time")
-    require("Havenwild — Bevy Studio v0.8.1" in main_text, "Studio 0.8.1 marker missing")
+    require("water_animation_ms" not in main_text, "stale fake water animation clock remains")
+    require("Havenwild — Bevy Studio v0.8.4" in main_text, "Studio 0.8.3 marker missing")
     require("checker_background" in gen_text, "disconnected checkerboard generation missing")
-    print("M2D081 SUMMER COMPLETE SELFTEST: PASS")
+    print("M2D081C WATER AUTHORITY REPAIR SELFTEST: PASS")
     print("  Summer runtime cells : 305/305 across 41 source groups")
     print("  runtime authority    : 2316 exact regions")
     print("  G/D/W grammar        : 81/81 states (14/14 pairwise + 36 tri-material)")
-    print("  homogeneous variants : Grass 6 / Dirt 6 / Water 8")
-    print("  water cycle          : 8 source-backed phases @ 220 ms (visual review candidate)")
+    print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 conservative base")
+    print("  water animation      : OFF / RepeatableFill variants are static source/detail cells")
     print("  checkerboards        : disconnected foreground policy enabled")
     return 0
 

@@ -77,8 +77,8 @@ def verify() -> dict:
     review = load(REVIEW)
     metrics = profile_metrics(profile)
 
-    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") != 4:
-        raise ValueError("Checked-in Summer runtime profile is not v4 complete source-derived authority")
+    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") != 5:
+        raise ValueError("Checked-in Summer runtime profile is not v5 water-authority-corrected source authority")
     if profile.get("sourceAtlas") != ATLAS_REL or profile.get("sourceAtlasSha256") != PINNED_SHA:
         raise ValueError("Summer runtime profile source identity mismatch")
     summary = donor_map.get("summary", {})
@@ -89,16 +89,18 @@ def verify() -> dict:
     if metrics["totalFlatStates"] != 81 or any(value != 14 for value in metrics["pairMixedCounts"].values()):
         raise ValueError(f"Flat Summer runtime coverage is incomplete: {metrics}")
     if len(profile.get("sourceGroups", {})) != 41:
-        raise ValueError("Summer v4 runtime profile no longer exposes 41 recovered source groups")
+        raise ValueError("Summer v5 runtime profile no longer exposes 41 recovered source groups")
     if sum(group.get("cellCount", 0) for group in profile.get("sourceGroups", {}).values()) != 305:
-        raise ValueError("Summer v4 runtime profile no longer exposes all 305 source cells")
-    expected_variants = {"Grass": 6, "MudBank": 6, "RiverWater": 8}
+        raise ValueError("Summer v5 runtime profile no longer exposes all 305 source cells")
+    expected_variants = {"Grass": 6, "MudBank": 6, "RiverWater": 1}
     for role, expected in expected_variants.items():
         if len(profile.get("fillVariants", {}).get(role, [])) != expected:
-            raise ValueError(f"Summer v4 fill variants changed for {role}")
-    water = profile.get("animations", {}).get("RiverWater", {})
-    if len(water.get("frames", [])) != 8 or water.get("frameDurationMs") != 220:
-        raise ValueError("Summer v4 RiverWater source-backed animation declaration changed")
+            raise ValueError(f"Summer v5 fill variants changed for {role}")
+    if "RiverWater" in profile.get("animations", {}):
+        raise ValueError("Summer v5 forbids promoting RepeatableFill water variants into animation frames")
+    water_group = profile.get("sourceGroups", {}).get("summer_water_fill", {})
+    if water_group.get("classification") != "RepeatableFill" or water_group.get("cellCount") != 8:
+        raise ValueError("Summer v5 must preserve the eight water-looking cells as static RepeatableFill source variants")
     if review.get("sourceMutationAllowed") is not False:
         raise ValueError("Native authority review must explicitly forbid source mutation")
     return {

@@ -276,7 +276,6 @@ struct Studio {
     world_selected_object: Option<String>,
     world_undo: Vec<WorldDocument>,
     world_redo: Vec<WorldDocument>,
-    water_animation_ms: u64,
     // A world paint stroke is authored locally while the pointer is down, then
     // topology-safe corrections are promoted to generator knowledge once on release.
     // This keeps Paint responsive and avoids regenerating every materialized chunk
@@ -639,7 +638,6 @@ fn startup(
         world_selected_object: None,
         world_undo: Vec::new(),
         world_redo: Vec::new(),
-        water_animation_ms: 0,
         world_stroke_cells: Vec::new(),
         world_stroke_seen: BTreeSet::new(),
         world_stroke_binding: None,
@@ -1798,11 +1796,10 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
         for ly in y0..y1 {
             for lx in x0..x1 {
                 let world = [origin[0] + lx as i64, origin[1] + ly as i64];
-                let Some(parts) = state.world_doc.resolved_visual_parts_with_authority_at(
-                    world,
-                    &state.asset_authority,
-                    Some(state.water_animation_ms),
-                ) else {
+                let Some(parts) = state
+                    .world_doc
+                    .resolved_visual_parts_with_authority(world, &state.asset_authority)
+                else {
                     continue;
                 };
                 let cell_min = region.min + egui::vec2(lx as f32 * px, ly as f32 * px);
@@ -3530,19 +3527,15 @@ fn draw_recipe_mapper(ui: &mut egui::Ui, state: &mut Studio, source_path: &str) 
             }
             ui.horizontal_wrapped(|ui| {
                 ui.label(format!(
-                    "Interior variants: Grass {} · Dirt {} · Water {}",
+                    "Interior variants: Grass {} · Dirt {} · Water {} conservative base",
                     state.asset_authority.summer_flatworld_fill_variant_count("Grass"),
                     state.asset_authority.summer_flatworld_fill_variant_count("MudBank"),
                     state.asset_authority.summer_flatworld_fill_variant_count("RiverWater")
                 ));
                 ui.separator();
-                ui.label(format!(
-                    "Water cycle: {} source-backed phases @ {} ms",
-                    state.asset_authority.summer_water_animation_frame_count(),
-                    state.asset_authority.summer_water_animation_frame_duration_ms()
-                ));
+                ui.colored_label(egui::Color32::LIGHT_GREEN, "Water animation: OFF (evidence-gated)");
             });
-            ui.small("Water animation is currently a source-backed Summer runtime candidate for visual review; shoreline topology stays static and source-exact. Cliffs and waterfall animation remain separate structural passes.");
+            ui.small("The eight recovered water-looking cells remain static RepeatableFill/detail source regions. They are not shuffled as temporal frames. RiverWater stays on one conservative base fill until an explicitly ordered authored animation is proven. Cliffs are now source-inventoried separately; waterfalls follow the structural cliff pass.");
             egui::Grid::new("summer.flatworld.safe.fills")
                 .num_columns(3)
                 .spacing(egui::vec2(14.0, 4.0))
@@ -6025,10 +6018,6 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
         sheet.texture = contexts.image_id(&sheet.handle);
     }
     let ctx = contexts.ctx_mut()?;
-    state.water_animation_ms = time.elapsed().as_millis() as u64;
-    if state.world_mode && state.asset_authority.summer_water_animation_frame_count() > 1 {
-        ctx.request_repaint_after(std::time::Duration::from_millis(110));
-    }
     if state.review_browser.loading {
         ctx.request_repaint_after(std::time::Duration::from_millis(150));
     }
@@ -6258,7 +6247,7 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
             }
             ui.separator();
             if state.world_mode {
-                ui.small(format!("Studio 0.8.1 · World {}{} · {} chunks · {}", state.world_doc.world_id, if state.world_dirty { " *" } else { "" }, state.world_doc.chunks.len(), state.tool.label()));
+                ui.small(format!("Studio 0.8.4 · World {}{} · {} chunks · {}", state.world_doc.world_id, if state.world_dirty { " *" } else { "" }, state.world_doc.chunks.len(), state.tool.label()));
             } else {
                 ui.small(format!("{}{} · {}", state.layered_scene.name, if state.layered_history.is_dirty() || state.scene_needs_initial_save { " *" } else { "" }, if state.playtest.is_some() { "PIE / source-snapshot" } else { state.tool.label() }));
             }
@@ -6590,7 +6579,7 @@ fn main() -> bevy::app::AppExit {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Havenwild — Bevy Studio v0.8.1".into(),
+                        title: "Havenwild — Bevy Studio v0.8.4".into(),
                         decorations: native_frame,
                         resolution: (1440, 900).into(),
                         resizable: true,

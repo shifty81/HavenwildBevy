@@ -28,11 +28,15 @@ ROLE_GROUP = {
     "RiverWater": "summer_water_fill",
 }
 
-# Keep plain grass common while still breaking the obvious single-tile repeat.
+# Keep plain grass/dirt variation spatial and deterministic. Water is deliberately
+# restricted to one conservative base fill until the source sheet provides explicit
+# temporal animation evidence. The other seven water-looking cells remain cataloged
+# source regions for deliberate detail/decor use; they are not animation frames and
+# are not shuffled into ordinary homogeneous water.
 ROLE_WEIGHTS = {
     "Grass": [5, 1, 1, 1, 1, 1],
     "MudBank": [3, 1, 1, 1, 1, 1],
-    "RiverWater": [1] * 8,
+    "RiverWater": [1],
 }
 
 QUADRANTS = [(0, 0), (16, 0), (0, 16), (16, 16)]
@@ -143,6 +147,11 @@ def build() -> dict:
     for role, group_id in ROLE_GROUP.items():
         cells = built_groups[group_id]["cells"]
         weights = ROLE_WEIGHTS[role]
+        if role == "RiverWater":
+            # M2D081C correction: the eight recovered cells are RepeatableFill
+            # variants, not an authored ordered animation strip. Keep only the
+            # conservative safe/base cell in automatic homogeneous water.
+            cells = cells[:1]
         if len(cells) != len(weights):
             raise ValueError(f"{role} expected {len(weights)} fill variants, got {len(cells)}")
         fill_variants[role] = [
@@ -150,18 +159,10 @@ def build() -> dict:
             for entry, weight in zip(cells, weights)
         ]
 
-    # The source sheet contains eight authored Summer water fill phases. M2D081
-    # plays them as a low-frequency interior-water cycle while leaving shoreline
-    # topology source-exact and static. The animation remains entirely source-backed.
-    animations = {
-        "RiverWater": {
-            "frameDurationMs": 220,
-            "phaseMode": "global",
-            "sourceAuthority": "summer_water_fill_source_variants",
-            "visualCertification": "runtime_candidate_requires_user_visual_review",
-            "frames": [{**entry, "weight": 1} for entry in built_groups["summer_water_fill"]["cells"]],
-        }
-    }
+    # Animation authority is evidence-gated. RepeatableFill variants may never be
+    # promoted into a temporal sequence just because they share a semantic label.
+    # Keep RiverWater static until an explicitly ordered source animation is proven.
+    animations = {}
 
     # Complete the normal three-material GRS/DIR/WTR grammar. Every three-material
     # output is a 4-quadrant composite of exact source pixels. The material that
@@ -231,7 +232,7 @@ def build() -> dict:
     if three_material != 36:
         raise ValueError(f"expected 36 three-material junction states, got {three_material}")
 
-    profile["version"] = 4
+    profile["version"] = 5
     profile["sourceGroups"] = built_groups
     profile["fillVariants"] = fill_variants
     profile["animations"] = animations
@@ -241,7 +242,8 @@ def build() -> dict:
         "Normal Bevy World painting resolves Grass/Dirt/Water through a complete 81/81 four-corner grammar: 3 solids, 42 two-material mixed states, and 36 exact-source three-material junction composites.",
         "Pairwise diagonal checkerboards use exact one-corner source quadrants so isolated Dirt/Grass land spots stay disconnected instead of being bridged by a fixed checker composite.",
         "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
-        "RiverWater homogeneous interiors can animate through the eight source-backed Summer water fill phases at runtime; shoreline topology remains exact static source geometry.",
+        "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
+        "Water animation is evidence-gated: no RiverWater temporal sequence is active until an explicitly ordered authored frame set is proven from source metadata or equivalent source evidence.",
         "Cliffs/elevation and waterfall assembly remain separate structural stages and are not silently injected into flat Summer terrain.",
         "Historical color inference and generated runtime atlases remain diagnostic evidence only, not visual authority.",
     ]
@@ -257,7 +259,7 @@ def main() -> int:
     if args.check:
         if not PROFILE.is_file() or PROFILE.read_bytes() != data:
             raise SystemExit(f"Summer complete runtime profile is stale: {PROFILE}")
-        print("M2D081 SUMMER COMPLETE PROFILE: PASS / 305 cells / 41 groups / 81 terrain states / 8 water phases")
+        print("M2D081C SUMMER PROFILE: PASS / 305 cells / 41 groups / 81 terrain states / static evidence-gated water")
         return 0
     PROFILE.write_bytes(data)
     print(f"WROTE {PROFILE}")

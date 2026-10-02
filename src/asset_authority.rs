@@ -438,7 +438,7 @@ impl AssetAuthority {
         }
 
         if self.summer_flatworld.schema != "havenwild.terrain.summer_flatworld_runtime.v1"
-            || !matches!(self.summer_flatworld.version, 1 | 2 | 3 | 4)
+            || !matches!(self.summer_flatworld.version, 1 | 2 | 3 | 4 | 5)
             || self.summer_flatworld.source_atlas != "Terrain/terrain_summer.png"
             || self.summer_flatworld.safe_fill.len() < 3
         {
@@ -500,7 +500,7 @@ impl AssetAuthority {
                     }
                 }
             }
-            for (role, expected) in [("Grass", 6usize), ("MudBank", 6), ("RiverWater", 8)] {
+            for (role, expected) in [("Grass", 6usize), ("MudBank", 6), ("RiverWater", 1)] {
                 let Some(entries) = self.summer_flatworld.fill_variants.get(role) else {
                     return Err(format!(
                         "Summer complete authority missing fill variants for {role}"
@@ -522,21 +522,32 @@ impl AssetAuthority {
                     }
                 }
             }
-            let Some(water) = self.summer_flatworld.animations.get("RiverWater") else {
-                return Err("Summer complete authority missing RiverWater animation".into());
-            };
-            if water.frame_duration_ms == 0
-                || water.frames.len() != 8
-                || water.source_authority != "summer_water_fill_source_variants"
-            {
-                return Err("Invalid Summer RiverWater animation authority".into());
-            }
-            for entry in &water.frames {
-                if entry.source_path != self.summer_flatworld.source_atlas
-                    || !region_ids.contains(entry.canonical_region_id.as_str())
-                    || !catalog.contains_rect(&entry.source_path, entry.source_rect_px)
+            if self.summer_flatworld.version >= 5 {
+                if self.summer_flatworld.animations.contains_key("RiverWater") {
+                    return Err("RiverWater animation is not certified: RepeatableFill variants are static source/detail choices, not temporal frames".into());
+                }
+                if self.summer_flatworld.animations.values().any(|animation| {
+                    animation.source_authority == "summer_water_fill_source_variants"
+                }) {
+                    return Err("RepeatableFill source variants cannot be promoted into animation authority".into());
+                }
+            } else {
+                let Some(water) = self.summer_flatworld.animations.get("RiverWater") else {
+                    return Err("Summer complete authority missing RiverWater animation".into());
+                };
+                if water.frame_duration_ms == 0
+                    || water.frames.len() != 8
+                    || water.source_authority != "summer_water_fill_source_variants"
                 {
-                    return Err("Invalid Summer RiverWater animation frame".into());
+                    return Err("Invalid Summer RiverWater animation authority".into());
+                }
+                for entry in &water.frames {
+                    if entry.source_path != self.summer_flatworld.source_atlas
+                        || !region_ids.contains(entry.canonical_region_id.as_str())
+                        || !catalog.contains_rect(&entry.source_path, entry.source_rect_px)
+                    {
+                        return Err("Invalid Summer RiverWater animation frame".into());
+                    }
                 }
             }
         }
@@ -927,9 +938,10 @@ mod tests {
         assert_eq!(authority.summer_flatworld_fill_variant_count("MudBank"), 6);
         assert_eq!(
             authority.summer_flatworld_fill_variant_count("RiverWater"),
-            8
+            1
         );
-        assert_eq!(authority.summer_water_animation_frame_count(), 8);
+        assert_eq!(authority.summer_water_animation_frame_count(), 0);
+        assert_eq!(authority.summer_water_animation_frame_duration_ms(), 0);
     }
 
     #[test]
@@ -1022,7 +1034,7 @@ mod tests {
     }
 
     #[test]
-    fn summer_water_cycle_uses_only_source_backed_frames() {
+    fn summer_water_variants_are_static_and_not_animation_frames() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR"));
         let catalog =
             SourceCatalog::load(&root.join("content/catalog/core_source_manifest.json")).unwrap();
@@ -1031,16 +1043,19 @@ mod tests {
             &catalog,
         )
         .unwrap();
-        let step = authority.summer_water_animation_frame_duration_ms();
-        assert_eq!(step, 220);
-        let mut rects = BTreeSet::new();
-        for frame in 0..authority.summer_water_animation_frame_count() {
-            let entry = authority
-                .summer_flatworld_animation_frame("RiverWater", step * frame as u64)
-                .unwrap();
-            assert_eq!(entry.source_path, "Terrain/terrain_summer.png");
-            rects.insert(entry.source_rect_px);
-        }
-        assert_eq!(rects.len(), 8);
+        assert_eq!(authority.summer_water_animation_frame_count(), 0);
+        assert_eq!(authority.summer_water_animation_frame_duration_ms(), 0);
+        assert!(authority
+            .summer_flatworld_animation_frame("RiverWater", 10_000)
+            .is_none());
+        assert_eq!(
+            authority.summer_flatworld_fill_variant_count("RiverWater"),
+            1
+        );
+        let base = authority
+            .summer_flatworld_fill_for_world("RiverWater", 42, [7, -3])
+            .unwrap();
+        assert_eq!(base.source_path, "Terrain/terrain_summer.png");
+        assert_eq!(base.source_rect_px, [384, 512, 32, 32]);
     }
 }

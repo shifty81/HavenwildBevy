@@ -1,5 +1,8 @@
 # Start here — Havenwild Bevy standalone
 
+> **Current patch intake:** PCC 1.3.5 uses manifest-first root ZIP discovery and also supports manual extract/overwrite. For governed intake, drop the ZIP unextracted in the project root or `updates/inbox`; browser-renamed ZIPs are accepted when they contain `pcc_patch.json`. For manual overwrite, extract the payload over the project and then run Full Quality Gate before publishing.
+
+
 ## Goal
 
 Develop the Havenwild Bevy game/editor lane as an independent project with its own source history, build/run workflow, and local asset hydration. Do not make the previous Havenwild checkout a runtime dependency.

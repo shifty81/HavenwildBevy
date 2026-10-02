@@ -1,6 +1,6 @@
 {
   "schema": "havenwild.terrain.summer_flatworld_runtime.v1",
-  "version": 4,
+  "version": 5,
   "sourceAtlas": "Terrain/terrain_summer.png",
   "sourceAtlasSha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
   "policy": {
@@ -3723,7 +3723,8 @@
     "Normal Bevy World painting resolves Grass/Dirt/Water through a complete 81/81 four-corner grammar: 3 solids, 42 two-material mixed states, and 36 exact-source three-material junction composites.",
     "Pairwise diagonal checkerboards use exact one-corner source quadrants so isolated Dirt/Grass land spots stay disconnected instead of being bridged by a fixed checker composite.",
     "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
-    "RiverWater homogeneous interiors can animate through the eight source-backed Summer water fill phases at runtime; shoreline topology remains exact static source geometry.",
+    "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
+    "Water animation is evidence-gated: no RiverWater temporal sequence is active until an explicitly ordered authored frame set is proven from source metadata or equivalent source evidence.",
     "Cliffs/elevation and waterfall assembly remain separate structural stages and are not silently injected into flat Summer terrain.",
     "Historical color inference and generated runtime atlases remain diagnostic evidence only, not visual authority."
   ],
@@ -8130,182 +8131,8 @@
           32
         ],
         "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.6a20ace53e59f5d35fbe0f2f",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          384,
-          544,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.12686e6e5b0e39e810fb09d2",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          416,
-          512,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.71deebe2f049458a5c29be1c",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          416,
-          544,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.60dac4cc3625e59d66ed7748",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          448,
-          512,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.bd93a41fdeba648ef75fb38c",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          448,
-          544,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.d2df7d389f36e7e630c386d8",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          480,
-          512,
-          32,
-          32
-        ],
-        "weight": 1
-      },
-      {
-        "canonicalRegionId": "hw.elizawy.region.3f05d10f2aa7ef56b65ffed8",
-        "sourcePath": "Terrain/terrain_summer.png",
-        "sourceRectPx": [
-          480,
-          544,
-          32,
-          32
-        ],
-        "weight": 1
       }
     ]
   },
-  "animations": {
-    "RiverWater": {
-      "frameDurationMs": 220,
-      "phaseMode": "global",
-      "sourceAuthority": "summer_water_fill_source_variants",
-      "visualCertification": "runtime_candidate_requires_user_visual_review",
-      "frames": [
-        {
-          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            384,
-            512,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.6a20ace53e59f5d35fbe0f2f",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            384,
-            544,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.12686e6e5b0e39e810fb09d2",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            416,
-            512,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.71deebe2f049458a5c29be1c",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            416,
-            544,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.60dac4cc3625e59d66ed7748",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            448,
-            512,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.bd93a41fdeba648ef75fb38c",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            448,
-            544,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d2df7d389f36e7e630c386d8",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            480,
-            512,
-            32,
-            32
-          ],
-          "weight": 1
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.3f05d10f2aa7ef56b65ffed8",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            480,
-            544,
-            32,
-            32
-          ],
-          "weight": 1
-        }
-      ]
-    }
-  }
+  "animations": {}
 }

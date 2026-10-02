@@ -210,6 +210,11 @@ def main() -> int:
                      "playtest.step(direction, time.delta_secs())", "snapshot: scene.clone()"):
         if not has_token(main_text + playtest_source, required):
             fail(errors, f"PIE source-snapshot/play lifecycle missing: {required}")
+    if has_token(main_text, "playtest.step(direction, time.delta_secs())") and not has_token(
+        main_text,
+        "fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time>) -> Result",
+    ):
+        fail(errors, "PIE draw_ui uses Time but the Bevy Time resource is not bound in the system signature")
     if "fn provisional_walkable(" not in playtest_source or '"RiverWater"' not in playtest_source:
         fail(errors, "PIE provisional v1 traversal policy must be explicit and testable")
     result = run([sys.executable, str(ROOT / 'tools/pie_source_contract_selftest.py')],

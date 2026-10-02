@@ -353,7 +353,7 @@ def refresh_assets_from_upstream() -> int:
         try:
             request = urllib.request.Request(
                 url,
-                headers={"User-Agent": "Havenwild-Bevy-Asset-Authority/0.8.1"},
+                headers={"User-Agent": "Havenwild-Bevy-Asset-Authority/0.8.4"},
             )
             with urllib.request.urlopen(request, timeout=30) as response:
                 data = response.read()

@@ -31,7 +31,7 @@ def main():
     require('quarantine_uncertified_large_objects' in world_rs, 'large object quarantine missing')
     require('worldgen_object_bounds.local.json' in authority_rs and 'locally_certified_object_template' in authority_rs, 'local object-crop authority missing')
     require('world_stroke_seen: BTreeSet' in main_rs and 'world_stroke_apply_segment' in main_rs, 'responsive drag-stroke contract missing')
-    require(('Studio 0.7.8' in main_rs and 'Bevy Studio v0.7.8' in main_rs) or ('Studio 0.8.0' in main_rs and 'Bevy Studio v0.8.0' in main_rs) or ('Studio 0.8.1' in main_rs and 'Bevy Studio v0.8.1' in main_rs), 'visible Studio identity missing')
+    require(('Studio 0.7.8' in main_rs and 'Bevy Studio v0.7.8' in main_rs) or ('Studio 0.8.0' in main_rs and 'Bevy Studio v0.8.0' in main_rs) or ('Studio 0.8.1' in main_rs and 'Bevy Studio v0.8.1' in main_rs) or ('Studio 0.8.2' in main_rs and 'Bevy Studio v0.8.2' in main_rs) or ('Studio 0.8.3' in main_rs and 'Bevy Studio v0.8.3' in main_rs) or ('Studio 0.8.4' in main_rs and 'Bevy Studio v0.8.4' in main_rs), 'visible Studio identity missing')
     require(('ONE-PASS Native -> Bevy Summer authority convergence' in pcc or 'BUILD Summer GRS/DIR/WTR autotile map' in pcc) and 'summer-map' in pcc, 'PCC Summer mapper/convergence entry missing')
     require('rgba_rows' in mapper and 'cornerRecipes' in mapper and 'cliff' in mapper.lower(), 'source-pixel mapper safeguards missing')
     require('largest_connected_crop' in mapper and 'worldgen_object_bounds.local.json' in mapper, 'tree/rock source-bound certification missing')

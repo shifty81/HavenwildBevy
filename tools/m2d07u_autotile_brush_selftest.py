@@ -6,7 +6,7 @@ world = (ROOT / 'src/world_doc.rs').read_text(encoding='utf-8')
 project = (ROOT / 'project/forgepy.project.json').read_text(encoding='utf-8')
 
 checks = {
-    'source >=0.7.7': '"sourceVersion": "0.8.1"' in project or '"sourceVersion": "0.8.0"' in project or '"sourceVersion": "0.7.8"' in project or '"sourceVersion": "0.7.7"' in project,
+    'source >=0.7.7': '"sourceVersion": "0.8.4"' in project or '"sourceVersion": "0.8.3"' in project or '"sourceVersion": "0.8.2"' in project or '"sourceVersion": "0.8.1"' in project or '"sourceVersion": "0.8.0"' in project or '"sourceVersion": "0.7.8"' in project or '"sourceVersion": "0.7.7"' in project,
     'semantic terrain brush enum': 'enum WorldTerrainBrush' in main,
     'grass brush': 'Self::Grass => "Grass"' in main,
     'dirt-bank brush': 'Self::DirtBank => "MudBank"' in main,
