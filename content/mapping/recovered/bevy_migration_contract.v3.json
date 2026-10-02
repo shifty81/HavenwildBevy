@@ -1,0 +1,59 @@
+{
+  "certification": {
+    "pie": "not_run",
+    "recipeCertifications": 0,
+    "runtime": "not_run",
+    "semanticMappingsPromoted": 0,
+    "sourceHash": "pending local original-byte verification",
+    "windowsPccFull": "not_run"
+  },
+  "geography": {
+    "freshwaterDownhillAndWaterfallContactRequired": true,
+    "retiredMinimumTwoCliffRule": true,
+    "seaLevel": 0,
+    "singleLevelCliffsAllowed": true,
+    "sourceSupportedTraversalOnly": true,
+    "testWorldLandLevels": [
+      1,
+      30
+    ]
+  },
+  "historicalApprovals": [
+    "B43 corrected board only; requires exact scope match"
+  ],
+  "mergeKey": [
+    "immutable source byte hash",
+    "relative source path",
+    "source pixel rectangle",
+    "source pixel SHA256",
+    "season and canonical atlas"
+  ],
+  "mode": "read_only_staging",
+  "onAbsentRawSource": "preserve historical evidence and mark unverified; never fabricate",
+  "onConflict": "hold_existing_current_bevy_value_and_emit_review_record",
+  "output": "new proposed import/review documents only; never edit original PNGs or active scene",
+  "pccRootDropPatch": false,
+  "schema": "havenwild.bevy.elizawy.migration_contract.v3",
+  "sourcePriority": [
+    {
+      "policy": "preserve primary authoring and scene state; do not overwrite",
+      "source": "current Bevy M2D04R2 project scene and mapper source"
+    },
+    {
+      "policy": "independent existing source-exact review evidence; reconcile exact records before merging",
+      "source": "current Bevy M2C4 review registry"
+    },
+    {
+      "policy": "read-only donor; import source identity/topology only after verified equivalence",
+      "source": "older Havenwild Pass103 and Pass106 verified artifacts"
+    },
+    {
+      "policy": "backfill missing source addresses and provenance; no semantic authority",
+      "source": "this exact B48R9 consolidated historical crosswalk"
+    },
+    {
+      "policy": "retain separate historical/reference lane; not original ElizaWy production art",
+      "source": "reference-only 34 material / 15562 tuple catalog"
+    }
+  ]
+}

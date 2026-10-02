@@ -191,7 +191,7 @@ impl ReviewBrowser {
             let result = fs::read_to_string(&path)
                 .map_err(|error| {
                     format!(
-                        "Cannot open {}: {error}. Generate the M2C4 registry first.",
+                        "Cannot open {}: {error}. The optional derivative M2C4 registry is not installed; use bundled B48R9 evidence below.",
                         path.display()
                     )
                 })

@@ -1,0 +1,36 @@
+{
+  "schema": "havenwild.bevy.elizawy.review_ledger.candidate.v1",
+  "evidenceStatusRules": {
+    "historical_verified": "source-address evidence only",
+    "visual_approved": "only the exact reviewed board or region identified, not automatic asset-wide approval",
+    "runtime_certified": "requires actual source hashes, semantic selection, editor/client parity, runtime tests"
+  },
+  "priorBoardReceipts": [
+    {
+      "id": "B43-winter-and-winter-ice-staged-board",
+      "reviewState": "historically_visually_approved",
+      "scope": "Corrected B43 staged winter/winter-ice review board only; does not approve unreviewed winter assets or gameplay joins",
+      "automaticRegionPromotion": false
+    },
+    {
+      "id": "B46-atlas-waterfall-overlay",
+      "reviewState": "rejected_as_assembled_scene_evidence",
+      "scope": "Historic overlay cannot certify assembled cliff and waterfall connections",
+      "automaticRegionPromotion": false
+    },
+    {
+      "id": "B47-assembled-waterfall-reference",
+      "reviewState": "reference_only_not_runtime_certified",
+      "scope": "Artist examples are references; top/bottom, water connection and runtime still require verification",
+      "automaticRegionPromotion": false
+    },
+    {
+      "id": "M2D04R2-source-region-board",
+      "reviewState": "diagnostic_evidence_only",
+      "scope": "Tree crop contamination/incomplete composition and rock exact-source identity require targeted validation; no blanket approval",
+      "automaticRegionPromotion": false
+    }
+  ],
+  "regionApprovals": [],
+  "runtimeCertifications": []
+}

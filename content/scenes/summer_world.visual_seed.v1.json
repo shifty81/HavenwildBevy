@@ -1,0 +1,1234 @@
+{
+  "schema": "havenwild.bevy.summer_visual_seed.v1",
+  "authority": "manual_original_source_preview_review_visual_only_not_terrain_or_collision_certification",
+  "legacySourceSha256": "a698bf14b4a9ab5390f37d4471ccffad5d394ab9aac43957326b747969785c31",
+  "baseScene": "elizawy_mapping_certification.scene.json",
+  "generatorId": "m2d04.summer.composition.visual-study.v1",
+  "note": "One coherent visual study over intact original v1 River ground; source PNG bytes are not included. No bridge, waterfall, drainage, topology, or collision invented.",
+  "objects": [
+    {
+      "id": "summer.house.east",
+      "label": "East-bank brick house · original whole sprite",
+      "layer": "structures",
+      "anchor": [
+        32,
+        0
+      ],
+      "footprint": [
+        6,
+        6
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Structure/Structures/Brick House B.png",
+            "source_rect": [
+              0,
+              0,
+              192,
+              192
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.northwest",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        2,
+        2
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              128,
+              0,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.west",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        11,
+        2
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              224,
+              0,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.east",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        29,
+        2
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              320,
+              0,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.riverside",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        32,
+        9
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              128,
+              128,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.southbank",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        26,
+        15
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              224,
+              128,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.southwest",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        2,
+        20
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              128,
+              0,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.broadleaf.southeast",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        32,
+        20
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              320,
+              0,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.conifer.west",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        7,
+        8
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              128,
+              384,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.conifer.southeast",
+      "label": "Summer tree · exact whole source sprite",
+      "layer": "objects",
+      "anchor": [
+        27,
+        21
+      ],
+      "footprint": [
+        3,
+        4
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/trees_summer.png",
+            "source_rect": [
+              224,
+              384,
+              96,
+              128
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.fern.west",
+      "label": "Summer foliage · exact source region",
+      "layer": "objects",
+      "anchor": [
+        23,
+        14
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              96,
+              64,
+              64,
+              64
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.fern.east",
+      "label": "Summer foliage · exact source region",
+      "layer": "objects",
+      "anchor": [
+        29,
+        17
+      ],
+      "footprint": [
+        3,
+        2
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              160,
+              64,
+              96,
+              64
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.west1",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        5,
+        6
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.west2",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        17,
+        2
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              32,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.house",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        31,
+        7
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              64,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.east",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        38,
+        8
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              96,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.southbank",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        34,
+        17
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              128,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.southwest",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        8,
+        23
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.edge",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        0,
+        24
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              64,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.west3",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        6,
+        18
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              32,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.shrub.east3",
+      "label": "Summer shrub · exact original source cell",
+      "layer": "objects",
+      "anchor": [
+        38,
+        25
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              64,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.west",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        5,
+        4
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.north",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        15,
+        6
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.east",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        29,
+        9
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.mid",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        38,
+        14
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.southwest",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        6,
+        26
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.southeast",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        31,
+        26
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.flowers.northeast",
+      "label": "Wildflower detail · original source grouping",
+      "layer": "terrain_details",
+      "anchor": [
+        38,
+        3
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/wildflowers_summer.png",
+            "source_rect": [
+              0,
+              0,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.reed.north",
+      "label": "Water-edge planting study · not traversal authority",
+      "layer": "objects",
+      "anchor": [
+        24,
+        6
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              448,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.reed.mid",
+      "label": "Water-edge planting study · not traversal authority",
+      "layer": "objects",
+      "anchor": [
+        19,
+        12
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              448,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.reed.west",
+      "label": "Water-edge planting study · not traversal authority",
+      "layer": "objects",
+      "anchor": [
+        13,
+        18
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              448,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.reed.south",
+      "label": "Water-edge planting study · not traversal authority",
+      "layer": "objects",
+      "anchor": [
+        11,
+        23
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              448,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.lily.north",
+      "label": "Lily pad study · original water detail",
+      "layer": "objects",
+      "anchor": [
+        24,
+        8
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              384,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.lily.south",
+      "label": "Lily pad study · original water detail",
+      "layer": "objects",
+      "anchor": [
+        15,
+        21
+      ],
+      "footprint": [
+        1,
+        1
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/plants_summer.png",
+            "source_rect": [
+              384,
+              64,
+              32,
+              32
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.rock.east",
+      "label": "Grasslands rock · original complete source region",
+      "layer": "objects",
+      "anchor": [
+        35,
+        13
+      ],
+      "footprint": [
+        2,
+        3
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/Rocks, Grasslands.png",
+            "source_rect": [
+              0,
+              0,
+              64,
+              96
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    },
+    {
+      "id": "summer.rock.west",
+      "label": "Grasslands stone · original complete source region",
+      "layer": "objects",
+      "anchor": [
+        2,
+        15
+      ],
+      "footprint": [
+        2,
+        2
+      ],
+      "parts": [
+        {
+          "offset": [
+            0,
+            0
+          ],
+          "source": {
+            "source_asset": "Terrain/Rocks, Grasslands.png",
+            "source_rect": [
+              128,
+              0,
+              64,
+              64
+            ]
+          }
+        }
+      ],
+      "origin": {
+        "kind": "generated",
+        "generator_id": "m2d04.summer.composition.visual-study.v1"
+      }
+    }
+  ]
+}

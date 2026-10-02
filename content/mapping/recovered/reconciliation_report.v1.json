@@ -1,0 +1,279 @@
+{
+  "schema": "havenwild.mapping.reconciliation_report.v1",
+  "authority": "diagnostic_only_no_semantic_import_or_promotion",
+  "inventorySource": "content\\catalog\\mapping_inventory.v1.json",
+  "recoveryIndex": ".forgepy\\recovered_mapping\\index.json",
+  "recoveryIndexPresent": true,
+  "records": [
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-004741-Havenwild_IncrementalPatch_B48R9_ElizaWySeasonalSourceCrosswalk_20260918\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-075139-Havenwild_IncrementalPatch_B48R15_CUMULATIVE_B48R7_to_B48R15_SummerMapper_PCCRepair_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-075139-Havenwild_IncrementalPatch_B48R15_CUMULATIVE_B48R7_to_B48R15_SummerMapper_PCCRepair_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-080534-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R16_StandaloneElizaWyMapperAndRestartRepair_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-080534-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R16_StandaloneElizaWyMapperAndRestartRepair_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-084001-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R18_MapperAndRootAuditRepair_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-084001-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R18_MapperAndRootAuditRepair_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-085853-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R19_MapperDevelopmentLayoutRepair_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-085853-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R19_MapperDevelopmentLayoutRepair_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-091731-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R20_GroupedSummerMapperUX_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-091731-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R20_GroupedSummerMapperUX_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-102312-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R22_PCCForgeCortexBridge_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-102312-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R22_PCCForgeCortexBridge_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-104941-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R23_ElizaWyMapperSourceAndEraseRepair_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-104941-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R23_ElizaWyMapperSourceAndEraseRepair_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-115817-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R24_UnifiedSummerMapperLayers_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-115817-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R24_UnifiedSummerMapperLayers_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-123918-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R25_ThreePaneSourceAtlasViewport_20260919\\content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": ".havenwild\\updates\\backups\\20260919-123918-Havenwild_CUMULATIVE_PCC_Patch_B48R7_to_B48R25_ThreePaneSourceAtlasViewport_20260919\\content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": "assets\\generated\\worldgen_v0_1\\terrain\\lpc_mapped_terrain_v7_32.json",
+      "sha256": "ee55da14103cea40bd85d7f7ddc43c3247c8c1d0c13cffb8fafae35d06c06b2d",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "pass114_exact_tuples_snapshot"
+      ]
+    },
+    {
+      "relativePath": "assets\\generated\\worldgen_v0_1\\terrain\\lpc_terrain_summer_complete_map_32.json",
+      "sha256": "6e6a64725208f6ec18b6f0a203ca25701db87c1facf3941e30077ac1f88c5c3e",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "pass103_summer_complete_map",
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": "content\\assets\\lpc\\elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": "content\\assets\\lpc\\elizawy_summer_atlas_source_crosswalk_b48r7_v0_1.json",
+      "sha256": "0699ddaf264ba4a01051af213d5c528f04d4292fc0bcb38d81dc2c66014fa394",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "b48r15_summer_mapper"
+      ]
+    },
+    {
+      "relativePath": "content\\assets\\lpc\\lpc_seasonal_terrain_topology_v0_1.json",
+      "sha256": "2b448c1a3f281413f7a735e3ddee7550ee29d073005e279b4da3aa55c16f2e4d",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "pass106_seasonal_topology"
+      ]
+    },
+    {
+      "relativePath": "content\\assets\\lpc\\lpc_seasonal_terrain_topology_v0_1.json.provenance.json",
+      "sha256": "a7ae440e6e6fcede3b2d84e8ecc8e7f73abb3d046ea5cad983a246bc34aa1287",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": [
+        "pass106_seasonal_topology"
+      ]
+    },
+    {
+      "relativePath": "content\\terrain\\havenwild_terrain_authoring_palette_v1.json",
+      "sha256": "c7365229dbc31260219eab2d303148291e1ddd53131c367711aae894068311f1",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": []
+    },
+    {
+      "relativePath": "content\\terrain\\havenwild_terrain_standard_v1.json",
+      "sha256": "f1dd3544575016f3e4ea46e1f7da95e78dcd65a9854b38d89288f9b6ecf1f40a",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": []
+    },
+    {
+      "relativePath": "content\\terrain\\havenwild_terrain_tuple_catalog_v1.json",
+      "sha256": "efc220ae177ae9fee2eac2103e01b779ed20db37419753bd45f96579c92b4991",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": []
+    },
+    {
+      "relativePath": "content\\worldgen\\terrain_topology_contract_v0_2.json",
+      "sha256": "dba35155921b40213a9570318ca2fb698b5bf8cfcf07f54385189cb9b366203b",
+      "evidenceState": "local_copy_hash_verified",
+      "possibleHistoricalMatches": []
+    }
+  ],
+  "historicalEvidence": [
+    {
+      "id": "pass103_summer_complete_map",
+      "currentImportState": "count_and_source_inventory_recovered",
+      "candidateArtifacts": 1,
+      "status": "candidate_evidence_only"
+    },
+    {
+      "id": "pass106_seasonal_topology",
+      "currentImportState": "evidence_only",
+      "candidateArtifacts": 2,
+      "status": "candidate_evidence_only"
+    },
+    {
+      "id": "pass90_ordered_transitions",
+      "currentImportState": "evidence_only",
+      "candidateArtifacts": 0,
+      "status": "raw_artifact_not_identified"
+    },
+    {
+      "id": "pass108_edge_signatures",
+      "currentImportState": "evidence_only",
+      "candidateArtifacts": 0,
+      "status": "raw_artifact_not_identified"
+    },
+    {
+      "id": "pass114_exact_tuples_snapshot",
+      "currentImportState": "evidence_only",
+      "candidateArtifacts": 1,
+      "status": "candidate_evidence_only"
+    },
+    {
+      "id": "b48r15_summer_mapper",
+      "currentImportState": "evidence_only",
+      "candidateArtifacts": 22,
+      "status": "candidate_evidence_only"
+    },
+    {
+      "id": "later_terrain_v7_authority",
+      "currentImportState": "separate_authority_layer",
+      "candidateArtifacts": 0,
+      "status": "raw_artifact_not_identified"
+    }
+  ],
+  "certifiedMappingsAdded": 0
+}

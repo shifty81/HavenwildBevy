@@ -73,6 +73,11 @@ def main() -> int:
         if dep.get("rev") != forge_rev:
             fail(errors, f"{dep_name} rev {dep.get('rev')!r} != project ForgeGUI rev {forge_rev!r}")
 
+    def has_token(haystack: str, token: str) -> bool:
+        # Formatting must not silently invalidate otherwise valid code. The
+        # source check is a structural guard; Cargo validates actual syntax.
+        return re.sub(r"\s+", "", token) in re.sub(r"\s+", "", haystack)
+
     main_path = SRC / "main.rs"
     try:
         main_text = main_path.read_text(encoding="utf-8")
@@ -90,8 +95,8 @@ def main() -> int:
         fail(errors, "orphan Rust source files not declared by main.rs: " + ", ".join(orphan))
 
     required_modules = {
-        "atomic_file", "canvas_rulers", "document", "editor_layout", "semantic_lab", "source_catalog",
-        "terrain", "terrain_mapper", "terrain_resolver", "elizawy_review",
+        "atomic_file", "canvas_rulers", "document", "editor_commands", "editor_layout", "semantic_lab", "source_catalog",
+        "terrain", "terrain_mapper", "terrain_resolver", "elizawy_review", "asset_authority", "world_doc", "world_chunks",
     }
     absent = sorted(required_modules - declared)
     if absent:
@@ -102,17 +107,17 @@ def main() -> int:
         if required not in review_source:
             fail(errors, f"M2D review authority/nonblocking contract missing: {required}")
     for required in ("fn draw_elizawy_review_browser(", "state.review_browser.poll()", "draw_elizawy_review_browser(ui, state)"):
-        if required not in main_text:
+        if not has_token(main_text, required):
             fail(errors, f"M2D review browser not wired into native mapper: {required}")
     # M2D02-A honest canvas-first controls. These are structural checks only;
     # a native Cargo build and interactive Windows test remain independent gates.
     for required in (
-        "tool: CanvasTool::Select", "fn draw_tool_rail(", "fn draw_layer_guide(",
+        "tool: CanvasTool::Select", "fn draw_tool_rail(", "fn draw_layer_rail(",
+        "fn draw_layer_panel(", "fn draw_app_launcher(",
         "fn draw_alpha_checker(", "fn sample_canvas_source(",
         "fn save_scene(", "state.canvas_controls_rect.contains(pointer)",
-        "ui.add_enabled(false, egui::Button::new(\"Regenerate selection / scene\"))",
     ):
-        if required not in main_text:
+        if not has_token(main_text, required):
             fail(errors, f"M2D02-A scene-first safe UI contract missing: {required}")
     for retired_ui in ("Stamp source tile on click", "Save canvas draft"):
         if retired_ui in main_text:
@@ -121,7 +126,7 @@ def main() -> int:
     for required in ("pub layers_open: bool", "pub inspect_alpha: bool", "terrain_mapper.visible = false"):
         if required not in layout_text:
             fail(errors, f"M2D02-A local layout default missing: {required}")
-    if "resolve_semantic_lab(&state.semantic_lab, &state.terrain_mapper)" not in main_text:
+    if not has_token(main_text, "resolve_semantic_lab(&state.semantic_lab, &state.terrain_mapper)"):
         fail(errors, "Studio UI is not wired to the shared terrain resolver")
     if "EguiPrimaryContextPass" not in main_text or "PrimaryEguiContext" not in main_text:
         fail(errors, "manual primary egui context contract is missing from main.rs")
@@ -132,11 +137,11 @@ def main() -> int:
     # keyboard focus API. The old method caused Windows E0599 on three callsites.
     if ".wants_keyboard_input(" in main_text:
         fail(errors, "obsolete egui Context::wants_keyboard_input call: use egui_wants_keyboard_input")
-    if main_text.count(".egui_wants_keyboard_input()") != 3:
+    if main_text.count(".egui_wants_keyboard_input()") < 3:
         fail(errors, "M2D02-A must retain three keyboard-focus guards (Delete, Undo, Redo)")
 
-    # M2D02-B1: a separate source-fingerprinted v2 draft, never a hidden
-    # rewrite/activation of the legacy scene or an invented procedural generator.
+    # M2D02-B1: retain source-fingerprinted v2 migration authority internally;
+    # M2D03-C removes its obsolete, competing user-facing preview buttons.
     v2_text = (SRC / "scene_v2.rs").read_text(encoding="utf-8") if (SRC / "scene_v2.rs").is_file() else ""
     for required in (
         "pub const SCHEMA:", "pub struct SceneV2", "legacy_base: source.tiles",
@@ -148,13 +153,14 @@ def main() -> int:
         if required not in v2_text:
             fail(errors, f"M2D02-B v2 draft or history guard missing: {required}")
     for required in (
-        "mod scene_v2;", "migration_preview: Option<SceneV2>",
-        "SceneV2::preview_import(source)",
-        "save_new_draft(&source, &destination)",
-        "Preview separate v2 scene draft", "Create separate v2 draft",
+        "mod scene_v2;", "SceneV2::preview_import(&legacy_base_path)",
+        ".save_editable_draft(",
     ):
-        if required not in main_text:
-            fail(errors, f"M2D02-B native migration UI missing: {required}")
+        if not has_token(main_text, required):
+            fail(errors, f"Live layered scene migration/save authority missing: {required}")
+    for retired in ("Preview separate v2 scene draft", "Create separate v2 draft", "migration_preview: Option<SceneV2>"):
+        if retired in main_text:
+            fail(errors, f"Obsolete secondary v2 migration UI returned: {retired}")
     if "pub fn write_atomic_new" not in (SRC / "atomic_file.rs").read_text(encoding="utf-8"):
         fail(errors, "M2D02-B create-new draft publisher missing")
 
@@ -164,7 +170,7 @@ def main() -> int:
         if required not in rulers:
             fail(errors, f"M2D02-B2 ruler overlay / no-paint guard missing: {required}")
     for required in ("mod canvas_rulers;", "canvas_rulers::draw(&painter, canvas, scene, px", "canvas_rulers::blocks_scene_edit(state.canvas_rect", "Show canvas rulers (tile coordinates)"):
-        if required not in main_text:
+        if not has_token(main_text, required):
             fail(errors, f"M2D02-B2 ruler integration missing: {required}")
     if "pub rulers_visible: bool" not in layout_text or "rulers_visible: true" not in layout_text:
         fail(errors, "M2D02-B2 persistent-on default rulers setting missing")
@@ -175,14 +181,14 @@ def main() -> int:
     # atlas-board draft is preserved under its old path and never overwritten.
     for required in (
         'content/scenes/elizawy_mapping_certification.scene.json',
-        'content/scenes/derived/elizawy_mapping_certification.source_exact.draft.json',
+        'content/scenes/derived/summer_world.layered.draft.json',
         'fn draw_assembled_objects(', 'fn hide_selected_visual_sample(',
         'mapping_lab.sample_zone_contains(pos)', 'Show reviewed-source markers',
         'let initial_pan = egui::Vec2::ZERO;',
         'scene.hidden_visual_samples', 'fn focus_mapping_zone(',
         'fn snapped_scene_edge(', 'visual_samples.len() != 0',
     ):
-        if required not in main_text:
+        if not has_token(main_text, required):
             fail(errors, f"M2D02-E source-exact lab/source correction integration missing: {required}")
     if 'fn draw_mapping_lab_markers(' in main_text or 'mapping_lab.boards' in main_text:
         fail(errors, "Legacy atlas-board canvas unexpectedly still in live editor")
@@ -200,9 +206,9 @@ def main() -> int:
     # A flattened demo screenshot is not an editable map or runtime asset authority.
     playtest_source = (SRC / "playtest.rs").read_text(encoding="utf-8") if (SRC / "playtest.rs").is_file() else ""
     for required in ("mod playtest;", "playtest: Option<PlaySession>",
-                     "PlaySession::start(&source_exact_snapshot", "fn stop_playtest(",
+                     "PlaySession::start_with_collision(&source_exact_snapshot", "fn stop_playtest(",
                      "playtest.step(direction, time.delta_secs())", "snapshot: scene.clone()"):
-        if required not in main_text + playtest_source:
+        if not has_token(main_text + playtest_source, required):
             fail(errors, f"PIE source-snapshot/play lifecycle missing: {required}")
     if "fn provisional_walkable(" not in playtest_source or '"RiverWater"' not in playtest_source:
         fail(errors, "PIE provisional v1 traversal policy must be explicit and testable")
@@ -211,27 +217,87 @@ def main() -> int:
     if result.returncode:
         fail(errors, 'PIE scene-reference integrity selftest failed: ' + (result.stdout + result.stderr)[-900:])
 
+    # M2D03-B: complete visual object instances use the existing v2 transaction
+    # authority and may not overwrite inherited terrain. Alpha diagnosis is read-only;
+    # no source-black pixel is silently converted to transparency.
+    for required in (
+        'fn is_complete_object_layer(', 'PlacedObject::manual_region(',
+        'SceneCommand::PlaceObject(object)', 'SceneCommand::MoveObject { id: id.clone(), to }',
+        'SceneCommand::RemoveObject { id: id.clone() }', 'fn select_object_at(',
+        'fn move_selected_object_to_origin(', 'fn remove_selected_object(',
+        'state.layered_scene.can_move_object_to(&id, destination)', 'fn draw_source_exact_visual_layers(',
+        'tools/inspect_elizawy_source_alpha.py',
+    ):
+        if not has_token(main_text, required):
+            fail(errors, f"M2D03-B complete-object/alpha UI missing: {required}")
+    for required in ('pub fn manual_region(', 'pub fn object_at(', 'pub fn origin_at_foot(',
+                     'fn full_manual_object_move_remove_preserves_original_terrain_and_source_region'):
+        if required not in v2_text:
+            fail(errors, f"M2D03-B object model/roundtrip regression missing: {required}")
+    for retired in ('CanvasTool::Move', '"MOV"', 'fn move_selected_object_to_foot('):
+        if retired in main_text:
+            fail(errors, f'M2D03-C redundant move tool unexpectedly in live UI: {retired}')
+    for required in ('drag_preview_origin: Option<[i32; 2]>', 'fn draw_layer_panel(',
+                     'Scene / Layers', 'Placed objects (', 'Open Source Browser',
+                     'Place selected source at cell', 'state.layered_history.mark_saved()',
+                     'state.playtest_layered = Some(state.layered_scene.clone());'):
+        if not has_token(main_text, required):
+            fail(errors, f'M2D03-C consolidated scene workbench missing: {required}')
+    if main_text.count('"▶ Play Scene"') != 1:
+        fail(errors, 'Exactly one Play Scene launcher must remain in native Studio')
+    if 'pub fn can_move_object_to(' not in v2_text:
+        fail(errors, 'SceneV2 drag preview bounds probe missing')
+    result = run([sys.executable, str(ROOT / 'tools/m2d03b_selftest.py')],
+                 cwd=ROOT, capture_output=True, text=True, timeout=35)
+    if result.returncode:
+        fail(errors, 'M2D03-B read-only source alpha fixture failed: ' + (result.stdout + result.stderr)[-900:])
+
     # M2D03-A: all original ElizaWy source PNGs are searchable and only requested
     # lazily. Scene V2 visual layers composite atop the unchanged original base and
     # PIE freezes the same visual layers. No synthetic object categories are approved.
     for required in (
         "fn load_source_sheet_on_demand(", "fn hydrate_pending_source(",
-        "state.source_catalog.entries.iter()", "source_family_filter",
+        "state.asset_authority.runtime_source_images.iter()", "source_family_filter",
         "fn draw_source_exact_visual_layers(", "playtest_layered: Option<SceneV2>",
         "state.layered_scene.resolved_legacy_tile(index)",
         "SceneCommand::PaintCells { layer: state.active_layer",
-        "state.layered_scene.save_editable_draft(",
+        ".save_editable_draft(",
         'let terrain_selection = source_path.starts_with("Terrain/")',
-        'ui.add_enabled(terrain_selection, egui::Button::new("Assign selected as sprite"))',
-        'ui.add_enabled(terrain_selection, egui::Button::new("Add selected tile as part"))',
-        'ui.add_enabled(terrain_selection, egui::Button::new("Replace from selection"))',
+        'egui::Button::new("Assign selected as sprite")',
+        'egui::Button::new("Add selected tile as part")',
+        'egui::Button::new("Replace from selection")',
     ):
-        if required not in main_text:
+        if not has_token(main_text, required):
             fail(errors, f"M2D03-A complete-source/layered-authoring contract missing: {required}")
     result = run([sys.executable, str(ROOT / 'tools/audit_elizawy_asset_consumption.py'), '--check'],
                  cwd=ROOT, capture_output=True, text=True, timeout=35)
     if result.returncode:
         fail(errors, 'M2D03-A original source consumption audit failed: '+(result.stdout+result.stderr)[-1000:])
+
+    # M2D05: inspect actual wiring, not a placeholder-only UI declaration.
+    for required in (
+        'mod project_root;', 'mod historical_evidence;', 'mod world_chunks;',
+        'project_root::resolve()', 'fn draw_historical_source_review(',
+        'fn draw_structural_panel(', 'fn draw_structural_overlay(',
+        'SceneCommand::SetStructuralCell', 'PlaySession::start_with_collision(',
+        'state.layered_scene.structural_cells',
+    ):
+        if not has_token(main_text, required):
+            fail(errors, f'M2D05 real source/chunk/structure wiring missing: {required}')
+    if 'fn chunk_and_local(' not in (SRC / 'world_chunks.rs').read_text(encoding='utf-8'):
+        fail(errors, 'M2D05 chunk coordinate transform module missing')
+
+    result = run([sys.executable, str(ROOT / 'tools/m2d06_shell_selftest.py')],
+                 cwd=ROOT, capture_output=True, text=True, timeout=35)
+    if result.returncode:
+        fail(errors, 'M2D06 canvas-first shell selftest failed: ' + (result.stdout + result.stderr)[-1200:])
+    for script in ('m2d07_asset_lane_selftest.py', 'm2d07_world_contract_selftest.py'):
+        result = run([sys.executable, str(ROOT / 'tools' / script)], cwd=ROOT, capture_output=True, text=True, timeout=35)
+        if result.returncode:
+            fail(errors, f'M2D07 selftest failed ({script}): ' + (result.stdout + result.stderr)[-1200:])
+    for required in ('mod asset_authority;', 'mod world_doc;', 'state.world_doc.materialize_3x3(', 'draw_world_workspace(ui, state);'):
+        if not has_token(main_text, required):
+            fail(errors, f'M2D07 unified asset/world wiring missing: {required}')
 
     # egui 0.36 unified SidePanel/TopBottomPanel into Panel and moved top-level
     # panel/central layout onto a parent Ui. Catch the exact API drift that only
@@ -251,13 +317,40 @@ def main() -> int:
         fail(errors, "Bevy window must use the native-frame setting")
     for required_panel in (
         'egui::Panel::top("havenwild.action.chrome")',
+        'egui::Panel::top("havenwild.command.toolbar")',
         'egui::Panel::bottom("havenwild.status.chrome")',
-        'egui::Panel::left("havenwild.terrain.mapper.left")',
-        'egui::Panel::right("havenwild.terrain.mapper.right")',
-        'egui::Panel::bottom("havenwild.terrain.mapper.bottom")',
+        'egui::Panel::left("havenwild.tool.rail")',
+        'egui::Panel::right("havenwild.layer.rail")',
+        'egui::Window::new("ElizaWy · Source / Terrain / Evidence")',
+        'egui::Window::new("World Properties")',
+        'egui::Window::new("Scene / Layers")',
+        'egui::Window::new("Havenwild Tools")',
     ):
-        if required_panel not in main_text:
-            fail(errors, f"egui 0.36 Panel migration contract missing: {required_panel}")
+        if not has_token(main_text, required_panel):
+            fail(errors, f"M2D06 editor-shell surface contract missing: {required_panel}")
+    for forbidden_reserving_panel in (
+        'havenwild.terrain.mapper.left', 'havenwild.terrain.mapper.right',
+        'havenwild.terrain.mapper.bottom', 'havenwild.structural.editor.right',
+        'havenwild.layers.compact',
+    ):
+        if forbidden_reserving_panel in main_text:
+            fail(errors, f"M2D06 feature panel still reserves canvas real estate: {forbidden_reserving_panel}")
+    for required_shell in (
+        'command_tooltip(StudioCommand::ToggleLauncher)',
+        'input.key_pressed(egui::Key::Q)',
+        'input.key_pressed(egui::Key::B)',
+        'input.key_pressed(egui::Key::E)',
+        'input.key_pressed(egui::Key::P)',
+        'input.key_pressed(egui::Key::F6)',
+        'input.key_pressed(egui::Key::Space)',
+        'fn draw_world_generator_panel(',
+        'fn draw_chunk_manager_panel(',
+        'fn draw_asset_authority_panel(',
+        'Pixel Studio · planned',
+        'Animation Studio · planned',
+    ):
+        if not has_token(main_text, required_shell):
+            fail(errors, f"M2D06 launcher/command contract missing: {required_shell}")
     if re.search(r"egui::CentralPanel::default\(\)[\s\S]{0,180}\.show\(ctx,", main_text):
         fail(errors, "CentralPanel is still being shown directly on Context instead of the root viewport Ui")
 

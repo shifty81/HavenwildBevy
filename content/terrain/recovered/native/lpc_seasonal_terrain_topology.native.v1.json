@@ -1,0 +1,7289 @@
+{
+  "schema": "havenwild.lpc_seasonal_terrain_topology.v0.1",
+  "canonicalSeason": "summer",
+  "cellSize": 32,
+  "grid": [
+    16,
+    26
+  ],
+  "sourceContract": "assets/generated/worldgen_v0_1/terrain/lpc_terrain_summer_complete_map_32.json",
+  "seasons": [
+    {
+      "id": "summer",
+      "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png"
+    },
+    {
+      "id": "spring",
+      "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png"
+    },
+    {
+      "id": "autumn",
+      "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png"
+    },
+    {
+      "id": "winter",
+      "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png"
+    },
+    {
+      "id": "winter_ice",
+      "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png"
+    }
+  ],
+  "topology": {
+    "neighborModel": "8-neighbor",
+    "ownerRule": "one ordered material pair owns each visual boundary",
+    "outerRule": "cardinal mask selects the complete authored 3x3 role",
+    "innerRule": "diagonal-only neighbor selects the matching authored 2x2 concave role",
+    "seasonRule": "all seasons reuse summer coordinates and semantic role IDs"
+  },
+  "summary": {
+    "familyCount": 20,
+    "familiesWithInnerCorners": 19,
+    "seasonCount": 5
+  },
+  "families": [
+    {
+      "id": "summer_deep_water_basin",
+      "label": "Summer Deep-Water Basin",
+      "classification": "ExpandableStampFamily",
+      "owner": "deep_water",
+      "neighbor": "shallow_water",
+      "runtimeStatus": "active_and_stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          23
+        ],
+        "north": [
+          1,
+          23
+        ],
+        "northEast": [
+          2,
+          23
+        ],
+        "west": [
+          0,
+          24
+        ],
+        "center": [
+          1,
+          24
+        ],
+        "east": [
+          2,
+          24
+        ],
+        "southWest": [
+          0,
+          25
+        ],
+        "south": [
+          1,
+          25
+        ],
+        "southEast": [
+          2,
+          25
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          4,
+          24
+        ],
+        "northEast": [
+          3,
+          24
+        ],
+        "southWest": [
+          4,
+          23
+        ],
+        "southEast": [
+          3,
+          23
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              23
+            ],
+            "outer_north": [
+              1,
+              23
+            ],
+            "outer_north_east": [
+              2,
+              23
+            ],
+            "outer_west": [
+              0,
+              24
+            ],
+            "center": [
+              1,
+              24
+            ],
+            "outer_east": [
+              2,
+              24
+            ],
+            "outer_south_west": [
+              0,
+              25
+            ],
+            "outer_south": [
+              1,
+              25
+            ],
+            "outer_south_east": [
+              2,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              24
+            ],
+            "inner_north_east": [
+              3,
+              24
+            ],
+            "inner_south_west": [
+              4,
+              23
+            ],
+            "inner_south_east": [
+              3,
+              23
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              23
+            ],
+            "outer_north": [
+              1,
+              23
+            ],
+            "outer_north_east": [
+              2,
+              23
+            ],
+            "outer_west": [
+              0,
+              24
+            ],
+            "center": [
+              1,
+              24
+            ],
+            "outer_east": [
+              2,
+              24
+            ],
+            "outer_south_west": [
+              0,
+              25
+            ],
+            "outer_south": [
+              1,
+              25
+            ],
+            "outer_south_east": [
+              2,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              24
+            ],
+            "inner_north_east": [
+              3,
+              24
+            ],
+            "inner_south_west": [
+              4,
+              23
+            ],
+            "inner_south_east": [
+              3,
+              23
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              23
+            ],
+            "outer_north": [
+              1,
+              23
+            ],
+            "outer_north_east": [
+              2,
+              23
+            ],
+            "outer_west": [
+              0,
+              24
+            ],
+            "center": [
+              1,
+              24
+            ],
+            "outer_east": [
+              2,
+              24
+            ],
+            "outer_south_west": [
+              0,
+              25
+            ],
+            "outer_south": [
+              1,
+              25
+            ],
+            "outer_south_east": [
+              2,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              24
+            ],
+            "inner_north_east": [
+              3,
+              24
+            ],
+            "inner_south_west": [
+              4,
+              23
+            ],
+            "inner_south_east": [
+              3,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              23
+            ],
+            "outer_north": [
+              1,
+              23
+            ],
+            "outer_north_east": [
+              2,
+              23
+            ],
+            "outer_west": [
+              0,
+              24
+            ],
+            "center": [
+              1,
+              24
+            ],
+            "outer_east": [
+              2,
+              24
+            ],
+            "outer_south_west": [
+              0,
+              25
+            ],
+            "outer_south": [
+              1,
+              25
+            ],
+            "outer_south_east": [
+              2,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              24
+            ],
+            "inner_north_east": [
+              3,
+              24
+            ],
+            "inner_south_west": [
+              4,
+              23
+            ],
+            "inner_south_east": [
+              3,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              23
+            ],
+            "outer_north": [
+              1,
+              23
+            ],
+            "outer_north_east": [
+              2,
+              23
+            ],
+            "outer_west": [
+              0,
+              24
+            ],
+            "center": [
+              1,
+              24
+            ],
+            "outer_east": [
+              2,
+              24
+            ],
+            "outer_south_west": [
+              0,
+              25
+            ],
+            "outer_south": [
+              1,
+              25
+            ],
+            "outer_south_east": [
+              2,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              24
+            ],
+            "inner_north_east": [
+              3,
+              24
+            ],
+            "inner_south_west": [
+              4,
+              23
+            ],
+            "inner_south_east": [
+              3,
+              23
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_depth_ring_overlay_a",
+      "label": "Summer Depth Ring Overlay A",
+      "classification": "ExpandableStampFamily",
+      "owner": "deep_water",
+      "neighbor": "shallow_water",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          5,
+          23
+        ],
+        "north": [
+          6,
+          23
+        ],
+        "northEast": [
+          7,
+          23
+        ],
+        "west": [
+          5,
+          24
+        ],
+        "center": [
+          6,
+          24
+        ],
+        "east": [
+          7,
+          24
+        ],
+        "southWest": [
+          5,
+          25
+        ],
+        "south": [
+          6,
+          25
+        ],
+        "southEast": [
+          7,
+          25
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          9,
+          24
+        ],
+        "northEast": [
+          8,
+          24
+        ],
+        "southWest": [
+          9,
+          23
+        ],
+        "southEast": [
+          8,
+          23
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              23
+            ],
+            "outer_north": [
+              6,
+              23
+            ],
+            "outer_north_east": [
+              7,
+              23
+            ],
+            "outer_west": [
+              5,
+              24
+            ],
+            "center": [
+              6,
+              24
+            ],
+            "outer_east": [
+              7,
+              24
+            ],
+            "outer_south_west": [
+              5,
+              25
+            ],
+            "outer_south": [
+              6,
+              25
+            ],
+            "outer_south_east": [
+              7,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              24
+            ],
+            "inner_north_east": [
+              8,
+              24
+            ],
+            "inner_south_west": [
+              9,
+              23
+            ],
+            "inner_south_east": [
+              8,
+              23
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              23
+            ],
+            "outer_north": [
+              6,
+              23
+            ],
+            "outer_north_east": [
+              7,
+              23
+            ],
+            "outer_west": [
+              5,
+              24
+            ],
+            "center": [
+              6,
+              24
+            ],
+            "outer_east": [
+              7,
+              24
+            ],
+            "outer_south_west": [
+              5,
+              25
+            ],
+            "outer_south": [
+              6,
+              25
+            ],
+            "outer_south_east": [
+              7,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              24
+            ],
+            "inner_north_east": [
+              8,
+              24
+            ],
+            "inner_south_west": [
+              9,
+              23
+            ],
+            "inner_south_east": [
+              8,
+              23
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              23
+            ],
+            "outer_north": [
+              6,
+              23
+            ],
+            "outer_north_east": [
+              7,
+              23
+            ],
+            "outer_west": [
+              5,
+              24
+            ],
+            "center": [
+              6,
+              24
+            ],
+            "outer_east": [
+              7,
+              24
+            ],
+            "outer_south_west": [
+              5,
+              25
+            ],
+            "outer_south": [
+              6,
+              25
+            ],
+            "outer_south_east": [
+              7,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              24
+            ],
+            "inner_north_east": [
+              8,
+              24
+            ],
+            "inner_south_west": [
+              9,
+              23
+            ],
+            "inner_south_east": [
+              8,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              23
+            ],
+            "outer_north": [
+              6,
+              23
+            ],
+            "outer_north_east": [
+              7,
+              23
+            ],
+            "outer_west": [
+              5,
+              24
+            ],
+            "center": [
+              6,
+              24
+            ],
+            "outer_east": [
+              7,
+              24
+            ],
+            "outer_south_west": [
+              5,
+              25
+            ],
+            "outer_south": [
+              6,
+              25
+            ],
+            "outer_south_east": [
+              7,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              24
+            ],
+            "inner_north_east": [
+              8,
+              24
+            ],
+            "inner_south_west": [
+              9,
+              23
+            ],
+            "inner_south_east": [
+              8,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              23
+            ],
+            "outer_north": [
+              6,
+              23
+            ],
+            "outer_north_east": [
+              7,
+              23
+            ],
+            "outer_west": [
+              5,
+              24
+            ],
+            "center": [
+              6,
+              24
+            ],
+            "outer_east": [
+              7,
+              24
+            ],
+            "outer_south_west": [
+              5,
+              25
+            ],
+            "outer_south": [
+              6,
+              25
+            ],
+            "outer_south_east": [
+              7,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              24
+            ],
+            "inner_north_east": [
+              8,
+              24
+            ],
+            "inner_south_west": [
+              9,
+              23
+            ],
+            "inner_south_east": [
+              8,
+              23
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_depth_ring_overlay_b",
+      "label": "Summer Depth Ring Overlay B",
+      "classification": "ExpandableStampFamily",
+      "owner": "deep_water",
+      "neighbor": "shallow_water",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          10,
+          23
+        ],
+        "north": [
+          11,
+          23
+        ],
+        "northEast": [
+          12,
+          23
+        ],
+        "west": [
+          10,
+          24
+        ],
+        "center": [
+          11,
+          24
+        ],
+        "east": [
+          12,
+          24
+        ],
+        "southWest": [
+          10,
+          25
+        ],
+        "south": [
+          11,
+          25
+        ],
+        "southEast": [
+          12,
+          25
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          14,
+          24
+        ],
+        "northEast": [
+          13,
+          24
+        ],
+        "southWest": [
+          14,
+          23
+        ],
+        "southEast": [
+          13,
+          23
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              23
+            ],
+            "outer_north": [
+              11,
+              23
+            ],
+            "outer_north_east": [
+              12,
+              23
+            ],
+            "outer_west": [
+              10,
+              24
+            ],
+            "center": [
+              11,
+              24
+            ],
+            "outer_east": [
+              12,
+              24
+            ],
+            "outer_south_west": [
+              10,
+              25
+            ],
+            "outer_south": [
+              11,
+              25
+            ],
+            "outer_south_east": [
+              12,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              24
+            ],
+            "inner_north_east": [
+              13,
+              24
+            ],
+            "inner_south_west": [
+              14,
+              23
+            ],
+            "inner_south_east": [
+              13,
+              23
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              23
+            ],
+            "outer_north": [
+              11,
+              23
+            ],
+            "outer_north_east": [
+              12,
+              23
+            ],
+            "outer_west": [
+              10,
+              24
+            ],
+            "center": [
+              11,
+              24
+            ],
+            "outer_east": [
+              12,
+              24
+            ],
+            "outer_south_west": [
+              10,
+              25
+            ],
+            "outer_south": [
+              11,
+              25
+            ],
+            "outer_south_east": [
+              12,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              24
+            ],
+            "inner_north_east": [
+              13,
+              24
+            ],
+            "inner_south_west": [
+              14,
+              23
+            ],
+            "inner_south_east": [
+              13,
+              23
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              23
+            ],
+            "outer_north": [
+              11,
+              23
+            ],
+            "outer_north_east": [
+              12,
+              23
+            ],
+            "outer_west": [
+              10,
+              24
+            ],
+            "center": [
+              11,
+              24
+            ],
+            "outer_east": [
+              12,
+              24
+            ],
+            "outer_south_west": [
+              10,
+              25
+            ],
+            "outer_south": [
+              11,
+              25
+            ],
+            "outer_south_east": [
+              12,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              24
+            ],
+            "inner_north_east": [
+              13,
+              24
+            ],
+            "inner_south_west": [
+              14,
+              23
+            ],
+            "inner_south_east": [
+              13,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              23
+            ],
+            "outer_north": [
+              11,
+              23
+            ],
+            "outer_north_east": [
+              12,
+              23
+            ],
+            "outer_west": [
+              10,
+              24
+            ],
+            "center": [
+              11,
+              24
+            ],
+            "outer_east": [
+              12,
+              24
+            ],
+            "outer_south_west": [
+              10,
+              25
+            ],
+            "outer_south": [
+              11,
+              25
+            ],
+            "outer_south_east": [
+              12,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              24
+            ],
+            "inner_north_east": [
+              13,
+              24
+            ],
+            "inner_south_west": [
+              14,
+              23
+            ],
+            "inner_south_east": [
+              13,
+              23
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              23
+            ],
+            "outer_north": [
+              11,
+              23
+            ],
+            "outer_north_east": [
+              12,
+              23
+            ],
+            "outer_west": [
+              10,
+              24
+            ],
+            "center": [
+              11,
+              24
+            ],
+            "outer_east": [
+              12,
+              24
+            ],
+            "outer_south_west": [
+              10,
+              25
+            ],
+            "outer_south": [
+              11,
+              25
+            ],
+            "outer_south_east": [
+              12,
+              25
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              24
+            ],
+            "inner_north_east": [
+              13,
+              24
+            ],
+            "inner_south_west": [
+              14,
+              23
+            ],
+            "inner_south_east": [
+              13,
+              23
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_dirt_bank_pond_a",
+      "label": "Summer Dirt-Bank Pond A",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "dirt",
+      "runtimeStatus": "active_and_stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          6,
+          10
+        ],
+        "north": [
+          7,
+          10
+        ],
+        "northEast": [
+          8,
+          10
+        ],
+        "west": [
+          6,
+          11
+        ],
+        "center": [
+          7,
+          11
+        ],
+        "east": [
+          8,
+          11
+        ],
+        "southWest": [
+          6,
+          12
+        ],
+        "south": [
+          7,
+          12
+        ],
+        "southEast": [
+          8,
+          12
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          7,
+          14
+        ],
+        "northEast": [
+          6,
+          14
+        ],
+        "southWest": [
+          7,
+          13
+        ],
+        "southEast": [
+          6,
+          13
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              10
+            ],
+            "outer_north": [
+              7,
+              10
+            ],
+            "outer_north_east": [
+              8,
+              10
+            ],
+            "outer_west": [
+              6,
+              11
+            ],
+            "center": [
+              7,
+              11
+            ],
+            "outer_east": [
+              8,
+              11
+            ],
+            "outer_south_west": [
+              6,
+              12
+            ],
+            "outer_south": [
+              7,
+              12
+            ],
+            "outer_south_east": [
+              8,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              14
+            ],
+            "inner_north_east": [
+              6,
+              14
+            ],
+            "inner_south_west": [
+              7,
+              13
+            ],
+            "inner_south_east": [
+              6,
+              13
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              10
+            ],
+            "outer_north": [
+              7,
+              10
+            ],
+            "outer_north_east": [
+              8,
+              10
+            ],
+            "outer_west": [
+              6,
+              11
+            ],
+            "center": [
+              7,
+              11
+            ],
+            "outer_east": [
+              8,
+              11
+            ],
+            "outer_south_west": [
+              6,
+              12
+            ],
+            "outer_south": [
+              7,
+              12
+            ],
+            "outer_south_east": [
+              8,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              14
+            ],
+            "inner_north_east": [
+              6,
+              14
+            ],
+            "inner_south_west": [
+              7,
+              13
+            ],
+            "inner_south_east": [
+              6,
+              13
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              10
+            ],
+            "outer_north": [
+              7,
+              10
+            ],
+            "outer_north_east": [
+              8,
+              10
+            ],
+            "outer_west": [
+              6,
+              11
+            ],
+            "center": [
+              7,
+              11
+            ],
+            "outer_east": [
+              8,
+              11
+            ],
+            "outer_south_west": [
+              6,
+              12
+            ],
+            "outer_south": [
+              7,
+              12
+            ],
+            "outer_south_east": [
+              8,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              14
+            ],
+            "inner_north_east": [
+              6,
+              14
+            ],
+            "inner_south_west": [
+              7,
+              13
+            ],
+            "inner_south_east": [
+              6,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              10
+            ],
+            "outer_north": [
+              7,
+              10
+            ],
+            "outer_north_east": [
+              8,
+              10
+            ],
+            "outer_west": [
+              6,
+              11
+            ],
+            "center": [
+              7,
+              11
+            ],
+            "outer_east": [
+              8,
+              11
+            ],
+            "outer_south_west": [
+              6,
+              12
+            ],
+            "outer_south": [
+              7,
+              12
+            ],
+            "outer_south_east": [
+              8,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              14
+            ],
+            "inner_north_east": [
+              6,
+              14
+            ],
+            "inner_south_west": [
+              7,
+              13
+            ],
+            "inner_south_east": [
+              6,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              10
+            ],
+            "outer_north": [
+              7,
+              10
+            ],
+            "outer_north_east": [
+              8,
+              10
+            ],
+            "outer_west": [
+              6,
+              11
+            ],
+            "center": [
+              7,
+              11
+            ],
+            "outer_east": [
+              8,
+              11
+            ],
+            "outer_south_west": [
+              6,
+              12
+            ],
+            "outer_south": [
+              7,
+              12
+            ],
+            "outer_south_east": [
+              8,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              14
+            ],
+            "inner_north_east": [
+              6,
+              14
+            ],
+            "inner_south_west": [
+              7,
+              13
+            ],
+            "inner_south_east": [
+              6,
+              13
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_dirt_bank_pond_a_overlay",
+      "label": "Summer Dirt-Bank Pond A Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "dirt",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          9,
+          10
+        ],
+        "north": [
+          10,
+          10
+        ],
+        "northEast": [
+          11,
+          10
+        ],
+        "west": [
+          9,
+          11
+        ],
+        "center": [
+          10,
+          11
+        ],
+        "east": [
+          11,
+          11
+        ],
+        "southWest": [
+          9,
+          12
+        ],
+        "south": [
+          10,
+          12
+        ],
+        "southEast": [
+          11,
+          12
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          10,
+          14
+        ],
+        "northEast": [
+          9,
+          14
+        ],
+        "southWest": [
+          10,
+          13
+        ],
+        "southEast": [
+          9,
+          13
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              10
+            ],
+            "outer_north": [
+              10,
+              10
+            ],
+            "outer_north_east": [
+              11,
+              10
+            ],
+            "outer_west": [
+              9,
+              11
+            ],
+            "center": [
+              10,
+              11
+            ],
+            "outer_east": [
+              11,
+              11
+            ],
+            "outer_south_west": [
+              9,
+              12
+            ],
+            "outer_south": [
+              10,
+              12
+            ],
+            "outer_south_east": [
+              11,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              14
+            ],
+            "inner_north_east": [
+              9,
+              14
+            ],
+            "inner_south_west": [
+              10,
+              13
+            ],
+            "inner_south_east": [
+              9,
+              13
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              10
+            ],
+            "outer_north": [
+              10,
+              10
+            ],
+            "outer_north_east": [
+              11,
+              10
+            ],
+            "outer_west": [
+              9,
+              11
+            ],
+            "center": [
+              10,
+              11
+            ],
+            "outer_east": [
+              11,
+              11
+            ],
+            "outer_south_west": [
+              9,
+              12
+            ],
+            "outer_south": [
+              10,
+              12
+            ],
+            "outer_south_east": [
+              11,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              14
+            ],
+            "inner_north_east": [
+              9,
+              14
+            ],
+            "inner_south_west": [
+              10,
+              13
+            ],
+            "inner_south_east": [
+              9,
+              13
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              10
+            ],
+            "outer_north": [
+              10,
+              10
+            ],
+            "outer_north_east": [
+              11,
+              10
+            ],
+            "outer_west": [
+              9,
+              11
+            ],
+            "center": [
+              10,
+              11
+            ],
+            "outer_east": [
+              11,
+              11
+            ],
+            "outer_south_west": [
+              9,
+              12
+            ],
+            "outer_south": [
+              10,
+              12
+            ],
+            "outer_south_east": [
+              11,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              14
+            ],
+            "inner_north_east": [
+              9,
+              14
+            ],
+            "inner_south_west": [
+              10,
+              13
+            ],
+            "inner_south_east": [
+              9,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              10
+            ],
+            "outer_north": [
+              10,
+              10
+            ],
+            "outer_north_east": [
+              11,
+              10
+            ],
+            "outer_west": [
+              9,
+              11
+            ],
+            "center": [
+              10,
+              11
+            ],
+            "outer_east": [
+              11,
+              11
+            ],
+            "outer_south_west": [
+              9,
+              12
+            ],
+            "outer_south": [
+              10,
+              12
+            ],
+            "outer_south_east": [
+              11,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              14
+            ],
+            "inner_north_east": [
+              9,
+              14
+            ],
+            "inner_south_west": [
+              10,
+              13
+            ],
+            "inner_south_east": [
+              9,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              10
+            ],
+            "outer_north": [
+              10,
+              10
+            ],
+            "outer_north_east": [
+              11,
+              10
+            ],
+            "outer_west": [
+              9,
+              11
+            ],
+            "center": [
+              10,
+              11
+            ],
+            "outer_east": [
+              11,
+              11
+            ],
+            "outer_south_west": [
+              9,
+              12
+            ],
+            "outer_south": [
+              10,
+              12
+            ],
+            "outer_south_east": [
+              11,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              14
+            ],
+            "inner_north_east": [
+              9,
+              14
+            ],
+            "inner_south_west": [
+              10,
+              13
+            ],
+            "inner_south_east": [
+              9,
+              13
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_dirt_bank_pond_b",
+      "label": "Summer Dirt-Bank Pond B",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "dirt",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          6,
+          15
+        ],
+        "north": [
+          7,
+          15
+        ],
+        "northEast": [
+          8,
+          15
+        ],
+        "west": [
+          6,
+          16
+        ],
+        "center": [
+          7,
+          16
+        ],
+        "east": [
+          8,
+          16
+        ],
+        "southWest": [
+          6,
+          17
+        ],
+        "south": [
+          7,
+          17
+        ],
+        "southEast": [
+          8,
+          17
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          7,
+          19
+        ],
+        "northEast": [
+          6,
+          19
+        ],
+        "southWest": [
+          7,
+          18
+        ],
+        "southEast": [
+          6,
+          18
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              15
+            ],
+            "outer_north": [
+              7,
+              15
+            ],
+            "outer_north_east": [
+              8,
+              15
+            ],
+            "outer_west": [
+              6,
+              16
+            ],
+            "center": [
+              7,
+              16
+            ],
+            "outer_east": [
+              8,
+              16
+            ],
+            "outer_south_west": [
+              6,
+              17
+            ],
+            "outer_south": [
+              7,
+              17
+            ],
+            "outer_south_east": [
+              8,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              19
+            ],
+            "inner_north_east": [
+              6,
+              19
+            ],
+            "inner_south_west": [
+              7,
+              18
+            ],
+            "inner_south_east": [
+              6,
+              18
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              15
+            ],
+            "outer_north": [
+              7,
+              15
+            ],
+            "outer_north_east": [
+              8,
+              15
+            ],
+            "outer_west": [
+              6,
+              16
+            ],
+            "center": [
+              7,
+              16
+            ],
+            "outer_east": [
+              8,
+              16
+            ],
+            "outer_south_west": [
+              6,
+              17
+            ],
+            "outer_south": [
+              7,
+              17
+            ],
+            "outer_south_east": [
+              8,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              19
+            ],
+            "inner_north_east": [
+              6,
+              19
+            ],
+            "inner_south_west": [
+              7,
+              18
+            ],
+            "inner_south_east": [
+              6,
+              18
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              15
+            ],
+            "outer_north": [
+              7,
+              15
+            ],
+            "outer_north_east": [
+              8,
+              15
+            ],
+            "outer_west": [
+              6,
+              16
+            ],
+            "center": [
+              7,
+              16
+            ],
+            "outer_east": [
+              8,
+              16
+            ],
+            "outer_south_west": [
+              6,
+              17
+            ],
+            "outer_south": [
+              7,
+              17
+            ],
+            "outer_south_east": [
+              8,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              19
+            ],
+            "inner_north_east": [
+              6,
+              19
+            ],
+            "inner_south_west": [
+              7,
+              18
+            ],
+            "inner_south_east": [
+              6,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              15
+            ],
+            "outer_north": [
+              7,
+              15
+            ],
+            "outer_north_east": [
+              8,
+              15
+            ],
+            "outer_west": [
+              6,
+              16
+            ],
+            "center": [
+              7,
+              16
+            ],
+            "outer_east": [
+              8,
+              16
+            ],
+            "outer_south_west": [
+              6,
+              17
+            ],
+            "outer_south": [
+              7,
+              17
+            ],
+            "outer_south_east": [
+              8,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              19
+            ],
+            "inner_north_east": [
+              6,
+              19
+            ],
+            "inner_south_west": [
+              7,
+              18
+            ],
+            "inner_south_east": [
+              6,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              15
+            ],
+            "outer_north": [
+              7,
+              15
+            ],
+            "outer_north_east": [
+              8,
+              15
+            ],
+            "outer_west": [
+              6,
+              16
+            ],
+            "center": [
+              7,
+              16
+            ],
+            "outer_east": [
+              8,
+              16
+            ],
+            "outer_south_west": [
+              6,
+              17
+            ],
+            "outer_south": [
+              7,
+              17
+            ],
+            "outer_south_east": [
+              8,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              19
+            ],
+            "inner_north_east": [
+              6,
+              19
+            ],
+            "inner_south_west": [
+              7,
+              18
+            ],
+            "inner_south_east": [
+              6,
+              18
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_dirt_bank_pond_b_overlay",
+      "label": "Summer Dirt-Bank Pond B Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "dirt",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          9,
+          15
+        ],
+        "north": [
+          10,
+          15
+        ],
+        "northEast": [
+          11,
+          15
+        ],
+        "west": [
+          9,
+          16
+        ],
+        "center": [
+          10,
+          16
+        ],
+        "east": [
+          11,
+          16
+        ],
+        "southWest": [
+          9,
+          17
+        ],
+        "south": [
+          10,
+          17
+        ],
+        "southEast": [
+          11,
+          17
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          10,
+          19
+        ],
+        "northEast": [
+          9,
+          19
+        ],
+        "southWest": [
+          10,
+          18
+        ],
+        "southEast": [
+          9,
+          18
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              15
+            ],
+            "outer_north": [
+              10,
+              15
+            ],
+            "outer_north_east": [
+              11,
+              15
+            ],
+            "outer_west": [
+              9,
+              16
+            ],
+            "center": [
+              10,
+              16
+            ],
+            "outer_east": [
+              11,
+              16
+            ],
+            "outer_south_west": [
+              9,
+              17
+            ],
+            "outer_south": [
+              10,
+              17
+            ],
+            "outer_south_east": [
+              11,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              19
+            ],
+            "inner_north_east": [
+              9,
+              19
+            ],
+            "inner_south_west": [
+              10,
+              18
+            ],
+            "inner_south_east": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              15
+            ],
+            "outer_north": [
+              10,
+              15
+            ],
+            "outer_north_east": [
+              11,
+              15
+            ],
+            "outer_west": [
+              9,
+              16
+            ],
+            "center": [
+              10,
+              16
+            ],
+            "outer_east": [
+              11,
+              16
+            ],
+            "outer_south_west": [
+              9,
+              17
+            ],
+            "outer_south": [
+              10,
+              17
+            ],
+            "outer_south_east": [
+              11,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              19
+            ],
+            "inner_north_east": [
+              9,
+              19
+            ],
+            "inner_south_west": [
+              10,
+              18
+            ],
+            "inner_south_east": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              15
+            ],
+            "outer_north": [
+              10,
+              15
+            ],
+            "outer_north_east": [
+              11,
+              15
+            ],
+            "outer_west": [
+              9,
+              16
+            ],
+            "center": [
+              10,
+              16
+            ],
+            "outer_east": [
+              11,
+              16
+            ],
+            "outer_south_west": [
+              9,
+              17
+            ],
+            "outer_south": [
+              10,
+              17
+            ],
+            "outer_south_east": [
+              11,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              19
+            ],
+            "inner_north_east": [
+              9,
+              19
+            ],
+            "inner_south_west": [
+              10,
+              18
+            ],
+            "inner_south_east": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              15
+            ],
+            "outer_north": [
+              10,
+              15
+            ],
+            "outer_north_east": [
+              11,
+              15
+            ],
+            "outer_west": [
+              9,
+              16
+            ],
+            "center": [
+              10,
+              16
+            ],
+            "outer_east": [
+              11,
+              16
+            ],
+            "outer_south_west": [
+              9,
+              17
+            ],
+            "outer_south": [
+              10,
+              17
+            ],
+            "outer_south_east": [
+              11,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              19
+            ],
+            "inner_north_east": [
+              9,
+              19
+            ],
+            "inner_south_west": [
+              10,
+              18
+            ],
+            "inner_south_east": [
+              9,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              15
+            ],
+            "outer_north": [
+              10,
+              15
+            ],
+            "outer_north_east": [
+              11,
+              15
+            ],
+            "outer_west": [
+              9,
+              16
+            ],
+            "center": [
+              10,
+              16
+            ],
+            "outer_east": [
+              11,
+              16
+            ],
+            "outer_south_west": [
+              9,
+              17
+            ],
+            "outer_south": [
+              10,
+              17
+            ],
+            "outer_south_east": [
+              11,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              19
+            ],
+            "inner_north_east": [
+              9,
+              19
+            ],
+            "inner_south_west": [
+              10,
+              18
+            ],
+            "inner_south_east": [
+              9,
+              18
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_foam_ring_overlay",
+      "label": "Summer Foam Ring Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "foam_or_pale_shore",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          5,
+          20
+        ],
+        "north": [
+          6,
+          20
+        ],
+        "northEast": [
+          7,
+          20
+        ],
+        "west": [
+          5,
+          21
+        ],
+        "center": [
+          6,
+          21
+        ],
+        "east": [
+          7,
+          21
+        ],
+        "southWest": [
+          5,
+          22
+        ],
+        "south": [
+          6,
+          22
+        ],
+        "southEast": [
+          7,
+          22
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          9,
+          21
+        ],
+        "northEast": [
+          8,
+          21
+        ],
+        "southWest": [
+          9,
+          20
+        ],
+        "southEast": [
+          8,
+          20
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              20
+            ],
+            "outer_north": [
+              6,
+              20
+            ],
+            "outer_north_east": [
+              7,
+              20
+            ],
+            "outer_west": [
+              5,
+              21
+            ],
+            "center": [
+              6,
+              21
+            ],
+            "outer_east": [
+              7,
+              21
+            ],
+            "outer_south_west": [
+              5,
+              22
+            ],
+            "outer_south": [
+              6,
+              22
+            ],
+            "outer_south_east": [
+              7,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              21
+            ],
+            "inner_north_east": [
+              8,
+              21
+            ],
+            "inner_south_west": [
+              9,
+              20
+            ],
+            "inner_south_east": [
+              8,
+              20
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              20
+            ],
+            "outer_north": [
+              6,
+              20
+            ],
+            "outer_north_east": [
+              7,
+              20
+            ],
+            "outer_west": [
+              5,
+              21
+            ],
+            "center": [
+              6,
+              21
+            ],
+            "outer_east": [
+              7,
+              21
+            ],
+            "outer_south_west": [
+              5,
+              22
+            ],
+            "outer_south": [
+              6,
+              22
+            ],
+            "outer_south_east": [
+              7,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              21
+            ],
+            "inner_north_east": [
+              8,
+              21
+            ],
+            "inner_south_west": [
+              9,
+              20
+            ],
+            "inner_south_east": [
+              8,
+              20
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              20
+            ],
+            "outer_north": [
+              6,
+              20
+            ],
+            "outer_north_east": [
+              7,
+              20
+            ],
+            "outer_west": [
+              5,
+              21
+            ],
+            "center": [
+              6,
+              21
+            ],
+            "outer_east": [
+              7,
+              21
+            ],
+            "outer_south_west": [
+              5,
+              22
+            ],
+            "outer_south": [
+              6,
+              22
+            ],
+            "outer_south_east": [
+              7,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              21
+            ],
+            "inner_north_east": [
+              8,
+              21
+            ],
+            "inner_south_west": [
+              9,
+              20
+            ],
+            "inner_south_east": [
+              8,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              20
+            ],
+            "outer_north": [
+              6,
+              20
+            ],
+            "outer_north_east": [
+              7,
+              20
+            ],
+            "outer_west": [
+              5,
+              21
+            ],
+            "center": [
+              6,
+              21
+            ],
+            "outer_east": [
+              7,
+              21
+            ],
+            "outer_south_west": [
+              5,
+              22
+            ],
+            "outer_south": [
+              6,
+              22
+            ],
+            "outer_south_east": [
+              7,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              21
+            ],
+            "inner_north_east": [
+              8,
+              21
+            ],
+            "inner_south_west": [
+              9,
+              20
+            ],
+            "inner_south_east": [
+              8,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              5,
+              20
+            ],
+            "outer_north": [
+              6,
+              20
+            ],
+            "outer_north_east": [
+              7,
+              20
+            ],
+            "outer_west": [
+              5,
+              21
+            ],
+            "center": [
+              6,
+              21
+            ],
+            "outer_east": [
+              7,
+              21
+            ],
+            "outer_south_west": [
+              5,
+              22
+            ],
+            "outer_south": [
+              6,
+              22
+            ],
+            "outer_south_east": [
+              7,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              9,
+              21
+            ],
+            "inner_north_east": [
+              8,
+              21
+            ],
+            "inner_south_west": [
+              9,
+              20
+            ],
+            "inner_south_east": [
+              8,
+              20
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_bank_pond_a",
+      "label": "Summer Grass-Bank Pond A",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "grass",
+      "runtimeStatus": "active_and_stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          10
+        ],
+        "north": [
+          1,
+          10
+        ],
+        "northEast": [
+          2,
+          10
+        ],
+        "west": [
+          0,
+          11
+        ],
+        "center": [
+          1,
+          11
+        ],
+        "east": [
+          2,
+          11
+        ],
+        "southWest": [
+          0,
+          12
+        ],
+        "south": [
+          1,
+          12
+        ],
+        "southEast": [
+          2,
+          12
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          1,
+          14
+        ],
+        "northEast": [
+          0,
+          14
+        ],
+        "southWest": [
+          1,
+          13
+        ],
+        "southEast": [
+          0,
+          13
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              10
+            ],
+            "outer_north": [
+              1,
+              10
+            ],
+            "outer_north_east": [
+              2,
+              10
+            ],
+            "outer_west": [
+              0,
+              11
+            ],
+            "center": [
+              1,
+              11
+            ],
+            "outer_east": [
+              2,
+              11
+            ],
+            "outer_south_west": [
+              0,
+              12
+            ],
+            "outer_south": [
+              1,
+              12
+            ],
+            "outer_south_east": [
+              2,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              14
+            ],
+            "inner_north_east": [
+              0,
+              14
+            ],
+            "inner_south_west": [
+              1,
+              13
+            ],
+            "inner_south_east": [
+              0,
+              13
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              10
+            ],
+            "outer_north": [
+              1,
+              10
+            ],
+            "outer_north_east": [
+              2,
+              10
+            ],
+            "outer_west": [
+              0,
+              11
+            ],
+            "center": [
+              1,
+              11
+            ],
+            "outer_east": [
+              2,
+              11
+            ],
+            "outer_south_west": [
+              0,
+              12
+            ],
+            "outer_south": [
+              1,
+              12
+            ],
+            "outer_south_east": [
+              2,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              14
+            ],
+            "inner_north_east": [
+              0,
+              14
+            ],
+            "inner_south_west": [
+              1,
+              13
+            ],
+            "inner_south_east": [
+              0,
+              13
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              10
+            ],
+            "outer_north": [
+              1,
+              10
+            ],
+            "outer_north_east": [
+              2,
+              10
+            ],
+            "outer_west": [
+              0,
+              11
+            ],
+            "center": [
+              1,
+              11
+            ],
+            "outer_east": [
+              2,
+              11
+            ],
+            "outer_south_west": [
+              0,
+              12
+            ],
+            "outer_south": [
+              1,
+              12
+            ],
+            "outer_south_east": [
+              2,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              14
+            ],
+            "inner_north_east": [
+              0,
+              14
+            ],
+            "inner_south_west": [
+              1,
+              13
+            ],
+            "inner_south_east": [
+              0,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              10
+            ],
+            "outer_north": [
+              1,
+              10
+            ],
+            "outer_north_east": [
+              2,
+              10
+            ],
+            "outer_west": [
+              0,
+              11
+            ],
+            "center": [
+              1,
+              11
+            ],
+            "outer_east": [
+              2,
+              11
+            ],
+            "outer_south_west": [
+              0,
+              12
+            ],
+            "outer_south": [
+              1,
+              12
+            ],
+            "outer_south_east": [
+              2,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              14
+            ],
+            "inner_north_east": [
+              0,
+              14
+            ],
+            "inner_south_west": [
+              1,
+              13
+            ],
+            "inner_south_east": [
+              0,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              10
+            ],
+            "outer_north": [
+              1,
+              10
+            ],
+            "outer_north_east": [
+              2,
+              10
+            ],
+            "outer_west": [
+              0,
+              11
+            ],
+            "center": [
+              1,
+              11
+            ],
+            "outer_east": [
+              2,
+              11
+            ],
+            "outer_south_west": [
+              0,
+              12
+            ],
+            "outer_south": [
+              1,
+              12
+            ],
+            "outer_south_east": [
+              2,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              14
+            ],
+            "inner_north_east": [
+              0,
+              14
+            ],
+            "inner_south_west": [
+              1,
+              13
+            ],
+            "inner_south_east": [
+              0,
+              13
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_bank_pond_a_overlay",
+      "label": "Summer Grass-Bank Pond A Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "grass",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          3,
+          10
+        ],
+        "north": [
+          4,
+          10
+        ],
+        "northEast": [
+          5,
+          10
+        ],
+        "west": [
+          3,
+          11
+        ],
+        "center": [
+          4,
+          11
+        ],
+        "east": [
+          5,
+          11
+        ],
+        "southWest": [
+          3,
+          12
+        ],
+        "south": [
+          4,
+          12
+        ],
+        "southEast": [
+          5,
+          12
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          4,
+          14
+        ],
+        "northEast": [
+          3,
+          14
+        ],
+        "southWest": [
+          4,
+          13
+        ],
+        "southEast": [
+          3,
+          13
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              10
+            ],
+            "outer_north": [
+              4,
+              10
+            ],
+            "outer_north_east": [
+              5,
+              10
+            ],
+            "outer_west": [
+              3,
+              11
+            ],
+            "center": [
+              4,
+              11
+            ],
+            "outer_east": [
+              5,
+              11
+            ],
+            "outer_south_west": [
+              3,
+              12
+            ],
+            "outer_south": [
+              4,
+              12
+            ],
+            "outer_south_east": [
+              5,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              14
+            ],
+            "inner_north_east": [
+              3,
+              14
+            ],
+            "inner_south_west": [
+              4,
+              13
+            ],
+            "inner_south_east": [
+              3,
+              13
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              10
+            ],
+            "outer_north": [
+              4,
+              10
+            ],
+            "outer_north_east": [
+              5,
+              10
+            ],
+            "outer_west": [
+              3,
+              11
+            ],
+            "center": [
+              4,
+              11
+            ],
+            "outer_east": [
+              5,
+              11
+            ],
+            "outer_south_west": [
+              3,
+              12
+            ],
+            "outer_south": [
+              4,
+              12
+            ],
+            "outer_south_east": [
+              5,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              14
+            ],
+            "inner_north_east": [
+              3,
+              14
+            ],
+            "inner_south_west": [
+              4,
+              13
+            ],
+            "inner_south_east": [
+              3,
+              13
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              10
+            ],
+            "outer_north": [
+              4,
+              10
+            ],
+            "outer_north_east": [
+              5,
+              10
+            ],
+            "outer_west": [
+              3,
+              11
+            ],
+            "center": [
+              4,
+              11
+            ],
+            "outer_east": [
+              5,
+              11
+            ],
+            "outer_south_west": [
+              3,
+              12
+            ],
+            "outer_south": [
+              4,
+              12
+            ],
+            "outer_south_east": [
+              5,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              14
+            ],
+            "inner_north_east": [
+              3,
+              14
+            ],
+            "inner_south_west": [
+              4,
+              13
+            ],
+            "inner_south_east": [
+              3,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              10
+            ],
+            "outer_north": [
+              4,
+              10
+            ],
+            "outer_north_east": [
+              5,
+              10
+            ],
+            "outer_west": [
+              3,
+              11
+            ],
+            "center": [
+              4,
+              11
+            ],
+            "outer_east": [
+              5,
+              11
+            ],
+            "outer_south_west": [
+              3,
+              12
+            ],
+            "outer_south": [
+              4,
+              12
+            ],
+            "outer_south_east": [
+              5,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              14
+            ],
+            "inner_north_east": [
+              3,
+              14
+            ],
+            "inner_south_west": [
+              4,
+              13
+            ],
+            "inner_south_east": [
+              3,
+              13
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              10
+            ],
+            "outer_north": [
+              4,
+              10
+            ],
+            "outer_north_east": [
+              5,
+              10
+            ],
+            "outer_west": [
+              3,
+              11
+            ],
+            "center": [
+              4,
+              11
+            ],
+            "outer_east": [
+              5,
+              11
+            ],
+            "outer_south_west": [
+              3,
+              12
+            ],
+            "outer_south": [
+              4,
+              12
+            ],
+            "outer_south_east": [
+              5,
+              12
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              14
+            ],
+            "inner_north_east": [
+              3,
+              14
+            ],
+            "inner_south_west": [
+              4,
+              13
+            ],
+            "inner_south_east": [
+              3,
+              13
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_bank_pond_b",
+      "label": "Summer Grass-Bank Pond B",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "grass",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          15
+        ],
+        "north": [
+          1,
+          15
+        ],
+        "northEast": [
+          2,
+          15
+        ],
+        "west": [
+          0,
+          16
+        ],
+        "center": [
+          1,
+          16
+        ],
+        "east": [
+          2,
+          16
+        ],
+        "southWest": [
+          0,
+          17
+        ],
+        "south": [
+          1,
+          17
+        ],
+        "southEast": [
+          2,
+          17
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          1,
+          19
+        ],
+        "northEast": [
+          0,
+          19
+        ],
+        "southWest": [
+          1,
+          18
+        ],
+        "southEast": [
+          0,
+          18
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              15
+            ],
+            "outer_north": [
+              1,
+              15
+            ],
+            "outer_north_east": [
+              2,
+              15
+            ],
+            "outer_west": [
+              0,
+              16
+            ],
+            "center": [
+              1,
+              16
+            ],
+            "outer_east": [
+              2,
+              16
+            ],
+            "outer_south_west": [
+              0,
+              17
+            ],
+            "outer_south": [
+              1,
+              17
+            ],
+            "outer_south_east": [
+              2,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              19
+            ],
+            "inner_north_east": [
+              0,
+              19
+            ],
+            "inner_south_west": [
+              1,
+              18
+            ],
+            "inner_south_east": [
+              0,
+              18
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              15
+            ],
+            "outer_north": [
+              1,
+              15
+            ],
+            "outer_north_east": [
+              2,
+              15
+            ],
+            "outer_west": [
+              0,
+              16
+            ],
+            "center": [
+              1,
+              16
+            ],
+            "outer_east": [
+              2,
+              16
+            ],
+            "outer_south_west": [
+              0,
+              17
+            ],
+            "outer_south": [
+              1,
+              17
+            ],
+            "outer_south_east": [
+              2,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              19
+            ],
+            "inner_north_east": [
+              0,
+              19
+            ],
+            "inner_south_west": [
+              1,
+              18
+            ],
+            "inner_south_east": [
+              0,
+              18
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              15
+            ],
+            "outer_north": [
+              1,
+              15
+            ],
+            "outer_north_east": [
+              2,
+              15
+            ],
+            "outer_west": [
+              0,
+              16
+            ],
+            "center": [
+              1,
+              16
+            ],
+            "outer_east": [
+              2,
+              16
+            ],
+            "outer_south_west": [
+              0,
+              17
+            ],
+            "outer_south": [
+              1,
+              17
+            ],
+            "outer_south_east": [
+              2,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              19
+            ],
+            "inner_north_east": [
+              0,
+              19
+            ],
+            "inner_south_west": [
+              1,
+              18
+            ],
+            "inner_south_east": [
+              0,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              15
+            ],
+            "outer_north": [
+              1,
+              15
+            ],
+            "outer_north_east": [
+              2,
+              15
+            ],
+            "outer_west": [
+              0,
+              16
+            ],
+            "center": [
+              1,
+              16
+            ],
+            "outer_east": [
+              2,
+              16
+            ],
+            "outer_south_west": [
+              0,
+              17
+            ],
+            "outer_south": [
+              1,
+              17
+            ],
+            "outer_south_east": [
+              2,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              19
+            ],
+            "inner_north_east": [
+              0,
+              19
+            ],
+            "inner_south_west": [
+              1,
+              18
+            ],
+            "inner_south_east": [
+              0,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              15
+            ],
+            "outer_north": [
+              1,
+              15
+            ],
+            "outer_north_east": [
+              2,
+              15
+            ],
+            "outer_west": [
+              0,
+              16
+            ],
+            "center": [
+              1,
+              16
+            ],
+            "outer_east": [
+              2,
+              16
+            ],
+            "outer_south_west": [
+              0,
+              17
+            ],
+            "outer_south": [
+              1,
+              17
+            ],
+            "outer_south_east": [
+              2,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              19
+            ],
+            "inner_north_east": [
+              0,
+              19
+            ],
+            "inner_south_west": [
+              1,
+              18
+            ],
+            "inner_south_east": [
+              0,
+              18
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_bank_pond_b_overlay",
+      "label": "Summer Grass-Bank Pond B Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "grass",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          3,
+          15
+        ],
+        "north": [
+          4,
+          15
+        ],
+        "northEast": [
+          5,
+          15
+        ],
+        "west": [
+          3,
+          16
+        ],
+        "center": [
+          4,
+          16
+        ],
+        "east": [
+          5,
+          16
+        ],
+        "southWest": [
+          3,
+          17
+        ],
+        "south": [
+          4,
+          17
+        ],
+        "southEast": [
+          5,
+          17
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          4,
+          19
+        ],
+        "northEast": [
+          3,
+          19
+        ],
+        "southWest": [
+          4,
+          18
+        ],
+        "southEast": [
+          3,
+          18
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              15
+            ],
+            "outer_north": [
+              4,
+              15
+            ],
+            "outer_north_east": [
+              5,
+              15
+            ],
+            "outer_west": [
+              3,
+              16
+            ],
+            "center": [
+              4,
+              16
+            ],
+            "outer_east": [
+              5,
+              16
+            ],
+            "outer_south_west": [
+              3,
+              17
+            ],
+            "outer_south": [
+              4,
+              17
+            ],
+            "outer_south_east": [
+              5,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              19
+            ],
+            "inner_north_east": [
+              3,
+              19
+            ],
+            "inner_south_west": [
+              4,
+              18
+            ],
+            "inner_south_east": [
+              3,
+              18
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              15
+            ],
+            "outer_north": [
+              4,
+              15
+            ],
+            "outer_north_east": [
+              5,
+              15
+            ],
+            "outer_west": [
+              3,
+              16
+            ],
+            "center": [
+              4,
+              16
+            ],
+            "outer_east": [
+              5,
+              16
+            ],
+            "outer_south_west": [
+              3,
+              17
+            ],
+            "outer_south": [
+              4,
+              17
+            ],
+            "outer_south_east": [
+              5,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              19
+            ],
+            "inner_north_east": [
+              3,
+              19
+            ],
+            "inner_south_west": [
+              4,
+              18
+            ],
+            "inner_south_east": [
+              3,
+              18
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              15
+            ],
+            "outer_north": [
+              4,
+              15
+            ],
+            "outer_north_east": [
+              5,
+              15
+            ],
+            "outer_west": [
+              3,
+              16
+            ],
+            "center": [
+              4,
+              16
+            ],
+            "outer_east": [
+              5,
+              16
+            ],
+            "outer_south_west": [
+              3,
+              17
+            ],
+            "outer_south": [
+              4,
+              17
+            ],
+            "outer_south_east": [
+              5,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              19
+            ],
+            "inner_north_east": [
+              3,
+              19
+            ],
+            "inner_south_west": [
+              4,
+              18
+            ],
+            "inner_south_east": [
+              3,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              15
+            ],
+            "outer_north": [
+              4,
+              15
+            ],
+            "outer_north_east": [
+              5,
+              15
+            ],
+            "outer_west": [
+              3,
+              16
+            ],
+            "center": [
+              4,
+              16
+            ],
+            "outer_east": [
+              5,
+              16
+            ],
+            "outer_south_west": [
+              3,
+              17
+            ],
+            "outer_south": [
+              4,
+              17
+            ],
+            "outer_south_east": [
+              5,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              19
+            ],
+            "inner_north_east": [
+              3,
+              19
+            ],
+            "inner_south_west": [
+              4,
+              18
+            ],
+            "inner_south_east": [
+              3,
+              18
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              3,
+              15
+            ],
+            "outer_north": [
+              4,
+              15
+            ],
+            "outer_north_east": [
+              5,
+              15
+            ],
+            "outer_west": [
+              3,
+              16
+            ],
+            "center": [
+              4,
+              16
+            ],
+            "outer_east": [
+              5,
+              16
+            ],
+            "outer_south_west": [
+              3,
+              17
+            ],
+            "outer_south": [
+              4,
+              17
+            ],
+            "outer_south_east": [
+              5,
+              17
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              19
+            ],
+            "inner_north_east": [
+              3,
+              19
+            ],
+            "inner_south_west": [
+              4,
+              18
+            ],
+            "inner_south_east": [
+              3,
+              18
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_over_dirt",
+      "label": "Summer Grass over Dirt",
+      "classification": "TerrainTransitionFamily",
+      "owner": "grass",
+      "neighbor": "dirt",
+      "runtimeStatus": "active",
+      "outerTopology": {
+        "northWest": [
+          6,
+          0
+        ],
+        "north": [
+          7,
+          0
+        ],
+        "northEast": [
+          8,
+          0
+        ],
+        "west": [
+          6,
+          1
+        ],
+        "center": [
+          7,
+          1
+        ],
+        "east": [
+          8,
+          1
+        ],
+        "southWest": [
+          6,
+          2
+        ],
+        "south": [
+          7,
+          2
+        ],
+        "southEast": [
+          8,
+          2
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          7,
+          4
+        ],
+        "northEast": [
+          6,
+          4
+        ],
+        "southWest": [
+          7,
+          3
+        ],
+        "southEast": [
+          6,
+          3
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              0
+            ],
+            "outer_north": [
+              7,
+              0
+            ],
+            "outer_north_east": [
+              8,
+              0
+            ],
+            "outer_west": [
+              6,
+              1
+            ],
+            "center": [
+              7,
+              1
+            ],
+            "outer_east": [
+              8,
+              1
+            ],
+            "outer_south_west": [
+              6,
+              2
+            ],
+            "outer_south": [
+              7,
+              2
+            ],
+            "outer_south_east": [
+              8,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              4
+            ],
+            "inner_north_east": [
+              6,
+              4
+            ],
+            "inner_south_west": [
+              7,
+              3
+            ],
+            "inner_south_east": [
+              6,
+              3
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              0
+            ],
+            "outer_north": [
+              7,
+              0
+            ],
+            "outer_north_east": [
+              8,
+              0
+            ],
+            "outer_west": [
+              6,
+              1
+            ],
+            "center": [
+              7,
+              1
+            ],
+            "outer_east": [
+              8,
+              1
+            ],
+            "outer_south_west": [
+              6,
+              2
+            ],
+            "outer_south": [
+              7,
+              2
+            ],
+            "outer_south_east": [
+              8,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              4
+            ],
+            "inner_north_east": [
+              6,
+              4
+            ],
+            "inner_south_west": [
+              7,
+              3
+            ],
+            "inner_south_east": [
+              6,
+              3
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              0
+            ],
+            "outer_north": [
+              7,
+              0
+            ],
+            "outer_north_east": [
+              8,
+              0
+            ],
+            "outer_west": [
+              6,
+              1
+            ],
+            "center": [
+              7,
+              1
+            ],
+            "outer_east": [
+              8,
+              1
+            ],
+            "outer_south_west": [
+              6,
+              2
+            ],
+            "outer_south": [
+              7,
+              2
+            ],
+            "outer_south_east": [
+              8,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              4
+            ],
+            "inner_north_east": [
+              6,
+              4
+            ],
+            "inner_south_west": [
+              7,
+              3
+            ],
+            "inner_south_east": [
+              6,
+              3
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              0
+            ],
+            "outer_north": [
+              7,
+              0
+            ],
+            "outer_north_east": [
+              8,
+              0
+            ],
+            "outer_west": [
+              6,
+              1
+            ],
+            "center": [
+              7,
+              1
+            ],
+            "outer_east": [
+              8,
+              1
+            ],
+            "outer_south_west": [
+              6,
+              2
+            ],
+            "outer_south": [
+              7,
+              2
+            ],
+            "outer_south_east": [
+              8,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              4
+            ],
+            "inner_north_east": [
+              6,
+              4
+            ],
+            "inner_south_west": [
+              7,
+              3
+            ],
+            "inner_south_east": [
+              6,
+              3
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              0
+            ],
+            "outer_north": [
+              7,
+              0
+            ],
+            "outer_north_east": [
+              8,
+              0
+            ],
+            "outer_west": [
+              6,
+              1
+            ],
+            "center": [
+              7,
+              1
+            ],
+            "outer_east": [
+              8,
+              1
+            ],
+            "outer_south_west": [
+              6,
+              2
+            ],
+            "outer_south": [
+              7,
+              2
+            ],
+            "outer_south_east": [
+              8,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              4
+            ],
+            "inner_north_east": [
+              6,
+              4
+            ],
+            "inner_south_west": [
+              7,
+              3
+            ],
+            "inner_south_east": [
+              6,
+              3
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_over_sand",
+      "label": "Summer Grass over Dry Sand",
+      "classification": "TerrainTransitionFamily",
+      "owner": "grass",
+      "neighbor": "sand",
+      "runtimeStatus": "active",
+      "outerTopology": {
+        "northWest": [
+          6,
+          5
+        ],
+        "north": [
+          7,
+          5
+        ],
+        "northEast": [
+          8,
+          5
+        ],
+        "west": [
+          6,
+          6
+        ],
+        "center": [
+          7,
+          6
+        ],
+        "east": [
+          8,
+          6
+        ],
+        "southWest": [
+          6,
+          7
+        ],
+        "south": [
+          7,
+          7
+        ],
+        "southEast": [
+          8,
+          7
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          7,
+          9
+        ],
+        "northEast": [
+          6,
+          9
+        ],
+        "southWest": [
+          7,
+          8
+        ],
+        "southEast": [
+          6,
+          8
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              5
+            ],
+            "outer_north": [
+              7,
+              5
+            ],
+            "outer_north_east": [
+              8,
+              5
+            ],
+            "outer_west": [
+              6,
+              6
+            ],
+            "center": [
+              7,
+              6
+            ],
+            "outer_east": [
+              8,
+              6
+            ],
+            "outer_south_west": [
+              6,
+              7
+            ],
+            "outer_south": [
+              7,
+              7
+            ],
+            "outer_south_east": [
+              8,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              9
+            ],
+            "inner_north_east": [
+              6,
+              9
+            ],
+            "inner_south_west": [
+              7,
+              8
+            ],
+            "inner_south_east": [
+              6,
+              8
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              5
+            ],
+            "outer_north": [
+              7,
+              5
+            ],
+            "outer_north_east": [
+              8,
+              5
+            ],
+            "outer_west": [
+              6,
+              6
+            ],
+            "center": [
+              7,
+              6
+            ],
+            "outer_east": [
+              8,
+              6
+            ],
+            "outer_south_west": [
+              6,
+              7
+            ],
+            "outer_south": [
+              7,
+              7
+            ],
+            "outer_south_east": [
+              8,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              9
+            ],
+            "inner_north_east": [
+              6,
+              9
+            ],
+            "inner_south_west": [
+              7,
+              8
+            ],
+            "inner_south_east": [
+              6,
+              8
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              5
+            ],
+            "outer_north": [
+              7,
+              5
+            ],
+            "outer_north_east": [
+              8,
+              5
+            ],
+            "outer_west": [
+              6,
+              6
+            ],
+            "center": [
+              7,
+              6
+            ],
+            "outer_east": [
+              8,
+              6
+            ],
+            "outer_south_west": [
+              6,
+              7
+            ],
+            "outer_south": [
+              7,
+              7
+            ],
+            "outer_south_east": [
+              8,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              9
+            ],
+            "inner_north_east": [
+              6,
+              9
+            ],
+            "inner_south_west": [
+              7,
+              8
+            ],
+            "inner_south_east": [
+              6,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              5
+            ],
+            "outer_north": [
+              7,
+              5
+            ],
+            "outer_north_east": [
+              8,
+              5
+            ],
+            "outer_west": [
+              6,
+              6
+            ],
+            "center": [
+              7,
+              6
+            ],
+            "outer_east": [
+              8,
+              6
+            ],
+            "outer_south_west": [
+              6,
+              7
+            ],
+            "outer_south": [
+              7,
+              7
+            ],
+            "outer_south_east": [
+              8,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              9
+            ],
+            "inner_north_east": [
+              6,
+              9
+            ],
+            "inner_south_west": [
+              7,
+              8
+            ],
+            "inner_south_east": [
+              6,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              6,
+              5
+            ],
+            "outer_north": [
+              7,
+              5
+            ],
+            "outer_north_east": [
+              8,
+              5
+            ],
+            "outer_west": [
+              6,
+              6
+            ],
+            "center": [
+              7,
+              6
+            ],
+            "outer_east": [
+              8,
+              6
+            ],
+            "outer_south_west": [
+              6,
+              7
+            ],
+            "outer_south": [
+              7,
+              7
+            ],
+            "outer_south_east": [
+              8,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              7,
+              9
+            ],
+            "inner_north_east": [
+              6,
+              9
+            ],
+            "inner_south_west": [
+              7,
+              8
+            ],
+            "inner_south_east": [
+              6,
+              8
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_patch_composited",
+      "label": "Summer Grass Patch, Composited",
+      "classification": "ExpandableStampFamily",
+      "owner": "grass",
+      "neighbor": "transparent_or_other_base",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          0
+        ],
+        "north": [
+          1,
+          0
+        ],
+        "northEast": [
+          2,
+          0
+        ],
+        "west": [
+          0,
+          1
+        ],
+        "center": [
+          1,
+          1
+        ],
+        "east": [
+          2,
+          1
+        ],
+        "southWest": [
+          0,
+          2
+        ],
+        "south": [
+          1,
+          2
+        ],
+        "southEast": [
+          2,
+          2
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          1,
+          9
+        ],
+        "northEast": [
+          0,
+          9
+        ],
+        "southWest": [
+          1,
+          8
+        ],
+        "southEast": [
+          0,
+          8
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              0
+            ],
+            "outer_north": [
+              1,
+              0
+            ],
+            "outer_north_east": [
+              2,
+              0
+            ],
+            "outer_west": [
+              0,
+              1
+            ],
+            "center": [
+              1,
+              1
+            ],
+            "outer_east": [
+              2,
+              1
+            ],
+            "outer_south_west": [
+              0,
+              2
+            ],
+            "outer_south": [
+              1,
+              2
+            ],
+            "outer_south_east": [
+              2,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              9
+            ],
+            "inner_north_east": [
+              0,
+              9
+            ],
+            "inner_south_west": [
+              1,
+              8
+            ],
+            "inner_south_east": [
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              0
+            ],
+            "outer_north": [
+              1,
+              0
+            ],
+            "outer_north_east": [
+              2,
+              0
+            ],
+            "outer_west": [
+              0,
+              1
+            ],
+            "center": [
+              1,
+              1
+            ],
+            "outer_east": [
+              2,
+              1
+            ],
+            "outer_south_west": [
+              0,
+              2
+            ],
+            "outer_south": [
+              1,
+              2
+            ],
+            "outer_south_east": [
+              2,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              9
+            ],
+            "inner_north_east": [
+              0,
+              9
+            ],
+            "inner_south_west": [
+              1,
+              8
+            ],
+            "inner_south_east": [
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              0
+            ],
+            "outer_north": [
+              1,
+              0
+            ],
+            "outer_north_east": [
+              2,
+              0
+            ],
+            "outer_west": [
+              0,
+              1
+            ],
+            "center": [
+              1,
+              1
+            ],
+            "outer_east": [
+              2,
+              1
+            ],
+            "outer_south_west": [
+              0,
+              2
+            ],
+            "outer_south": [
+              1,
+              2
+            ],
+            "outer_south_east": [
+              2,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              9
+            ],
+            "inner_north_east": [
+              0,
+              9
+            ],
+            "inner_south_west": [
+              1,
+              8
+            ],
+            "inner_south_east": [
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              0
+            ],
+            "outer_north": [
+              1,
+              0
+            ],
+            "outer_north_east": [
+              2,
+              0
+            ],
+            "outer_west": [
+              0,
+              1
+            ],
+            "center": [
+              1,
+              1
+            ],
+            "outer_east": [
+              2,
+              1
+            ],
+            "outer_south_west": [
+              0,
+              2
+            ],
+            "outer_south": [
+              1,
+              2
+            ],
+            "outer_south_east": [
+              2,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              9
+            ],
+            "inner_north_east": [
+              0,
+              9
+            ],
+            "inner_south_west": [
+              1,
+              8
+            ],
+            "inner_south_east": [
+              0,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              0
+            ],
+            "outer_north": [
+              1,
+              0
+            ],
+            "outer_north_east": [
+              2,
+              0
+            ],
+            "outer_west": [
+              0,
+              1
+            ],
+            "center": [
+              1,
+              1
+            ],
+            "outer_east": [
+              2,
+              1
+            ],
+            "outer_south_west": [
+              0,
+              2
+            ],
+            "outer_south": [
+              1,
+              2
+            ],
+            "outer_south_east": [
+              2,
+              2
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              9
+            ],
+            "inner_north_east": [
+              0,
+              9
+            ],
+            "inner_south_west": [
+              1,
+              8
+            ],
+            "inner_south_east": [
+              0,
+              8
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_grass_patch_overlay",
+      "label": "Summer Grass Patch Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "grass_overlay",
+      "neighbor": "base_required",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          3
+        ],
+        "north": [
+          1,
+          3
+        ],
+        "northEast": [
+          2,
+          3
+        ],
+        "west": [
+          0,
+          4
+        ],
+        "center": [
+          1,
+          4
+        ],
+        "east": [
+          2,
+          4
+        ],
+        "southWest": [
+          0,
+          5
+        ],
+        "south": [
+          1,
+          5
+        ],
+        "southEast": [
+          2,
+          5
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          1,
+          7
+        ],
+        "northEast": [
+          0,
+          7
+        ],
+        "southWest": [
+          1,
+          6
+        ],
+        "southEast": [
+          0,
+          6
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              3
+            ],
+            "outer_north": [
+              1,
+              3
+            ],
+            "outer_north_east": [
+              2,
+              3
+            ],
+            "outer_west": [
+              0,
+              4
+            ],
+            "center": [
+              1,
+              4
+            ],
+            "outer_east": [
+              2,
+              4
+            ],
+            "outer_south_west": [
+              0,
+              5
+            ],
+            "outer_south": [
+              1,
+              5
+            ],
+            "outer_south_east": [
+              2,
+              5
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              7
+            ],
+            "inner_north_east": [
+              0,
+              7
+            ],
+            "inner_south_west": [
+              1,
+              6
+            ],
+            "inner_south_east": [
+              0,
+              6
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              3
+            ],
+            "outer_north": [
+              1,
+              3
+            ],
+            "outer_north_east": [
+              2,
+              3
+            ],
+            "outer_west": [
+              0,
+              4
+            ],
+            "center": [
+              1,
+              4
+            ],
+            "outer_east": [
+              2,
+              4
+            ],
+            "outer_south_west": [
+              0,
+              5
+            ],
+            "outer_south": [
+              1,
+              5
+            ],
+            "outer_south_east": [
+              2,
+              5
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              7
+            ],
+            "inner_north_east": [
+              0,
+              7
+            ],
+            "inner_south_west": [
+              1,
+              6
+            ],
+            "inner_south_east": [
+              0,
+              6
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              3
+            ],
+            "outer_north": [
+              1,
+              3
+            ],
+            "outer_north_east": [
+              2,
+              3
+            ],
+            "outer_west": [
+              0,
+              4
+            ],
+            "center": [
+              1,
+              4
+            ],
+            "outer_east": [
+              2,
+              4
+            ],
+            "outer_south_west": [
+              0,
+              5
+            ],
+            "outer_south": [
+              1,
+              5
+            ],
+            "outer_south_east": [
+              2,
+              5
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              7
+            ],
+            "inner_north_east": [
+              0,
+              7
+            ],
+            "inner_south_west": [
+              1,
+              6
+            ],
+            "inner_south_east": [
+              0,
+              6
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              3
+            ],
+            "outer_north": [
+              1,
+              3
+            ],
+            "outer_north_east": [
+              2,
+              3
+            ],
+            "outer_west": [
+              0,
+              4
+            ],
+            "center": [
+              1,
+              4
+            ],
+            "outer_east": [
+              2,
+              4
+            ],
+            "outer_south_west": [
+              0,
+              5
+            ],
+            "outer_south": [
+              1,
+              5
+            ],
+            "outer_south_east": [
+              2,
+              5
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              7
+            ],
+            "inner_north_east": [
+              0,
+              7
+            ],
+            "inner_south_west": [
+              1,
+              6
+            ],
+            "inner_south_east": [
+              0,
+              6
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              3
+            ],
+            "outer_north": [
+              1,
+              3
+            ],
+            "outer_north_east": [
+              2,
+              3
+            ],
+            "outer_west": [
+              0,
+              4
+            ],
+            "center": [
+              1,
+              4
+            ],
+            "outer_east": [
+              2,
+              4
+            ],
+            "outer_south_west": [
+              0,
+              5
+            ],
+            "outer_south": [
+              1,
+              5
+            ],
+            "outer_south_east": [
+              2,
+              5
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              1,
+              7
+            ],
+            "inner_north_east": [
+              0,
+              7
+            ],
+            "inner_south_west": [
+              1,
+              6
+            ],
+            "inner_south_east": [
+              0,
+              6
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_pale_shore_ring_overlay",
+      "label": "Summer Pale Shore Ring Overlay",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "pale_shore",
+      "runtimeStatus": "stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          10,
+          20
+        ],
+        "north": [
+          11,
+          20
+        ],
+        "northEast": [
+          12,
+          20
+        ],
+        "west": [
+          10,
+          21
+        ],
+        "center": [
+          11,
+          21
+        ],
+        "east": [
+          12,
+          21
+        ],
+        "southWest": [
+          10,
+          22
+        ],
+        "south": [
+          11,
+          22
+        ],
+        "southEast": [
+          12,
+          22
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          14,
+          21
+        ],
+        "northEast": [
+          13,
+          21
+        ],
+        "southWest": [
+          14,
+          20
+        ],
+        "southEast": [
+          13,
+          20
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              20
+            ],
+            "outer_north": [
+              11,
+              20
+            ],
+            "outer_north_east": [
+              12,
+              20
+            ],
+            "outer_west": [
+              10,
+              21
+            ],
+            "center": [
+              11,
+              21
+            ],
+            "outer_east": [
+              12,
+              21
+            ],
+            "outer_south_west": [
+              10,
+              22
+            ],
+            "outer_south": [
+              11,
+              22
+            ],
+            "outer_south_east": [
+              12,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              21
+            ],
+            "inner_north_east": [
+              13,
+              21
+            ],
+            "inner_south_west": [
+              14,
+              20
+            ],
+            "inner_south_east": [
+              13,
+              20
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              20
+            ],
+            "outer_north": [
+              11,
+              20
+            ],
+            "outer_north_east": [
+              12,
+              20
+            ],
+            "outer_west": [
+              10,
+              21
+            ],
+            "center": [
+              11,
+              21
+            ],
+            "outer_east": [
+              12,
+              21
+            ],
+            "outer_south_west": [
+              10,
+              22
+            ],
+            "outer_south": [
+              11,
+              22
+            ],
+            "outer_south_east": [
+              12,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              21
+            ],
+            "inner_north_east": [
+              13,
+              21
+            ],
+            "inner_south_west": [
+              14,
+              20
+            ],
+            "inner_south_east": [
+              13,
+              20
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              20
+            ],
+            "outer_north": [
+              11,
+              20
+            ],
+            "outer_north_east": [
+              12,
+              20
+            ],
+            "outer_west": [
+              10,
+              21
+            ],
+            "center": [
+              11,
+              21
+            ],
+            "outer_east": [
+              12,
+              21
+            ],
+            "outer_south_west": [
+              10,
+              22
+            ],
+            "outer_south": [
+              11,
+              22
+            ],
+            "outer_south_east": [
+              12,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              21
+            ],
+            "inner_north_east": [
+              13,
+              21
+            ],
+            "inner_south_west": [
+              14,
+              20
+            ],
+            "inner_south_east": [
+              13,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              20
+            ],
+            "outer_north": [
+              11,
+              20
+            ],
+            "outer_north_east": [
+              12,
+              20
+            ],
+            "outer_west": [
+              10,
+              21
+            ],
+            "center": [
+              11,
+              21
+            ],
+            "outer_east": [
+              12,
+              21
+            ],
+            "outer_south_west": [
+              10,
+              22
+            ],
+            "outer_south": [
+              11,
+              22
+            ],
+            "outer_south_east": [
+              12,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              21
+            ],
+            "inner_north_east": [
+              13,
+              21
+            ],
+            "inner_south_west": [
+              14,
+              20
+            ],
+            "inner_south_east": [
+              13,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              10,
+              20
+            ],
+            "outer_north": [
+              11,
+              20
+            ],
+            "outer_north_east": [
+              12,
+              20
+            ],
+            "outer_west": [
+              10,
+              21
+            ],
+            "center": [
+              11,
+              21
+            ],
+            "outer_east": [
+              12,
+              21
+            ],
+            "outer_south_west": [
+              10,
+              22
+            ],
+            "outer_south": [
+              11,
+              22
+            ],
+            "outer_south_east": [
+              12,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              14,
+              21
+            ],
+            "inner_north_east": [
+              13,
+              21
+            ],
+            "inner_south_west": [
+              14,
+              20
+            ],
+            "inner_south_east": [
+              13,
+              20
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_pebble_path_over_dirt",
+      "label": "Summer Pebble Path over Dirt",
+      "classification": "TerrainTransitionFamily",
+      "owner": "pebble_path",
+      "neighbor": "dirt",
+      "runtimeStatus": "active",
+      "outerTopology": {
+        "northWest": [
+          9,
+          0
+        ],
+        "north": [
+          10,
+          0
+        ],
+        "northEast": [
+          11,
+          0
+        ],
+        "west": [
+          9,
+          1
+        ],
+        "center": [
+          10,
+          1
+        ],
+        "east": [
+          11,
+          1
+        ],
+        "southWest": [
+          9,
+          2
+        ],
+        "south": [
+          10,
+          2
+        ],
+        "southEast": [
+          11,
+          2
+        ]
+      },
+      "innerTopology": {
+        "northWest": null,
+        "northEast": null,
+        "southWest": null,
+        "southEast": null
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              0
+            ],
+            "outer_north": [
+              10,
+              0
+            ],
+            "outer_north_east": [
+              11,
+              0
+            ],
+            "outer_west": [
+              9,
+              1
+            ],
+            "center": [
+              10,
+              1
+            ],
+            "outer_east": [
+              11,
+              1
+            ],
+            "outer_south_west": [
+              9,
+              2
+            ],
+            "outer_south": [
+              10,
+              2
+            ],
+            "outer_south_east": [
+              11,
+              2
+            ]
+          },
+          "innerRoles": {}
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              0
+            ],
+            "outer_north": [
+              10,
+              0
+            ],
+            "outer_north_east": [
+              11,
+              0
+            ],
+            "outer_west": [
+              9,
+              1
+            ],
+            "center": [
+              10,
+              1
+            ],
+            "outer_east": [
+              11,
+              1
+            ],
+            "outer_south_west": [
+              9,
+              2
+            ],
+            "outer_south": [
+              10,
+              2
+            ],
+            "outer_south_east": [
+              11,
+              2
+            ]
+          },
+          "innerRoles": {}
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              0
+            ],
+            "outer_north": [
+              10,
+              0
+            ],
+            "outer_north_east": [
+              11,
+              0
+            ],
+            "outer_west": [
+              9,
+              1
+            ],
+            "center": [
+              10,
+              1
+            ],
+            "outer_east": [
+              11,
+              1
+            ],
+            "outer_south_west": [
+              9,
+              2
+            ],
+            "outer_south": [
+              10,
+              2
+            ],
+            "outer_south_east": [
+              11,
+              2
+            ]
+          },
+          "innerRoles": {}
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              0
+            ],
+            "outer_north": [
+              10,
+              0
+            ],
+            "outer_north_east": [
+              11,
+              0
+            ],
+            "outer_west": [
+              9,
+              1
+            ],
+            "center": [
+              10,
+              1
+            ],
+            "outer_east": [
+              11,
+              1
+            ],
+            "outer_south_west": [
+              9,
+              2
+            ],
+            "outer_south": [
+              10,
+              2
+            ],
+            "outer_south_east": [
+              11,
+              2
+            ]
+          },
+          "innerRoles": {}
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              0
+            ],
+            "outer_north": [
+              10,
+              0
+            ],
+            "outer_north_east": [
+              11,
+              0
+            ],
+            "outer_west": [
+              9,
+              1
+            ],
+            "center": [
+              10,
+              1
+            ],
+            "outer_east": [
+              11,
+              1
+            ],
+            "outer_south_west": [
+              9,
+              2
+            ],
+            "outer_south": [
+              10,
+              2
+            ],
+            "outer_south_east": [
+              11,
+              2
+            ]
+          },
+          "innerRoles": {}
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_sand_bank_pond",
+      "label": "Summer Sand-Bank Pond",
+      "classification": "ExpandableStampFamily",
+      "owner": "shallow_water",
+      "neighbor": "sand",
+      "runtimeStatus": "active_and_stamp_ready",
+      "outerTopology": {
+        "northWest": [
+          0,
+          20
+        ],
+        "north": [
+          1,
+          20
+        ],
+        "northEast": [
+          2,
+          20
+        ],
+        "west": [
+          0,
+          21
+        ],
+        "center": [
+          1,
+          21
+        ],
+        "east": [
+          2,
+          21
+        ],
+        "southWest": [
+          0,
+          22
+        ],
+        "south": [
+          1,
+          22
+        ],
+        "southEast": [
+          2,
+          22
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          4,
+          21
+        ],
+        "northEast": [
+          3,
+          21
+        ],
+        "southWest": [
+          4,
+          20
+        ],
+        "southEast": [
+          3,
+          20
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              20
+            ],
+            "outer_north": [
+              1,
+              20
+            ],
+            "outer_north_east": [
+              2,
+              20
+            ],
+            "outer_west": [
+              0,
+              21
+            ],
+            "center": [
+              1,
+              21
+            ],
+            "outer_east": [
+              2,
+              21
+            ],
+            "outer_south_west": [
+              0,
+              22
+            ],
+            "outer_south": [
+              1,
+              22
+            ],
+            "outer_south_east": [
+              2,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              21
+            ],
+            "inner_north_east": [
+              3,
+              21
+            ],
+            "inner_south_west": [
+              4,
+              20
+            ],
+            "inner_south_east": [
+              3,
+              20
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              20
+            ],
+            "outer_north": [
+              1,
+              20
+            ],
+            "outer_north_east": [
+              2,
+              20
+            ],
+            "outer_west": [
+              0,
+              21
+            ],
+            "center": [
+              1,
+              21
+            ],
+            "outer_east": [
+              2,
+              21
+            ],
+            "outer_south_west": [
+              0,
+              22
+            ],
+            "outer_south": [
+              1,
+              22
+            ],
+            "outer_south_east": [
+              2,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              21
+            ],
+            "inner_north_east": [
+              3,
+              21
+            ],
+            "inner_south_west": [
+              4,
+              20
+            ],
+            "inner_south_east": [
+              3,
+              20
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              20
+            ],
+            "outer_north": [
+              1,
+              20
+            ],
+            "outer_north_east": [
+              2,
+              20
+            ],
+            "outer_west": [
+              0,
+              21
+            ],
+            "center": [
+              1,
+              21
+            ],
+            "outer_east": [
+              2,
+              21
+            ],
+            "outer_south_west": [
+              0,
+              22
+            ],
+            "outer_south": [
+              1,
+              22
+            ],
+            "outer_south_east": [
+              2,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              21
+            ],
+            "inner_north_east": [
+              3,
+              21
+            ],
+            "inner_south_west": [
+              4,
+              20
+            ],
+            "inner_south_east": [
+              3,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              20
+            ],
+            "outer_north": [
+              1,
+              20
+            ],
+            "outer_north_east": [
+              2,
+              20
+            ],
+            "outer_west": [
+              0,
+              21
+            ],
+            "center": [
+              1,
+              21
+            ],
+            "outer_east": [
+              2,
+              21
+            ],
+            "outer_south_west": [
+              0,
+              22
+            ],
+            "outer_south": [
+              1,
+              22
+            ],
+            "outer_south_east": [
+              2,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              21
+            ],
+            "inner_north_east": [
+              3,
+              21
+            ],
+            "inner_south_west": [
+              4,
+              20
+            ],
+            "inner_south_east": [
+              3,
+              20
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              0,
+              20
+            ],
+            "outer_north": [
+              1,
+              20
+            ],
+            "outer_north_east": [
+              2,
+              20
+            ],
+            "outer_west": [
+              0,
+              21
+            ],
+            "center": [
+              1,
+              21
+            ],
+            "outer_east": [
+              2,
+              21
+            ],
+            "outer_south_west": [
+              0,
+              22
+            ],
+            "outer_south": [
+              1,
+              22
+            ],
+            "outer_south_east": [
+              2,
+              22
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              4,
+              21
+            ],
+            "inner_north_east": [
+              3,
+              21
+            ],
+            "inner_south_west": [
+              4,
+              20
+            ],
+            "inner_south_east": [
+              3,
+              20
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    },
+    {
+      "id": "summer_sand_over_wet_sand",
+      "label": "Summer Dry Sand over Wet Sand",
+      "classification": "TerrainTransitionFamily",
+      "owner": "wet_sand",
+      "neighbor": "sand",
+      "runtimeStatus": "active",
+      "outerTopology": {
+        "northWest": [
+          9,
+          5
+        ],
+        "north": [
+          10,
+          5
+        ],
+        "northEast": [
+          11,
+          5
+        ],
+        "west": [
+          9,
+          6
+        ],
+        "center": [
+          10,
+          6
+        ],
+        "east": [
+          11,
+          6
+        ],
+        "southWest": [
+          9,
+          7
+        ],
+        "south": [
+          10,
+          7
+        ],
+        "southEast": [
+          11,
+          7
+        ]
+      },
+      "innerTopology": {
+        "northWest": [
+          10,
+          9
+        ],
+        "northEast": [
+          9,
+          9
+        ],
+        "southWest": [
+          10,
+          8
+        ],
+        "southEast": [
+          9,
+          8
+        ]
+      },
+      "seasonalBindings": [
+        {
+          "season": "summer",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_summer.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              5
+            ],
+            "outer_north": [
+              10,
+              5
+            ],
+            "outer_north_east": [
+              11,
+              5
+            ],
+            "outer_west": [
+              9,
+              6
+            ],
+            "center": [
+              10,
+              6
+            ],
+            "outer_east": [
+              11,
+              6
+            ],
+            "outer_south_west": [
+              9,
+              7
+            ],
+            "outer_south": [
+              10,
+              7
+            ],
+            "outer_south_east": [
+              11,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              9
+            ],
+            "inner_north_east": [
+              9,
+              9
+            ],
+            "inner_south_west": [
+              10,
+              8
+            ],
+            "inner_south_east": [
+              9,
+              8
+            ]
+          }
+        },
+        {
+          "season": "spring",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_spring.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              5
+            ],
+            "outer_north": [
+              10,
+              5
+            ],
+            "outer_north_east": [
+              11,
+              5
+            ],
+            "outer_west": [
+              9,
+              6
+            ],
+            "center": [
+              10,
+              6
+            ],
+            "outer_east": [
+              11,
+              6
+            ],
+            "outer_south_west": [
+              9,
+              7
+            ],
+            "outer_south": [
+              10,
+              7
+            ],
+            "outer_south_east": [
+              11,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              9
+            ],
+            "inner_north_east": [
+              9,
+              9
+            ],
+            "inner_south_west": [
+              10,
+              8
+            ],
+            "inner_south_east": [
+              9,
+              8
+            ]
+          }
+        },
+        {
+          "season": "autumn",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_autumn.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              5
+            ],
+            "outer_north": [
+              10,
+              5
+            ],
+            "outer_north_east": [
+              11,
+              5
+            ],
+            "outer_west": [
+              9,
+              6
+            ],
+            "center": [
+              10,
+              6
+            ],
+            "outer_east": [
+              11,
+              6
+            ],
+            "outer_south_west": [
+              9,
+              7
+            ],
+            "outer_south": [
+              10,
+              7
+            ],
+            "outer_south_east": [
+              11,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              9
+            ],
+            "inner_north_east": [
+              9,
+              9
+            ],
+            "inner_south_west": [
+              10,
+              8
+            ],
+            "inner_south_east": [
+              9,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              5
+            ],
+            "outer_north": [
+              10,
+              5
+            ],
+            "outer_north_east": [
+              11,
+              5
+            ],
+            "outer_west": [
+              9,
+              6
+            ],
+            "center": [
+              10,
+              6
+            ],
+            "outer_east": [
+              11,
+              6
+            ],
+            "outer_south_west": [
+              9,
+              7
+            ],
+            "outer_south": [
+              10,
+              7
+            ],
+            "outer_south_east": [
+              11,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              9
+            ],
+            "inner_north_east": [
+              9,
+              9
+            ],
+            "inner_south_west": [
+              10,
+              8
+            ],
+            "inner_south_east": [
+              9,
+              8
+            ]
+          }
+        },
+        {
+          "season": "winter_ice",
+          "source": "assets/source/licensed/lpc_revised/Terrain/terrain_winter_ice.png",
+          "outerRoles": {
+            "outer_north_west": [
+              9,
+              5
+            ],
+            "outer_north": [
+              10,
+              5
+            ],
+            "outer_north_east": [
+              11,
+              5
+            ],
+            "outer_west": [
+              9,
+              6
+            ],
+            "center": [
+              10,
+              6
+            ],
+            "outer_east": [
+              11,
+              6
+            ],
+            "outer_south_west": [
+              9,
+              7
+            ],
+            "outer_south": [
+              10,
+              7
+            ],
+            "outer_south_east": [
+              11,
+              7
+            ]
+          },
+          "innerRoles": {
+            "inner_north_west": [
+              10,
+              9
+            ],
+            "inner_north_east": [
+              9,
+              9
+            ],
+            "inner_south_west": [
+              10,
+              8
+            ],
+            "inner_south_east": [
+              9,
+              8
+            ]
+          }
+        }
+      ],
+      "topologyRule": "shared_8_neighbor_owner_side"
+    }
+  ]
+}

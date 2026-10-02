@@ -10,8 +10,9 @@ ForgePY owns local dependency/bootstrap workflow for this repository:
 - source-only packaging
 
 The source repository intentionally does not vendor the ElizaWy/LPC Revised art.
-Point ForgePY at an existing authoritative asset tree/archive staging folder once;
-ForgePY copies validated assets into this project's local assets/ tree.
+When core assets are absent, ForgePY hydrates them from the exact pinned
+ElizaWy/LPC GitHub revision first. Remembered/local mirrors are fallback sources
+only if the pinned upstream cannot satisfy the checked-in manifest.
 """
 from __future__ import annotations
 
@@ -24,6 +25,9 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 import zipfile
 from typing import Iterable
 
@@ -42,11 +46,19 @@ CHARACTER_INDEX = CATALOG_ROOT / "characters_index.local.json"
 ASSET_STATE = LOCAL_DIR / "asset_state.json"
 PROJECT_META = ROOT / "project" / "forgepy.project.json"
 PCC_ACTIVE_JOB = ROOT / ".pcc" / "active_job.json"
-FORGEPY_VERSION = "0.4.6"
+FORGEPY_VERSION = "0.4.10"
+CANONICAL_REPOSITORY_URL = "https://github.com/shifty81/HavenwildBevy.git"
+ELIZAWY_UPSTREAM_COMMIT = "f07f7f5892e67c932c68f70bb04472f2c64e46bc"
+ELIZAWY_UPSTREAM_RAW = f"https://raw.githubusercontent.com/ElizaWy/LPC/{ELIZAWY_UPSTREAM_COMMIT}"
 
 CORE_PACKS = ("Terrain.zip", "Structure.zip", "Objects.zip", "FX.zip")
 OPTIONAL_ARCHIVES = ("Characters.zip", "FourSeasonAlternative.zip")
 LEGACY_GENERATED_CATALOGS = {"content/catalog/source_index.json", "content/catalog/source_collisions.json"}
+SOURCE_PACKAGE_EXCLUDE_EXACT = {
+    "Havenwild_M2D080A_Guarded_Compile_Repair.ps1",
+    "tools/_package_pie_temp.py",
+}
+SOURCE_PACKAGE_HANDOFF_SUFFIXES = {".zip", ".7z", ".rar", ".patch", ".pccpatch", ".tar", ".tgz", ".gz"}
 
 
 def _now() -> str:
@@ -228,6 +240,50 @@ def _manifest_entries() -> list[dict]:
     return data["entries"]
 
 
+def _manifest_data_matches(data: bytes, entry: dict) -> tuple[bool, str]:
+    """Validate source bytes against the checked-in core manifest.
+
+    The historical manifest was captured from a Windows Git working tree. Git's
+    text checkout conversion therefore recorded CRLF byte identities for the
+    upstream Credits.txt files, while GitHub raw/blob endpoints correctly serve
+    the repository's LF bytes. Binary files remain byte-exact. For .txt source
+    metadata only, accept the raw GitHub blob when its CRLF-normalized form
+    matches the historical manifest. The downloaded LF bytes are preserved
+    unchanged so assets/elizawy is still an exact GitHub mirror.
+    """
+    expected_sha = str(entry.get("sha256") or "").lower()
+    expected_bytes = int(entry.get("bytes") or 0)
+    actual_sha = hashlib.sha256(data).hexdigest()
+    if (not expected_bytes or len(data) == expected_bytes) and (not expected_sha or actual_sha == expected_sha):
+        return True, "exact"
+
+    rel = str(entry.get("path") or "")
+    if Path(rel).suffix.lower() == ".txt":
+        lf = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        crlf = lf.replace(b"\n", b"\r\n")
+        compat_sha = hashlib.sha256(crlf).hexdigest()
+        if (not expected_bytes or len(crlf) == expected_bytes) and (not expected_sha or compat_sha == expected_sha):
+            return True, "git-text-eol"
+    return False, "mismatch"
+
+
+def _manifest_file_matches(path: Path, entry: dict) -> tuple[bool, str]:
+    if not path.is_file():
+        return False, "missing"
+    expected_sha = str(entry.get("sha256") or "").lower()
+    expected_bytes = int(entry.get("bytes") or 0)
+    if (not expected_bytes or path.stat().st_size == expected_bytes):
+        actual_sha = _sha256(path)
+        if not expected_sha or actual_sha == expected_sha:
+            return True, "exact"
+    if path.suffix.lower() == ".txt":
+        try:
+            return _manifest_data_matches(path.read_bytes(), entry)
+        except OSError:
+            return False, "read-error"
+    return False, "mismatch"
+
+
 def _copy_verified(src: Path, dst: Path, expected_sha: str | None) -> tuple[bool, str]:
     if not src.is_file():
         return False, "missing"
@@ -265,12 +321,101 @@ def _extract_verified(z: zipfile.ZipFile, member: str, dst: Path, expected_sha: 
     return True, "extracted"
 
 
-def sync_assets(source_arg: str | None, *, characters: bool = False, include_optional: bool = False, reference: bool = False) -> int:
+
+def refresh_assets_from_upstream() -> int:
+    """Restore canonical non-character assets from the pinned ElizaWy/LPC commit.
+
+    Every downloaded byte stream must match this repository's checked-in manifest
+    SHA-256 and byte count before it can replace the hydrated local copy.
+    """
+    entries = _manifest_entries()
+    ASSET_ROOT.mkdir(parents=True, exist_ok=True)
+    restored = current = failed = 0
+    print(f"ELIZAWY UPSTREAM: https://github.com/ElizaWy/LPC/tree/{ELIZAWY_UPSTREAM_COMMIT}")
+    print(f"TARGET: {ASSET_ROOT}")
+    print("POLICY: exact GitHub blob bytes are installed; binary identity is exact, legacy Credits.txt manifest identity is EOL-canonicalized")
+    for idx, entry in enumerate(entries, 1):
+        rel = str(entry["path"]).replace("\\", "/")
+        encoded = "/".join(urllib.parse.quote(part, safe="") for part in rel.split("/"))
+        url = f"{ELIZAWY_UPSTREAM_RAW}/{encoded}"
+        expected_sha = str(entry.get("sha256") or "").lower()
+        expected_bytes = int(entry.get("bytes") or 0)
+        dst = ASSET_ROOT / Path(rel)
+        # A correct hydrated file is already an exact mirror of the pinned
+        # upstream identity. Do not hit GitHub again for bytes we have proved.
+        if dst.is_file():
+            local_ok, local_mode = _manifest_file_matches(dst, entry)
+            if local_ok:
+                current += 1
+                if idx % 25 == 0 or idx == len(entries):
+                    print(f"UPSTREAM REFRESH: {idx}/{len(entries)} checked | restored={restored} current={current} failed={failed}")
+                continue
+        try:
+            request = urllib.request.Request(
+                url,
+                headers={"User-Agent": "Havenwild-Bevy-Asset-Authority/0.8.1"},
+            )
+            with urllib.request.urlopen(request, timeout=30) as response:
+                data = response.read()
+        except (OSError, urllib.error.URLError) as exc:
+            print(f"[UPSTREAM FAIL] {rel}: {exc}")
+            failed += 1
+            continue
+        actual_sha = hashlib.sha256(data).hexdigest()
+        manifest_ok, identity_mode = _manifest_data_matches(data, entry)
+        if not manifest_ok:
+            print(
+                f"[UPSTREAM IDENTITY FAIL] {rel}: bytes={len(data)} sha256={actual_sha} "
+                f"expected_bytes={expected_bytes} expected_sha256={expected_sha}"
+            )
+            failed += 1
+            continue
+        if identity_mode == "git-text-eol":
+            print(f"[UPSTREAM TEXT EOL] {rel}: GitHub LF blob accepted against historical Windows-CRLF manifest; raw upstream bytes preserved")
+        if dst.is_file() and dst.stat().st_size == len(data) and _sha256(dst) == actual_sha:
+            current += 1
+        else:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            tmp = dst.with_suffix(dst.suffix + ".upstream.tmp")
+            tmp.write_bytes(data)
+            tmp.replace(dst)
+            restored += 1
+        if idx % 25 == 0 or idx == len(entries):
+            print(f"UPSTREAM REFRESH: {idx}/{len(entries)} checked | restored={restored} current={current} failed={failed}")
+    if failed:
+        print("UPSTREAM REFRESH: FAILED — no unverified source bytes were installed")
+        return 3
+    build_core_catalog()
+    print(f"UPSTREAM REFRESH: PASS — restored={restored} already-current={current}")
+    return 0
+
+def sync_assets(
+    source_arg: str | None,
+    *,
+    characters: bool = False,
+    include_optional: bool = False,
+    reference: bool = False,
+    local_only: bool = False,
+) -> int:
+    # Core authority order is deliberate: the exact pinned GitHub revision is
+    # primary for every fresh/missing source deployment. Local/remembered trees
+    # are recovery fallbacks, never the default authority.
+    if not local_only:
+        print("ASSET AUTHORITY ORDER: pinned ElizaWy GitHub revision -> remembered/local fallback")
+        upstream_rc = refresh_assets_from_upstream()
+        if upstream_rc == 0 and not (characters or include_optional or reference):
+            return 0
+        if upstream_rc == 0:
+            print("CORE ASSETS: pinned GitHub hydration is complete; resolving local source only for requested optional/reference content.")
+        else:
+            print(f"PINNED GITHUB HYDRATION: failed ({upstream_rc}); trying remembered/local fallback.")
+
     source = resolve_asset_source(source_arg)
     if not source:
-        print("ASSETS: no authoritative source discovered.")
-        print("Use: python ForgePY.py assets sync --source \"D:\\path\\to\\asset-source\"")
-        print("Accepted source: complete project containing assets/elizawy, extracted Terrain/Structure/Objects/FX tree, or pack ZIP staging folder.")
+        print("ASSETS: no authoritative local fallback source discovered.")
+        print("Primary source is the pinned ElizaWy GitHub revision; local source is only needed when GitHub hydration is unavailable or optional packs are requested.")
+        print("Fallback: python ForgePY.py assets sync --source \"D:\\path\\to\\asset-source\" --local-only")
+        print("Accepted fallback: complete project containing assets/elizawy, extracted Terrain/Structure/Objects/FX tree, or pack ZIP staging folder.")
         return 2
     _remember_source(source)
     print(f"ASSET SOURCE: {source}")
@@ -492,7 +637,7 @@ def hydrate_characters(source_arg: str | None = None, *, verify: bool = False) -
     return build_character_catalog(archive)
 
 
-def asset_status(*, full_verify: bool = False) -> int:
+def asset_status(*, full_verify: bool = False, require_complete: bool = False) -> int:
     active = _load_json(ACTIVE_SHEETS, {}) or {}
     problems = 0
     print(f"ASSET ROOT: {ASSET_ROOT}")
@@ -519,15 +664,15 @@ def asset_status(*, full_verify: bool = False) -> int:
                 print(f"[CORE MISSING] {rel}")
                 problems += 1
                 continue
-            expected_size = entry.get("bytes")
-            if expected_size is not None and p.stat().st_size != int(expected_size):
-                print(f"[CORE SIZE FAIL] {rel}: expected {expected_size}, actual {p.stat().st_size}")
-                problems += 1
-                continue
-            expected_sha = str(entry.get("sha256") or "").lower()
-            actual_sha = _sha256(p)
-            if expected_sha and actual_sha != expected_sha:
-                print(f"[CORE HASH FAIL] {rel}\n  expected {expected_sha}\n  actual   {actual_sha}")
+            manifest_ok, identity_mode = _manifest_file_matches(p, entry)
+            if not manifest_ok:
+                expected_size = entry.get("bytes")
+                expected_sha = str(entry.get("sha256") or "").lower()
+                actual_sha = _sha256(p)
+                print(
+                    f"[CORE IDENTITY FAIL] {rel}: expected_bytes={expected_size} actual_bytes={p.stat().st_size}\n"
+                    f"  expected_sha256 {expected_sha}\n  actual_sha256   {actual_sha}"
+                )
                 problems += 1
                 continue
             verified += 1
@@ -537,6 +682,10 @@ def asset_status(*, full_verify: bool = False) -> int:
     else:
         present = sum(1 for e in manifest if (ASSET_ROOT / e["path"]).is_file())
         print(f"CORE MANIFEST: {present}/{len(manifest)} files present")
+        if require_complete and present != len(manifest):
+            missing = len(manifest) - present
+            print(f"[CORE INCOMPLETE] {missing} manifest file(s) missing; hydration/repair required")
+            problems += 1
 
     char_dir = ASSET_ROOT / "Characters"
     state = (_load_json(ASSET_STATE, {}) or {}).get("characters", {})
@@ -638,7 +787,8 @@ def source_status() -> int:
     rc, inside = _git_text(["rev-parse", "--is-inside-work-tree"])
     if rc or inside.lower() != "true":
         print("[LOCAL] This folder is not a Git checkout yet.")
-        print("        Builds continue locally; GitHub refresh activates automatically once the project is cloned/checked out with an origin remote.")
+        print("        Builds continue locally; PCC primary option 2 can attach the canonical GitHub origin after a successful Full Gate.")
+        print(f"        CANONICAL ORIGIN: {CANONICAL_REPOSITORY_URL}")
         return 0
     _, branch = _git_text(["branch", "--show-current"])
     _, head = _git_text(["rev-parse", "--short=12", "HEAD"])
@@ -674,6 +824,7 @@ def source_refresh(*, explicit: bool = False) -> int:
     remote_rc, remote_url = _git_text(["remote", "get-url", "origin"])
     if remote_rc:
         print("SOURCE REFRESH: no origin remote configured; skipped")
+        print(f"CANONICAL ORIGIN: {CANONICAL_REPOSITORY_URL}")
         return 0
     dirty_rc, dirty = _git_text(["status", "--porcelain"])
     if dirty_rc:
@@ -782,7 +933,7 @@ def doctor() -> int:
         failures += 0 if ok else 1
     asset_rc = asset_status()
     if asset_rc:
-        print("[INFO] Runtime assets are not ready. Use `ForgePY.py assets sync --source <path>`. Build can still be attempted.")
+        print("[INFO] Runtime assets are not ready. Use `ForgePY.py assets sync`; pinned GitHub hydration is attempted first. Build can still be attempted.")
     if _command_exists("rustc"):
         _stream(["rustc", "--version"], label="rustc-version")
     if _command_exists("cargo"):
@@ -924,35 +1075,48 @@ def clean() -> int:
     return 0
 
 
+def _source_package_include(rel: Path) -> bool:
+    """Return True only for files that belong in a deployable source-only rollup."""
+    rel_posix = rel.as_posix()
+    excluded_roots = {".git", "target", "artifacts", ".vs", ".idea", ".vscode", ".forgepy", ".pcc", "__pycache__"}
+
+    if rel.suffix.lower() == ".pyc":
+        return False
+    if rel_posix in {"LOCAL_SEED_MANIFEST.json", "LOCAL_SEED_OVERLAY_README.txt", "pcc_patch.json"}:
+        return False
+    if rel_posix in SOURCE_PACKAGE_EXCLUDE_EXACT:
+        return False
+    if rel.parts[:3] == ("content", "scenes", "derived"):
+        # Only an explicit authored-scene promotion may publish local corrections.
+        return False
+    if rel.parts and rel.parts[0] in excluded_roots:
+        return False
+    if rel.suffix.lower() in SOURCE_PACKAGE_HANDOFF_SUFFIXES:
+        # Archive/patch payloads are deployment/update artifacts, never source. Keeping
+        # them caused previous source-only rollups to recursively ship old handoffs.
+        return False
+    if rel.parts and rel.parts[0] == "updates":
+        return rel_posix == "updates/README.md"
+    if rel.parts and rel.parts[0] in {"assets", "reference"}:
+        # Keep only explanatory source-controlled asset readme.
+        return rel_posix == "assets/README.md"
+    if rel_posix in {GENERATED_INDEX.relative_to(ROOT).as_posix(), CHARACTER_INDEX.relative_to(ROOT).as_posix()}:
+        return False
+    if rel_posix in LEGACY_GENERATED_CATALOGS:
+        return False
+    return True
+
+
 def package_source() -> int:
     out_dir = ROOT / "artifacts"
     out_dir.mkdir(parents=True, exist_ok=True)
     out = out_dir / f"Havenwild_Bevy_Standalone_SOURCE_ONLY_{_dt.date.today():%Y%m%d}.zip"
-    excluded_roots = {".git", "target", "artifacts", ".vs", ".idea", ".vscode", ".forgepy", ".pcc", "__pycache__"}
     with zipfile.ZipFile(out, "w", allowZip64=True, compression=zipfile.ZIP_DEFLATED) as z:
         for p in sorted(ROOT.rglob("*")):
-            if not p.is_file() or p == out or p.suffix.lower() == ".pyc":
+            if not p.is_file() or p == out:
                 continue
             rel = p.relative_to(ROOT)
-            if rel.as_posix() in {"LOCAL_SEED_MANIFEST.json", "LOCAL_SEED_OVERLAY_README.txt", "pcc_patch.json"}:
-                continue
-            if rel.parts[:3] == ("content", "scenes", "derived"):
-                # Only an explicit authored-scene promotion may publish local corrections.
-                continue
-            if p.name.lower().endswith(".pccpatch.zip"):
-                continue
-            if rel.parts and rel.parts[0] in excluded_roots:
-                continue
-            if rel.parts and rel.parts[0] == "updates":
-                if rel.as_posix() != "updates/README.md":
-                    continue
-            if rel.parts and rel.parts[0] in {"assets", "reference"}:
-                # Keep only explanatory source-controlled asset readme.
-                if rel.as_posix() != "assets/README.md":
-                    continue
-            if rel.as_posix() in {GENERATED_INDEX.relative_to(ROOT).as_posix(), CHARACTER_INDEX.relative_to(ROOT).as_posix()}:
-                continue
-            if rel.as_posix() in LEGACY_GENERATED_CATALOGS:
+            if not _source_package_include(rel):
                 continue
             z.write(p, rel.as_posix())
     print(f"PACKAGE: {out}")
@@ -975,7 +1139,7 @@ def menu() -> int:
         "2": ("Run Studio (DX12)", lambda: run("dx12", False)),
         "3": ("Build Studio", lambda: build()),
         "4": ("Doctor / status", doctor),
-        "5": ("Sync core assets", lambda: sync_assets(None)),
+        "5": ("Hydrate / repair core assets (pinned GitHub first)", lambda: sync_assets(None)),
         "6": ("Hydrate characters", lambda: hydrate_characters()),
         "7": ("Rebuild local asset catalog", build_catalog),
         "8": ("Run Studio (Vulkan)", lambda: run("vulkan", False)),
@@ -1035,11 +1199,14 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     aset = assets.add_subparsers(dest="asset_command")
     status_p = aset.add_parser("status")
     status_p.add_argument("--full", action="store_true", help="hash-verify every core manifest file")
+    status_p.add_argument("--complete", action="store_true", help="require every core manifest path to exist without hashing all files")
     sync_p = aset.add_parser("sync")
     sync_p.add_argument("--source")
     sync_p.add_argument("--characters", action="store_true")
     sync_p.add_argument("--include-optional", action="store_true")
     sync_p.add_argument("--reference", action="store_true")
+    sync_p.add_argument("--local-only", action="store_true", help="skip pinned GitHub hydration and use only an explicit/remembered local fallback")
+    aset.add_parser("refresh-upstream")
     char_p = aset.add_parser("hydrate-characters")
     char_p.add_argument("--source")
     char_p.add_argument("--verify", action="store_true", help="recheck all hydrated character file sizes even when local hydration state is current")
@@ -1070,8 +1237,9 @@ def main(argv: list[str]) -> int:
     if command == "full": return full(args.source)
     if command == "run": return run(args.backend, args.native_frame, args.verbose_gpu)
     if command == "assets":
-        if args.asset_command == "status": return asset_status(full_verify=args.full)
-        if args.asset_command == "sync": return sync_assets(args.source, characters=args.characters, include_optional=args.include_optional, reference=args.reference)
+        if args.asset_command == "status": return asset_status(full_verify=args.full, require_complete=args.complete)
+        if args.asset_command == "sync": return sync_assets(args.source, characters=args.characters, include_optional=args.include_optional, reference=args.reference, local_only=args.local_only)
+        if args.asset_command == "refresh-upstream": return refresh_assets_from_upstream()
         if args.asset_command == "hydrate-characters": return hydrate_characters(args.source, verify=args.verify)
         print("Use `ForgePY.py assets --help`.")
         return 2

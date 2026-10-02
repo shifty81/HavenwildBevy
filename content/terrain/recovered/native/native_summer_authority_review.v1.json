@@ -1,0 +1,62 @@
+{
+  "schema": "havenwild.native_summer_authority_review.v1",
+  "version": 1,
+  "sourceAtlas": "Terrain/terrain_summer.png",
+  "sourceAtlasSha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
+  "objective": "Use mature source-derived LPC/ElizaWy geometry while removing Macroquad-era implementation assumptions and generated-art fallbacks.",
+  "decisions": [
+    {
+      "authority": "Native complete Summer source map",
+      "decision": "KEEP",
+      "reason": "Source-derived exhaustive catalog; 305/305 non-transparent cells mapped without modifying artwork."
+    },
+    {
+      "authority": "Native 20-family seasonal topology",
+      "decision": "KEEP_AND_NORMALIZE",
+      "reason": "Explicit authored outer/inner source coordinates describe how the LPC terrain art is intended to connect."
+    },
+    {
+      "authority": "Grass-over-Dirt / Grass-bank / Dirt-bank source topology",
+      "decision": "ACTIVE_RUNTIME",
+      "reason": "Directly supports normal Grass, Dirt, Water semantic painting with exact source regions."
+    },
+    {
+      "authority": "Native overlays, pond variants, depth rings, sand/path families",
+      "decision": "CATALOG_NOW_ADVANCED_LATER",
+      "reason": "Valid source geometry retained in full catalog; not forced into the basic flat brush until its semantic material is explicitly selected."
+    },
+    {
+      "authority": "Native generated lpc_mapped_terrain_v7_32 atlas and broad tuple bake",
+      "decision": "EXCLUDE_FROM_VISUAL_AUTHORITY",
+      "reason": "Derived/generated artwork path conflicts with immutable exact-source requirement; semantics may remain donor reference only."
+    },
+    {
+      "authority": "Pixel-color corner classifier",
+      "decision": "DEMOTE_TO_DIAGNOSTIC",
+      "reason": "Useful to inspect unknown source art but must never select runtime terrain when explicit source topology exists."
+    },
+    {
+      "authority": "Forced MudBank around every generated river",
+      "decision": "DELETE",
+      "reason": "Artwork contains direct Grass-to-Water shoreline topology; Dirt is a semantic material choice, not an automatic river requirement."
+    },
+    {
+      "authority": "Cliff/elevation topology in flat brush",
+      "decision": "EXCLUDE_FROM_FLAT_PROFILE",
+      "reason": "Catalog separately; cliff authoring remains a dedicated elevation pass."
+    }
+  ],
+  "runtimeCoverage": {
+    "safeFills": 3,
+    "directMixedCornerRecipes": 36,
+    "exactSourceCompositeRecipes": 6,
+    "pairwiseStatesPerPair": 16,
+    "pairwiseMixedStatesPerPair": 14,
+    "activePairs": [
+      "Grass|MudBank",
+      "Grass|RiverWater",
+      "MudBank|RiverWater"
+    ]
+  },
+  "sourceMutationAllowed": false
+}

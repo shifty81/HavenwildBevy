@@ -13,12 +13,13 @@ scene = json.loads(original)
 assert scene['schema'] == 'havenwild.elizawy.scene.v1'
 assert scene['size'] == [40,28] and len(scene['tiles']) == 1120
 assert all('role' in cell and 'source_asset' in cell and 'source_rect' in cell for cell in scene['tiles'])
-assert 'mod scene_v2;' in main and 'migration_preview: Option<SceneV2>' in main
-assert 'SceneV2::preview_import(source)' in main
-assert '.save_new_draft(&source, &destination)' in main
-assert 'Preview separate v2 scene draft' in main and 'Create separate v2 draft' in main
-assert 'if state.dirty' in main and 'Original v1 unchanged' in main
-assert 'state.source_scene_path' in main and 'state.document_path.is_file()' in main
+assert 'mod scene_v2;' in main and 'SceneV2::preview_import(&legacy_base_path)' in main
+assert '.save_editable_draft(' in main
+assert 'Preview separate v2 scene draft' not in main and 'Create separate v2 draft' not in main
+assert 'migration_preview: Option<SceneV2>' not in main
+assert 'verify_legacy_source' in v2_src and 'pub fn save_new_draft(' in v2_src
+assert 'let source_scene_path' in main and 'summer_world.layered.draft.json' in main and 'summer_seed::populate_new_scene' in main
+assert 'read_draft(&layered_path)' in main and 'verify_legacy_source(&legacy_base_path)' in main
 assert 'write_atomic_new(draft_path, &bytes)' in v2_src
 assert 'fs::hard_link(&staged, path)' in atomic and '.create_new(true)' in atomic
 assert 'pub fn validate(&self)' in v1_src and 'pub fn validate(&self)' in v2_src
@@ -40,5 +41,5 @@ if draft_path.exists():
     if hashlib.sha256(original).hexdigest() != draft['legacy_origin']['source_sha256']:
         print('NOTE: saved v2 draft has a different v1 origin revision; its existing contents are retained, not silently rebased.')
 assert scene_path.read_bytes() == original, 'read-only source fixture contract'
-print('M2D02-B SELFTEST: PASS / v1 fixture 1120 intact; v2 preview explicit; sparse layer/object ops; structural metadata not invented; atomic create-new only; SHA256 fixture =', hashlib.sha256(original).hexdigest()[:12])
+print('M2D02-B SELFTEST: PASS / v1 fixture 1120 intact; v2 source migration internal and one active live scene; sparse layer/object ops; structural metadata not invented; atomic create-new only; SHA256 fixture =', hashlib.sha256(original).hexdigest()[:12])
 print('NOTE: Source-only test; native cargo test/build and UI validation are separate.')

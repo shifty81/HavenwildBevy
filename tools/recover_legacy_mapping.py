@@ -18,6 +18,10 @@ KNOWN_RELATIVE = [
     Path('assets/generated/worldgen_v0_1/terrain/lpc_terrain_summer_complete_map_32.json'),
     Path('content/assets/lpc/lpc_seasonal_terrain_topology_v0_1.json'),
     Path('assets/generated/worldgen_v0_1/terrain/lpc_mapped_terrain_v7_32.json'),
+    Path('assets/generated/worldgen_v0_1/terrain/live_autotile_16_32.json'),
+    Path('assets/generated/worldgen_v0_1/terrain/lpc_expandable_ponds_32.json'),
+    Path('content/assets/intake/lpc_terrain_family_mapping_v0_3.json'),
+    Path('content/assets/lpc/lpc_terrain_promotion_v0_2.json'),
     Path('content/terrain/havenwild_terrain_standard_v1.json'),
     Path('content/terrain/havenwild_terrain_authoring_palette_v1.json'),
 ]
@@ -28,6 +32,10 @@ NAME_PATTERNS = [
     '*seasonal*source*.json',
     '*tuple*catalog*.json',
     '*terrain*topology*.json',
+    '*terrain*promotion*.json',
+    '*terrain*family*mapping*.json',
+    '*live*autotile*.json',
+    '*expandable*pond*.json',
 ]
 
 

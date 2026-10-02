@@ -30,12 +30,24 @@
     "characters": "local_hydration_63991_files_metadata_catalog_no_per_file_sha256",
     "seasonalAlternative": "never_auto_merge",
     "characterCatalog": "content/catalog/characters_index.local.json",
-    "handoffPolicy": "source_only_no_asset_payloads"
+    "handoffPolicy": "source_only_no_asset_payloads",
+    "hydrationAuthority": "Pinned ElizaWy/LPC GitHub commit first when core assets are missing; manifest-verified local/remembered mirrors are fallback only."
   },
   "authoredContent": {
     "sceneRoot": "content/scenes",
     "initialScene": "content/scenes/elizawy_mapping_certification.scene.json",
-    "visualTestFixture": "content/scenes/summer_river.scene.json"
+    "visualTestFixture": "content/scenes/summer_river.scene.json",
+    "chunkOverlay": "editor overlay only, default 32x32; no neighboring chunk materialization yet",
+    "structuralEditing": "explicit SceneV2 structural cell transaction; provisional PIE override only",
+    "editorShell": "permanent compact left tool rail + permanent compact layer rail; all feature-rich tool applications are floating/dock-over-canvas windows; docking never reserves/reflows the world canvas",
+    "toolLauncher": "bottom-left Havenwild launcher expands right/up over canvas; Ctrl+Space; only real wired applications enabled; planned World Generator/Pixel/Animation entries remain disabled until implemented",
+    "commandRegistry": "src/editor_commands.rs central labels/descriptions/shortcuts shared by rail/toolbar/tooltips; direct canvas tools Q/B/E/P; Save Ctrl+S; Undo/Redo Ctrl+Z/Ctrl+Y; PIE F6; Focus F11",
+    "collisionEditing": "Source artwork stays immutable. Collision is Havenwild metadata with reusable exact-source profiles and optional local 32x32 per-cell pixel masks; direct click-drag painting on the World canvas supports 1/2/4/8px brushes and 16x cursor-anchored zoom.",
+    "collisionPrecedence": "Local world collision override > reusable exact-source behavior profile > semantic traversal default. Removing an override reveals the inherited profile/default; no ElizaWy PNG bytes are modified.",
+    "assetAuthority": "One canonical ElizaWy lane under content/assets/authority; original source pixels immutable; runtime/world composition references exact canonical source regions; generated artwork forbidden.",
+    "worldComposition": "Local .forgepy/world/havenwild_world.local.json; signed 32x32 chunks; source-driven Summer semantic terrain, reusable source behavior profiles, local terrain/traversal/collision/elevation overrides, and generation tombstones persist through regeneration.",
+    "worldGenerator": "Single shared Summer semantic resolver consumes exact ElizaWy source geometry recovered from mature Havenwild Native mapping; generated river does not force MudBank; Grass/Water, Dirt/Water, and Grass/Dirt are independent semantic relationships; generated artwork and pixel-color runtime guessing are forbidden.",
+    "worldPanels": "World Properties, World Generator, Terrain Rules, Scene/Layers and specialist panels use compact dockable surfaces with collapsible sub-sections; advanced evidence/DG controls are hidden behind explicit advanced sections so normal authoring remains canvas-first."
   },
   "sourceControl": {
     "provider": "github",
@@ -43,11 +55,13 @@
     "branchPolicy": "current_checked_out_branch",
     "buildRefresh": "safe_fast_forward_when_clean",
     "dirtyPolicy": "never_stash_reset_rebase_or_overwrite; skip refresh and build local worktree",
-    "repositoryUrl": "auto-detect-from-git-origin"
+    "repositoryUrl": "https://github.com/shifty81/HavenwildBevy.git",
+    "canonicalRepository": "shifty81/HavenwildBevy",
+    "bootstrapPolicy": "Full Gate may precede Git setup; primary workflow option 2 can initialize/adopt the canonical GitHub origin while preserving the certified source tree."
   },
-  "forgepyVersion": "0.4.6",
+  "forgepyVersion": "0.4.10",
   "pcc": {
-    "version": "1.2.6",
+    "version": "1.3.4",
     "logs": ".pcc/logs",
     "receipts": ".pcc/receipts",
     "debugBundles": ".pcc/debug",
@@ -55,22 +69,30 @@
     "patchSchema": "havenwild.bevy.pcc.patch.v1",
     "failurePolicy": "child failures are captured; interactive host remains open; debug bundle auto-generated",
     "assetBoundary": "source-only; hydrated art is excluded from patches/packages/debug bundles",
-    "telemetry": "phased full gate with unique phase receipts, exact-version governed patch chaining, Windows-safe patch identity checks, post-apply hashes, Cargo-free Rust source/module/dependency audit, authored-scene source-rect validation, Summer mapping recovery validation, 16-mask semantic resolver-lab validation, full resolved semantic-to-recipe edge/corner + bit-orientation pipeline validation, full core-asset hash certification, Cargo.lock snapshot + --locked metadata verification, per-job heartbeat, active-job recovery, gate receipts, recent-log diagnostics; runtime-generation handshake prevents pre-update PCC processes from certifying post-update source"
+    "telemetry": "phased full gate with unique phase receipts, exact-version governed patch chaining, Windows-safe patch identity checks, post-apply hashes, Cargo-free Rust source/module/dependency audit, authored-scene source-rect validation, Summer mapping recovery validation, 16-mask semantic resolver-lab validation, full resolved semantic-to-recipe edge/corner + bit-orientation pipeline validation, early complete-manifest preflight + immediate full core-asset identity certification, Cargo.lock snapshot + --locked metadata verification, per-job heartbeat, active-job recovery, gate receipts, recent-log diagnostics; runtime-generation handshake prevents pre-update PCC processes from certifying post-update source",
+    "gitPublish": "Full Gate records both Git state and a Git-history-independent publishable-source fingerprint. Primary option 2 can bootstrap Git or attach the canonical shifty81/HavenwildBevy origin after certification without invalidating the gate when source bytes are unchanged. Existing unrelated remote history is adopted with git reset --mixed so current source files are preserved, then certified changes are committed onto origin/main. Machine-readable Git filename queries keep stderr separate so Windows core.autocrlf warnings cannot become staged path names. Fetch/ahead-behind checks still fail closed on behind/diverged branches, forbidden local payloads, or post-gate source edits.",
+    "mainWorkflow": "1 Full Quality Gate / certify current source; 2 Commit + Push certified source to canonical GitHub (self-heals missing local Git/origin and safely adopts existing history); 3 Patch scan/review/apply; secondary operations remain grouped by function."
   },
   "terrain": {
     "contract": "content/terrain/dual_grid_contract.v1.json",
     "initialRecipeFamily": "content/terrain/recipes/summer_grass_void.v1.json",
-    "status": "DG-03 verified shared resolver: 305/305 non-transparent Summer source cells preserved as source evidence; semantic-only 5x5 lab covers all 16 masks; shared semantic->vertex->recipe resolver drives the full 6x6 vertex preview; all 25 semantic cells are checked for exact four-vertex invalidation and corner-bit orientation; recipe certification remains manual/source-backed",
+    "status": "M2D081 Summer completion: all 305/305 non-transparent terrain_summer.png cells are canonical runtime-selectable across 41 recovered source groups; flat GRS/DIR/WTR resolves all 81/81 four-corner states including 36 exact-source tri-material junctions; Grass/Dirt/Water homogeneous interiors use deterministic source variants; RiverWater has an 8-phase source-backed runtime animation candidate; diagonal checkerboards preserve isolated land/detail spots; cliffs and waterfalls remain separate next-stage structural systems.",
     "fixtureCoverage": "16/16 topology masks covered by checked-in fixtures and the immutable semantic resolver seed; editor experiments persist separately under .forgepy",
-    "mapper": "src/terrain_mapper.rs + dockable responsive Terrain Mapper with 29-sheet Terrain catalog, resolved output preview, semantic undo/redo, dirty-vertex highlighting, and editable composite parts",
+    "mapper": "Normal authoring is semantic/canvas-first. Terrain Rules summarizes 305/305 Summer runtime cells, 41 source groups, 81/81 G/D/W corner states, fill variation and source-backed water animation. Advanced source evidence/manual DG tools remain collapsible and optional.",
     "summerRecovery": "content/terrain/recovery/summer_source_cells.v1.json",
     "historicalAuthority": "content/terrain/recovery/historical_authority.v1.json",
     "legacyRecoveryTool": "tools/recover_legacy_mapping.py",
     "confidencePolicy": "certified/reviewed/source_mapped/candidate/ambiguous/unsupported/unmapped; historical evidence never auto-promotes to certification",
-    "resolver": "src/terrain.rs::corner_mask_for_vertex + src/terrain_resolver.rs::resolve_semantic_lab; shared UI/runtime-facing vertex resolution consumes semantic-only cells and recipe state",
+    "resolver": "One shared source-driven Summer resolver in AssetAuthority/WorldDocument drives generator, authored world paint and runtime preview; homogeneous fills use deterministic exact-source variants, tri-material junctions use exact-source quadrant composites, and homogeneous RiverWater can cycle source-backed Summer phases. Historical generated-atlas rules and pixel-color classifiers remain diagnostic only.",
     "semanticLabSeed": "content/terrain/previews/dg01_grass_void.semantic_lab.v1.json",
     "semanticLabLocal": ".forgepy/semantic_lab.local.json",
-    "runtimeResolver": "src/terrain_resolver.rs"
+    "runtimeResolver": "src/terrain_resolver.rs",
+    "consolidatedHistoricalSource": "content/mapping/recovered/region_candidates.v1.json",
+    "consolidatedTriage": "content/mapping/recovered/review_triage.v3.json",
+    "consolidationPolicy": "historical source/address only; no auto semantic promotion or recipe certification",
+    "nativeDonorReview": "content/terrain/recovered/native/native_summer_authority_review.v1.json",
+    "nativeCompleteMap": "content/terrain/recovered/native/lpc_terrain_summer_complete_map_32.native.v1.json",
+    "nativeTopology": "content/terrain/recovered/native/lpc_seasonal_terrain_topology.native.v1.json"
   },
-  "sourceVersion": "0.5.6"
+  "sourceVersion": "0.8.1"
 }

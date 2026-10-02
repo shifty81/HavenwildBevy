@@ -1,0 +1,21 @@
+{
+  "schema": "havenwild.bevy.source.checkpoint.v1",
+  "id": "M2D03C",
+  "sourceVersion": "0.5.6",
+  "forgepyVersion": "0.4.6",
+  "pccVersion": "1.2.6",
+  "publishedBaseCommit": "3d8a52a46e134374117d16f6dad86e47e67722c4",
+  "patch": "cumulative_from_published_A_includes_B_and_C_safe_over_B",
+  "scope": [
+    "single_active_scene",
+    "scene_layers_instance_navigator",
+    "single_play_scene_stop_pie",
+    "select_drag_preview",
+    "undo_redo_save",
+    "legacy_migration_preview_retired_from_ui"
+  ],
+  "sourceAssets": "unchanged;349 core files manifested; original PNG bytes not shipped",
+  "certification": "python/static/source replay only; Windows Cargo, visual alpha and interactive PIE pending",
+  "fullSummerScene": "not yet authored; pinned editable 40x28 Summer River fixture retained",
+  "gitHubPush": "not performed; require Windows Full Quality Gate and user acceptance"
+}

@@ -27,7 +27,8 @@ assert index['retiredLocalDraftPreserved'].endswith('.assembled.draft.json')
 assert index['activeDerivedDraft'].endswith('.source_exact.draft.json')
 assert fixture_path.read_bytes()==fixture_bytes and sha(original)==original_hash
 main=(ROOT/'src/main.rs').read_text('utf-8')
-assert '.source_exact.draft.json' in main and '.assembled.draft.json' not in main
+assert 'summer_world.layered.draft.json' in main and '.assembled.draft.json' not in main
+assert 'summer_seed::populate_new_scene' in main and 'verify_legacy_source(&legacy_base_path)' in main
 assert 'visual_samples.len() != 0' in main
 assert 'fn snapped_scene_edge(' in main
 assert 'draw_assembled_objects(&painter, state, scene, px, canvas);' in main

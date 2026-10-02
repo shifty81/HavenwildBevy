@@ -186,6 +186,55 @@ pub struct PlacedObject {
     pub parts: Vec<ObjectPart>,
     pub origin: ObjectOrigin,
 }
+impl PlacedObject {
+    /// A manually selected region is one complete source-bound instance. Do not
+    /// infer an object's silhouette or remove allegedly empty/black source pixels.
+    pub fn manual_region(
+        id: String,
+        layer: LayerId,
+        anchor: [i32; 2],
+        source: SourceBinding,
+    ) -> Self {
+        let width = source.source_rect[2].div_ceil(32);
+        let height = source.source_rect[3].div_ceil(32);
+        Self {
+            id,
+            label: format!(
+                "Manual region: {} @ {:?}",
+                source.source_asset, source.source_rect
+            ),
+            layer,
+            anchor,
+            footprint: [width, height],
+            parts: vec![ObjectPart {
+                offset: [0, 0],
+                source,
+            }],
+            origin: ObjectOrigin::Manual,
+        }
+    }
+
+    pub fn contains_cell(&self, cell: [usize; 2]) -> bool {
+        (0..2).all(|axis| {
+            i64::try_from(cell[axis]).ok().is_some_and(|coordinate| {
+                let start = i64::from(self.anchor[axis]);
+                coordinate >= start && coordinate - start < i64::from(self.footprint[axis])
+            })
+        })
+    }
+
+    /// The clicked cell is the vegetation/structure's foot (bottom center), not
+    /// an arbitrary top-left stamp. This does not claim a verified art socket.
+    pub fn origin_at_foot(cell: [usize; 2], footprint: [u32; 2]) -> Option<[i32; 2]> {
+        if footprint.contains(&0) {
+            return None;
+        }
+        let x = i64::try_from(cell[0]).ok()? - i64::from((footprint[0] - 1) / 2);
+        let y = i64::try_from(cell[1]).ok()? - i64::from(footprint[1] - 1);
+        Some([i32::try_from(x).ok()?, i32::try_from(y).ok()?])
+    }
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct RemovalTombstone {
     pub object_id: String,
@@ -196,6 +245,57 @@ pub struct ProtectedRegion {
     pub id: String,
     pub bounds: [usize; 4],
     pub reason: String,
+}
+
+pub const COLLISION_MASK_SIDE: usize = 32;
+
+/// Pixel-exact authored collision for one 32x32 world cell. A set bit is impassable.
+/// This is gameplay/editor metadata only; source artwork is never modified or sampled
+/// automatically into collision authority.
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+pub struct CollisionMask32 {
+    pub rows: Vec<u32>,
+}
+impl CollisionMask32 {
+    pub fn empty() -> Self {
+        Self {
+            rows: vec![0; COLLISION_MASK_SIDE],
+        }
+    }
+    pub fn full() -> Self {
+        Self {
+            rows: vec![u32::MAX; COLLISION_MASK_SIDE],
+        }
+    }
+    pub fn validate(&self) -> Result<(), String> {
+        if self.rows.len() != COLLISION_MASK_SIDE {
+            return Err("Collision mask must contain exactly 32 rows".into());
+        }
+        Ok(())
+    }
+    pub fn blocked(&self, x: usize, y: usize) -> bool {
+        x < COLLISION_MASK_SIDE && y < COLLISION_MASK_SIDE && (self.rows[y] & (1u32 << x)) != 0
+    }
+    pub fn set_blocked(&mut self, x: usize, y: usize, blocked: bool) {
+        if x >= COLLISION_MASK_SIDE || y >= COLLISION_MASK_SIDE {
+            return;
+        }
+        let bit = 1u32 << x;
+        if blocked {
+            self.rows[y] |= bit;
+        } else {
+            self.rows[y] &= !bit;
+        }
+    }
+    pub fn blocked_count(&self) -> u32 {
+        self.rows.iter().map(|row| row.count_ones()).sum()
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+pub struct CollisionCell {
+    pub index: usize,
+    pub mask: CollisionMask32,
 }
 
 /// Separate structural data channel. Empty on import: a v1 visual role is NOT
@@ -222,6 +322,8 @@ pub struct SceneV2 {
     pub legacy_base: Vec<Tile>,
     #[serde(default)]
     pub structural_cells: Vec<StructuralCell>,
+    #[serde(default)]
+    pub collision_cells: Vec<CollisionCell>,
     pub visual_layers: Vec<VisualLayer>,
     pub objects: Vec<PlacedObject>,
     pub removed_generated_objects: Vec<RemovalTombstone>,
@@ -262,6 +364,7 @@ impl SceneV2 {
             },
             legacy_base: source.tiles,
             structural_cells: Vec::new(), // evidence is absent in the v1 source-only fixture
+            collision_cells: Vec::new(), // collision authority is authored separately from source art
             visual_layers: LayerId::ORDERED
                 .iter()
                 .copied()
@@ -336,6 +439,13 @@ impl SceneV2 {
                 );
             }
         }
+        let mut collision_indices = BTreeSet::new();
+        for collision in &self.collision_cells {
+            if collision.index >= count || !collision_indices.insert(collision.index) {
+                return Err("Invalid/duplicate pixel collision cell".into());
+            }
+            collision.mask.validate()?;
+        }
         let mut ids = BTreeSet::new();
         for object in &self.objects {
             self.validate_object(object)?;
@@ -368,6 +478,44 @@ impl SceneV2 {
         }
         Ok(())
     }
+    /// Return the uppermost complete object instance whose rectangular footprint
+    /// contains a scene cell. This is an editor-selection bound, NOT pixel alpha,
+    /// collision, or certified asset-geometry inference.
+    pub fn object_at(&self, cell: [usize; 2]) -> Option<&PlacedObject> {
+        LayerId::ORDERED.iter().rev().find_map(|layer| {
+            self.objects
+                .iter()
+                .rev()
+                .find(|object| object.layer == *layer && object.contains_cell(cell))
+        })
+    }
+    pub fn collision_mask(&self, index: usize) -> Option<&CollisionMask32> {
+        self.collision_cells
+            .iter()
+            .find(|cell| cell.index == index)
+            .map(|cell| &cell.mask)
+    }
+
+    fn replace_collision_mask(&mut self, index: usize, mask: Option<CollisionMask32>) {
+        self.collision_cells.retain(|cell| cell.index != index);
+        if let Some(mask) = mask {
+            self.collision_cells.push(CollisionCell { index, mask });
+            self.collision_cells.sort_by_key(|cell| cell.index);
+        }
+    }
+    /// Side-effect-free drag destination probe. The same object bounds check is used
+    /// by SceneCommand::MoveObject at commit; no ephemeral invalid scene is written.
+    pub fn can_move_object_to(&self, id: &str, anchor: [i32; 2]) -> bool {
+        self.objects
+            .iter()
+            .find(|object| object.id == id)
+            .is_some_and(|object| {
+                let mut proposed = object.clone();
+                proposed.anchor = anchor;
+                self.validate_object(&proposed).is_ok()
+            })
+    }
+
     fn validate_object(&self, object: &PlacedObject) -> Result<(), String> {
         if object.id.is_empty()
             || object.label.is_empty()
@@ -426,8 +574,13 @@ impl SceneV2 {
         self.validate()?;
         self.verify_legacy_source(original)?;
         if original == derived
-            || derived.file_name().and_then(|name| name.to_str())
-                != Some("elizawy_mapping_certification.layered.draft.json")
+            || derived
+                .file_name()
+                .and_then(|name| name.to_str())
+                .is_none_or(|name| {
+                    name != "elizawy_mapping_certification.layered.draft.json"
+                        && name != "summer_world.layered.draft.json"
+                })
             || derived
                 .parent()
                 .and_then(|path| path.file_name())
@@ -525,6 +678,16 @@ pub enum SceneCommand {
     RemoveObject {
         id: String,
     },
+    /// A manual semantic/collision edit. Original pixels and visual layers remain unchanged.
+    SetStructuralCell {
+        index: usize,
+        after: Option<StructuralCell>,
+    },
+    /// Pixel-level collision mask for one 32x32 logical cell. None restores automatic/coarse collision.
+    SetCollisionMask {
+        index: usize,
+        after: Option<CollisionMask32>,
+    },
 }
 #[derive(Clone, Debug)]
 enum Delta {
@@ -547,6 +710,16 @@ enum Delta {
     NextSerial {
         before: u64,
         after: u64,
+    },
+    Structural {
+        index: usize,
+        before: Option<StructuralCell>,
+        after: Option<StructuralCell>,
+    },
+    Collision {
+        index: usize,
+        before: Option<CollisionMask32>,
+        after: Option<CollisionMask32>,
     },
 }
 impl Delta {
@@ -582,6 +755,31 @@ impl Delta {
                 }
                 doc.removed_generated_objects
                     .sort_by(|a, b| a.object_id.cmp(&b.object_id));
+            }
+            Self::Structural {
+                index,
+                before,
+                after,
+            } => {
+                doc.structural_cells.retain(|cell| cell.index != *index);
+                if let Some(cell) = if forward { after } else { before } {
+                    doc.structural_cells.push(cell.clone());
+                    doc.structural_cells.sort_by_key(|cell| cell.index);
+                }
+            }
+            Self::Collision {
+                index,
+                before,
+                after,
+            } => {
+                doc.replace_collision_mask(
+                    *index,
+                    if forward {
+                        after.clone()
+                    } else {
+                        before.clone()
+                    },
+                );
             }
             Self::NextSerial { before, after } => {
                 doc.next_object_serial = if forward { *after } else { *before }
@@ -728,6 +926,59 @@ impl SceneHistory {
                 }
                 ("Remove complete object".to_string(), deltas)
             }
+            SceneCommand::SetStructuralCell { index, after } => {
+                if index >= doc.legacy_base.len() {
+                    return Err("Structural edit is outside the active scene".into());
+                }
+                if let Some(ref cell) = after {
+                    if cell.index != index
+                        || cell.elevation.is_some_and(|v| !(0..=30).contains(&v))
+                        || cell
+                            .water_flow
+                            .is_some_and(|[x, y]| !(-1..=1).contains(&x) || !(-1..=1).contains(&y))
+                    {
+                        return Err("Invalid explicit structural edit".into());
+                    }
+                }
+                let before = doc
+                    .structural_cells
+                    .iter()
+                    .find(|cell| cell.index == index)
+                    .cloned();
+                (
+                    "Edit structural cell".to_string(),
+                    if before == after {
+                        Vec::new()
+                    } else {
+                        vec![Delta::Structural {
+                            index,
+                            before,
+                            after,
+                        }]
+                    },
+                )
+            }
+            SceneCommand::SetCollisionMask { index, after } => {
+                if index >= doc.legacy_base.len() {
+                    return Err("Collision edit is outside the active scene".into());
+                }
+                if let Some(mask) = &after {
+                    mask.validate()?;
+                }
+                let before = doc.collision_mask(index).cloned();
+                (
+                    "Edit pixel collision mask".to_string(),
+                    if before == after {
+                        Vec::new()
+                    } else {
+                        vec![Delta::Collision {
+                            index,
+                            before,
+                            after,
+                        }]
+                    },
+                )
+            }
         };
         if deltas.is_empty() {
             return Err("No scene changes".into());
@@ -805,6 +1056,86 @@ mod tests {
             source_asset: "Terrain/terrain_summer.png".into(),
             source_rect: [x, 0, 32, 32],
         }
+    }
+    #[test]
+    fn pixel_collision_mask_is_sparse_transactional_and_source_independent() {
+        let mut doc = example();
+        let original = doc.legacy_base.clone();
+        let mut history = SceneHistory::default();
+        let mut mask = CollisionMask32::full();
+        mask.set_blocked(10, 11, false);
+        history
+            .execute(
+                &mut doc,
+                SceneCommand::SetCollisionMask {
+                    index: 1,
+                    after: Some(mask.clone()),
+                },
+            )
+            .unwrap();
+        assert_eq!(doc.collision_mask(1), Some(&mask));
+        assert!(!doc.collision_mask(1).unwrap().blocked(10, 11));
+        assert_eq!(doc.legacy_base, original);
+        history.undo(&mut doc);
+        assert!(doc.collision_mask(1).is_none());
+        history.redo(&mut doc);
+        assert_eq!(doc.collision_mask(1), Some(&mask));
+        history
+            .execute(
+                &mut doc,
+                SceneCommand::SetCollisionMask {
+                    index: 1,
+                    after: None,
+                },
+            )
+            .unwrap();
+        assert!(doc.collision_mask(1).is_none());
+    }
+
+    #[test]
+    fn structural_collision_is_transactional_separate_from_source_pixels() {
+        let mut doc = example();
+        let original = doc.legacy_base.clone();
+        let mut history = SceneHistory::default();
+        let explicit = StructuralCell {
+            index: 1,
+            elevation: Some(1),
+            terrain_kind: Some("grass".into()),
+            water_flow: None,
+            blocks_traversal: Some(true),
+            connector: None,
+        };
+        history
+            .execute(
+                &mut doc,
+                SceneCommand::SetStructuralCell {
+                    index: 1,
+                    after: Some(explicit.clone()),
+                },
+            )
+            .unwrap();
+        assert_eq!(doc.structural_cells, vec![explicit.clone()]);
+        assert_eq!(doc.legacy_base, original);
+        history.undo(&mut doc);
+        assert!(doc.structural_cells.is_empty());
+        history.redo(&mut doc);
+        assert_eq!(doc.structural_cells, vec![explicit]);
+        assert!(history
+            .execute(
+                &mut doc,
+                SceneCommand::SetStructuralCell {
+                    index: 1,
+                    after: Some(StructuralCell {
+                        index: 1,
+                        elevation: Some(31),
+                        terrain_kind: None,
+                        water_flow: None,
+                        blocks_traversal: None,
+                        connector: None
+                    })
+                }
+            )
+            .is_err());
     }
     #[test]
     fn sha256_vectors_and_source_fingerprint() {
@@ -1123,6 +1454,98 @@ mod tests {
         assert_eq!(fs::read(&draft).unwrap(), saved);
         fs::remove_dir_all(root).unwrap();
     }
+    #[test]
+    fn full_manual_object_move_remove_preserves_original_terrain_and_source_region() {
+        let mut doc = example();
+        let base = doc.legacy_base.clone();
+        let mut history = SceneHistory::default();
+        let source = SourceBinding {
+            source_asset: "Objects/manual_reed.png".into(),
+            source_rect: [32, 64, 32, 64],
+        };
+        let foot = PlacedObject::origin_at_foot([1, 1], [1, 2]).unwrap();
+        assert_eq!(foot, [1, 0]);
+        let object = PlacedObject::manual_region(
+            doc.next_object_id(),
+            LayerId::Objects,
+            foot,
+            source.clone(),
+        );
+        assert_eq!(object.footprint, [1, 2]);
+        history
+            .execute(&mut doc, SceneCommand::PlaceObject(object.clone()))
+            .unwrap();
+        assert_eq!(doc.object_at([1, 1]).unwrap().id, object.id);
+        assert!(doc.object_at([0, 1]).is_none());
+        assert_eq!(doc.legacy_base, base);
+        assert_eq!(doc.objects[0].parts[0].source, source);
+        history
+            .execute(
+                &mut doc,
+                SceneCommand::MoveObject {
+                    id: object.id.clone(),
+                    to: [2, 0],
+                },
+            )
+            .unwrap();
+        assert!(doc.object_at([1, 1]).is_none());
+        assert_eq!(doc.object_at([2, 1]).unwrap().id, object.id);
+        history
+            .execute(
+                &mut doc,
+                SceneCommand::RemoveObject {
+                    id: object.id.clone(),
+                },
+            )
+            .unwrap();
+        assert!(doc.objects.is_empty());
+        assert_eq!(doc.legacy_base, base);
+        history.undo(&mut doc);
+        assert_eq!(doc.objects[0].parts[0].source, source);
+        history.undo(&mut doc);
+        assert_eq!(doc.objects[0].anchor, foot);
+        history.redo(&mut doc);
+        assert_eq!(doc.objects[0].anchor, [2, 0]);
+    }
+
+    #[test]
+    fn drag_preview_and_committed_object_move_use_same_scene_bounds() {
+        let mut scene = example();
+        let mut history = SceneHistory::default();
+        let art = SourceBinding {
+            source_asset: "Terrain/plants_summer.png".into(),
+            source_rect: [0, 0, 32, 32],
+        };
+        let object = PlacedObject::manual_region("object:1".into(), LayerId::Objects, [1, 1], art);
+        history
+            .execute(&mut scene, SceneCommand::PlaceObject(object))
+            .unwrap();
+        assert!(scene.can_move_object_to("object:1", [2, 1]));
+        assert!(!scene.can_move_object_to("object:1", [-1, 1]));
+        assert!(!scene.can_move_object_to("object:1", [3, 1]));
+        assert!(!scene.can_move_object_to("not-present", [1, 1]));
+    }
+
+    #[test]
+    fn object_anchor_refuses_out_of_bounds_instead_of_silently_clamping() {
+        let mut doc = example();
+        let mut history = SceneHistory::default();
+        assert_eq!(PlacedObject::origin_at_foot([0, 0], [1, 2]), Some([0, -1]));
+        assert!(PlacedObject::origin_at_foot([0, 0], [0, 2]).is_none());
+        let original = doc.legacy_base.clone();
+        let object = PlacedObject::manual_region(
+            doc.next_object_id(),
+            LayerId::Objects,
+            [0, -1],
+            binding(0),
+        );
+        assert!(history
+            .execute(&mut doc, SceneCommand::PlaceObject(object))
+            .is_err());
+        assert_eq!(doc.legacy_base, original);
+        assert!(doc.objects.is_empty());
+    }
+
     #[test]
     fn visual_changes_do_not_mutate_structural_channels_or_invent_certification() {
         let mut doc = example();

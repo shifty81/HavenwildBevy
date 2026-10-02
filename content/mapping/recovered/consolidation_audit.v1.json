@@ -1,0 +1,64 @@
+{
+  "schema": "havenwild.bevy.elizawy.consolidation_audit.v1",
+  "source": "havenwild.elizawy.reference_split_seasonal_source_crosswalk.b48r9",
+  "exactSourceCrosswalkSha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf",
+  "sourceSheets": 40,
+  "sourceRegions": 1781,
+  "transparentRegions": 223,
+  "opaqueRegions": 1558,
+  "sourceAddressHistoricallyVerified": 1781,
+  "semanticMappingsPromoted": 0,
+  "currentLocalAssetHashesChecked": 0,
+  "currentLocalAssetHashesPending": 40,
+  "familyCounts": {
+    "dirt": 12,
+    "dirt_shallows": 180,
+    "grass": 120,
+    "grass_dirt": 84,
+    "grass_shallows": 252,
+    "ice_water": 36,
+    "mountain_animated_water": 168,
+    "mountain_base": 280,
+    "mountain_features": 112,
+    "mountain_vines": 120,
+    "mountain_waterfall_transitions": 168,
+    "waterfall_animation": 228,
+    "waterfall_frozen": 21
+  },
+  "targetMatchCounts": {
+    "one": 1762,
+    "multiple": 515,
+    "none": 272
+  },
+  "seasonTargetMatchCounts": {
+    "autumn:multiple": 131,
+    "autumn:none": 41,
+    "autumn:one": 469,
+    "spring:multiple": 131,
+    "spring:none": 43,
+    "spring:one": 467,
+    "summer:multiple": 131,
+    "summer:none": 44,
+    "summer:one": 466,
+    "winter:multiple": 118,
+    "winter:none": 121,
+    "winter:one": 330,
+    "winter_ice:multiple": 4,
+    "winter_ice:none": 23,
+    "winter_ice:one": 30
+  },
+  "referenceOnlyMaterials": 34,
+  "referenceOnlyTupleSignatures": 15562,
+  "previousReconciliationCertifiedMappingsAdded": 0,
+  "knownUnavailableInputs": [
+    "Exact current M2D04R2 source ZIP cannot be materialized in this session",
+    "Original ElizaWy PNG bytes could not be materialized in this session",
+    "M2C4 full source registry not retrieved as raw data; avoid replacing it with the B48R9 crosswalk",
+    "Pass 103 complete-map raw file and Pass 106 topology raw file not directly retrieved; historical recovery inventory remains reference only"
+  ],
+  "nonProductionReasons": [
+    "Historical pixel matching is not semantic approval",
+    "Local source PNG hashes not verified in this run",
+    "No Windows build, PIE, client or full PCC run"
+  ]
+}

@@ -115,3 +115,23 @@ PCC v1.2.4 adds `terrain pipeline` as a first-class static/runtime-preflight sur
 ### v1.2.5 pre-build structural / lockfile hardening
 
 PCC v1.2.5 adds a Cargo-free Rust source audit before authored-content checks. It verifies the Rust module graph, exact Bevy/bevy_egui pins, Rust minimum, pinned ForgeGUI revision, shared-resolver wiring, merge-marker absence, and the UI-agnostic resolver boundary. DG pipeline validation now checks all semantic cells including edge/corner invalidation and independently locks the NW=1, NE=2, SW=4, SE=8 bit orientation. ForgePY FULL now fails on any Doctor error instead of continuing when only rustfmt/MSRV is wrong. After a successful Cargo build, FULL also runs `cargo metadata --locked --no-deps` so the generated `Cargo.lock` is not merely present but actually reproducible.
+
+## PCC 1.2.7 operator workflow
+
+The root menu is intentionally workflow-first:
+
+1. **Full Quality Gate / Certify Current Source** — runs the complete gate and records a Git worktree fingerprint in the gate receipt.
+2. **Commit + Push Certified Source to GitHub** — available only when the current worktree exactly matches the latest successful Full Gate. It fetches `origin`, refuses detached/missing/diverged/behind states, stages only source-safe changed paths, commits, and pushes the current branch. PCC never auto-stashes, rebases, resets, or merges during publish.
+3. **Patch Scan / Review / Apply** — shows governed root/inbox patches and applies only the one exact-version-compatible patch selected by the existing transactional patch authority.
+
+Build/run choices are grouped under **Studio / Build / Run**. Doctor/status/static audit are under **Project Health**. Asset hydration, terrain/mapping authority, source control, diagnostics, and maintenance each retain a dedicated submenu.
+
+A successful Full Gate does not itself push to GitHub. The explicit publish action is the source-control boundary. Full Gate still retains the existing governed patch-intake phase before certification so a build can never certify stale pre-update source.
+
+## Git filename-stream safety
+
+PCC 1.3.3 keeps stderr separate from machine-readable NUL-delimited Git filename queries. Windows core.autocrlf/line-ending warnings therefore remain diagnostics and can never be interpreted as source paths during certified staging.
+
+### PCC 1.3.4 retry-safe certified staging
+
+Certified publish staging is now safe to retry after a previous publish stopped part-way through staging. PCC stages only paths whose index still differs from the working tree (plus untracked files), leaves already-staged deletions alone, then proves the final staged path set exactly equals the Full-Gate-certified change set before commit. This prevents deleted source paths that are already absent from the index from being re-submitted as invalid pathspecs.

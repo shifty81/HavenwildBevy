@@ -15,13 +15,20 @@ Develop the Havenwild Bevy game/editor lane as an independent project with its o
 
 ForgePY accepts an existing project containing `assets/elizawy`, an extracted `Terrain/Structure/Objects/FX` source tree, or source pack ZIP staging. It validates known source identities before copying anything into the local project.
 
-## Current visual acceptance — M2D03-A
 
-Use the active `Havenwild Latest` project and its 349 verified original core assets. Run `python tools/audit_elizawy_asset_consumption.py --check --verify-local` to distinguish a complete hydrated source set from in-scene usage. The single **SRC** browser now lists every one of the 320 original PNGs (Terrain 29, Structure 98, Objects 188, FX 5). Original credits and GIF records remain separate metadata; Characters.zip is optional and unhydrated at last check.
+## Current checkpoint — M2D07Q canonical template-region repair / source 0.7.2
 
-Press **LYR** and select Objects, Structure, Water, Elevation, Foreground, Terrain Details, or Ground. Open SRC and select a source image/category; manually select an exact rectangle (width/height in 32px cells). With Objects selected, place visually verified vegetation above grass or reeds above water; inspect the original alpha and verify underlying terrain remains visible. Non-Terrain files cannot replace Ground. Undo/redo, save to the separate `content/scenes/derived/elizawy_mapping_certification.layered.draft.json`, close/reopen and test PIE visual parity. No original v1 River fixture, PNG or older draft may change. Do not call source-region selection a certified object prefab or DG rule.
+After hydrating the existing ElizaWy assets and passing PCC Full Gate, open Studio and use **HW → World Generator** to materialize a deterministic 3×3 working region. The generator composes only exact canonical ElizaWy regions/templates; it never creates artwork. World edits are saved to the workstation-local `.forgepy/world/havenwild_world.local.json`, while original PNGs remain immutable. Use Collision / Elevation for the red 32×32 pixel mask layer. Regeneration preserves authored corrections and placement tombstones. World PIE is intentionally pending; use the Summer Scene for the existing PIE path.
 
-The older M2D02-D randomly scattered trees/rocks were retired. The original Summer demo PNG is **reference-only**, not the editable scene or flattened PIE backdrop. Certified cliff topology, collision, waterfall animation and a composed original-demo-style world remain future work.
+## Current interactive acceptance — M2D04 canvas-first Summer study
+
+In `C:\Users\Shifty\Desktop\Havenwild Latest`, place **only** `Havenwild_Bevy_M2D04_Canvas_First_Summer_Study_CUMULATIVE_FROM_A.pccpatch.zip` unextracted in project root. Apply via PCC 11 → 2, run Option 1 Full Quality Gate, then run DX12 (Option 3) or Vulkan. This is cumulative A→D04 and may be used over installed B or C. The complete source ZIP is a recovery snapshot, NOT a PCC inbox patch.
+
+Launch Studio: the large canvas is clear, LYR/SRC/advanced terrain mapping are CLOSED unless requested. The initial Summer study should show **36 separate original-source objects** (one whole brick house, nine trees, vegetation, flowers, rocks and water-edge studies) over the intact pinned River terrain, not the former bare River. The seed image bytes are not in the package: hydrated `assets/elizawy` must be available. If missing, run `ForgePY.cmd assets sync --source "<authoritative local collection>"`; never substitute generated artwork. Source exact SHA-256: `python tools/audit_elizawy_asset_consumption.py --check --verify-local` validates all locally hydrated originals.
+
+Test by clicking an EXISTING tree in SEL and holding left mouse to drag, releasing to commit. Delete it; Undo restores it. Open LYR if you want the instance list; use SRC on demand to inspect and select original source regions. Ctrl+S (Save Scene) creates/updates ONLY `content/scenes/derived/summer_world.layered.draft.json`; relaunch and confirm the edit persists. The old C-era `content/scenes/derived/elizawy_mapping_certification.layered.draft.json` and v1 drafts are preserved, NOT automatically merged/replaced. The existing **Play Scene** button is the single PIE entry; it toggles to Stop and renders a snapshot of the live same scene including unsaved visuals. Esc exits. Capture screenshots after opening and inside PIE and attach the automatically generated PCC debug bundle on any gate/runtime issue.
+
+This is a **visual composition study**, not certified complete Summer demo: no bridge, waterfall, drainage/cliff topology, structure collision, navigation or dual-grid certification is claimed. The underlying 40×28 River terrain remains the original fixture, with source-bound decorative placements on top. There is no separate V2 view or second game launcher. Do not mark this pass Windows GREEN before its native Full Gate and manual interaction/PIE tests pass.
 
 ## Architecture rule
 
@@ -34,3 +41,8 @@ Once the local seed has been hydrated, asset payloads stay local. All subsequent
 ## First terrain-compiler checkpoint
 
 DG-00 is represented by versioned data contracts under `content/terrain/`. `PCC.cmd terrain status` verifies the scaffold and `PCC.cmd terrain pipeline` verifies the shared resolved 6×6 vertex path from the immutable 5×5 semantic seed. `PCC.cmd terrain certify` is intentionally expected to fail until all 16 Summer Grass/Void masks have explicit source-certified sprite/composite/unsupported mappings. Do not replace those unmapped entries with guesses.
+
+
+### GitHub source authority
+
+Canonical origin: `https://github.com/shifty81/HavenwildBevy.git` (`main`). Run Full Gate first. Primary workflow option 2 can then initialize/adopt Git and publish the exact certified source; existing GitHub history is preserved and adopted with a mixed reset that does not overwrite working files.

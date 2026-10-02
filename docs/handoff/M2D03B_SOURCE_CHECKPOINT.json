@@ -1,0 +1,22 @@
+{
+  "schema": "havenwild.bevy.handoff.v1",
+  "id": "HW-BEVY-M2D03-B-COMPLETE-OBJECT-ALPHA-EVIDENCE-20260928",
+  "baselineGitCommit": "3d8a52a46e134374117d16f6dad86e47e67722c4",
+  "baseline": "M2D03-A initial published main, active Havenwild Latest folder",
+  "sourceVersion": "0.5.6",
+  "pccVersion": "1.2.6",
+  "forgepyVersion": "0.4.6",
+  "coreAssetManifestModified": false,
+  "originalSourcePixelsModified": false,
+  "originalCoreSources": 349,
+  "originalPngSources": 320,
+  "newSourceCertifications": 0,
+  "newTerrainMaskCertifications": 0,
+  "newManualObjectInstanceWorkflow": ["place", "select", "mouse_drag", "move_click", "remove", "undo", "redo", "save", "reopen", "PIE_visual_snapshot"],
+  "alphaEvidence": "read_only_sha_verified_exact_source_region_if_supported_png_format",
+  "savedDraftPath": "content/scenes/derived/elizawy_mapping_certification.layered.draft.json",
+  "existingDraftOverwrite": false,
+  "githubPublishPolicy": "wait_for_user_Windows_gate_and_runtime_acceptance",
+  "windowsNativeBuild": "pending_user_gate",
+  "visualAlphaObjectAndPIETests": "pending_user_session"
+}

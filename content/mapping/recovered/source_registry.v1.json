@@ -1,0 +1,816 @@
+{
+  "schema": "havenwild.bevy.elizawy.source_registry.candidate.v1",
+  "generatedAtUtcDate": "2026-09-29",
+  "tilePx": 32,
+  "origin": "Immutable ElizaWy B48R9 crosswalk; SHA-256 and source rectangles preserved exactly",
+  "sourceSheets": [
+    {
+      "path": "Terrain/Dirt (Non-Winter).png",
+      "family": "dirt",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "pixelDimensions": [
+        96,
+        64
+      ],
+      "tileDimensions": [
+        3,
+        2
+      ],
+      "sourceByteSha256": "1b7e56000eb4a0416bc8d72adf206d1e8f81426b60f96d5a1d4a9e9d9b39bbc1",
+      "cellCount": 6,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Dirt (Winter).png",
+      "family": "dirt",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        96,
+        64
+      ],
+      "tileDimensions": [
+        3,
+        2
+      ],
+      "sourceByteSha256": "c6164da86a7121c84b647322437c57b58382ef1311c6658886cd6d4bd6ced528",
+      "cellCount": 6,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Dirt-Shallows (Autumn).png",
+      "family": "dirt_shallows",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        192,
+        384
+      ],
+      "tileDimensions": [
+        6,
+        12
+      ],
+      "sourceByteSha256": "aebe82947f4c29781afc6f487a39aa420579e5df94badff4efa522d1c0d73ad7",
+      "cellCount": 72,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Dirt-Shallows (Spring & Summer).png",
+      "family": "dirt_shallows",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "pixelDimensions": [
+        192,
+        384
+      ],
+      "tileDimensions": [
+        6,
+        12
+      ],
+      "sourceByteSha256": "9ded16da1f73a5243655541bffd5291c073aa94367865bdc4de036bf486a3c36",
+      "cellCount": 72,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Dirt-Shallows (Winter).png",
+      "family": "dirt_shallows",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        96,
+        384
+      ],
+      "tileDimensions": [
+        3,
+        12
+      ],
+      "sourceByteSha256": "fdd9379f00ac1a0e0d496a7a5699cbd8e62608bbf1aaab73142d8a617a818588",
+      "cellCount": 36,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass (Autumn).png",
+      "family": "grass",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        96,
+        320
+      ],
+      "tileDimensions": [
+        3,
+        10
+      ],
+      "sourceByteSha256": "7f4d58c4e43091e6b7c6dcb1518ca371bf91cd7416f0d6e6cc35c277c502c32e",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass (Spring).png",
+      "family": "grass",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        96,
+        320
+      ],
+      "tileDimensions": [
+        3,
+        10
+      ],
+      "sourceByteSha256": "34132b9ab1f437ef2f84696e421cca2600bd049aa5a5db1ac66d5b8f12af28a4",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass (Summer).png",
+      "family": "grass",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        96,
+        320
+      ],
+      "tileDimensions": [
+        3,
+        10
+      ],
+      "sourceByteSha256": "37a02786369338edbadc889ce49b82fdb014dc51a81244c10f4d6ea99770854e",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass (Winter).png",
+      "family": "grass",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        96,
+        320
+      ],
+      "tileDimensions": [
+        3,
+        10
+      ],
+      "sourceByteSha256": "eca597f4eb19e3e4cdedc268e1efabdcbc68865e3373655b92abf17d62b29dc8",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Dirt (Autumn).png",
+      "family": "grass_dirt",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        96,
+        224
+      ],
+      "tileDimensions": [
+        3,
+        7
+      ],
+      "sourceByteSha256": "274d3f8f9b378136ef8817d6165fb6b82e91a366b0019e578012ea561995d289",
+      "cellCount": 21,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Dirt (Spring).png",
+      "family": "grass_dirt",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        96,
+        224
+      ],
+      "tileDimensions": [
+        3,
+        7
+      ],
+      "sourceByteSha256": "b24a5836dba798f98dd768382b849cc74875288ddf1f7247bd5c87cac7a94b1f",
+      "cellCount": 21,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Dirt (Summer).png",
+      "family": "grass_dirt",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        96,
+        224
+      ],
+      "tileDimensions": [
+        3,
+        7
+      ],
+      "sourceByteSha256": "dc48907be91940b839598dab36a632415208a4639befd6337fadc75b02562e99",
+      "cellCount": 21,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Dirt (Winter).png",
+      "family": "grass_dirt",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        96,
+        224
+      ],
+      "tileDimensions": [
+        3,
+        7
+      ],
+      "sourceByteSha256": "210a6f63b5b09727f15298a2b5a25b231d9cf7058db0b2bb18e1355818fea724",
+      "cellCount": 21,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Shallows (Autumn).png",
+      "family": "grass_shallows",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        192,
+        384
+      ],
+      "tileDimensions": [
+        6,
+        12
+      ],
+      "sourceByteSha256": "fb69fc7fc3c3c529e3a6eccd3686d294dc0fb8d2220756593f27bc258129ed29",
+      "cellCount": 72,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Shallows (Spring).png",
+      "family": "grass_shallows",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        192,
+        384
+      ],
+      "tileDimensions": [
+        6,
+        12
+      ],
+      "sourceByteSha256": "6c20b5fa5dd07746d20f2d39d355772cc6069116a54056a803467e4274d49c31",
+      "cellCount": 72,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Shallows (Summer).png",
+      "family": "grass_shallows",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        192,
+        384
+      ],
+      "tileDimensions": [
+        6,
+        12
+      ],
+      "sourceByteSha256": "4104e301237dcfb593404548912c6dd46bae4bb9d9b2dd89914c07de8d1333a8",
+      "cellCount": 72,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Grass-Shallows (Winter).png",
+      "family": "grass_shallows",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        96,
+        384
+      ],
+      "tileDimensions": [
+        3,
+        12
+      ],
+      "sourceByteSha256": "2b97b40f9b3094bbe255a9ba418e4eb356c212dae7644825cc188949eb6ff4b8",
+      "cellCount": 36,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Ice-Water.png",
+      "family": "ice_water",
+      "seasons": [
+        "winter_ice"
+      ],
+      "pixelDimensions": [
+        192,
+        192
+      ],
+      "tileDimensions": [
+        6,
+        6
+      ],
+      "sourceByteSha256": "25cea82cdbbbb71cc75f3787f8ee49ecb266ae19d18a5a453ccd0352d8b58358",
+      "cellCount": 36,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain (Autumn).png",
+      "family": "mountain_base",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        224,
+        320
+      ],
+      "tileDimensions": [
+        7,
+        10
+      ],
+      "sourceByteSha256": "d1a9129da063301251af401f895efa288e1176f7f5841a766b03e960c0f6452f",
+      "cellCount": 70,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain (Spring).png",
+      "family": "mountain_base",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        224,
+        320
+      ],
+      "tileDimensions": [
+        7,
+        10
+      ],
+      "sourceByteSha256": "01044d2f79c4c880085147a6db4f4fac9fc0597e8222d01c3cb4e3cac262411c",
+      "cellCount": 70,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain (Summer).png",
+      "family": "mountain_base",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        224,
+        320
+      ],
+      "tileDimensions": [
+        7,
+        10
+      ],
+      "sourceByteSha256": "5cb26d9a6d63a963a37cf4c59cd30729e672e0251957e2ee61358503cf7b6284",
+      "cellCount": 70,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain (Winter).png",
+      "family": "mountain_base",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        224,
+        320
+      ],
+      "tileDimensions": [
+        7,
+        10
+      ],
+      "sourceByteSha256": "aa8df656d42e9e06605cac66c10ca0ff71ef4bc5f8b7de54a6f9ca4c0301e6e2",
+      "cellCount": 70,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Animated Water (Autumn).png",
+      "family": "mountain_animated_water",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "97bc448829f8dc63d4454c68f62704b38d9215b6f4bc2b24465e074bb2e373e0",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Animated Water (Spring).png",
+      "family": "mountain_animated_water",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "e35871b6e9f1e8616e0c257bd91cb12ffa51df1aa91bb1d340eccaab5e76cea1",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Animated Water (Summer).png",
+      "family": "mountain_animated_water",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "0e0998191aedd8562b8d31342c443536765c7223561997d14d091553b93b7cfc",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Animated Water (Winter).png",
+      "family": "mountain_animated_water",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "c7f02fb2335e066e6557f2cee1c8968abffe04d6d5935c9a495a3c5dd1b7a941",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Features (Autumn).png",
+      "family": "mountain_features",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        128,
+        224
+      ],
+      "tileDimensions": [
+        4,
+        7
+      ],
+      "sourceByteSha256": "0b87eecab618b0acd821557be52e6340cc3868611df74170241a21f9deff9155",
+      "cellCount": 28,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Features (Spring).png",
+      "family": "mountain_features",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        128,
+        224
+      ],
+      "tileDimensions": [
+        4,
+        7
+      ],
+      "sourceByteSha256": "77b12c76fb7cb7afff4e09dd6998fee3a30a8c601f8ab678a013f8ac9bdf1f8f",
+      "cellCount": 28,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Features (Summer).png",
+      "family": "mountain_features",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        128,
+        224
+      ],
+      "tileDimensions": [
+        4,
+        7
+      ],
+      "sourceByteSha256": "fb59e9f930dd814de8ffcef66081d31658e18bf0bde7b799167dd8b0f9db0fd1",
+      "cellCount": 28,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Features (Winter).png",
+      "family": "mountain_features",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        128,
+        224
+      ],
+      "tileDimensions": [
+        4,
+        7
+      ],
+      "sourceByteSha256": "c0a71ee82c4e3fe1b1a878cec7297f7a0cd5190e24ce300c438542d7b95e0709",
+      "cellCount": 28,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Vines (Autumn).png",
+      "family": "mountain_vines",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        192,
+        160
+      ],
+      "tileDimensions": [
+        6,
+        5
+      ],
+      "sourceByteSha256": "3e47bbda6ed3a2ed0f98b19b9ebe7c008eddf100265f15cbe683cbd0f7ba2fcb",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Vines (Spring).png",
+      "family": "mountain_vines",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        192,
+        160
+      ],
+      "tileDimensions": [
+        6,
+        5
+      ],
+      "sourceByteSha256": "23104135a57d6bdaf3c0b03a977ec7ae2e4247a9b936bcfc106f195f2015dded",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Vines (Summer).png",
+      "family": "mountain_vines",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        192,
+        160
+      ],
+      "tileDimensions": [
+        6,
+        5
+      ],
+      "sourceByteSha256": "4059c67084cdc40003498a7b9f07461546bdbd0d246a0f633d14f5a436d61e60",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Vines (Winter).png",
+      "family": "mountain_vines",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        192,
+        160
+      ],
+      "tileDimensions": [
+        6,
+        5
+      ],
+      "sourceByteSha256": "aa9ded211b378618305771fa04266ad2615f14decde7af8246fde82b80f6b27f",
+      "cellCount": 30,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Waterfall Transitions (Autumn).png",
+      "family": "mountain_waterfall_transitions",
+      "seasons": [
+        "autumn"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "6af615292c6c70389bff7a06688f0ca675a903f91372ed32c0c1b12be075b325",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Waterfall Transitions (Spring).png",
+      "family": "mountain_waterfall_transitions",
+      "seasons": [
+        "spring"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "be3b64d39b31607c3794d9d57477572559c5275ddd3d9b684121bc77915a2b3f",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Waterfall Transitions (Summer).png",
+      "family": "mountain_waterfall_transitions",
+      "seasons": [
+        "summer"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "8deafc172a31e96409d31ef0e7c23eee1b25d3c903ff24f6ab602f56985c1ae4",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Mountain, Waterfall Transitions - (Winter).png",
+      "family": "mountain_waterfall_transitions",
+      "seasons": [
+        "winter"
+      ],
+      "pixelDimensions": [
+        192,
+        224
+      ],
+      "tileDimensions": [
+        6,
+        7
+      ],
+      "sourceByteSha256": "c7a6550039be87b32240aba9289a28fa3bd3be950b783c48214004919e3181e0",
+      "cellCount": 42,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Waterfall, Frozen.png",
+      "family": "waterfall_frozen",
+      "seasons": [
+        "winter_ice"
+      ],
+      "pixelDimensions": [
+        96,
+        224
+      ],
+      "tileDimensions": [
+        3,
+        7
+      ],
+      "sourceByteSha256": "b5026e805b54ea0de2050a19dadf96d1a520545bdd327ef6920837c1c4d3c397",
+      "cellCount": 21,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    },
+    {
+      "path": "Terrain/Waterfall.png",
+      "family": "waterfall_animation",
+      "seasons": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "pixelDimensions": [
+        384,
+        608
+      ],
+      "tileDimensions": [
+        12,
+        19
+      ],
+      "sourceByteSha256": "d08642cf4c3360a4ef88604a2ad24fd4abfd5c6db554731b999dbb501090a6ef",
+      "cellCount": 228,
+      "authority": "historical_source_fingerprint_evidence",
+      "currentLocalHashVerified": false,
+      "immutableSourceRequired": true
+    }
+  ],
+  "sourceCount": 40,
+  "runtimeEnabled": false
+}

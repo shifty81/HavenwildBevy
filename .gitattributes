@@ -1,0 +1,19 @@
+# Havenwild source text normalization. Keep repository text deterministic across Windows/Linux.
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+Cargo.lock text eol=lf
+*.rs text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.png binary
+*.gif binary
+*.jpg binary
+*.jpeg binary
+*.zip binary
