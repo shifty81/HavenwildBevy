@@ -1,0 +1,5173 @@
+{
+  "schema": "havenwild.worldgen.elizawy_asset_catalog.v1",
+  "purpose": "complete ElizaWy source discovery for Generated World; contextual placement remains evidence-gated",
+  "counts": {
+    "images": 320,
+    "domains": {
+      "fx": 5,
+      "object": 188,
+      "structure": 98,
+      "terrain_or_nature": 29
+    },
+    "states": {
+      "certified_template_source_available": 5,
+      "certified_terrain_authority": 1,
+      "source_available_requires_context_mapping": 314
+    }
+  },
+  "assets": [
+    {
+      "sourcePath": "FX/Splash.png",
+      "sourceAssetId": "elizawy:FX/Splash.png",
+      "imageSizePx": [
+        384,
+        32
+      ],
+      "domain": "fx",
+      "contextTags": [
+        "effect",
+        "water"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "FX/Splash_Back.png",
+      "sourceAssetId": "elizawy:FX/Splash_Back.png",
+      "imageSizePx": [
+        384,
+        32
+      ],
+      "domain": "fx",
+      "contextTags": [
+        "effect",
+        "water"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "FX/Water Reflections.png",
+      "sourceAssetId": "elizawy:FX/Water Reflections.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "fx",
+      "contextTags": [
+        "effect",
+        "water"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "FX/WaterRipple.png",
+      "sourceAssetId": "elizawy:FX/WaterRipple.png",
+      "imageSizePx": [
+        128,
+        32
+      ],
+      "domain": "fx",
+      "contextTags": [
+        "effect",
+        "water"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "FX/WaterRipple_Back.png",
+      "sourceAssetId": "elizawy:FX/WaterRipple_Back.png",
+      "imageSizePx": [
+        128,
+        32
+      ],
+      "domain": "fx",
+      "contextTags": [
+        "effect",
+        "water"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Barrel.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Barrel.png",
+      "imageSizePx": [
+        160,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "clutter",
+        "furniture",
+        "interior",
+        "prop",
+        "storage"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Child Headboards.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Child Headboards.png",
+      "imageSizePx": [
+        160,
+        384
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Child Mattresses.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Child Mattresses.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Child.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Child.png",
+      "imageSizePx": [
+        768,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double B.png",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double C - Overlays.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double C - Overlays.png",
+      "imageSizePx": [
+        320,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double C.png",
+      "imageSizePx": [
+        512,
+        512
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double Headboards.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double Headboards.png",
+      "imageSizePx": [
+        192,
+        384
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double Mattresses.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double Mattresses.png",
+      "imageSizePx": [
+        224,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Double.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Double.png",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Single  A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Single  A.png",
+      "imageSizePx": [
+        896,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Single B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Single B.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Single C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Single C.png",
+      "imageSizePx": [
+        256,
+        224
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Single Headboards.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Single Headboards.png",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Beds, Single Mattresses.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Beds, Single Mattresses.png",
+      "imageSizePx": [
+        224,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Beds/Single Beds B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Beds/Single Beds B.png",
+      "imageSizePx": [
+        640,
+        448
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Bin.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Bin.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Cabinet.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Cabinet.png",
+      "imageSizePx": [
+        224,
+        288
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Cauldron.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Cauldron.png",
+      "imageSizePx": [
+        32,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Chest.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Chest.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Christmas Tree.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Christmas Tree.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Clock, Grandfather.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Clock, Grandfather.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Copy Machine.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Copy Machine.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Countertop.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Countertop.png",
+      "imageSizePx": [
+        192,
+        224
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Crate.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Crate.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "clutter",
+        "furniture",
+        "interior",
+        "prop",
+        "storage"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Desk, Office.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Desk, Office.png",
+      "imageSizePx": [
+        256,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Desk, Vanity.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Desk, Vanity.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Dresser.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Dresser.png",
+      "imageSizePx": [
+        384,
+        384
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/End Table.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/End Table.png",
+      "imageSizePx": [
+        64,
+        224
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Fireplace, Cast Iron.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Fireplace, Cast Iron.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Fireplace.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Fireplace.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Fridge.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Fridge.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Ladder.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Ladder.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Lighting, Floor.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Lighting, Floor.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Lighting, Outdoors.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Lighting, Outdoors.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Mirror, Standing.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Mirror, Standing.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Oven, Modern.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Oven, Modern.png",
+      "imageSizePx": [
+        32,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Planter.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Planter.png",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Rugs/Diamond Rug, tiling.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Rugs/Diamond Rug, tiling.png",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Rugs/Rainbow Checkered Rug.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Rugs/Rainbow Checkered Rug.png",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Rugs/Rainbow Rug.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Rugs/Rainbow Rug.png",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Rugs/Swirling Vine Rug.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Rugs/Swirling Vine Rug.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sawhorse.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sawhorse.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Bar Stools.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Bar Stools.png",
+      "imageSizePx": [
+        256,
+        32
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining A.png",
+      "imageSizePx": [
+        224,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining B.png",
+      "imageSizePx": [
+        224,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining C.png",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining D.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining D.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining E.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining E.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Dining F.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Dining F.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Office.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Office.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa A.png",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa B.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa C.png",
+      "imageSizePx": [
+        320,
+        512
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa D.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa D.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa E.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa E.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa F.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa F.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Chair, Sofa G.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Chair, Sofa G.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned A.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned B.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned C.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Patterned D.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Patterned D.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid A.png",
+      "imageSizePx": [
+        256,
+        384
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid B.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Casual Solid C.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Casual Solid C.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Loveseat, Small - Formal A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Loveseat, Small - Formal A.png",
+      "imageSizePx": [
+        256,
+        320
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Ottoman, Long A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Ottoman, Long A.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Ottoman, Medium A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Ottoman, Medium A.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Ottoman, Small A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Ottoman, Small A.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Ottoman, Small B.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Ottoman, Small B.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Sofa Set, Casual A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Sofa Set, Casual A.png",
+      "imageSizePx": [
+        416,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Sofa, Casual A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Sofa, Casual A.png",
+      "imageSizePx": [
+        480,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Seating/Thrones.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Seating/Thrones.png",
+      "imageSizePx": [
+        320,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sewing & Weaving/Dress Form.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sewing & Weaving/Dress Form.png",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sewing & Weaving/Loom.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sewing & Weaving/Loom.png",
+      "imageSizePx": [
+        512,
+        320
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sewing & Weaving/Spinning Wheel.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sewing & Weaving/Spinning Wheel.png",
+      "imageSizePx": [
+        320,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sewing & Weaving/Workbench, Sewing Machine.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sewing & Weaving/Workbench, Sewing Machine.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sewing & Weaving/Workbench, Sewing.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sewing & Weaving/Workbench, Sewing.png",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Shavehorse.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Shavehorse.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Shelf.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Shelf.png",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sink, Countertop.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sink, Countertop.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Sink, Pedestal.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Sink, Pedestal.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Anvils.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Anvils.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Bellows.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Bellows.png",
+      "imageSizePx": [
+        256,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Coal Piles.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Coal Piles.png",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Forge A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Forge A.png",
+      "imageSizePx": [
+        512,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Furnace A.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Furnace A.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Grindstone.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Grindstone.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Smelter.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Smelter.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Smithing/Workbench, Smith.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Smithing/Workbench, Smith.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Standing Screen.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Standing Screen.png",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Stone Slab.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Stone Slab.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Table, Card.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Table, Card.png",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Table, Ornate Wood.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Table, Ornate Wood.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Table, Rough Wood.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Table, Rough Wood.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Table, Workshop.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Table, Workshop.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Trough.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Trough.png",
+      "imageSizePx": [
+        320,
+        320
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/TV, Widescreen - No Service.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/TV, Widescreen - No Service.png",
+      "imageSizePx": [
+        448,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/TV, Widescreen.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/TV, Widescreen.png",
+      "imageSizePx": [
+        448,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Vase-Studies.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Vase-Studies.png",
+      "imageSizePx": [
+        128,
+        320
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Vending Machine.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Vending Machine.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Water Cooler.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Water Cooler.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Wolf Stone.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Wolf Stone.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Workbench, Carpentry.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Workbench, Carpentry.png",
+      "imageSizePx": [
+        128,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Furniture/Workbench, Wire Drawing.png",
+      "sourceAssetId": "elizawy:Objects/Furniture/Workbench, Wire Drawing.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "furniture",
+        "interior",
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Shopping Cart.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Shopping Cart.png",
+      "imageSizePx": [
+        32,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Wheelchair, Black.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Wheelchair, Black.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Wheelchair, Blue.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Wheelchair, Blue.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Wheelchair, Pink.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Wheelchair, Pink.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Wheelchair, Tan.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Wheelchair, Tan.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Moveable/Wheelchair, White.png",
+      "sourceAssetId": "elizawy:Objects/Moveable/Wheelchair, White.png",
+      "imageSizePx": [
+        192,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Baskets A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Baskets A.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Boxes.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Boxes.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "clutter",
+        "prop",
+        "storage"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Buckets.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Buckets.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Coffee Maker.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Coffee Maker.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Dishes A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Dishes A.png",
+      "imageSizePx": [
+        256,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Dungeon Elements.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Dungeon Elements.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fabric/Blankets, Crumpled.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fabric/Blankets, Crumpled.png",
+      "imageSizePx": [
+        512,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fabric/Fabric Baskets.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fabric/Fabric Baskets.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fabric/Fabric Rolls, Groups.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fabric/Fabric Rolls, Groups.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fabric/Fabric Rolls.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fabric/Fabric Rolls.png",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fabric/Fabril Rolls, Mounted.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fabric/Fabril Rolls, Mounted.png",
+      "imageSizePx": [
+        256,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fire, Camp.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fire, Camp.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fire, Fireplace.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fire, Fireplace.png",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Fireplace, Accessories A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Fireplace, Accessories A.png",
+      "imageSizePx": [
+        64,
+        32
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Flowers.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Flowers.png",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Bread A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Bread A.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Bread B.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Bread B.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Bread C.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Bread C.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Butter.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Butter.png",
+      "imageSizePx": [
+        32,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Cheese A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Cheese A.png",
+      "imageSizePx": [
+        192,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Cheese B.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Cheese B.png",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Dessert.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Dessert.png",
+      "imageSizePx": [
+        160,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Eggs.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Eggs.png",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Fruit A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Fruit A.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Fruit B.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Fruit B.png",
+      "imageSizePx": [
+        480,
+        480
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Grains, Grasses.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Grains, Grasses.png",
+      "imageSizePx": [
+        320,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Grains, Rice, Noodles.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Grains, Rice, Noodles.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Hamburgers.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Hamburgers.png",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Herbs & Spices.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Herbs & Spices.png",
+      "imageSizePx": [
+        480,
+        320
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Meals.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Meals.png",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Meats A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Meats A.png",
+      "imageSizePx": [
+        160,
+        352
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Meats B.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Meats B.png",
+      "imageSizePx": [
+        352,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Mushrooms.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Mushrooms.png",
+      "imageSizePx": [
+        320,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Nuts.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Nuts.png",
+      "imageSizePx": [
+        288,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Seafood A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Seafood A.png",
+      "imageSizePx": [
+        384,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Tea, Coffee, Medicinal Herbs.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Tea, Coffee, Medicinal Herbs.png",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Tortillas.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Tortillas.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Vegetables A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Vegetables A.png",
+      "imageSizePx": [
+        384,
+        448
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Vegetables B.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Vegetables B.png",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Food/Vegetables C.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Food/Vegetables C.png",
+      "imageSizePx": [
+        576,
+        480
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Games.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Games.png",
+      "imageSizePx": [
+        32,
+        32
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Hay & Straw.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Hay & Straw.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Kitchen Clutter A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Kitchen Clutter A.png",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Laptop.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Laptop.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Lighting, Table.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Lighting, Table.png",
+      "imageSizePx": [
+        256,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Loose Paper.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Loose Paper.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Lumber.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Lumber.png",
+      "imageSizePx": [
+        320,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Alloys.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Alloys.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Coal.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Coal.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Copper.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Copper.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Gold.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Gold.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Iron.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Iron.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Silver.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Silver.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Stone.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Stone.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Ores & Ingots/Ore, Tin.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Ores & Ingots/Ore, Tin.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Pillows.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Pillows.png",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Presents.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Presents.png",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Rotary Phones.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Rotary Phones.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Sawdust.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Sawdust.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Skeletons A.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Skeletons A.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Tabletop Portraits.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Tabletop Portraits.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Tools, Carpentry.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Tools, Carpentry.png",
+      "imageSizePx": [
+        416,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Tools, Sewing.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Tools, Sewing.png",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Small Items/Tools, Smithing.png",
+      "sourceAssetId": "elizawy:Objects/Small Items/Tools, Smithing.png",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Christmas Wall Decor.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Christmas Wall Decor.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Curtains.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Curtains.png",
+      "imageSizePx": [
+        768,
+        416
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Graffiti Elements.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Graffiti Elements.png",
+      "imageSizePx": [
+        320,
+        256
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Graffiti.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Graffiti.png",
+      "imageSizePx": [
+        352,
+        160
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Lighting, Wall.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Lighting, Wall.png",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Mailboxes (tiling).png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Mailboxes (tiling).png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "clutter",
+        "prop",
+        "storage"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Mirrors.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Mirrors.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Paintings, Abstract.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Paintings, Abstract.png",
+      "imageSizePx": [
+        192,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Paintings, Landscape.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Paintings, Landscape.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Paintings, Portraits.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Paintings, Portraits.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Paintings, Still Life.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Paintings, Still Life.png",
+      "imageSizePx": [
+        128,
+        64
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Posters.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Posters.png",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Objects/Wall Items/Pride Flags.png",
+      "sourceAssetId": "elizawy:Objects/Wall Items/Pride Flags.png",
+      "imageSizePx": [
+        128,
+        96
+      ],
+      "domain": "object",
+      "contextTags": [
+        "prop"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Bridges/Drawbridge A.png",
+      "sourceAssetId": "elizawy:Structure/Bridges/Drawbridge A.png",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "bridge",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Bridges/Rope Bridge A - No Rails.png",
+      "sourceAssetId": "elizawy:Structure/Bridges/Rope Bridge A - No Rails.png",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "bridge",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Bridges/Rope Bridge A - Rails.png",
+      "sourceAssetId": "elizawy:Structure/Bridges/Rope Bridge A - Rails.png",
+      "imageSizePx": [
+        160,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "bridge",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Bridges/Wood Bridge A - No Rails.png",
+      "sourceAssetId": "elizawy:Structure/Bridges/Wood Bridge A - No Rails.png",
+      "imageSizePx": [
+        320,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "bridge",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Bridges/Wood Bridge A - Rails.png",
+      "sourceAssetId": "elizawy:Structure/Bridges/Wood Bridge A - Rails.png",
+      "imageSizePx": [
+        320,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "bridge",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/12 Panel Door A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/12 Panel Door A.png",
+      "imageSizePx": [
+        896,
+        768
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/12 Panel Door B.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/12 Panel Door B.png",
+      "imageSizePx": [
+        896,
+        768
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/Barred Prison Door A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/Barred Prison Door A.png",
+      "imageSizePx": [
+        448,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/Doorframe A Shadows.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/Doorframe A Shadows.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/Doorframe A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/Doorframe A.png",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/DoorFrame B Shadows.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/DoorFrame B Shadows.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x48px Doors/Doorframe B.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x48px Doors/Doorframe B.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x64px Doors/15 Panel Door A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x64px Doors/15 Panel Door A.png",
+      "imageSizePx": [
+        896,
+        1024
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x64px Doors/Doorframe A Shadows.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x64px Doors/Doorframe A Shadows.png",
+      "imageSizePx": [
+        64,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/32x64px Doors/Doorframe A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/32x64px Doors/Doorframe A.png",
+      "imageSizePx": [
+        384,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/64x64px Arched Doors/Arched Doorway A Shadows.png",
+      "sourceAssetId": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Doorway A Shadows.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/64x64px Arched Doors/Arched Doorway A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Doorway A.png",
+      "imageSizePx": [
+        160,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Doors/64x64px Arched Doors/Arched Double Doors A.png",
+      "sourceAssetId": "elizawy:Structure/Doors/64x64px Arched Doors/Arched Double Doors A.png",
+      "imageSizePx": [
+        256,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "door",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Fences/Ornamental Fence A.png",
+      "sourceAssetId": "elizawy:Structure/Fences/Ornamental Fence A.png",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "fence",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Fences/Ornamental Fence B.png",
+      "sourceAssetId": "elizawy:Structure/Fences/Ornamental Fence B.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "fence",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Fences/Plain Fence A.png",
+      "sourceAssetId": "elizawy:Structure/Fences/Plain Fence A.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "fence",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Diamond Tile A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Diamond Tile A.png",
+      "imageSizePx": [
+        256,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Diamond Tile B.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Diamond Tile B.png",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Diamond Tile C.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Diamond Tile C.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Floral Carpet A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Floral Carpet A.png",
+      "imageSizePx": [
+        1120,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Floral Carpet B.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Floral Carpet B.png",
+      "imageSizePx": [
+        1120,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Geometric Carpet A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Geometric Carpet A.png",
+      "imageSizePx": [
+        2016,
+        672
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Geometric Carpet B.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Geometric Carpet B.png",
+      "imageSizePx": [
+        2016,
+        672
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Geometric Carpet C.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Geometric Carpet C.png",
+      "imageSizePx": [
+        288,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Gritty Dirt.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Gritty Dirt.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Herringbone A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Herringbone A.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Subfloor.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Subfloor.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Tile A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Tile A.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Tile B.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Tile B.png",
+      "imageSizePx": [
+        128,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Tile C.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Tile C.png",
+      "imageSizePx": [
+        128,
+        256
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Wood Floor A.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Wood Floor A.png",
+      "imageSizePx": [
+        160,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Floor/Wood Floor B.png",
+      "sourceAssetId": "elizawy:Structure/Floor/Wood Floor B.png",
+      "imageSizePx": [
+        64,
+        32
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "floor",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Misc/Drain A.png",
+      "sourceAssetId": "elizawy:Structure/Misc/Drain A.png",
+      "imageSizePx": [
+        32,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Misc/Fountain A.png",
+      "sourceAssetId": "elizawy:Structure/Misc/Fountain A.png",
+      "imageSizePx": [
+        64,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Misc/Pool A.png",
+      "sourceAssetId": "elizawy:Structure/Misc/Pool A.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Misc/Prison A.png",
+      "sourceAssetId": "elizawy:Structure/Misc/Prison A.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Misc/Trellis A.png",
+      "sourceAssetId": "elizawy:Structure/Misc/Trellis A.png",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Pillars/Floral Pillar A.png",
+      "sourceAssetId": "elizawy:Structure/Pillars/Floral Pillar A.png",
+      "imageSizePx": [
+        320,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Pillars/Stone Pillar A.png",
+      "sourceAssetId": "elizawy:Structure/Pillars/Stone Pillar A.png",
+      "imageSizePx": [
+        288,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Platforms/Cement Platform A.png",
+      "sourceAssetId": "elizawy:Structure/Platforms/Cement Platform A.png",
+      "imageSizePx": [
+        96,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Platforms/Dias with Steps A.png",
+      "sourceAssetId": "elizawy:Structure/Platforms/Dias with Steps A.png",
+      "imageSizePx": [
+        96,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Adobe Brick Roof.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Adobe Brick Roof.png",
+      "imageSizePx": [
+        384,
+        256
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Adobe Stucco Roof.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Adobe Stucco Roof.png",
+      "imageSizePx": [
+        416,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Brick Chimney A.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Brick Chimney A.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Flat Shingle Roof A.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Flat Shingle Roof A.png",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Gable Shingle Roof A.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Gable Shingle Roof A.png",
+      "imageSizePx": [
+        768,
+        480
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Hipped Shingle Roof A.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Hipped Shingle Roof A.png",
+      "imageSizePx": [
+        960,
+        480
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Roofing/Roof Trim.png",
+      "sourceAssetId": "elizawy:Structure/Roofing/Roof Trim.png",
+      "imageSizePx": [
+        1536,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "roof",
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Signs/Sign Backgrounds A.png",
+      "sourceAssetId": "elizawy:Structure/Signs/Sign Backgrounds A.png",
+      "imageSizePx": [
+        64,
+        64
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Signs/Sign Icons A.png",
+      "sourceAssetId": "elizawy:Structure/Signs/Sign Icons A.png",
+      "imageSizePx": [
+        160,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Cement Stairs A.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Cement Stairs A.png",
+      "imageSizePx": [
+        160,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Formal Interior Stairs A.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Formal Interior Stairs A.png",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Short Steps A.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Short Steps A.png",
+      "imageSizePx": [
+        224,
+        160
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Wood Interior Stairs A.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Wood Interior Stairs A.png",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Wood Interior Stairs B.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Wood Interior Stairs B.png",
+      "imageSizePx": [
+        256,
+        352
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Stairs/Wood Interior Stairs Wall.png",
+      "sourceAssetId": "elizawy:Structure/Stairs/Wood Interior Stairs Wall.png",
+      "imageSizePx": [
+        254,
+        251
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "stairs",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Structures/Brick House A.png",
+      "sourceAssetId": "elizawy:Structure/Structures/Brick House A.png",
+      "imageSizePx": [
+        256,
+        224
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Structures/Brick House B.png",
+      "sourceAssetId": "elizawy:Structure/Structures/Brick House B.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "certified_template_source_available",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Structure/Structures/Paneled House A.png",
+      "sourceAssetId": "elizawy:Structure/Structures/Paneled House A.png",
+      "imageSizePx": [
+        160,
+        160
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Decorative Border A.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Decorative Border A.png",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Formal Crown Molding.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Formal Crown Molding.png",
+      "imageSizePx": [
+        192,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Pillar Crown Molding.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Pillar Crown Molding.png",
+      "imageSizePx": [
+        160,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Plain Edged Border - A.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Plain Edged Border - A.png",
+      "imageSizePx": [
+        384,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Plain Edged Border.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Plain Edged Border.png",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Plain Smooth Border.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Plain Smooth Border.png",
+      "imageSizePx": [
+        768,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Wall Borders/Textured Wood Border.png",
+      "sourceAssetId": "elizawy:Structure/Wall Borders/Textured Wood Border.png",
+      "imageSizePx": [
+        768,
+        256
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Adobe Brick Wall.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Adobe Brick Wall.png",
+      "imageSizePx": [
+        128,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Adobe Stucco Wall.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Adobe Stucco Wall.png",
+      "imageSizePx": [
+        256,
+        160
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Brick Wall A.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Brick Wall A.png",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Brick Wall B.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Brick Wall B.png",
+      "imageSizePx": [
+        384,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Brick Wall Block Edging.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Brick Wall Block Edging.png",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/CutawayOverlay.png",
+      "sourceAssetId": "elizawy:Structure/Walls/CutawayOverlay.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Diamond Wallpaper.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Diamond Wallpaper.png",
+      "imageSizePx": [
+        1152,
+        1280
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Drywall.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Drywall.png",
+      "imageSizePx": [
+        224,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Floral Wallpaper A.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Floral Wallpaper A.png",
+      "imageSizePx": [
+        960,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Floral Wallpaper B.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Floral Wallpaper B.png",
+      "imageSizePx": [
+        192,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Grainy Plain Wall.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Grainy Plain Wall.png",
+      "imageSizePx": [
+        576,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Half-Wall Paneling A.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Half-Wall Paneling A.png",
+      "imageSizePx": [
+        288,
+        96
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Jagged Stone Walls.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Jagged Stone Walls.png",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Molding.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Molding.png",
+      "imageSizePx": [
+        192,
+        288
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Painted Walls.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Painted Walls.png",
+      "imageSizePx": [
+        1536,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Panels A.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Panels A.png",
+      "imageSizePx": [
+        96,
+        64
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Siding, Plain.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Siding, Plain.png",
+      "imageSizePx": [
+        1600,
+        384
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Striped Wallpaper A.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Striped Wallpaper A.png",
+      "imageSizePx": [
+        1056,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Striped Wallpaper B.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Striped Wallpaper B.png",
+      "imageSizePx": [
+        1056,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Walls/Striped Wallpaper C.png",
+      "sourceAssetId": "elizawy:Structure/Walls/Striped Wallpaper C.png",
+      "imageSizePx": [
+        1152,
+        512
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "wall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Ornamental Windows A - Emission.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Ornamental Windows A - Emission.png",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Ornamental Windows A.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Ornamental Windows A.png",
+      "imageSizePx": [
+        96,
+        160
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Ornamental Windows B - Emission.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Ornamental Windows B - Emission.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Ornamental Windows B.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Ornamental Windows B.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Stone Windows A - Emission.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Stone Windows A - Emission.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Stone Windows A.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Stone Windows A.png",
+      "imageSizePx": [
+        96,
+        128
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Structure/Windows/Window Awnings A.png",
+      "sourceAssetId": "elizawy:Structure/Windows/Window Awnings A.png",
+      "imageSizePx": [
+        288,
+        192
+      ],
+      "domain": "structure",
+      "contextTags": [
+        "settlement",
+        "window"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/cliff_autumn.png",
+      "sourceAssetId": "elizawy:Terrain/cliff_autumn.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "autumn",
+        "cliff",
+        "elevation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/cliff_spring.png",
+      "sourceAssetId": "elizawy:Terrain/cliff_spring.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "cliff",
+        "elevation",
+        "spring"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/cliff_summer.png",
+      "sourceAssetId": "elizawy:Terrain/cliff_summer.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "cliff",
+        "elevation",
+        "summer"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/cliff_winter.png",
+      "sourceAssetId": "elizawy:Terrain/cliff_winter.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "cliff",
+        "elevation",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/cliff_winter_ice.png",
+      "sourceAssetId": "elizawy:Terrain/cliff_winter_ice.png",
+      "imageSizePx": [
+        512,
+        448
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "cliff",
+        "elevation",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/flowers.png",
+      "sourceAssetId": "elizawy:Terrain/flowers.png",
+      "imageSizePx": [
+        352,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/ice-shallows.png",
+      "sourceAssetId": "elizawy:Terrain/ice-shallows.png",
+      "imageSizePx": [
+        192,
+        192
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/mushrooms.png",
+      "sourceAssetId": "elizawy:Terrain/mushrooms.png",
+      "imageSizePx": [
+        192,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/plants_autumn.png",
+      "sourceAssetId": "elizawy:Terrain/plants_autumn.png",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "autumn",
+        "ground_detail",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/plants_spring.png",
+      "sourceAssetId": "elizawy:Terrain/plants_spring.png",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "spring",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/plants_summer.png",
+      "sourceAssetId": "elizawy:Terrain/plants_summer.png",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "summer",
+        "vegetation"
+      ],
+      "worldgenState": "certified_template_source_available",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Terrain/plants_winter.png",
+      "sourceAssetId": "elizawy:Terrain/plants_winter.png",
+      "imageSizePx": [
+        512,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "vegetation",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/Rocks, Cliffs.png",
+      "sourceAssetId": "elizawy:Terrain/Rocks, Cliffs.png",
+      "imageSizePx": [
+        192,
+        128
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "cliff",
+        "elevation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/Rocks, Grasslands.png",
+      "sourceAssetId": "elizawy:Terrain/Rocks, Grasslands.png",
+      "imageSizePx": [
+        192,
+        384
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [],
+      "worldgenState": "certified_template_source_available",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Terrain/terrain_autumn.png",
+      "sourceAssetId": "elizawy:Terrain/terrain_autumn.png",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "autumn",
+        "ground",
+        "seasonal_terrain"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/terrain_spring.png",
+      "sourceAssetId": "elizawy:Terrain/terrain_spring.png",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground",
+        "seasonal_terrain",
+        "spring"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceAssetId": "elizawy:Terrain/terrain_summer.png",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground",
+        "seasonal_terrain",
+        "summer"
+      ],
+      "worldgenState": "certified_terrain_authority",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Terrain/terrain_winter.png",
+      "sourceAssetId": "elizawy:Terrain/terrain_winter.png",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground",
+        "seasonal_terrain",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/terrain_winter_ice.png",
+      "sourceAssetId": "elizawy:Terrain/terrain_winter_ice.png",
+      "imageSizePx": [
+        512,
+        832
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground",
+        "seasonal_terrain",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/tilled_soil.png",
+      "sourceAssetId": "elizawy:Terrain/tilled_soil.png",
+      "imageSizePx": [
+        256,
+        256
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "farming",
+        "soil"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/trees_autumn.png",
+      "sourceAssetId": "elizawy:Terrain/trees_autumn.png",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "autumn",
+        "tree",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/trees_spring.png",
+      "sourceAssetId": "elizawy:Terrain/trees_spring.png",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "spring",
+        "tree",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/trees_summer.png",
+      "sourceAssetId": "elizawy:Terrain/trees_summer.png",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "summer",
+        "tree",
+        "vegetation"
+      ],
+      "worldgenState": "certified_template_source_available",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Terrain/trees_winter.png",
+      "sourceAssetId": "elizawy:Terrain/trees_winter.png",
+      "imageSizePx": [
+        512,
+        576
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "tree",
+        "vegetation",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/Waterfall.png",
+      "sourceAssetId": "elizawy:Terrain/Waterfall.png",
+      "imageSizePx": [
+        512,
+        608
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "water",
+        "waterfall"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/wildflowers_autumn.png",
+      "sourceAssetId": "elizawy:Terrain/wildflowers_autumn.png",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "autumn",
+        "ground_detail",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/wildflowers_spring.png",
+      "sourceAssetId": "elizawy:Terrain/wildflowers_spring.png",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "spring",
+        "vegetation"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    },
+    {
+      "sourcePath": "Terrain/wildflowers_summer.png",
+      "sourceAssetId": "elizawy:Terrain/wildflowers_summer.png",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "summer",
+        "vegetation"
+      ],
+      "worldgenState": "certified_template_source_available",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
+    },
+    {
+      "sourcePath": "Terrain/wildflowers_winter.png",
+      "sourceAssetId": "elizawy:Terrain/wildflowers_winter.png",
+      "imageSizePx": [
+        144,
+        160
+      ],
+      "domain": "terrain_or_nature",
+      "contextTags": [
+        "ground_detail",
+        "vegetation",
+        "winter"
+      ],
+      "worldgenState": "source_available_requires_context_mapping",
+      "generatedArtwork": false,
+      "autoPlacementPolicy": "disabled_until_mapped"
+    }
+  ]
+}

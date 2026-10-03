@@ -438,7 +438,7 @@ impl AssetAuthority {
         }
 
         if self.summer_flatworld.schema != "havenwild.terrain.summer_flatworld_runtime.v1"
-            || !matches!(self.summer_flatworld.version, 1 | 2 | 3 | 4 | 5)
+            || !matches!(self.summer_flatworld.version, 1..=6)
             || self.summer_flatworld.source_atlas != "Terrain/terrain_summer.png"
             || self.summer_flatworld.safe_fill.len() < 3
         {

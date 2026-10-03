@@ -1,6 +1,6 @@
 # Havenwild Bevy — standalone source
 
-**Current deploy checkpoint:** source **0.8.4**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+**Current deploy checkpoint:** source **0.8.6**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
 
 
 ### M2D081C water authority + PCC manifest-first intake
@@ -11,6 +11,19 @@
 - PCC root-drop discovery is manifest-first: any root ZIP containing a valid root `pcc_patch.json` is discovered even if the browser renamed it. Ordinary source/debug ZIPs remain ignored.
 - Manual extract/overwrite remains supported. If the installed target versions and exact declared file hashes already match a governed patch, PCC reconciles/archives that handoff instead of trying to apply it again. Older superseded patch handoffs are archived rather than poisoning Full Gate.
 - M2D082 cliff groundwork is now deterministic: `Terrain/cliff_summer.png` exposes **205 canonical 32x32 cliff source cells** and **212 retained historical reference entries** across five evidence families, with zero semantic/runtime promotions until topology is classified.
+
+### M2D082C1 terrain authority version-skew repair
+
+Source 0.8.6 keeps the M2D082C Generated World behavior intact while aligning all Summer runtime consumers with profile v6. M2D080 compatibility checks, Rust AssetAuthority validation, and Native→Bevy convergence now accept the v6 mixed-bank/static-water authority. Terrain certification no longer hard-codes a specific 0.8.x Studio patch version.
+
+## M2D082C Generated World consolidation
+
+- **Generated World is now the primary editor surface.** A fresh or migrated world auto-materializes a 5×5 chunk working region; the old River/Summer scene remains internal regression evidence instead of the normal authoring destination.
+- The macro planner establishes four ocean-separated island intents: Spring, Summer, Autumn and Winter. Each island has deterministic interior river/lake intent plus coast, meadow, light-woodland and dense-forest biome regions. Seasonal **visual** substitution is still evidence-gated; current certified ground rendering remains the Summer terrain authority until the other seasons are mapped.
+- Mixed Grass/Dirt/Water junctions are now **water-continuity-first**. All 36 three-material corner states use RiverWater as the exact-source quadrant background so narrow channels, coves and mixed-bank inlets do not fragment into the visible wedge/notch defects reported during visual review.
+- Large tree draws use a one-source-pixel UV inset on `Terrain/trees_*` regions. This preserves the world-space footprint while excluding the atlas guide pixels that were appearing as faint rectangular/vertical bars around trees. Source PNG bytes remain untouched.
+- `content/worldgen/elizawy_worldgen_asset_catalog.v1.json` exposes **all 320 canonical ElizaWy PNGs** to Generated World discovery: 29 Terrain/Nature, 98 Structure, 188 Object and 5 FX sheets. Automatic placement remains authority-gated; unmapped sheets are not randomly scattered.
+- `content/worldgen/havenwild_generated_world.v1.json` locks the purpose-first roadmap for settlements, meandering connectivity roads, biomes and deterministic weekly-reset procedural caves (`hash(world_seed,cave_id,game_week)`).
 
 Large ElizaWy/LPC source assets remain local/hydrated and are intentionally not included in this repository handoff.
 

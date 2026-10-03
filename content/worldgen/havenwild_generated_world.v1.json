@@ -1,0 +1,74 @@
+{
+  "schema": "havenwild.worldgen.intent.v1",
+  "profileId": "havenwild.four_season_archipelago.v1",
+  "status": "foundation_active",
+  "authoritativeSurface": "Generated World",
+  "legacyRiverScene": {
+    "userFacing": false,
+    "purpose": "regression_fixture_only",
+    "mayDriveWorldgen": false
+  },
+  "macroWorld": {
+    "majorIslands": 4,
+    "oceanSeparatesMajorIslands": true,
+    "seasonIdentity": ["spring", "summer", "autumn", "winter"],
+    "seasonVisualPolicy": "logical identity now; seasonal source-art substitution only after exact source mappings are certified",
+    "interiorHydrology": ["meandering_river", "pond_or_lake"],
+    "biomeIntent": ["ocean", "coast", "meadow", "light_woodland", "dense_forest", "river_or_lake"]
+  },
+  "purposeFirstGenerationOrder": [
+    "macro_geography",
+    "elevation_and_hydrology",
+    "biomes",
+    "settlement_and_poi_graph",
+    "road_connectivity_graph",
+    "parcels_and_structures",
+    "vegetation",
+    "contextual_props",
+    "navigation_and_progression_validation"
+  ],
+  "settlements": {
+    "hierarchy": ["homestead", "hamlet", "village", "town", "city"],
+    "requiredIntent": [
+      "districts_before_buildings",
+      "civic_or_market_anchor",
+      "residential_and_commercial_relationships",
+      "farmland_or_resource_context_when_applicable",
+      "terrain_support_and_entrance_validation"
+    ],
+    "cityGoal": "purposeful authored-feeling settlements rather than repeated random house stamps"
+  },
+  "roads": {
+    "authority": "connectivity_graph_before_geometry",
+    "nodes": ["settlements", "farms", "ports", "caves", "mines", "ruins", "major_pois"],
+    "geometryGoal": "meandering countryside routes that lead somewhere meaningful",
+    "terrainCosts": ["prefer_existing_road", "prefer_gentle_land", "penalize_dense_forest", "bridge_or_ford_water", "route_around_or_connect_cliffs"]
+  },
+  "caves": {
+    "persistentEntrance": true,
+    "resetCadence": "weekly_in_game",
+    "runSeedFormula": "hash(world_seed,cave_id,game_week)",
+    "depthProgression": "unbounded_tiered",
+    "layoutIntent": ["entrance", "branching_rooms", "resource_pockets", "traversal_challenges", "encounters", "deeper_transition", "reward_rooms"],
+    "resetExclusions": ["explicit_persistent_spaces", "player_owned_or_authored_persistent_state"]
+  },
+  "sourceArt": {
+    "provider": "ElizaWy/LPC",
+    "generatedArtwork": false,
+    "currentCertifiedGroundAuthority": "Terrain/terrain_summer.png",
+    "broaderLaneGoal": "classify and contextually expose the entire hydrated ElizaWy lane without forcing unrelated assets into one scene"
+  },
+  "validation": {
+    "requiredFutureChecks": [
+      "settlement_reachability",
+      "road_destination_validity",
+      "bridge_connectivity",
+      "raised_region_access",
+      "building_support_and_entrances",
+      "cave_entrance_reachability",
+      "complete_drainage",
+      "shoreline_topology",
+      "critical_resource_progression"
+    ]
+  }
+}

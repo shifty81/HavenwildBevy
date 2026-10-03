@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import json
+import re
 from collections import Counter
 from pathlib import Path
 
@@ -19,7 +20,7 @@ def require(ok, msg):
 
 def main():
     profile, runtime, donor = map(load, (PROFILE, RUNTIME, DONOR))
-    require(profile.get("version") == 5, "runtime profile is not v5 water-authority repair")
+    require(profile.get("version") == 6, "runtime profile is not v6 mixed-bank continuity repair")
     require(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor is not 305/305")
     groups = profile.get("sourceGroups", {})
     require(len(groups) == 41, f"expected 41 Summer groups, got {len(groups)}")
@@ -68,6 +69,24 @@ def main():
             if role == bg:
                 require(recipe["parts"][i]["canonicalRegionId"] == bg_id, f"checker {key} bridges background at quadrant {i}")
 
+
+    # M2D082C regression: all 36 three-material junctions keep RiverWater as the
+    # quadrant background. This is the exact topology family exposed by the user's
+    # narrow inlet / opposing grass+dirt bank screenshots.
+    water_bg_id = safe["RiverWater"]["canonicalRegionId"]
+    tri_count = 0
+    for key, recipe in comps.items():
+        corners = key.split("|")
+        if len(set(corners)) != 3:
+            continue
+        tri_count += 1
+        require("RiverWater" in corners, f"unexpected non-water tri-material state {key}")
+        require(len(recipe.get("parts", [])) == 4, f"tri-material {key} is not four exact quadrants")
+        for i, role in enumerate(corners):
+            if role == "RiverWater":
+                require(recipe["parts"][i]["canonicalRegionId"] == water_bg_id, f"tri-material {key} lost water background at quadrant {i}")
+    require(tri_count == 36, f"expected 36 water-continuity tri-material states, got {tri_count}")
+
     auth_text = AUTH.read_text(encoding="utf-8")
     world_text = WORLD.read_text(encoding="utf-8")
     main_text = MAIN.read_text(encoding="utf-8")
@@ -80,15 +99,16 @@ def main():
     require("a.contains_source_slice(&part.source)" in world_text, "flatworld regression does not validate canonical source slices")
     require("strict Summer flatworld paint must resolve\")" not in world_text, "stale single-binding flatworld regression remains")
     require("water_animation_ms" not in main_text, "stale fake water animation clock remains")
-    require("Havenwild — Bevy Studio v0.8.4" in main_text, "Studio 0.8.3 marker missing")
+    require(re.search(r"Havenwild — Bevy Studio v0\.8\.\d+", main_text) is not None, "Studio 0.8.x marker missing")
     require("checker_background" in gen_text, "disconnected checkerboard generation missing")
-    print("M2D081C WATER AUTHORITY REPAIR SELFTEST: PASS")
+    print("M2D082C WATER / MIXED-BANK CONTINUITY SELFTEST: PASS")
     print("  Summer runtime cells : 305/305 across 41 source groups")
     print("  runtime authority    : 2316 exact regions")
     print("  G/D/W grammar        : 81/81 states (14/14 pairwise + 36 tri-material)")
     print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 conservative base")
     print("  water animation      : OFF / RepeatableFill variants are static source/detail cells")
     print("  checkerboards        : disconnected foreground policy enabled")
+    print("  mixed-bank channels  : RiverWater background across all 36 tri-material junctions")
     return 0
 
 if __name__ == "__main__": raise SystemExit(main())

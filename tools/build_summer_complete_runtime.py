@@ -165,9 +165,11 @@ def build() -> dict:
     animations = {}
 
     # Complete the normal three-material GRS/DIR/WTR grammar. Every three-material
-    # output is a 4-quadrant composite of exact source pixels. The material that
-    # appears twice is the local background; each singleton material contributes
-    # the exact quadrant from its corresponding pairwise one-corner recipe.
+    # output is a 4-quadrant composite of exact source pixels. M2D082C gives water
+    # continuity explicit priority whenever Grass, Dirt and Water meet in one dual-
+    # grid output: RiverWater owns the background and both land materials contribute
+    # exact one-corner quadrants. This prevents narrow channels/inlets from breaking
+    # into disconnected water wedges when the doubled material happens to be land.
     composites = dict(profile.get("cornerComposites", {}))
 
     # The six pairwise checkerboard states are inherently ambiguous if represented
@@ -216,7 +218,9 @@ def build() -> dict:
                     counts = Counter(corners)
                     if len(counts) != 3:
                         continue
-                    background = next(role for role, count in counts.items() if count == 2)
+                    background = "RiverWater" if "RiverWater" in counts else next(
+                        role for role, count in counts.items() if count == 2
+                    )
                     parts = []
                     for index, role in enumerate(corners):
                         if role == background:
@@ -232,7 +236,7 @@ def build() -> dict:
     if three_material != 36:
         raise ValueError(f"expected 36 three-material junction states, got {three_material}")
 
-    profile["version"] = 5
+    profile["version"] = 6
     profile["sourceGroups"] = built_groups
     profile["fillVariants"] = fill_variants
     profile["animations"] = animations
@@ -241,6 +245,7 @@ def build() -> dict:
         "All 305 non-transparent cells in the Summer atlas are canonical runtime-selectable source regions grouped by the recovered Native authority.",
         "Normal Bevy World painting resolves Grass/Dirt/Water through a complete 81/81 four-corner grammar: 3 solids, 42 two-material mixed states, and 36 exact-source three-material junction composites.",
         "Pairwise diagonal checkerboards use exact one-corner source quadrants so isolated Dirt/Grass land spots stay disconnected instead of being bridged by a fixed checker composite.",
+        "Three-material Grass/Dirt/Water junctions are water-continuity-first: RiverWater owns the exact-source quadrant background so narrow channels, coves and mixed-bank inlets do not collapse into disconnected water wedges.",
         "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
         "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
         "Water animation is evidence-gated: no RiverWater temporal sequence is active until an explicitly ordered authored frame set is proven from source metadata or equivalent source evidence.",
@@ -259,7 +264,7 @@ def main() -> int:
     if args.check:
         if not PROFILE.is_file() or PROFILE.read_bytes() != data:
             raise SystemExit(f"Summer complete runtime profile is stale: {PROFILE}")
-        print("M2D081C SUMMER PROFILE: PASS / 305 cells / 41 groups / 81 terrain states / static evidence-gated water")
+        print("M2D082C SUMMER PROFILE: PASS / 305 cells / 41 groups / 81 terrain states / water-continuity mixed-bank repair")
         return 0
     PROFILE.write_bytes(data)
     print(f"WROTE {PROFILE}")

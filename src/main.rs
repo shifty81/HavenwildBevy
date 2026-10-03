@@ -20,6 +20,7 @@ mod terrain_mapper;
 mod terrain_resolver;
 mod world_chunks;
 mod world_doc;
+mod worldgen_plan;
 
 use asset_authority::AssetAuthority;
 use bevy::{image::ImagePlugin, prelude::*};
@@ -472,6 +473,14 @@ fn startup(
         });
     let quarantined_world_objects =
         world_doc.quarantine_uncertified_large_objects(&asset_authority);
+    let generated_world_initialized = if world_doc.chunks.is_empty() {
+        world_doc
+            .materialize([0, 0], 2, &asset_authority)
+            .unwrap_or_else(|error| panic!("Cannot initialize Generated World: {error}"));
+        true
+    } else {
+        false
+    };
     // Exact bounds and source identity are checked for every saved v2 overlay/object.
     // Never replace missing material with a black rectangle or invented sprite.
     let mut layered_references = std::collections::BTreeSet::new();
@@ -605,7 +614,7 @@ fn startup(
     );
     // The pinned source-authored River supplies immutable ground UNDER the opening Summer
     // object composition. Guessed M2D02-D visual samples stay retired.
-    let initial_zoom = 0.70;
+    let initial_zoom = 0.20;
     let initial_pan = egui::Vec2::ZERO;
     let summer_object_count = layered_scene.objects.len();
     commands.insert_resource(Studio {
@@ -632,8 +641,8 @@ fn startup(
         asset_authority,
         world_doc,
         world_path,
-        world_mode: false,
-        world_dirty: repaired_world_rules > 0 || quarantined_world_objects > 0,
+        world_mode: true,
+        world_dirty: generated_world_initialized || repaired_world_rules > 0 || quarantined_world_objects > 0,
         world_selected: [0, 0],
         world_selected_object: None,
         world_undo: Vec::new(),
@@ -692,10 +701,12 @@ fn startup(
         dirty: false,
         message: if repaired_world_rules > 0 || quarantined_world_objects > 0 {
             format!(
-                "World safety repair: {repaired_world_rules} unsafe learned rule(s) repaired; {quarantined_world_objects} uncertified large generated tree/rock object(s) quarantined. Build the Summer autotile map in PCC, regenerate, then Save World."
+                "Generated World safety repair: {repaired_world_rules} unsafe learned rule(s) repaired; {quarantined_world_objects} uncertified large generated object(s) quarantined. The four-season archipelago is now the primary authoring map."
             )
+        } else if generated_world_initialized {
+            "Generated World initialized: four seasonal island regions, ocean separation, interior water and biome intent are materialized as the primary map. Seasonal source-art substitution remains evidence-gated; current certified ground rendering uses the Summer terrain authority.".into()
         } else {
-            format!("Summer composition ready: {} individually placed original-source instances. GRS/DIR/WTR use four-corner source-only autotiling; build/update its local map from PCC Terrain when coverage changes.", summer_object_count)
+            format!("Generated World ready: {} legacy source-exact scene instances remain available only as regression evidence; normal authoring now stays on the generated map.", summer_object_count)
         },
         theme: ForgeTheme::from_preset(ForgeThemePreset::MidnightMint),
         creator_visuals_applied: false,
@@ -712,6 +723,30 @@ fn startup(
 fn source_uv(rect: [u32; 4], sheet: [u32; 2]) -> egui::Rect {
     let inset_x = if rect[2] > 1 { 0.5 } else { 0.0 };
     let inset_y = if rect[3] > 1 { 0.5 } else { 0.0 };
+    egui::Rect::from_min_max(
+        egui::pos2(
+            (rect[0] as f32 + inset_x) / sheet[0] as f32,
+            (rect[1] as f32 + inset_y) / sheet[1] as f32,
+        ),
+        egui::pos2(
+            (rect[0] as f32 + rect[2] as f32 - inset_x) / sheet[0] as f32,
+            (rect[1] as f32 + rect[3] as f32 - inset_y) / sheet[1] as f32,
+        ),
+    )
+}
+
+fn source_uv_object(source_asset: &str, rect: [u32; 4], sheet: [u32; 2]) -> egui::Rect {
+    // ElizaWy tree sheets contain visible atlas guide pixels on some large-cell
+    // boundaries. Keep the world-space footprint unchanged, but sample one full
+    // source pixel inside certified large tree regions so guide bars cannot appear
+    // as ghost rectangles around otherwise transparent sprites. No source pixels
+    // are edited or generated.
+    let tree_region = source_asset.starts_with("Terrain/trees_") && rect[2] > 32 && rect[3] > 32;
+    if !tree_region {
+        return source_uv(rect, sheet);
+    }
+    let inset_x = 1.0_f32.min((rect[2] as f32 - 1.0) * 0.5);
+    let inset_y = 1.0_f32.min((rect[3] as f32 - 1.0) * 0.5);
     egui::Rect::from_min_max(
         egui::pos2(
             (rect[0] as f32 + inset_x) / sheet[0] as f32,
@@ -1361,7 +1396,7 @@ fn draw_source_exact_visual_layers(
                     painter.image(
                         texture,
                         target,
-                        source_uv(source.source_rect, sheet.size),
+                        source_uv_object(&source.source_asset, source.source_rect, sheet.size),
                         egui::Color32::WHITE,
                     );
                 }
@@ -1914,7 +1949,11 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
                             painter.image(
                                 texture,
                                 target,
-                                source_uv(part.source.source_rect, sheet.size),
+                                source_uv_object(
+                                    &part.source.source_asset,
+                                    part.source.source_rect,
+                                    sheet.size,
+                                ),
                                 egui::Color32::WHITE,
                             );
                         }
@@ -2067,7 +2106,7 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
                 .fill(egui::Color32::from_rgba_unmultiplied(25, 33, 37, 232))
                 .show(ui, |ui| {
                     ui.horizontal(|ui| {
-                        if ui.small_button("Fit 3×3").clicked() {
+                        if ui.small_button("Fit world").clicked() {
                             let fx = canvas.width() / size[0] as f32 / 32.0;
                             let fy = canvas.height() / size[1] as f32 / 32.0;
                             state.zoom = fx.min(fy).clamp(0.125, 16.0) * 0.92;
@@ -2093,10 +2132,6 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
                                 state.collision_brush_radius =
                                     (state.collision_brush_radius + 1).min(8);
                             }
-                        }
-                        if ui.small_button("Summer scene").clicked() {
-                            state.world_mode = false;
-                            state.selection_active = false;
                         }
                     });
                 });
@@ -5725,7 +5760,7 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
     let compact = state.editor_layout.world_generator_compact;
     let mut open = true;
     let response = docked_overlay_window(
-        "World Generator",
+        "Generated World",
         "havenwild.world.generator.overlay",
         dock,
         compact,
@@ -5764,11 +5799,18 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                     ui.add(egui::DragValue::new(&mut cy));
                 });
                 state.world_doc.center_chunk = [cx, cy];
+                let mut radius = state.world_doc.materialized_radius.clamp(1, 4);
+                ui.horizontal(|ui| {
+                    ui.label("World radius");
+                    ui.add(egui::DragValue::new(&mut radius).range(1..=4));
+                    ui.small(format!("{}×{} chunks", radius * 2 + 1, radius * 2 + 1));
+                });
+                state.world_doc.materialized_radius = radius;
                 ui.horizontal_wrapped(|ui| {
                     if ui.button("Preview").clicked() {
                         match state
                             .world_doc
-                            .preview_regenerate_3x3([cx, cy], &state.asset_authority)
+                            .preview_regenerate([cx, cy], radius, &state.asset_authority)
                         {
                             Ok(preview) => {
                                 state.message = format!(
@@ -5783,21 +5825,23 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                         }
                     }
                     let label = if state.world_doc.chunks.is_empty() {
-                        "Generate 3×3"
+                        format!("Generate {}×{}", radius * 2 + 1, radius * 2 + 1)
                     } else {
-                        "Regenerate 3×3"
+                        format!("Regenerate {}×{}", radius * 2 + 1, radius * 2 + 1)
                     };
-                    if ui.button(label).clicked() {
+                    if ui.button(&label).clicked() {
                         checkpoint_world(state);
                         match state
                             .world_doc
-                            .materialize_3x3([cx, cy], &state.asset_authority)
+                            .materialize([cx, cy], radius, &state.asset_authority)
                         {
                             Ok(()) => {
                                 state.world_mode = true;
                                 state.world_dirty = true;
                                 state.message = format!(
-                                    "Regenerated source-backed 3×3 around CH {cx},{cy}; authored terrain/behavior overrides preserved."
+                                    "Regenerated Generated World {}×{} around CH {cx},{cy}; authored terrain/behavior overrides preserved.",
+                                    radius * 2 + 1,
+                                    radius * 2 + 1
                                 );
                             }
                             Err(error) => {
@@ -5822,6 +5866,25 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                 });
             });
 
+        egui::CollapsingHeader::new("World plan")
+            .id_salt("havenwild.generated_world.plan")
+            .default_open(true)
+            .show(ui, |ui| {
+                ui.small("One authoritative Generated World. The old River scene remains only as an internal regression fixture.");
+                for island in worldgen_plan::ISLANDS {
+                    ui.label(format!("{} · {} · center {},{}", island.label, island.season, island.center[0], island.center[1]));
+                }
+                if let (Some(season), Some(biome), Some(region)) = (
+                    state.world_doc.generated_season(state.world_selected),
+                    state.world_doc.generated_biome(state.world_selected),
+                    state.world_doc.generated_region_id(state.world_selected),
+                ) {
+                    ui.separator();
+                    ui.small(format!("Selected: {region} · {season} · {biome}"));
+                }
+                ui.small("Season identities are logical worldgen intent. Seasonal terrain/source substitution remains disabled until each season's exact source mappings are certified.");
+            });
+
         egui::CollapsingHeader::new("Terrain paint")
             .id_salt("havenwild.world.generator.terrain")
             .default_open(true)
@@ -5842,7 +5905,7 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                         }
                     }
                 });
-                ui.small("Water may meet Grass directly. Dirt/Mud bank appears only where DIR semantics are actually authored or generated by an explicit profile.");
+                ui.small("Ocean/river water may meet Grass directly. Dirt/Mud remains an explicit authored material; it is not forced around every shoreline.");
             });
 
         if !compact {
@@ -5889,7 +5952,7 @@ fn draw_chunk_manager_panel(ctx: &egui::Context, state: &mut Studio) {
     let dock = state.editor_layout.chunk_manager_dock;
     let compact = state.editor_layout.chunk_manager_compact;
     let mut open = true;
-    let response=docked_overlay_window("Chunk Manager","havenwild.world.chunks.overlay",dock,compact,&mut open).show(ctx,|ui|{let(d,c)=panel_header(ui,dock,compact);if let Some(v)=d{state.editor_layout.chunk_manager_dock=v;save_editor_layout(state);}if c!=compact{state.editor_layout.chunk_manager_compact=c;save_editor_layout(state);}ui.small("Chunks are 32×32 working windows in one signed-coordinate world; they do not own separate art.");if state.world_doc.chunks.is_empty(){ui.label("No chunks materialized.");return;}if ui.button("Open world canvas").clicked(){state.world_mode=true;}let rows:Vec<_>=state.world_doc.chunks.iter().map(|ch|(ch.coord,ch.generated_objects.len())).collect();egui::ScrollArea::vertical().max_height(if compact{210.0}else{360.0}).show(ui,|ui|{for(coord,count)in rows{let active=coord==state.world_doc.center_chunk;if ui.selectable_label(active,format!("CH {},{} · {} source-backed placements",coord[0],coord[1],count)).clicked(){state.world_doc.center_chunk=coord;state.world_mode=true;}}});if !compact{ui.label(format!("Revision {} · seed {}",state.world_doc.revision,state.world_doc.seed));ui.label(format!("Overrides {} · tombstones {}",state.world_doc.cell_overrides.len(),state.world_doc.suppressed_generated_objects.len()));}});
+    let response=docked_overlay_window("Chunk Manager","havenwild.world.chunks.overlay",dock,compact,&mut open).show(ctx,|ui|{let(d,c)=panel_header(ui,dock,compact);if let Some(v)=d{state.editor_layout.chunk_manager_dock=v;save_editor_layout(state);}if c!=compact{state.editor_layout.chunk_manager_compact=c;save_editor_layout(state);}ui.small("Chunks are 32×32 working windows in one signed-coordinate world; they do not own separate art.");if state.world_doc.chunks.is_empty(){ui.label("No chunks materialized.");return;}if ui.button("Open generated world").clicked(){state.world_mode=true;}let rows:Vec<_>=state.world_doc.chunks.iter().map(|ch|(ch.coord,ch.generated_objects.len())).collect();egui::ScrollArea::vertical().max_height(if compact{210.0}else{360.0}).show(ui,|ui|{for(coord,count)in rows{let active=coord==state.world_doc.center_chunk;if ui.selectable_label(active,format!("CH {},{} · {} source-backed placements",coord[0],coord[1],count)).clicked(){state.world_doc.center_chunk=coord;state.world_mode=true;}}});if !compact{ui.label(format!("Revision {} · seed {}",state.world_doc.revision,state.world_doc.seed));ui.label(format!("Overrides {} · tombstones {}",state.world_doc.cell_overrides.len(),state.world_doc.suppressed_generated_objects.len()));}});
     state.chunk_manager_rect = response
         .as_ref()
         .map(|r| r.response.rect)
@@ -5948,7 +6011,7 @@ fn draw_app_launcher(ctx: &egui::Context, state: &mut Studio) {
                 state.launcher_open = false;
                 save_editor_layout(state);
             }
-            if ui.button("World Generator").clicked() { state.editor_layout.world_generator_open = true; state.launcher_open = false; save_editor_layout(state); }
+            if ui.button("Generated World").clicked() { state.editor_layout.world_generator_open = true; state.launcher_open = false; save_editor_layout(state); }
             if ui.button("Chunk Manager").clicked() { state.editor_layout.chunk_manager_open = true; state.launcher_open = false; save_editor_layout(state); }
 
             ui.separator();
@@ -6228,7 +6291,7 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                     state.evidence_open = !state.evidence_open;
                 }
                 ui.separator();
-                if ui.button("World Generator").clicked() { state.editor_layout.world_generator_open = true; save_editor_layout(&mut state); }
+                if ui.button("Generated World").clicked() { state.editor_layout.world_generator_open = true; save_editor_layout(&mut state); }
                 if ui.button("Chunk Manager").clicked() { state.editor_layout.chunk_manager_open = true; save_editor_layout(&mut state); }
                 if ui.button("ElizaWy Asset Authority").clicked() { state.editor_layout.asset_authority_open = true; save_editor_layout(&mut state); }
                 ui.add_enabled(false, egui::Button::new("Pixel Studio · planned"));
@@ -6247,7 +6310,7 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
             }
             ui.separator();
             if state.world_mode {
-                ui.small(format!("Studio 0.8.4 · World {}{} · {} chunks · {}", state.world_doc.world_id, if state.world_dirty { " *" } else { "" }, state.world_doc.chunks.len(), state.tool.label()));
+                ui.small(format!("Studio 0.8.6 · World {}{} · {} chunks · {}", state.world_doc.world_id, if state.world_dirty { " *" } else { "" }, state.world_doc.chunks.len(), state.tool.label()));
             } else {
                 ui.small(format!("{}{} · {}", state.layered_scene.name, if state.layered_history.is_dirty() || state.scene_needs_initial_save { " *" } else { "" }, if state.playtest.is_some() { "PIE / source-snapshot" } else { state.tool.label() }));
             }
@@ -6579,7 +6642,7 @@ fn main() -> bevy::app::AppExit {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Havenwild — Bevy Studio v0.8.4".into(),
+                        title: "Havenwild — Bevy Studio v0.8.6".into(),
                         decorations: native_frame,
                         resolution: (1440, 900).into(),
                         resizable: true,

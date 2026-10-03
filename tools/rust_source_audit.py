@@ -300,7 +300,7 @@ def main() -> int:
         result = run([sys.executable, str(ROOT / 'tools' / script)], cwd=ROOT, capture_output=True, text=True, timeout=35)
         if result.returncode:
             fail(errors, f'M2D07 selftest failed ({script}): ' + (result.stdout + result.stderr)[-1200:])
-    for required in ('mod asset_authority;', 'mod world_doc;', 'state.world_doc.materialize_3x3(', 'draw_world_workspace(ui, state);'):
+    for required in ('mod asset_authority;', 'mod world_doc;', 'state.world_doc\n                            .materialize([cx, cy], radius', 'draw_world_workspace(ui, state);'):
         if not has_token(main_text, required):
             fail(errors, f'M2D07 unified asset/world wiring missing: {required}')
 

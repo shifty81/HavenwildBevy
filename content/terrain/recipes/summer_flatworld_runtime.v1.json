@@ -1,6 +1,6 @@
 {
   "schema": "havenwild.terrain.summer_flatworld_runtime.v1",
-  "version": 5,
+  "version": 6,
   "sourceAtlas": "Terrain/terrain_summer.png",
   "sourceAtlasSha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
   "policy": {
@@ -864,11 +864,11 @@
     "Grass|Grass|MudBank|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -880,11 +880,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            32,
+            16,
+            448,
             16,
             16
           ],
@@ -896,11 +896,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.ea07ceecf80802b5001cd56e",
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            112,
+            432,
             16,
             16
           ],
@@ -912,11 +912,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.7791ef58c53fde008f64cb53",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            336,
+            400,
+            528,
             16,
             16
           ],
@@ -932,11 +932,11 @@
     "Grass|Grass|RiverWater|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -948,11 +948,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            32,
+            16,
+            448,
             16,
             16
           ],
@@ -964,11 +964,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.505dca2b7fa5458a086502a1",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
-            336,
+            384,
+            528,
             16,
             16
           ],
@@ -980,11 +980,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.a9adc71032759b31e098c460",
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            112,
+            432,
             16,
             16
           ],
@@ -1000,11 +1000,11 @@
     "Grass|MudBank|Grass|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -1016,11 +1016,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.6e3d53885fe58e377aa4b736",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            128,
+            448,
             16,
             16
           ],
@@ -1032,11 +1032,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            48,
+            32,
+            432,
             16,
             16
           ],
@@ -1048,11 +1048,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.7791ef58c53fde008f64cb53",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            336,
+            400,
+            528,
             16,
             16
           ],
@@ -1136,11 +1136,11 @@
     "Grass|MudBank|MudBank|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.2c91ddbe444d7a307c621888",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
-            64,
+            32,
+            448,
             16,
             16
           ],
@@ -1152,43 +1152,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            96,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            112,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.2da6aa6984fdfe637a951bcb",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            336,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            400,
+            528,
             16,
             16
           ],
@@ -1204,11 +1204,11 @@
     "Grass|MudBank|RiverWater|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -1220,11 +1220,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.6e3d53885fe58e377aa4b736",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            128,
+            448,
             16,
             16
           ],
@@ -1236,11 +1236,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.505dca2b7fa5458a086502a1",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
-            336,
+            384,
+            528,
             16,
             16
           ],
@@ -1252,11 +1252,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -1272,11 +1272,11 @@
     "Grass|MudBank|RiverWater|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.2c91ddbe444d7a307c621888",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
-            64,
+            32,
+            448,
             16,
             16
           ],
@@ -1288,11 +1288,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            96,
+            208,
+            448,
             16,
             16
           ],
@@ -1304,11 +1304,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.0110317a2d16eb8021237fa3",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
-            336,
+            384,
+            528,
             16,
             16
           ],
@@ -1320,11 +1320,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            112,
+            208,
+            432,
             16,
             16
           ],
@@ -1408,11 +1408,11 @@
     "Grass|RiverWater|Grass|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -1424,11 +1424,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.0de1ae818dd40d4b1bed3101",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            384,
+            400,
+            512,
             16,
             16
           ],
@@ -1440,11 +1440,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            48,
+            32,
+            432,
             16,
             16
           ],
@@ -1456,11 +1456,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.a9adc71032759b31e098c460",
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            112,
+            432,
             16,
             16
           ],
@@ -1476,11 +1476,11 @@
     "Grass|RiverWater|MudBank|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
             32,
+            448,
             16,
             16
           ],
@@ -1492,11 +1492,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.0de1ae818dd40d4b1bed3101",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            384,
+            400,
+            512,
             16,
             16
           ],
@@ -1508,11 +1508,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.ea07ceecf80802b5001cd56e",
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            112,
+            432,
             16,
             16
           ],
@@ -1524,11 +1524,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -1544,11 +1544,11 @@
     "Grass|RiverWater|MudBank|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.2c91ddbe444d7a307c621888",
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
-            64,
+            32,
+            448,
             16,
             16
           ],
@@ -1560,43 +1560,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.3a9135774d399f30b50691ef",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            400,
+            512,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            384,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            112,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            112,
+            432,
             16,
             16
           ],
@@ -1884,11 +1884,11 @@
     "MudBank|Grass|Grass|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.0054812815391a7aff51d49d",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            128,
+            448,
             16,
             16
           ],
@@ -1900,27 +1900,27 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
+            16,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
             32,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            48,
+            432,
             16,
             16
           ],
@@ -1932,11 +1932,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.7791ef58c53fde008f64cb53",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            336,
+            400,
+            528,
             16,
             16
           ],
@@ -1952,11 +1952,11 @@
     "MudBank|Grass|MudBank|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -1968,11 +1968,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.08fa88a77a7cda510df620d2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            208,
-            64,
+            16,
+            448,
             16,
             16
           ],
@@ -1984,11 +1984,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            112,
+            224,
+            432,
             16,
             16
           ],
@@ -2000,11 +2000,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.2da6aa6984fdfe637a951bcb",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            208,
-            336,
+            400,
+            528,
             16,
             16
           ],
@@ -2020,11 +2020,11 @@
     "MudBank|Grass|RiverWater|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.0054812815391a7aff51d49d",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            128,
+            448,
             16,
             16
           ],
@@ -2036,11 +2036,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            32,
+            16,
+            448,
             16,
             16
           ],
@@ -2052,11 +2052,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.505dca2b7fa5458a086502a1",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
-            336,
+            384,
+            528,
             16,
             16
           ],
@@ -2068,11 +2068,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -2088,11 +2088,11 @@
     "MudBank|Grass|RiverWater|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -2104,43 +2104,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.08fa88a77a7cda510df620d2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            16,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            384,
+            528,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            64,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.0110317a2d16eb8021237fa3",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            256,
-            336,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            112,
+            432,
             16,
             16
           ],
@@ -2224,11 +2224,11 @@
     "MudBank|MudBank|Grass|RiverWater": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -2240,43 +2240,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            96,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.08857863dc519ee8a8a5ffba",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            256,
-            16,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.2da6aa6984fdfe637a951bcb",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            336,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            400,
+            528,
             16,
             16
           ],
@@ -2292,11 +2292,11 @@
     "MudBank|MudBank|RiverWater|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -2308,43 +2308,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            96,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.0110317a2d16eb8021237fa3",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            256,
-            336,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.ffccc75149bac2b5221936c8",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
+            448,
             16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            384,
+            528,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            16,
+            432,
             16,
             16
           ],
@@ -2360,11 +2360,11 @@
     "MudBank|RiverWater|Grass|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.0054812815391a7aff51d49d",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            128,
+            448,
             16,
             16
           ],
@@ -2376,11 +2376,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.0de1ae818dd40d4b1bed3101",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            16,
-            384,
+            400,
+            512,
             16,
             16
           ],
@@ -2392,11 +2392,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            48,
+            32,
+            432,
             16,
             16
           ],
@@ -2408,11 +2408,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -2428,11 +2428,11 @@
     "MudBank|RiverWater|Grass|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -2444,43 +2444,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.3a9135774d399f30b50691ef",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            400,
+            512,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            384,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.08857863dc519ee8a8a5ffba",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            256,
-            16,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            112,
+            432,
             16,
             16
           ],
@@ -2564,11 +2564,11 @@
     "MudBank|RiverWater|MudBank|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            96,
+            224,
+            448,
             16,
             16
           ],
@@ -2580,11 +2580,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.3a9135774d399f30b50691ef",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            208,
-            384,
+            400,
+            512,
             16,
             16
           ],
@@ -2596,11 +2596,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            112,
+            224,
+            432,
             16,
             16
           ],
@@ -2612,11 +2612,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.ffccc75149bac2b5221936c8",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            208,
             16,
+            432,
             16,
             16
           ],
@@ -2768,11 +2768,11 @@
     "RiverWater|Grass|Grass|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.8f995236abe7a11c6571cedc",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
             384,
+            512,
             16,
             16
           ],
@@ -2784,27 +2784,27 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
+            16,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
             32,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            48,
+            432,
             16,
             16
           ],
@@ -2816,11 +2816,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.a9adc71032759b31e098c460",
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            112,
+            432,
             16,
             16
           ],
@@ -2904,11 +2904,11 @@
     "RiverWater|Grass|MudBank|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.8f995236abe7a11c6571cedc",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
             384,
+            512,
             16,
             16
           ],
@@ -2920,11 +2920,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            32,
+            16,
+            448,
             16,
             16
           ],
@@ -2936,11 +2936,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.ea07ceecf80802b5001cd56e",
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             224,
-            112,
+            432,
             16,
             16
           ],
@@ -2952,11 +2952,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -2972,11 +2972,11 @@
     "RiverWater|Grass|MudBank|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.c2f3b9d5b7e0d75a5d362986",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
             384,
+            512,
             16,
             16
           ],
@@ -2988,43 +2988,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.08fa88a77a7cda510df620d2",
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            16,
+            448,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            64,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            112,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            112,
+            432,
             16,
             16
           ],
@@ -3176,11 +3176,11 @@
     "RiverWater|MudBank|Grass|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.8f995236abe7a11c6571cedc",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            64,
             384,
+            512,
             16,
             16
           ],
@@ -3192,11 +3192,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.6e3d53885fe58e377aa4b736",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
-            128,
+            448,
             16,
             16
           ],
@@ -3208,11 +3208,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            96,
-            48,
+            32,
+            432,
             16,
             16
           ],
@@ -3224,11 +3224,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.1f5734a50f727ead8ce0bef2",
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            48,
+            16,
+            432,
             16,
             16
           ],
@@ -3244,11 +3244,11 @@
     "RiverWater|MudBank|Grass|MudBank": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.c2f3b9d5b7e0d75a5d362986",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
             384,
+            512,
             16,
             16
           ],
@@ -3260,11 +3260,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            96,
+            208,
+            448,
             16,
             16
           ],
@@ -3276,11 +3276,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.08857863dc519ee8a8a5ffba",
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
-            16,
+            32,
+            432,
             16,
             16
           ],
@@ -3292,11 +3292,11 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            112,
-            112,
+            208,
+            432,
             16,
             16
           ],
@@ -3380,11 +3380,11 @@
     "RiverWater|MudBank|MudBank|Grass": {
       "parts": [
         {
-          "canonicalRegionId": "hw.elizawy.region.c2f3b9d5b7e0d75a5d362986",
+          "canonicalRegionId": "hw.elizawy.region.a295c2a27e614cb586c39194",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
-            256,
             384,
+            512,
             16,
             16
           ],
@@ -3396,43 +3396,43 @@
           ]
         },
         {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            112,
-            96,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            16,
-            0,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.d9dbf85c8900f7f8e64b974e",
-          "sourcePath": "Terrain/terrain_summer.png",
-          "sourceRectPx": [
-            96,
-            112,
-            16,
-            16
-          ],
-          "destinationRectPx": [
-            0,
-            16,
-            16,
-            16
-          ]
-        },
-        {
-          "canonicalRegionId": "hw.elizawy.region.ffccc75149bac2b5221936c8",
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
           "sourcePath": "Terrain/terrain_summer.png",
           "sourceRectPx": [
             208,
+            448,
             16,
+            16
+          ],
+          "destinationRectPx": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            432,
+            16,
+            16
+          ],
+          "destinationRectPx": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            16,
+            432,
             16,
             16
           ],
@@ -3722,6 +3722,7 @@
     "All 305 non-transparent cells in the Summer atlas are canonical runtime-selectable source regions grouped by the recovered Native authority.",
     "Normal Bevy World painting resolves Grass/Dirt/Water through a complete 81/81 four-corner grammar: 3 solids, 42 two-material mixed states, and 36 exact-source three-material junction composites.",
     "Pairwise diagonal checkerboards use exact one-corner source quadrants so isolated Dirt/Grass land spots stay disconnected instead of being bridged by a fixed checker composite.",
+    "Three-material Grass/Dirt/Water junctions are water-continuity-first: RiverWater owns the exact-source quadrant background so narrow channels, coves and mixed-bank inlets do not collapse into disconnected water wedges.",
     "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
     "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
     "Water animation is evidence-gated: no RiverWater temporal sequence is active until an explicitly ordered authored frame set is proven from source metadata or equivalent source evidence.",
