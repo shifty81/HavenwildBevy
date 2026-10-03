@@ -26,7 +26,22 @@ ROLE_GROUP = {
     "Grass": "summer_grass_fill",
     "MudBank": "summer_dirt_fill",
     "RiverWater": "summer_water_fill",
+    "Sand": "summer_sand_fill",
+    "WetSand": "summer_wet_sand_fill",
+    "PebblePath": "summer_pebble_path_fill",
 }
+
+# Source-authored transition/stamp families that can be promoted into the
+# semantic terrain lane without synthesizing pixels. 13-piece families cover
+# the 12 non-diagonal mixed corner states plus their center; diagonal states are
+# resolved by the runtime's land-connectivity policy instead of quadrant splicing.
+TRANSITION_PROMOTIONS = (
+    ("Grass", "Sand", "summer_grass_over_sand"),
+    ("Sand", "WetSand", "summer_sand_over_wet_sand"),
+    ("Sand", "RiverWater", "summer_sand_bank_pond"),
+    ("RiverWater", "DeepWater", "summer_deep_water_basin"),
+    ("PebblePath", "MudBank", "summer_pebble_path_over_dirt"),
+)
 
 # Keep plain grass/dirt variation spatial and deterministic. Water is deliberately
 # restricted to one conservative base fill until the source sheet provides explicit
@@ -37,10 +52,28 @@ ROLE_WEIGHTS = {
     "Grass": [5, 1, 1, 1, 1, 1],
     "MudBank": [3, 1, 1, 1, 1, 1],
     "RiverWater": [1],
+    "Sand": [3, 1, 1],
+    "WetSand": [3, 1, 1],
+    "PebblePath": [1, 1, 1, 1],
 }
 
 QUADRANTS = [(0, 0), (16, 0), (0, 16), (16, 16)]
 ROLES = ("Grass", "MudBank", "RiverWater")
+
+ROLE_TO_CORNERS = {
+    "outer_north_west": (0, 0, 0, 1),
+    "outer_north":      (0, 0, 1, 1),
+    "outer_north_east": (0, 0, 1, 0),
+    "outer_west":       (0, 1, 0, 1),
+    "outer_east":       (1, 0, 1, 0),
+    "outer_south_west": (0, 1, 0, 0),
+    "outer_south":      (1, 1, 0, 0),
+    "outer_south_east": (1, 0, 0, 0),
+    "inner_south_east": (1, 1, 1, 0),
+    "inner_south_west": (1, 1, 0, 1),
+    "inner_north_east": (1, 0, 1, 1),
+    "inner_north_west": (0, 1, 1, 1),
+}
 
 
 def load(path: Path):
@@ -93,6 +126,31 @@ def recipe_quadrant(profile, corners, quadrant):
                 return dict(part)
     raise ValueError(f"pairwise recipe missing while constructing junction: {key}")
 
+
+
+def donor_group_role_entries(donor, lookup, group_id):
+    out = {}
+    for cell in donor.get("cells", []):
+        if cell.get("groupId") != group_id or not cell.get("nonTransparent"):
+            continue
+        role = cell.get("role")
+        row = lookup.get((ATLAS, tuple(cell["pixelRect"])))
+        if role and row is not None:
+            out[role] = palette_entry(row)
+    return out
+
+
+def promote_transition_recipes(corner_recipes, donor, lookup, foreground, background, group_id):
+    entries = donor_group_role_entries(donor, lookup, group_id)
+    promoted = 0
+    for source_role, bits in ROLE_TO_CORNERS.items():
+        entry = entries.get(source_role)
+        if entry is None:
+            continue
+        corners = [foreground if bit else background for bit in bits]
+        corner_recipes["|".join(corners)] = entry
+        promoted += 1
+    return promoted
 
 def build() -> dict:
     profile = load(PROFILE)
@@ -158,6 +216,30 @@ def build() -> dict:
             {**entry, "weight": weight}
             for entry, weight in zip(cells, weights)
         ]
+
+    # Deep water is represented by the authored center of the shallow-rim-over-
+    # deep basin family. It is a source-backed world material, not a generated
+    # recolor. Keep one conservative center until a broader deep-water fill family
+    # is explicitly identified.
+    deep_roles = donor_group_role_entries(donor, lookup, "summer_deep_water_basin")
+    if "center" not in deep_roles:
+        raise ValueError("deep-water basin is missing its authored center")
+    fill_variants["DeepWater"] = [{**deep_roles["center"], "weight": 1}]
+
+    safe_fill = dict(profile.get("safeFill", {}))
+    for role in ("Sand", "WetSand", "PebblePath"):
+        safe_fill[role] = dict(fill_variants[role][0])
+    safe_fill["DeepWater"] = dict(fill_variants["DeepWater"][0])
+
+    # Promote complete source-authored material boundaries into the semantic lane.
+    # No diagonal tile is invented: the runtime resolves ambiguous diagonals by
+    # connecting land unless an actual continuous water path exists.
+    corner_recipes = dict(profile.get("cornerRecipes", {}))
+    promoted_transition_counts = {}
+    for foreground, background, group_id in TRANSITION_PROMOTIONS:
+        promoted_transition_counts[group_id] = promote_transition_recipes(
+            corner_recipes, donor, lookup, foreground, background, group_id
+        )
 
     # Animation authority is evidence-gated. RepeatableFill variants may never be
     # promoted into a temporal sequence just because they share a semantic label.
@@ -236,16 +318,24 @@ def build() -> dict:
     if three_material != 36:
         raise ValueError(f"expected 36 three-material junction states, got {three_material}")
 
-    profile["version"] = 6
+    profile["version"] = 7
+    profile["safeFill"] = safe_fill
     profile["sourceGroups"] = built_groups
     profile["fillVariants"] = fill_variants
     profile["animations"] = animations
+    profile["cornerRecipes"] = dict(sorted(corner_recipes.items()))
     profile["cornerComposites"] = dict(sorted(composites.items()))
+    profile["extendedTerrainPromotions"] = {
+        "roles": ["Sand", "WetSand", "DeepWater", "PebblePath"],
+        "transitionRecipeCounts": promoted_transition_counts,
+        "diagonalPolicy": "land_connectivity_first_no_quadrant_splice",
+    }
     profile["notes"] = [
         "All 305 non-transparent cells in the Summer atlas are canonical runtime-selectable source regions grouped by the recovered Native authority.",
-        "Normal Bevy World painting resolves Grass/Dirt/Water through a complete 81/81 four-corner grammar: 3 solids, 42 two-material mixed states, and 36 exact-source three-material junction composites.",
-        "Pairwise diagonal checkerboards use exact one-corner source quadrants so isolated Dirt/Grass land spots stay disconnected instead of being bridged by a fixed checker composite.",
-        "Three-material Grass/Dirt/Water junctions are water-continuity-first: RiverWater owns the exact-source quadrant background so narrow channels, coves and mixed-bank inlets do not collapse into disconnected water wedges.",
+        "The original Grass/Dirt/Water 81-state evidence grammar remains preserved for compatibility and audit, while live ambiguous shoreline resolution is land-connectivity-first and never requires quadrant-spliced output.",
+        "Sand, WetSand, PebblePath and DeepWater are promoted as source-backed semantic materials from existing Summer groups; no pixels are synthesized.",
+        "Source-authored Grass/Sand, Sand/WetSand, Sand/Water, shallow/deep-water and PebblePath/Dirt boundaries are available to the semantic resolver where their source families provide an exact role.",
+        "Ambiguous diagonal land/water contacts connect land by default. Water remains open only when its two corners are cardinally adjacent, so one-cell square water notches do not appear between near-touching land.",
         "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
         "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
         "Water animation is evidence-gated: no RiverWater temporal sequence is active until an explicitly ordered authored frame set is proven from source metadata or equivalent source evidence.",
@@ -264,7 +354,7 @@ def main() -> int:
     if args.check:
         if not PROFILE.is_file() or PROFILE.read_bytes() != data:
             raise SystemExit(f"Summer complete runtime profile is stale: {PROFILE}")
-        print("M2D082C SUMMER PROFILE: PASS / 305 cells / 41 groups / 81 terrain states / water-continuity mixed-bank repair")
+        print("M2D082F SUMMER PROFILE: PASS / 305 cells / 41 groups / 81-state G/D/W baseline + Sand/WetSand/DeepWater/PebblePath / land-connectivity-first")
         return 0
     PROFILE.write_bytes(data)
     print(f"WROTE {PROFILE}")

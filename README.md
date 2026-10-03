@@ -1,6 +1,19 @@
+
+### M2D082F1 — deterministic fill regression repair
+
+Source 0.8.10 keeps the 0.8.9 runtime/world behavior intact and repairs the diagonal-land Rust regression so it validates the deterministic source-backed Grass fill variant chosen for the current seed/vertex instead of pinning one arbitrary safe-fill atlas coordinate. It also carries the rustfmt normalization already performed by the Windows Full Gate.
 # Havenwild Bevy — standalone source
 
-**Current deploy checkpoint:** source **0.8.6**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+**Current deploy checkpoint:** source **0.8.10**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+
+
+### M2D082F land-connectivity + full Summer material promotion
+
+Source 0.8.9 keeps the corrected 0.8.7 semantic-cell/dual-grid coordinate authority and replaces the rejected 0.8.8 shoreline projection with a simpler visual rule: **ambiguous diagonal water does not cut a square notch between near-touching land**. Live mixed terrain uses complete authored 32x32 source tiles only; historical 16x16 quadrant composites remain evidence/tooling records and are no longer used by the live world resolver. Cardinally continuous water stays open.
+
+The Summer semantic lane now exposes **Grass, Dirt/MudBank, Sand, Wet Sand, Shallow/River Water, Deep Water and Pebble/Stone Path**. Existing source groups provide 3 Sand variants, 3 WetSand variants, 4 PebblePath variants and one conservative DeepWater center, plus source-authored Grass↔Sand, Sand↔WetSand, Sand↔Water, Shallow↔Deep and PebblePath↔Dirt transition roles where those families actually exist. Generated World now uses a visible coast sequence **Deep Ocean → Shallow Water → Wet Sand → Dry Sand → inland land**, dirt along interior river/lake edges, and a deterministic meandering PebblePath road spine per island as the first road placeholder.
+
+Material abbreviations have been removed from the permanent left tool rail; material choice now lives in World Generator / World Authoring. This is an intermediate shell cleanup ahead of the larger workspace-bar/tabbed application refactor.
 
 
 ### M2D081C water authority + PCC manifest-first intake
@@ -11,6 +24,13 @@
 - PCC root-drop discovery is manifest-first: any root ZIP containing a valid root `pcc_patch.json` is discovered even if the browser renamed it. Ordinary source/debug ZIPs remain ignored.
 - Manual extract/overwrite remains supported. If the installed target versions and exact declared file hashes already match a governed patch, PCC reconciles/archives that handoff instead of trying to apply it again. Older superseded patch handoffs are archived rather than poisoning Full Gate.
 - M2D082 cliff groundwork is now deterministic: `Terrain/cliff_summer.png` exposes **205 canonical 32x32 cliff source cells** and **212 retained historical reference entries** across five evidence families, with zero semantic/runtime promotions until topology is classified.
+
+### M2D082D dual-grid coordinate authority repair
+
+Source 0.8.7 fixes the live Generated World paint/render mismatch: semantic cells remain integer-aligned authoring squares, while dual-grid output tiles render centered on their terrain vertices with the required half-cell offset and N+1 by M+1 vertex coverage. One Grass click now resolves around the selected cell instead of down/right from it. Exact-source Direct Tile overrides remain locked to the selected 32x32 semantic cell. Deterministic virtual neighbours close the outer materialized boundary without inventing artwork.
+
+### M2D082E seam-safe shoreline composite experiment — superseded
+Source 0.8.8 attempted full-tile projection for seam-sensitive junctions. Visual review showed that it traded 16x16 seam leaks for larger square water cutouts, so 0.8.9 supersedes that live behavior. The historical patch/evidence remains documented; the runtime now uses the land-connectivity-first rule described above.
 
 ### M2D082C1 terrain authority version-skew repair
 

@@ -20,7 +20,7 @@ def require(ok, msg):
 
 def main():
     profile, runtime, donor = map(load, (PROFILE, RUNTIME, DONOR))
-    require(profile.get("version") == 6, "runtime profile is not v6 mixed-bank continuity repair")
+    require(profile.get("version") == 7, "runtime profile is not v7 land-connectivity/material expansion")
     require(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor is not 305/305")
     groups = profile.get("sourceGroups", {})
     require(len(groups) == 41, f"expected 41 Summer groups, got {len(groups)}")
@@ -35,8 +35,13 @@ def main():
     safe = profile.get("safeFill", {})
     direct = profile.get("cornerRecipes", {})
     comps = profile.get("cornerComposites", {})
-    require(len(safe) == 3 and len(direct) == 36 and len(comps) == 42, "81-state grammar counts changed")
-    require(len(safe) + len(direct) + len(comps) == 81, "Summer G/D/W grammar is not 81/81")
+    core_roles = {"Grass", "MudBank", "RiverWater"}
+    core_safe = {k:v for k,v in safe.items() if k in core_roles}
+    core_direct = {k:v for k,v in direct.items() if set(k.split("|")) <= core_roles}
+    core_comps = {k:v for k,v in comps.items() if set(k.split("|")) <= core_roles}
+    require(len(core_safe) == 3 and len(core_direct) == 36 and len(core_comps) == 42, "81-state G/D/W baseline changed")
+    require(len(core_safe) + len(core_direct) + len(core_comps) == 81, "Summer G/D/W baseline is not 81/81")
+    require(set(safe) >= {"Sand","WetSand","PebblePath","DeepWater"}, "extended source-backed terrain safe fills missing")
     pairs = [frozenset(("Grass","MudBank")), frozenset(("Grass","RiverWater")), frozenset(("MudBank","RiverWater"))]
     for pair in pairs:
         n = sum(1 for k in list(direct) + list(comps) if frozenset(k.split("|")) == pair)
@@ -44,7 +49,8 @@ def main():
     require(sum(1 for k in comps if len(set(k.split("|"))) == 3) == 36, "three-material junction count is not 36")
 
     variants = profile.get("fillVariants", {})
-    require([len(variants.get(r, [])) for r in ("Grass","MudBank","RiverWater")] == [6,6,1], "fill variant counts changed")
+    require([len(variants.get(r, [])) for r in ("Grass","MudBank","RiverWater")] == [6,6,1], "core fill variant counts changed")
+    require([len(variants.get(r, [])) for r in ("Sand","WetSand","PebblePath","DeepWater")] == [3,3,4,1], "extended fill variant counts changed")
     require("RiverWater" not in profile.get("animations", {}), "RepeatableFill water variants must not be promoted into temporal animation")
     water_group = groups.get("summer_water_fill", {})
     require(water_group.get("classification") == "RepeatableFill" and water_group.get("cellCount") == 8, "water source variants must remain cataloged as eight static RepeatableFill cells")
@@ -100,15 +106,16 @@ def main():
     require("strict Summer flatworld paint must resolve\")" not in world_text, "stale single-binding flatworld regression remains")
     require("water_animation_ms" not in main_text, "stale fake water animation clock remains")
     require(re.search(r"Havenwild — Bevy Studio v0\.8\.\d+", main_text) is not None, "Studio 0.8.x marker missing")
-    require("checker_background" in gen_text, "disconnected checkerboard generation missing")
-    print("M2D082C WATER / MIXED-BANK CONTINUITY SELFTEST: PASS")
+    require("land_connectivity_first_no_quadrant_splice" in PROFILE.read_text(encoding="utf-8"), "land-connectivity policy missing from profile")
+    require("TRANSITION_PROMOTIONS" in gen_text, "extended terrain transition promotion missing")
+    print("M2D082F SUMMER MATERIAL / LAND-CONNECTIVITY SELFTEST: PASS")
     print("  Summer runtime cells : 305/305 across 41 source groups")
     print("  runtime authority    : 2316 exact regions")
     print("  G/D/W grammar        : 81/81 states (14/14 pairwise + 36 tri-material)")
-    print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 conservative base")
+    print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 / Sand 3 / WetSand 3 / Path 4 / Deep 1")
     print("  water animation      : OFF / RepeatableFill variants are static source/detail cells")
-    print("  checkerboards        : disconnected foreground policy enabled")
-    print("  mixed-bank channels  : RiverWater background across all 36 tri-material junctions")
+    print("  ambiguous diagonals  : live resolver connects land; historical composites evidence-only")
+    print("  extended materials   : Sand / WetSand / DeepWater / PebblePath source-backed")
     return 0
 
 if __name__ == "__main__": raise SystemExit(main())

@@ -105,6 +105,13 @@ pub const fn affected_vertices(cell: WorldCellCoord) -> [TerrainVertexCoord; 4] 
     ]
 }
 
+/// Top-left of the 1x1 rendered dual-grid tile centered on a local terrain
+/// vertex, expressed in semantic-cell units. Semantic cells themselves occupy
+/// integer-aligned [x,x+1] × [y,y+1] squares.
+pub fn dual_grid_vertex_tile_min(local_vertex: [usize; 2]) -> [f32; 2] {
+    [local_vertex[0] as f32 - 0.5, local_vertex[1] as f32 - 0.5]
+}
+
 /// Resolve the four semantic samples around a dual-grid vertex into the contract mask.
 /// The caller owns world-boundary behavior through `is_foreground`; out-of-bounds
 /// cells normally resolve as background/void.
@@ -178,5 +185,13 @@ mod tests {
             let mask = corner_mask_for_vertex(vertex, |coord| coord == cell);
             assert_eq!(mask.0, expected, "unexpected corner bit at {vertex:?}");
         }
+    }
+
+    #[test]
+    fn dual_grid_output_tiles_are_centered_on_vertices() {
+        assert_eq!(dual_grid_vertex_tile_min([0, 0]), [-0.5, -0.5]);
+        assert_eq!(dual_grid_vertex_tile_min([1, 0]), [0.5, -0.5]);
+        assert_eq!(dual_grid_vertex_tile_min([0, 1]), [-0.5, 0.5]);
+        assert_eq!(dual_grid_vertex_tile_min([1, 1]), [0.5, 0.5]);
     }
 }

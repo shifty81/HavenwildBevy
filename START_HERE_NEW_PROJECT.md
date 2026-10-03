@@ -3,6 +3,15 @@
 > **Current patch intake:** PCC 1.3.5 uses manifest-first root ZIP discovery and also supports manual extract/overwrite. For governed intake, drop the ZIP unextracted in the project root or `updates/inbox`; browser-renamed ZIPs are accepted when they contain `pcc_patch.json`. For manual overwrite, extract the payload over the project and then run Full Quality Gate before publishing.
 
 
+
+## Current checkpoint — M2D082F1 / source 0.8.10
+
+Generated World is the primary user-facing map. Source 0.8.10 is a gate-only regression repair over the 0.8.9 terrain/world behavior: diagonal land connectivity now accepts the deterministic Grass fill variant selected for that seed/vertex instead of requiring one hard-coded atlas cell.
+
+Generated World is the primary user-facing map. The Summer source-backed semantic palette now includes Grass, Dirt/MudBank, Sand, Wet Sand, Shallow Water, Deep Water and Pebble Path. Coast generation uses Deep → Shallow → Wet Sand → Sand → inland land, while interior rivers/lakes receive dirt banks. Ambiguous diagonal water contacts connect land; a real cardinal water channel remains open. Historical quadrant composites are evidence-only in the live world renderer. Terrain material selection lives in World Generator / World Authoring instead of the permanent left rail.
+
+The old River/Summer scene is regression evidence only. Continue development on Generated World. Run PCC Full Gate after every patch/overwrite and publish only the certified source.
+
 ## Goal
 
 Develop the Havenwild Bevy game/editor lane as an independent project with its own source history, build/run workflow, and local asset hydration. Do not make the previous Havenwild checkout a runtime dependency.

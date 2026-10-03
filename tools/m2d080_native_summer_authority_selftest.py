@@ -33,7 +33,7 @@ def main() -> int:
     review = load(REVIEW)
     runtime = load(RUNTIME)
 
-    check(profile.get("version") in {3, 4, 5, 6}, "Summer profile must be v3-v6 source authority")
+    check(profile.get("version") in {3, 4, 5, 6, 7}, "Summer profile must be v3-v7 source authority")
     check(profile.get("sourceAtlas") == "Terrain/terrain_summer.png", "wrong source atlas")
     check(profile.get("sourceAtlasSha256") == "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752", "wrong pinned source hash")
     check(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor does not prove 305 mapped cells")
@@ -46,10 +46,15 @@ def main() -> int:
     safe = profile.get("safeFill", {})
     direct = profile.get("cornerRecipes", {})
     comps = profile.get("cornerComposites", {})
-    check(set(safe) == {"Grass", "MudBank", "RiverWater"}, "flat safe fills changed")
-    check(len(direct) == 36, f"expected 36 direct mixed recipes, got {len(direct)}")
-    check(len(comps) >= 6, f"expected at least six exact-source checkerboard composites, got {len(comps)}")
-    check(len(safe) + len(direct) + len(comps) in {45, 81}, "flat Summer authority is not a supported 45/45 or 81/81 profile")
+    core_roles = {"Grass", "MudBank", "RiverWater"}
+    core_safe = {k:v for k,v in safe.items() if k in core_roles}
+    core_direct = {k:v for k,v in direct.items() if set(k.split("|")) <= core_roles}
+    core_comps = {k:v for k,v in comps.items() if set(k.split("|")) <= core_roles}
+    check(set(core_safe) == core_roles, "core flat safe fills changed")
+    check(len(core_direct) == 36, f"expected 36 core direct mixed recipes, got {len(core_direct)}")
+    check(len(core_comps) == 42, f"expected 42 core evidence composites, got {len(core_comps)}")
+    check(len(core_safe) + len(core_direct) + len(core_comps) == 81, "core Summer G/D/W authority is not 81/81")
+    check(set(safe) >= {"Sand", "WetSand", "PebblePath", "DeepWater"}, "extended Summer materials missing")
     for pair in [
         frozenset(("Grass", "MudBank")),
         frozenset(("Grass", "RiverWater")),
@@ -89,13 +94,13 @@ def main() -> int:
     check("clamp(0.125, 16.0)" in main_text, "16x world zoom missing")
     check("resolved_visual_parts_with_authority" in world_text, "shared exact-source visual resolver missing")
     check("worldgen_plan::terrain_role(seed, world)" in world_text, "purpose-first generated terrain-role wiring missing")
-    check("corner_composites" in authority_text and "1..=6" in authority_text, "v6 composite authority is not accepted by runtime")
+    check("corner_composites" in authority_text and "1..=7" in authority_text, "v7 extended authority is not accepted by runtime")
     check("ONE-PASS Native -> Bevy Summer authority convergence" in pcc_text, "PCC one-pass command missing")
 
     print("M2D080 NATIVE SUMMER AUTHORITY SELFTEST: PASS")
     print("  full source sheet: 305/305 non-transparent cells cataloged")
     print("  donor topology   : 20 source-authored families retained/reviewed")
-    print(f"  flat paint       : {len(safe) + len(direct) + len(comps)}/81 max states; 14/14 per active material pair")
+    print(f"  flat paint       : 81/81 G/D/W baseline + {len(safe)-3} promoted material fills + extended source transitions")
     print("  source mutation  : OFF")
     print("  generated art    : not runtime authority")
     print("  traversal/collision local + reusable metadata workflow: present")

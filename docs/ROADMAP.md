@@ -1,3 +1,4 @@
+- **M2D082D — Dual-grid coordinate authority:** semantic-cell authoring is now distinct from vertex-centered render output; fixes down/right paint offset and square seam leakage before the kitchen-sink world population pass.
 # Implementation milestones — first usable game from ElizaWy
 
 No arbitrary pass-count validators or donor PCC chains. Work is accepted with functioning user workflows and real visual/manual evidence. First Windows machine owns compile/runtime confirmation.

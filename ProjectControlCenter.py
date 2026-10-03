@@ -1915,6 +1915,10 @@ def audit_gate() -> int:
             [python_cmd(), str(ROOT / "tools/build_worldgen_asset_catalog.py"), "--check"], label="m2d082c-worldgen-asset-catalog", debug_on_fail=False)),
         ("M2D082C Generated World consolidation / shoreline / tree contract", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d082c_generated_world_selftest.py")], label="m2d082c-generated-world-selftest", debug_on_fail=False)),
+        ("M2D082D dual-grid semantic/render coordinate authority", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082d_dual_grid_alignment_selftest.py")], label="m2d082d-dual-grid-alignment-selftest", debug_on_fail=False)),
+        ("M2D082F land-connectivity + extended Summer materials", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="audit-terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="audit-terrain-resolver", debug_on_fail=False)),
@@ -2074,6 +2078,10 @@ def full_gate() -> int:
             [python_cmd(), str(ROOT / "tools/build_worldgen_asset_catalog.py"), "--check"], label="m2d082c-worldgen-asset-catalog", debug_on_fail=False)),
         ("M2D082C Generated World consolidation / shoreline / tree contract", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d082c_generated_world_selftest.py")], label="m2d082c-generated-world-selftest", debug_on_fail=False)),
+        ("M2D082D dual-grid semantic/render coordinate authority", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082d_dual_grid_alignment_selftest.py")], label="m2d082d-dual-grid-alignment-selftest", debug_on_fail=False)),
+        ("M2D082F land-connectivity + extended Summer materials", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="terrain-resolver", debug_on_fail=False)),

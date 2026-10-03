@@ -438,7 +438,7 @@ impl AssetAuthority {
         }
 
         if self.summer_flatworld.schema != "havenwild.terrain.summer_flatworld_runtime.v1"
-            || !matches!(self.summer_flatworld.version, 1..=6)
+            || !matches!(self.summer_flatworld.version, 1..=7)
             || self.summer_flatworld.source_atlas != "Terrain/terrain_summer.png"
             || self.summer_flatworld.safe_fill.len() < 3
         {
@@ -461,7 +461,15 @@ impl AssetAuthority {
                 );
             }
         }
-        for role in ["Grass", "MudBank", "RiverWater"] {
+        for role in [
+            "Grass",
+            "MudBank",
+            "RiverWater",
+            "Sand",
+            "WetSand",
+            "PebblePath",
+            "DeepWater",
+        ] {
             let Some(entry) = self.summer_flatworld.safe_fill.get(role) else {
                 return Err(format!("Summer flatworld missing safe fill for {role}"));
             };
@@ -500,7 +508,15 @@ impl AssetAuthority {
                     }
                 }
             }
-            for (role, expected) in [("Grass", 6usize), ("MudBank", 6), ("RiverWater", 1)] {
+            for (role, expected) in [
+                ("Grass", 6usize),
+                ("MudBank", 6),
+                ("RiverWater", 1),
+                ("Sand", 3),
+                ("WetSand", 3),
+                ("PebblePath", 4),
+                ("DeepWater", 1),
+            ] {
                 let Some(entries) = self.summer_flatworld.fill_variants.get(role) else {
                     return Err(format!(
                         "Summer complete authority missing fill variants for {role}"
@@ -576,9 +592,18 @@ impl AssetAuthority {
         for (corners, entry) in &self.summer_flatworld.corner_recipes {
             let roles = corners.split('|').collect::<Vec<_>>();
             if roles.len() != 4
-                || roles
-                    .iter()
-                    .any(|role| !matches!(*role, "Grass" | "MudBank" | "RiverWater"))
+                || roles.iter().any(|role| {
+                    !matches!(
+                        *role,
+                        "Grass"
+                            | "MudBank"
+                            | "RiverWater"
+                            | "Sand"
+                            | "WetSand"
+                            | "PebblePath"
+                            | "DeepWater"
+                    )
+                })
                 || entry.source_path != self.summer_flatworld.source_atlas
                 || !region_ids.contains(entry.canonical_region_id.as_str())
                 || !catalog.contains_rect(&entry.source_path, entry.source_rect_px)
@@ -589,9 +614,18 @@ impl AssetAuthority {
         for (corners, recipe) in &self.summer_flatworld.corner_composites {
             let roles = corners.split('|').collect::<Vec<_>>();
             if roles.len() != 4
-                || roles
-                    .iter()
-                    .any(|role| !matches!(*role, "Grass" | "MudBank" | "RiverWater"))
+                || roles.iter().any(|role| {
+                    !matches!(
+                        *role,
+                        "Grass"
+                            | "MudBank"
+                            | "RiverWater"
+                            | "Sand"
+                            | "WetSand"
+                            | "PebblePath"
+                            | "DeepWater"
+                    )
+                })
                 || recipe.parts.is_empty()
             {
                 return Err(format!(
@@ -634,9 +668,17 @@ impl AssetAuthority {
             }
         }
 
-        if self.summer_flatworld.version >= 4 && self.summer_flatworld_corner_count() != 81 {
+        if (4..=6).contains(&self.summer_flatworld.version)
+            && self.summer_flatworld_corner_count() != 81
+        {
             return Err(format!(
                 "Summer complete runtime authority expected 81/81 corner states, got {}",
+                self.summer_flatworld_corner_count()
+            ));
+        }
+        if self.summer_flatworld.version >= 7 && self.summer_flatworld_corner_count() < 81 {
+            return Err(format!(
+                "Extended Summer terrain authority regressed below the certified 81-state G/D/W baseline: {}",
                 self.summer_flatworld_corner_count()
             ));
         }
@@ -932,12 +974,22 @@ mod tests {
         assert!(authority.terrain_object_templates().count() > 10);
         assert_eq!(authority.summer_source_group_count(), 41);
         assert_eq!(authority.summer_source_runtime_cell_count(), 305);
-        assert_eq!(authority.summer_flatworld_corner_count(), 81);
+        assert_eq!(authority.summer_flatworld_corner_count(), 141);
         assert_eq!(authority.summer_flatworld_pair_counts(), [14, 14, 14]);
         assert_eq!(authority.summer_flatworld_fill_variant_count("Grass"), 6);
         assert_eq!(authority.summer_flatworld_fill_variant_count("MudBank"), 6);
         assert_eq!(
             authority.summer_flatworld_fill_variant_count("RiverWater"),
+            1
+        );
+        assert_eq!(authority.summer_flatworld_fill_variant_count("Sand"), 3);
+        assert_eq!(authority.summer_flatworld_fill_variant_count("WetSand"), 3);
+        assert_eq!(
+            authority.summer_flatworld_fill_variant_count("PebblePath"),
+            4
+        );
+        assert_eq!(
+            authority.summer_flatworld_fill_variant_count("DeepWater"),
             1
         );
         assert_eq!(authority.summer_water_animation_frame_count(), 0);

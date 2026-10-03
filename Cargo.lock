@@ -3216,7 +3216,7 @@ dependencies = [
 
 [[package]]
 name = "havenwild_bevy"
-version = "0.8.6"
+version = "0.8.10"
 dependencies = [
  "bevy",
  "bevy_egui",

@@ -88,6 +88,14 @@ fn normalized_island_score(seed: u64, world: [i64; 2], island: IslandDescriptor)
     adjusted.clamp(i128::from(i64::MIN), i128::from(i64::MAX)) as i64
 }
 
+fn nearest_island(seed: u64, world: [i64; 2]) -> (i64, IslandDescriptor) {
+    ISLANDS
+        .into_iter()
+        .map(|island| (normalized_island_score(seed, world, island), island))
+        .min_by_key(|(score, _)| *score)
+        .expect("four-season archipelago always has islands")
+}
+
 pub fn island_at(seed: u64, world: [i64; 2]) -> Option<IslandDescriptor> {
     ISLANDS
         .into_iter()
@@ -125,15 +133,59 @@ fn interior_water(seed: u64, world: [i64; 2], island: IslandDescriptor) -> bool 
     river || lake
 }
 
-pub fn terrain_role(seed: u64, world: [i64; 2]) -> &'static str {
-    let Some(island) = island_at(seed, world) else {
-        return "RiverWater"; // ocean authority currently uses the conservative water fill
-    };
-    if interior_water(seed, world, island) {
-        "RiverWater"
-    } else {
-        "Grass"
+fn adjacent_to_interior_water(seed: u64, world: [i64; 2], island: IslandDescriptor) -> bool {
+    [(0i64, -1i64), (1, 0), (0, 1), (-1, 0)]
+        .into_iter()
+        .any(|(dx, dy)| interior_water(seed, [world[0] + dx, world[1] + dy], island))
+}
+
+fn country_road(seed: u64, world: [i64; 2], island: IslandDescriptor) -> bool {
+    let local = [world[0] - island.center[0], world[1] - island.center[1]];
+    if local[0].abs() > island.radius[0] - 5 {
+        return false;
     }
+    // A broad meandering east/west road spine establishes purposeful connectivity
+    // for the showcase world. Later settlement/POI passes will promote this into
+    // a graph-routed road network, but it is already deterministic and avoids the
+    // island's river/lake cells.
+    let phase =
+        (local[0] + (splitmix64(seed ^ island.salt ^ 0x524f_4144) % 53) as i64).rem_euclid(53);
+    let triangle = if phase < 27 { phase } else { 52 - phase };
+    let y = triangle / 7 - 2;
+    (local[1] - y).abs() <= 1
+}
+
+pub fn terrain_role(seed: u64, world: [i64; 2]) -> &'static str {
+    let (score, nearest) = nearest_island(seed, world);
+    if score > 10_000 {
+        // A shallow-water collar makes the coast read as a real shoreline; open
+        // ocean beyond it uses the authored deep-water basin center.
+        return if score <= 12_300 {
+            "RiverWater"
+        } else {
+            "DeepWater"
+        };
+    }
+    let island = nearest;
+    if interior_water(seed, world, island) {
+        return "RiverWater";
+    }
+    if adjacent_to_interior_water(seed, world, island) {
+        return "MudBank";
+    }
+    // Source-backed tidal bands: wet sand touches shallow ocean, then dry sand,
+    // then inland grass. This activates the existing Summer sand families rather
+    // than jumping directly from Grass to Water.
+    if score >= 9_250 {
+        return "WetSand";
+    }
+    if score >= 8_250 {
+        return "Sand";
+    }
+    if country_road(seed, world, island) {
+        return "PebblePath";
+    }
+    "Grass"
 }
 
 pub fn season(seed: u64, world: [i64; 2]) -> &'static str {
@@ -185,7 +237,7 @@ mod tests {
             assert_eq!(season(7, island.center), island.season);
             assert!(matches!(
                 terrain_role(7, island.center),
-                "Grass" | "RiverWater"
+                "Grass" | "MudBank" | "RiverWater" | "PebblePath"
             ));
         }
     }
@@ -193,6 +245,9 @@ mod tests {
     #[test]
     fn center_channels_remain_ocean_separated() {
         assert_eq!(region_id(7, [0, 0]), "open_ocean");
-        assert_eq!(terrain_role(7, [0, 0]), "RiverWater");
+        assert!(matches!(
+            terrain_role(7, [0, 0]),
+            "RiverWater" | "DeepWater"
+        ));
     }
 }

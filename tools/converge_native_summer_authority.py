@@ -77,8 +77,8 @@ def verify() -> dict:
     review = load(REVIEW)
     metrics = profile_metrics(profile)
 
-    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") not in {5, 6}:
-        raise ValueError("Checked-in Summer runtime profile is not a supported v5/v6 static-water source authority")
+    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") not in {5, 6, 7}:
+        raise ValueError("Checked-in Summer runtime profile is not a supported v5/v6/v7 static-water source authority")
     if profile.get("sourceAtlas") != ATLAS_REL or profile.get("sourceAtlasSha256") != PINNED_SHA:
         raise ValueError("Summer runtime profile source identity mismatch")
     summary = donor_map.get("summary", {})
@@ -86,13 +86,17 @@ def verify() -> dict:
         raise ValueError("Native complete Summer donor no longer proves 305/305 source coverage")
     if donor_topology.get("summary", {}).get("familyCount") != 20:
         raise ValueError("Native topology donor no longer contains the expected 20 Summer families")
-    if metrics["totalFlatStates"] != 81 or any(value != 14 for value in metrics["pairMixedCounts"].values()):
-        raise ValueError(f"Flat Summer runtime coverage is incomplete: {metrics}")
+    if any(value != 14 for value in metrics["pairMixedCounts"].values()):
+        raise ValueError(f"Core G/D/W Summer runtime coverage is incomplete: {metrics}")
+    if profile.get("version") <= 6 and metrics["totalFlatStates"] != 81:
+        raise ValueError(f"Legacy flat Summer runtime coverage is not 81/81: {metrics}")
+    if profile.get("version") >= 7 and metrics["totalFlatStates"] < 81:
+        raise ValueError(f"Extended Summer runtime regressed below the 81-state core baseline: {metrics}")
     if len(profile.get("sourceGroups", {})) != 41:
         raise ValueError("Summer runtime profile no longer exposes 41 recovered source groups")
     if sum(group.get("cellCount", 0) for group in profile.get("sourceGroups", {}).values()) != 305:
         raise ValueError("Summer runtime profile no longer exposes all 305 source cells")
-    expected_variants = {"Grass": 6, "MudBank": 6, "RiverWater": 1}
+    expected_variants = {"Grass": 6, "MudBank": 6, "RiverWater": 1, "Sand": 3, "WetSand": 3, "PebblePath": 4, "DeepWater": 1}
     for role, expected in expected_variants.items():
         if len(profile.get("fillVariants", {}).get(role, [])) != expected:
             raise ValueError(f"Summer fill variants changed for {role}")

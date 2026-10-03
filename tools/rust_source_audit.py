@@ -133,6 +133,34 @@ def main() -> int:
     if "Semantic Save & Resolve arrives with the DG live-world pass" in main_text:
         fail(errors, "stale pre-DG03 canvas-save message remains in main.rs")
 
+    # M2D082D: semantic-cell authoring and dual-grid vertex rendering are distinct
+    # coordinate spaces. Output tiles must be centered on vertices and include the
+    # extra east/south boundary vertex; direct exact-source overrides stay cell aligned.
+    terrain_source = (SRC / "terrain.rs").read_text(encoding="utf-8")
+    world_source = (SRC / "world_doc.rs").read_text(encoding="utf-8")
+    for required in (
+        "pub fn dual_grid_vertex_tile_min(",
+        "local_vertex[0] as f32 - 0.5",
+        "local_vertex[1] as f32 - 0.5",
+    ):
+        if not has_token(terrain_source, required):
+            fail(errors, f"M2D082D terrain coordinate helper missing: {required}")
+    for required in (
+        "resolved_dual_grid_visual_parts_with_authority",
+        "resolved_role_for_dual_grid",
+    ):
+        if required not in world_source:
+            fail(errors, f"M2D082D WorldDocument dual-grid authority missing: {required}")
+    for required in (
+        "dual_grid_vertex_tile_min([vx, vy])",
+        "resolved_dual_grid_visual_parts_with_authority(vertex, &state.asset_authority)",
+        "size[0] + 1",
+        "size[1] + 1",
+        "VisualOverrideMode::Replace",
+    ):
+        if not has_token(main_text, required):
+            fail(errors, f"M2D082D live Generated World coordinate integration missing: {required}")
+
     # M2D02-A1: the actual pinned egui context exposes the egui_-prefixed
     # keyboard focus API. The old method caused Windows E0599 on three callsites.
     if ".wants_keyboard_input(" in main_text:

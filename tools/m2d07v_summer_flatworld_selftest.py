@@ -46,7 +46,8 @@ for table_name, family in expected.items():
         # the Native recovered topology/profile now owns the exact Summer mapping.
 
 assert 'Terrain/cliff_summer.png' not in json.dumps(profile)
-assert 'summer_flatworld_visual_parts' in world
+assert 'land_connectivity_projection' in world
+assert 'summer_flatworld_corner(projected)' in world
 assert 'summer_flatworld_fill' in world
 assert 'Summer Terrain Authority' in main
 assert 'Advanced: manual DG / evidence tools' in main

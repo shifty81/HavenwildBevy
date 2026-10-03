@@ -467,7 +467,15 @@ impl WorldDocument {
         if !self.generation_correction_cycle_initialized {
             self.promote_legacy_visual_overrides_to_generation_corrections(authority)?;
         }
-        for role in ["Grass", "RiverWater", "MudBank"] {
+        for role in [
+            "Grass",
+            "MudBank",
+            "Sand",
+            "WetSand",
+            "RiverWater",
+            "DeepWater",
+            "PebblePath",
+        ] {
             if authority.summer_flatworld_fill(role).is_none() {
                 return Err(format!(
                     "Summer flatworld authority has no safe source-backed {role} fill"
@@ -566,6 +574,214 @@ impl WorldDocument {
         self.resolved_visual_parts_with_authority_at(world, authority, None)
     }
 
+    /// Resolve one dual-grid *vertex* into exact source-backed visual parts.
+    ///
+    /// Semantic world cells occupy the squares between integer terrain vertices.
+    /// Rendering therefore centers this output on the vertex coordinate; callers
+    /// must not treat `vertex` as the top-left of a semantic cell. This method also
+    /// resolves deterministic generated roles just outside the currently materialized
+    /// chunk rectangle so the outer half-cells remain continuous.
+    pub fn resolved_dual_grid_visual_parts_with_authority(
+        &self,
+        vertex: [i64; 2],
+        authority: &AssetAuthority,
+    ) -> Option<Vec<SummerVisualPart>> {
+        self.resolved_dual_grid_visual_parts_with_authority_at(vertex, authority, None)
+    }
+
+    fn resolved_role_for_dual_grid(&self, world: [i64; 2]) -> String {
+        if let Some(pending) = self.pending_semantic_edits.get(&world) {
+            return pending
+                .clone()
+                .unwrap_or_else(|| role_for(self.seed, world).to_owned());
+        }
+        if let Some(role) = self
+            .cell_override(world)
+            .and_then(|item| item.semantic.clone())
+        {
+            return role;
+        }
+        self.generated_cell(world)
+            .map(|cell| cell.role.clone())
+            .unwrap_or_else(|| role_for(self.seed, world).to_owned())
+    }
+
+    fn is_water_role(role: &str) -> bool {
+        matches!(role, "RiverWater" | "DeepWater")
+    }
+
+    fn is_land_role(role: &str) -> bool {
+        matches!(
+            role,
+            "Grass" | "MudBank" | "Sand" | "WetSand" | "PebblePath"
+        )
+    }
+
+    fn dominant_land_role<'a>(corners: [&'a str; 4]) -> Option<&'a str> {
+        // Tie-breaking follows the authored SE cell first, then SW/NE/NW, so a
+        // user's current semantic cell remains the most local authority while the
+        // neighbouring vertices carry material hand-offs.
+        let mut best: Option<(&str, usize, usize)> = None;
+        for (priority, index) in [3usize, 2, 1, 0].into_iter().enumerate() {
+            let role = corners[index];
+            if !Self::is_land_role(role) {
+                continue;
+            }
+            let count = corners
+                .iter()
+                .filter(|candidate| **candidate == role)
+                .count();
+            match best {
+                None => best = Some((role, count, priority)),
+                Some((_, best_count, best_priority))
+                    if count > best_count || (count == best_count && priority < best_priority) =>
+                {
+                    best = Some((role, count, priority));
+                }
+                _ => {}
+            }
+        }
+        best.map(|(role, _, _)| role)
+    }
+
+    fn land_connectivity_projection<'a>(corners: [&'a str; 4]) -> [&'a str; 4] {
+        let mut projected = corners;
+        let has_land = corners.iter().any(|role| Self::is_land_role(role));
+        let has_water = corners.iter().any(|role| Self::is_water_role(role));
+
+        // Mixed Grass/Dirt/Sand/etc. around a shoreline is rendered as one local
+        // land material against one local water material. This uses complete
+        // authored 32x32 transition tiles and leaves the land-material hand-off to
+        // adjacent vertices instead of stitching unrelated 16x16 quadrants.
+        if has_land && has_water {
+            let land = Self::dominant_land_role(corners).unwrap_or("Grass");
+            let water = if corners.contains(&"RiverWater") {
+                "RiverWater"
+            } else {
+                "DeepWater"
+            };
+            for role in &mut projected {
+                *role = if Self::is_water_role(role) {
+                    water
+                } else {
+                    land
+                };
+            }
+        } else if has_land {
+            let distinct: BTreeSet<&str> = corners.iter().copied().collect();
+            if distinct.len() > 2 {
+                let land = Self::dominant_land_role(corners).unwrap_or("Grass");
+                projected = [land; 4];
+            }
+        }
+
+        let distinct: BTreeSet<&str> = projected.iter().copied().collect();
+        let diagonal = distinct.len() == 2
+            && projected[0] == projected[3]
+            && projected[1] == projected[2]
+            && projected[0] != projected[1];
+        if !diagonal {
+            return projected;
+        }
+
+        let water_positions = projected
+            .iter()
+            .enumerate()
+            .filter_map(|(index, role)| Self::is_water_role(role).then_some(index))
+            .collect::<Vec<_>>();
+        let land_positions = projected
+            .iter()
+            .enumerate()
+            .filter_map(|(index, role)| Self::is_land_role(role).then_some(index))
+            .collect::<Vec<_>>();
+
+        // Two water corners that only touch diagonally do not form a traversable
+        // or visually continuous channel. Land therefore wins the ambiguous
+        // contact. A real one-cell channel has cardinally adjacent water cells and
+        // is preserved by the non-diagonal path above.
+        if water_positions.len() == 2 && land_positions.len() == 2 {
+            let land = Self::dominant_land_role(projected).unwrap_or("Grass");
+            return [land; 4];
+        }
+
+        // Diagonal contacts between two land materials are likewise not rendered
+        // with quadrant composites. Pick the local dominant material and let the
+        // surrounding exact transition tiles carry the visible boundary.
+        if water_positions.is_empty() && land_positions.len() == 4 {
+            let land = Self::dominant_land_role(projected).unwrap_or(projected[3]);
+            return [land; 4];
+        }
+
+        // Deep/shallow water diagonals are not shoreline topology; keep one local
+        // water authority rather than fabricating a checkerboard.
+        [projected[3]; 4]
+    }
+
+    fn resolved_dual_grid_visual_parts_with_authority_at(
+        &self,
+        vertex: [i64; 2],
+        authority: &AssetAuthority,
+        elapsed_ms: Option<u64>,
+    ) -> Option<Vec<SummerVisualPart>> {
+        // One semantic dual-grid authority drives generated terrain and authored
+        // terrain alike. Every rendered output tile is centered on a terrain
+        // vertex and reads the four logical cells surrounding that vertex.
+        let corner_cells = [
+            [vertex[0] - 1, vertex[1] - 1], // NW
+            [vertex[0], vertex[1] - 1],     // NE
+            [vertex[0] - 1, vertex[1]],     // SW
+            vertex,                         // SE
+        ];
+        let roles = [
+            self.resolved_role_for_dual_grid(corner_cells[0]),
+            self.resolved_role_for_dual_grid(corner_cells[1]),
+            self.resolved_role_for_dual_grid(corner_cells[2]),
+            self.resolved_role_for_dual_grid(corner_cells[3]),
+        ];
+        let [nw, ne, sw, se] = roles;
+        let role_refs = [nw.as_str(), ne.as_str(), sw.as_str(), se.as_str()];
+        if role_refs.iter().all(|role| *role == role_refs[0]) {
+            // M2D081C: homogeneous terrain is spatial, not temporal. RiverWater
+            // remains on the conservative static source fill until explicit
+            // ordered animation evidence exists.
+            let _ = elapsed_ms;
+            let entry = authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, vertex);
+            return entry.map(|entry| {
+                vec![SummerVisualPart {
+                    source: entry.binding(),
+                    destination_rect_px: [0, 0, 32, 32],
+                }]
+            });
+        }
+        let projected = Self::land_connectivity_projection(role_refs);
+        if projected.iter().all(|role| *role == projected[0]) {
+            return authority
+                .summer_flatworld_fill_for_world(projected[0], self.seed, vertex)
+                .map(|entry| {
+                    vec![SummerVisualPart {
+                        source: entry.binding(),
+                        destination_rect_px: [0, 0, 32, 32],
+                    }]
+                });
+        }
+        if let Some(entry) = authority.summer_flatworld_corner(projected) {
+            return Some(vec![SummerVisualPart {
+                source: entry.binding(),
+                destination_rect_px: [0, 0, 32, 32],
+            }]);
+        }
+
+        // Historical quadrant composites remain evidence/tooling records only. The
+        // live world never splices four unrelated source quarters. Unsupported
+        // material states fail closed to the directly authored SE material.
+        authority.summer_flatworld_fill(projected[3]).map(|entry| {
+            vec![SummerVisualPart {
+                source: entry.binding(),
+                destination_rect_px: [0, 0, 32, 32],
+            }]
+        })
+    }
+
     pub fn resolved_visual_parts_with_authority_at(
         &self,
         world: [i64; 2],
@@ -588,57 +804,7 @@ impl WorldDocument {
                 }
             }
         }
-
-        // One semantic dual-grid authority drives generated terrain and authored
-        // terrain alike. Every rendered output tile reads the four surrounding
-        // logical terrain cells; source artwork remains immutable.
-        let corner_cells = [
-            [world[0] - 1, world[1] - 1], // NW
-            [world[0], world[1] - 1],     // NE
-            [world[0] - 1, world[1]],     // SW
-            world,                        // SE
-        ];
-        let roles = [
-            self.resolved_role(corner_cells[0]),
-            self.resolved_role(corner_cells[1]),
-            self.resolved_role(corner_cells[2]),
-            self.resolved_role(corner_cells[3]),
-        ];
-        let [Some(nw), Some(ne), Some(sw), Some(se)] = roles else {
-            return self.generated_cell(world).map(|cell| {
-                vec![SummerVisualPart {
-                    source: cell.source.clone(),
-                    destination_rect_px: [0, 0, 32, 32],
-                }]
-            });
-        };
-        let role_refs = [nw.as_str(), ne.as_str(), sw.as_str(), se.as_str()];
-        if role_refs.iter().all(|role| *role == role_refs[0]) {
-            // M2D081C: homogeneous terrain is spatial, not temporal. RiverWater
-            // remains on the conservative static source fill until explicit
-            // ordered animation evidence exists.
-            let _ = elapsed_ms;
-            let entry = authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, world);
-            return entry.map(|entry| {
-                vec![SummerVisualPart {
-                    source: entry.binding(),
-                    destination_rect_px: [0, 0, 32, 32],
-                }]
-            });
-        }
-        if let Some(parts) = authority.summer_flatworld_visual_parts(role_refs) {
-            return Some(parts);
-        }
-
-        // Three-material junctions and intentionally unsupported material pairs
-        // fail closed to the directly authored SE material. They never borrow
-        // cliff/fixture art or a color-inferred region.
-        authority.summer_flatworld_fill(role_refs[3]).map(|entry| {
-            vec![SummerVisualPart {
-                source: entry.binding(),
-                destination_rect_px: [0, 0, 32, 32],
-            }]
-        })
+        self.resolved_dual_grid_visual_parts_with_authority_at(world, authority, elapsed_ms)
     }
 
     pub fn resolved_source_with_authority(
@@ -710,6 +876,9 @@ impl WorldDocument {
     }
     pub fn has_pending_semantic_edits(&self) -> bool {
         !self.pending_semantic_edits.is_empty()
+    }
+    pub fn has_pending_semantic_edit(&self, world: [i64; 2]) -> bool {
+        self.pending_semantic_edits.contains_key(&world)
     }
     fn flush_pending_semantic_edits(&mut self) {
         if self.pending_semantic_edits.is_empty() {
@@ -874,8 +1043,10 @@ impl WorldDocument {
             }
         }
         match self.resolved_role(world).as_deref() {
-            Some("RiverWater") => TraversalMode::Swimmable,
-            Some("Grass" | "MudBank") => TraversalMode::Walkable,
+            Some("RiverWater" | "DeepWater") => TraversalMode::Swimmable,
+            Some("Grass" | "MudBank" | "Sand" | "WetSand" | "PebblePath") => {
+                TraversalMode::Walkable
+            }
             _ => TraversalMode::Auto,
         }
     }
@@ -1642,6 +1813,110 @@ mod tests {
             w.resolved_role(world),
             w.generated_cell(world).map(|cell| cell.role.clone())
         );
+    }
+
+    #[test]
+    fn dual_grid_render_resolves_the_extra_east_and_south_vertices() {
+        let a = authority();
+        let mut w = WorldDocument::new(43);
+        w.materialize_3x3([0, 0], &a).unwrap();
+        let (origin, size) = w.materialized_bounds().unwrap();
+        let east_south_vertex = [origin[0] + size[0] as i64, origin[1] + size[1] as i64];
+        let parts = w
+            .resolved_dual_grid_visual_parts_with_authority(east_south_vertex, &a)
+            .expect("deterministic virtual neighbours keep the outer dual-grid vertex renderable");
+        assert!(!parts.is_empty());
+        assert!(parts.iter().all(|part| a.contains_binding(&part.source)));
+    }
+
+    #[test]
+    fn direct_source_override_remains_semantic_cell_aligned_authority() {
+        let a = authority();
+        let mut w = WorldDocument::new(47);
+        w.materialize_3x3([0, 0], &a).unwrap();
+        let world = [7, 9];
+        let source = a.role_palette("Grass").unwrap()[0].binding();
+        w.set_visual_override(world, source.clone());
+        let parts = w
+            .resolved_visual_parts_with_authority(world, &a)
+            .expect("direct source override remains queryable in semantic-cell space");
+        assert_eq!(parts.len(), 1);
+        assert_eq!(parts[0].source, source);
+        assert_eq!(parts[0].destination_rect_px, [0, 0, 32, 32]);
+    }
+
+    #[test]
+    fn ambiguous_diagonal_water_connects_land_without_quadrant_parts() {
+        let a = authority();
+        let mut w = WorldDocument::new(59);
+        w.materialize_3x3([0, 0], &a).unwrap();
+        let vertex = [8, 8];
+        for (cell, role) in [
+            ([7, 7], "Grass"),
+            ([8, 7], "RiverWater"),
+            ([7, 8], "RiverWater"),
+            ([8, 8], "Grass"),
+        ] {
+            w.paint_semantic_terrain(cell, role);
+        }
+        let parts = w
+            .resolved_dual_grid_visual_parts_with_authority(vertex, &a)
+            .expect("ambiguous diagonal shoreline resolves");
+        assert_eq!(parts.len(), 1);
+        assert_eq!(parts[0].destination_rect_px, [0, 0, 32, 32]);
+        assert_eq!(parts[0].source.source_rect[2..], [32, 32]);
+        let expected = a
+            .summer_flatworld_fill_for_world("Grass", w.seed, vertex)
+            .expect("land-connectivity uses a deterministic Grass fill variant")
+            .binding();
+        assert_eq!(parts[0].source, expected);
+    }
+
+    #[test]
+    fn cardinal_water_channel_remains_open() {
+        let a = authority();
+        let mut w = WorldDocument::new(61);
+        w.materialize_3x3([0, 0], &a).unwrap();
+        let vertex = [8, 8];
+        for (cell, role) in [
+            ([7, 7], "Grass"),
+            ([8, 7], "Grass"),
+            ([7, 8], "RiverWater"),
+            ([8, 8], "RiverWater"),
+        ] {
+            w.paint_semantic_terrain(cell, role);
+        }
+        let parts = w
+            .resolved_dual_grid_visual_parts_with_authority(vertex, &a)
+            .expect("cardinal water channel resolves");
+        assert_eq!(parts.len(), 1);
+        assert_eq!(parts[0].destination_rect_px, [0, 0, 32, 32]);
+        assert_ne!(
+            parts[0].source,
+            a.summer_flatworld_fill("Grass").unwrap().binding()
+        );
+    }
+
+    #[test]
+    fn mixed_grass_dirt_water_uses_complete_authored_pairwise_tile() {
+        let a = authority();
+        let mut w = WorldDocument::new(63);
+        w.materialize_3x3([0, 0], &a).unwrap();
+        let vertex = [8, 8];
+        for (cell, role) in [
+            ([7, 7], "Grass"),
+            ([8, 7], "MudBank"),
+            ([7, 8], "RiverWater"),
+            ([8, 8], "RiverWater"),
+        ] {
+            w.paint_semantic_terrain(cell, role);
+        }
+        let parts = w
+            .resolved_dual_grid_visual_parts_with_authority(vertex, &a)
+            .expect("mixed bank shoreline resolves");
+        assert_eq!(parts.len(), 1);
+        assert_eq!(parts[0].destination_rect_px, [0, 0, 32, 32]);
+        assert_eq!(parts[0].source.source_rect[2..], [32, 32]);
     }
 
     #[test]

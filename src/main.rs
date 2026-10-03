@@ -52,7 +52,7 @@ use std::{
 };
 use terrain_mapper::{mask_meaning, TerrainMapper, TerrainRecipeSource, TerrainRecipeState};
 use terrain_resolver::{all_vertex_coords, dirty_vertices_for_cell, resolve_semantic_lab};
-use world_doc::{TraversalMode, WorldDocument};
+use world_doc::{TraversalMode, VisualOverrideMode, WorldDocument};
 
 const INITIAL_SHEETS: &[&str] = &[
     "Terrain/terrain_summer.png",
@@ -90,7 +90,11 @@ impl CanvasTool {
 enum WorldTerrainBrush {
     Grass,
     DirtBank,
+    Sand,
+    WetSand,
     Water,
+    DeepWater,
+    PebblePath,
 }
 
 impl WorldTerrainBrush {
@@ -98,7 +102,11 @@ impl WorldTerrainBrush {
         match self {
             Self::Grass => "Grass",
             Self::DirtBank => "MudBank",
+            Self::Sand => "Sand",
+            Self::WetSand => "WetSand",
             Self::Water => "RiverWater",
+            Self::DeepWater => "DeepWater",
+            Self::PebblePath => "PebblePath",
         }
     }
 
@@ -106,7 +114,11 @@ impl WorldTerrainBrush {
         match self {
             Self::Grass => "GRS",
             Self::DirtBank => "DIR",
+            Self::Sand => "SND",
+            Self::WetSand => "WET",
             Self::Water => "WTR",
+            Self::DeepWater => "DEP",
+            Self::PebblePath => "PTH",
         }
     }
 
@@ -114,7 +126,11 @@ impl WorldTerrainBrush {
         match self {
             Self::Grass => "Grass",
             Self::DirtBank => "Dirt / river bank",
-            Self::Water => "River water",
+            Self::Sand => "Dry sand",
+            Self::WetSand => "Wet / tidal sand",
+            Self::Water => "Shallow / river water",
+            Self::DeepWater => "Deep water",
+            Self::PebblePath => "Pebble / stone path",
         }
     }
 
@@ -122,7 +138,11 @@ impl WorldTerrainBrush {
         match role {
             "Grass" => Some(Self::Grass),
             "MudBank" => Some(Self::DirtBank),
+            "Sand" => Some(Self::Sand),
+            "WetSand" => Some(Self::WetSand),
             "RiverWater" => Some(Self::Water),
+            "DeepWater" => Some(Self::DeepWater),
+            "PebblePath" => Some(Self::PebblePath),
             _ => None,
         }
     }
@@ -1815,10 +1835,19 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
     state.scene_rect = region;
     let visible = canvas.intersect(region);
     if visible.width() > 0.0 {
-        let x0 = (((visible.left() - region.left()) / px).floor() as isize).max(0) as usize;
-        let y0 = (((visible.top() - region.top()) / px).floor() as isize).max(0) as usize;
-        let x1 = ((((visible.right() - region.left()) / px).ceil() as usize) + 1).min(size[0]);
-        let y1 = ((((visible.bottom() - region.top()) / px).ceil() as usize) + 1).min(size[1]);
+        // Semantic world cells occupy the square between four integer dual-grid
+        // vertices. Render each resolved vertex tile centered on that vertex, not
+        // with the vertex as its top-left corner. The previous top-left placement
+        // shifted authored terrain down/right by half a cell and exposed square
+        // ownership artifacts at tight shorelines.
+        let local_left = (visible.left() - region.left()) / px;
+        let local_top = (visible.top() - region.top()) / px;
+        let local_right = (visible.right() - region.left()) / px;
+        let local_bottom = (visible.bottom() - region.top()) / px;
+        let vx0 = ((local_left - 0.5).floor() as isize).max(0) as usize;
+        let vy0 = ((local_top - 0.5).floor() as isize).max(0) as usize;
+        let vx1 = (((local_right + 0.5).ceil() as usize) + 1).min(size[0] + 1);
+        let vy1 = (((local_bottom + 0.5).ceil() as usize) + 1).min(size[1] + 1);
 
         let sheet_lookup: std::collections::HashMap<&str, usize> = state
             .sheets
@@ -1828,16 +1857,18 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
             .collect();
 
         let mut terrain_mesh: Option<(egui::TextureId, egui::Mesh)> = None;
-        for ly in y0..y1 {
-            for lx in x0..x1 {
-                let world = [origin[0] + lx as i64, origin[1] + ly as i64];
+        for vy in vy0..vy1 {
+            for vx in vx0..vx1 {
+                let vertex = [origin[0] + vx as i64, origin[1] + vy as i64];
                 let Some(parts) = state
                     .world_doc
-                    .resolved_visual_parts_with_authority(world, &state.asset_authority)
+                    .resolved_dual_grid_visual_parts_with_authority(vertex, &state.asset_authority)
                 else {
                     continue;
                 };
-                let cell_min = region.min + egui::vec2(lx as f32 * px, ly as f32 * px);
+                let vertex_tile_min_units = terrain::dual_grid_vertex_tile_min([vx, vy]);
+                let vertex_tile_min = region.min
+                    + egui::vec2(vertex_tile_min_units[0] * px, vertex_tile_min_units[1] * px);
                 for part in parts {
                     let Some(sheet_index) =
                         sheet_lookup.get(part.source.source_asset.as_str()).copied()
@@ -1850,7 +1881,7 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
                     };
                     let [dx, dy, dw, dh] = part.destination_rect_px;
                     let target = egui::Rect::from_min_size(
-                        cell_min + egui::vec2(dx as f32 * px / 32.0, dy as f32 * px / 32.0),
+                        vertex_tile_min + egui::vec2(dx as f32 * px / 32.0, dy as f32 * px / 32.0),
                         egui::vec2(dw as f32 * px / 32.0, dh as f32 * px / 32.0),
                     );
                     let needs_new_mesh = terrain_mesh.as_ref().is_none_or(|(id, _)| *id != texture);
@@ -1872,6 +1903,50 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
         }
         if let Some((_, mesh)) = terrain_mesh.take() {
             painter.add(egui::Shape::mesh(mesh));
+        }
+
+        // Exact-source local replacements are authored in semantic-cell space,
+        // so draw them directly inside the selected 32x32 cell after the shared
+        // dual-grid terrain. This keeps Direct Tile corrections pixel-aligned
+        // without reintroducing the old vertex/cell coordinate conflation.
+        let x0 = (local_left.floor() as isize).max(0) as usize;
+        let y0 = (local_top.floor() as isize).max(0) as usize;
+        let x1 = (((local_right.ceil() as usize) + 1).min(size[0])).max(x0);
+        let y1 = (((local_bottom.ceil() as usize) + 1).min(size[1])).max(y0);
+        for ly in y0..y1 {
+            for lx in x0..x1 {
+                let world = [origin[0] + lx as i64, origin[1] + ly as i64];
+                if state.world_doc.has_pending_semantic_edit(world) {
+                    continue;
+                }
+                let Some(item) = state.world_doc.cell_override(world) else {
+                    continue;
+                };
+                if !matches!(item.visual_mode, Some(VisualOverrideMode::Replace)) {
+                    continue;
+                }
+                let Some(source) = item.source.as_ref() else {
+                    continue;
+                };
+                let Some(sheet_index) = sheet_lookup.get(source.source_asset.as_str()).copied()
+                else {
+                    continue;
+                };
+                let sheet = &state.sheets[sheet_index];
+                let Some(texture) = sheet.texture else {
+                    continue;
+                };
+                let target = egui::Rect::from_min_size(
+                    region.min + egui::vec2(lx as f32 * px, ly as f32 * px),
+                    egui::Vec2::splat(px),
+                );
+                painter.image(
+                    texture,
+                    target,
+                    source_uv(source.source_rect, sheet.size),
+                    egui::Color32::WHITE,
+                );
+            }
         }
 
         let visible_world_min = [origin[0] + x0 as i64, origin[1] + y0 as i64];
@@ -5370,32 +5445,8 @@ fn draw_tool_rail(viewport_ui: &mut egui::Ui, state: &mut Studio) {
 
             if state.world_mode {
                 ui.separator();
-                ui.small("TERR")
-                    .on_hover_text("Semantic terrain brushes. Paint meaning; Havenwild resolves exact ElizaWy source tiles automatically from local topology.");
-                for brush in [
-                    WorldTerrainBrush::Grass,
-                    WorldTerrainBrush::DirtBank,
-                    WorldTerrainBrush::Water,
-                ] {
-                    if ui
-                        .add_sized(
-                            [43.0, 27.0],
-                            egui::Button::selectable(state.world_terrain_brush == brush, brush.glyph()),
-                        )
-                        .on_hover_text(format!(
-                            "{} terrain brush · click/drag with PNT · exact-source autotile",
-                            brush.label()
-                        ))
-                        .clicked()
-                    {
-                        state.world_terrain_brush = brush;
-                        state.tool = CanvasTool::Paint;
-                        state.message = format!(
-                            "{} terrain brush selected. Hold left mouse and drag on the World canvas; exact-source autotiling updates around the stroke.",
-                            brush.label()
-                        );
-                    }
-                }
+                ui.small("WORLD")
+                    .on_hover_text("Terrain/material selection now lives in the World Generator / World Authoring panel; the permanent rail only contains canvas tools.");
             }
 
             ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
@@ -5894,7 +5945,11 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                     for brush in [
                         WorldTerrainBrush::Grass,
                         WorldTerrainBrush::DirtBank,
+                        WorldTerrainBrush::Sand,
+                        WorldTerrainBrush::WetSand,
                         WorldTerrainBrush::Water,
+                        WorldTerrainBrush::DeepWater,
+                        WorldTerrainBrush::PebblePath,
                     ] {
                         if ui
                             .selectable_label(state.world_terrain_brush == brush, brush.label())
@@ -5905,7 +5960,7 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                         }
                     }
                 });
-                ui.small("Ocean/river water may meet Grass directly. Dirt/Mud remains an explicit authored material; it is not forced around every shoreline.");
+                ui.small("Source-backed materials: Grass · Dirt · Sand · Wet Sand · Shallow Water · Deep Water · Pebble Path. Ambiguous diagonal shoreline contacts connect land unless a cardinal water channel is explicitly present.");
             });
 
         if !compact {
@@ -6642,7 +6697,7 @@ fn main() -> bevy::app::AppExit {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Havenwild — Bevy Studio v0.8.6".into(),
+                        title: "Havenwild — Bevy Studio v0.8.10".into(),
                         decorations: native_frame,
                         resolution: (1440, 900).into(),
                         resizable: true,
