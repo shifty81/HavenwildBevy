@@ -1,10 +1,14 @@
-
-### M2D082F1 — deterministic fill regression repair
-
-Source 0.8.10 keeps the 0.8.9 runtime/world behavior intact and repairs the diagonal-land Rust regression so it validates the deterministic source-backed Grass fill variant chosen for the current seed/vertex instead of pinning one arbitrary safe-fill atlas coordinate. It also carries the rustfmt normalization already performed by the Windows Full Gate.
 # Havenwild Bevy — standalone source
 
-**Current deploy checkpoint:** source **0.8.10**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+**Current deploy checkpoint:** source **0.9.1**, ForgePY **0.4.10**, PCC **1.3.5**. The PCC primary operator flow is **1 Full Gate → 2 Commit + Push certified source → 3 Patch Scan / Review / Apply**. Fresh/source-only deployments hydrate missing core ElizaWy assets automatically from the exact pinned GitHub revision first; remembered/local mirrors are fallback-only. Source-only packaging now excludes root update ZIPs, legacy `.patch` handoffs, local operational state, hydrated assets, derived workstation drafts, and one-off repair/package scripts so a packaged source checkpoint does not recursively carry deployment debris.
+
+M2D090A gate repair aligns the Rust regression suite with the 0.9.0 seasonal-ground contract: generated Spring/Autumn/Winter cells must use their coordinate-equivalent `terrain_*` sheets, while cliff sheets remain forbidden as ground authority. Runtime world generation is unchanged.
+
+### M2D090 — ElizaWy kitchen-sink Generated World
+
+Source 0.9.0 moves the project off the sparse terrain prototype and into the screenshot-driven showcase/worldgen loop. The four major islands now retain Spring/Summer/Autumn/Winter identity using exact coordinate-equivalent ElizaWy terrain, tree, plant, wildflower and cliff source regions. The unified runtime lane contains 320 source images, 2890 exact source regions and 28 reviewed worldgen templates; generated artwork remains disabled.
+
+Generated World v3 adds deterministic 0/+1/+2 elevation intent, two settlement anchors per island, meandering road spines plus town-to-cave spurs, source-exact houses/clutter/lighting, river bridges, a static reviewed waterfall source feature, cliff/cave entrance showcase features, and much denser biome-aware trees/shrubs/foliage/wildflowers/rocks/water details. Continuous contour-cliff tiling and animated waterfall frame ordering remain screenshot/source-evidence driven rather than guessed. Generator v3 deliberately invalidates the old sparse generated-chunk cache while preserving authored cell/behavior overrides.
 
 
 ### M2D082F land-connectivity + full Summer material promotion

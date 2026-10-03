@@ -25,7 +25,7 @@ def main():
     groups = profile.get("sourceGroups", {})
     require(len(groups) == 41, f"expected 41 Summer groups, got {len(groups)}")
     require(sum(g.get("cellCount", 0) for g in groups.values()) == 305, "source groups do not cover 305 cells")
-    require(runtime.get("counts", {}).get("canonicalRuntimeRegions") == 2316, "runtime authority is not 2316 regions")
+    require(runtime.get("counts", {}).get("canonicalRuntimeRegions", 0) >= 2890, "runtime authority does not include M2D090 seasonal/showcase source regions")
     runtime_regions = {r["canonicalRegionId"]: r for r in runtime["canonicalRuntimeRegions"]}
     grouped_ids = [entry["canonicalRegionId"] for group in groups.values() for entry in group.get("cells", [])]
     require(len(grouped_ids) == 305 and len(set(grouped_ids)) == 305, "source groups do not expose 305 unique canonical Summer cells")
@@ -105,12 +105,12 @@ def main():
     require("a.contains_source_slice(&part.source)" in world_text, "flatworld regression does not validate canonical source slices")
     require("strict Summer flatworld paint must resolve\")" not in world_text, "stale single-binding flatworld regression remains")
     require("water_animation_ms" not in main_text, "stale fake water animation clock remains")
-    require(re.search(r"Havenwild — Bevy Studio v0\.8\.\d+", main_text) is not None, "Studio 0.8.x marker missing")
+    require(re.search(r"Havenwild — Bevy Studio v0\.\d+\.\d+", main_text) is not None, "Studio 0.x marker missing")
     require("land_connectivity_first_no_quadrant_splice" in PROFILE.read_text(encoding="utf-8"), "land-connectivity policy missing from profile")
     require("TRANSITION_PROMOTIONS" in gen_text, "extended terrain transition promotion missing")
     print("M2D082F SUMMER MATERIAL / LAND-CONNECTIVITY SELFTEST: PASS")
     print("  Summer runtime cells : 305/305 across 41 source groups")
-    print("  runtime authority    : 2316 exact regions")
+    print(f"  runtime authority    : {runtime.get('counts', {}).get('canonicalRuntimeRegions')} exact regions")
     print("  G/D/W grammar        : 81/81 states (14/14 pairwise + 36 tri-material)")
     print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 / Sand 3 / WetSand 3 / Path 4 / Deep 1")
     print("  water animation      : OFF / RepeatableFill variants are static source/detail cells")

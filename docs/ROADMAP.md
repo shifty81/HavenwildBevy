@@ -22,3 +22,17 @@ No arbitrary pass-count validators or donor PCC chains. Work is accepted with fu
 ## M2D082C1 — Terrain authority version-skew repair
 - Align Summer profile v6 across M2D080, runtime AssetAuthority, and Native convergence.
 - Preserve M2D082C Generated World behavior; no worldgen rollback.
+
+
+## M2D090 — ElizaWy kitchen-sink Generated World
+- Promote exact coordinate-equivalent Spring/Summer/Autumn/Winter terrain, tree, plant, wildflower and cliff regions into the unified runtime authority.
+- Regenerate the primary four-island world under generator v3 with 0/+1/+2 elevation metadata, hamlet/town anchors, road/cave connectivity, bridges, waterfall drops and cave approaches.
+- Populate visible biomes with source-exact trees, shrubs, foliage, wildflowers, rocks, water details and bank plants; populate settlements with reviewed houses, storage clutter and outdoor lighting.
+- Use source-exact reviewed waterfall and cliff/cave showcase regions now; finish continuous contour-cliff topology and ordered waterfall animation from screenshots/source evidence rather than guessed atlas semantics.
+- Preserve the 0.8.7 dual-grid coordinate fix and 0.8.9 land-connectivity-first shoreline behavior.
+- Treat the upstream ElizaWy Summer demo as a density/composition target, not a layout to copy 1:1.
+
+### M2D090A — Seasonal ground gate repair — COMPLETE IN SOURCE 0.9.1
+- Correct the stale pre-kitchen-sink Rust guard that required every generated ground cell to come from `terrain_summer.png`.
+- Require coordinate-equivalent Spring/Summer/Autumn/Winter terrain sheets by generated season while continuing to reject cliff sheets as ground authority.
+- Runtime/worldgen behavior is unchanged from 0.9.0; this is certification alignment only.

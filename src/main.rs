@@ -525,6 +525,23 @@ fn startup(
             layered_references.insert(part.source.source_asset.clone());
         }
     }
+    // Generated World purpose/nature objects can use Structure/Object sheets that are
+    // intentionally not part of the eager Terrain-only set. Promote every currently
+    // materialized source sheet into the same exact-source texture load set.
+    for chunk in &world_doc.chunks {
+        for object in &chunk.generated_objects {
+            for part in &object.parts {
+                if !source_catalog.contains_rect(&part.source.source_asset, part.source.source_rect)
+                {
+                    panic!(
+                        "Generated World object references missing/out-of-bounds original source: {} {:?}",
+                        part.source.source_asset, part.source.source_rect
+                    );
+                }
+                layered_references.insert(part.source.source_asset.clone());
+            }
+        }
+    }
     let recipe_source_errors = terrain_mapper.source_validation_errors(&source_catalog);
     if !recipe_source_errors.is_empty() {
         panic!(
@@ -5931,9 +5948,10 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                     state.world_doc.generated_region_id(state.world_selected),
                 ) {
                     ui.separator();
-                    ui.small(format!("Selected: {region} · {season} · {biome}"));
+                    let elevation = state.world_doc.generated_elevation(state.world_selected).unwrap_or(0);
+                    ui.small(format!("Selected: {region} · {season} · {biome} · elevation +{elevation}"));
                 }
-                ui.small("Season identities are logical worldgen intent. Seasonal terrain/source substitution remains disabled until each season's exact source mappings are certified.");
+                ui.small("M2D090 uses exact coordinate-equivalent Spring/Summer/Autumn/Winter terrain, tree, plant, wildflower and cliff source regions. Houses, bridges, waterfall/cave features and contextual props remain exact original ElizaWy source pixels.");
             });
 
         egui::CollapsingHeader::new("Terrain paint")
@@ -5985,7 +6003,9 @@ fn draw_world_generator_panel(ctx: &egui::Context, state: &mut Studio) {
                         state.world_doc.source_behavior_profiles.len(),
                         state.world_doc.suppressed_generated_objects.len()
                     ));
-                    ui.small("Cliff/elevation art is catalogued separately and is not eligible for the flat Summer brush until the cliff pass is enabled.");
+                    let object_count: usize = state.world_doc.chunks.iter().map(|chunk| chunk.generated_objects.len()).sum();
+                    ui.label(format!("{} generated source-exact objects · elevations 0..2 active in the current archipelago prototype", object_count));
+                    ui.small("Cliff/cave and waterfall showcase features are active. Continuous contour-cliff tiling is still screenshot-driven/evidence-gated so Havenwild does not guess source-atlas cliff roles.");
                 });
         }
     });
@@ -6697,7 +6717,7 @@ fn main() -> bevy::app::AppExit {
                 })
                 .set(WindowPlugin {
                     primary_window: Some(Window {
-                        title: "Havenwild — Bevy Studio v0.8.10".into(),
+                        title: "Havenwild — Bevy Studio v0.9.1".into(),
                         decorations: native_frame,
                         resolution: (1440, 900).into(),
                         resizable: true,

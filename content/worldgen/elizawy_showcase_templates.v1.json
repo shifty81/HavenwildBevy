@@ -1,0 +1,248 @@
+{
+  "schema": "havenwild.worldgen.elizawy_showcase_templates.v1",
+  "version": 1,
+  "reviewBasis": "manual source-image review against ElizaWy/LPC pinned revision f07f7f5892e67c932c68f70bb04472f2c64e46bc and the upstream Summer DemoGame scene",
+  "policy": {
+    "sourcePixelsImmutable": true,
+    "generatedArtwork": false,
+    "purpose": "source-exact showcase/worldgen placements; screenshot-driven correction is allowed, source-image mutation is not"
+  },
+  "templates": [
+    {
+      "key": "house_brick_a",
+      "label": "Brick House A \u00b7 reviewed whole source sprite",
+      "layer": "structures",
+      "footprintCells": [
+        8,
+        7
+      ],
+      "worldgenTags": [
+        "settlement",
+        "house",
+        "large_structure"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            0
+          ],
+          "sourcePath": "Structure/Structures/Brick House A.png",
+          "sourceRectPx": [
+            0,
+            0,
+            256,
+            224
+          ]
+        }
+      ]
+    },
+    {
+      "key": "house_paneled_a",
+      "label": "Paneled House A \u00b7 reviewed whole source sprite",
+      "layer": "structures",
+      "footprintCells": [
+        5,
+        5
+      ],
+      "worldgenTags": [
+        "settlement",
+        "house",
+        "large_structure"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            0
+          ],
+          "sourcePath": "Structure/Structures/Paneled House A.png",
+          "sourceRectPx": [
+            0,
+            0,
+            160,
+            160
+          ]
+        }
+      ]
+    },
+    {
+      "key": "bridge_wood_a_rails",
+      "label": "Wood Bridge A \u00b7 reviewed source section",
+      "layer": "structures",
+      "footprintCells": [
+        4,
+        3
+      ],
+      "worldgenTags": [
+        "bridge",
+        "river_crossing",
+        "large_structure"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            0
+          ],
+          "sourcePath": "Structure/Bridges/Wood Bridge A - Rails.png",
+          "sourceRectPx": [
+            0,
+            0,
+            128,
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "key": "barrel_a",
+      "label": "Barrel \u00b7 reviewed source cell",
+      "layer": "objects",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "worldgenTags": [
+        "settlement",
+        "clutter",
+        "storage",
+        "detail"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            0
+          ],
+          "sourcePath": "Objects/Furniture/Barrel.png",
+          "sourceRectPx": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "key": "crate_a",
+      "label": "Crate \u00b7 reviewed source cell",
+      "layer": "objects",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "worldgenTags": [
+        "settlement",
+        "clutter",
+        "storage",
+        "detail"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            0
+          ],
+          "sourcePath": "Objects/Furniture/Crate.png",
+          "sourceRectPx": [
+            0,
+            0,
+            32,
+            32
+          ]
+        }
+      ]
+    },
+    {
+      "key": "outdoor_lamp_a",
+      "label": "Outdoor lamp \u00b7 reviewed single fixture",
+      "layer": "objects",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "worldgenTags": [
+        "settlement",
+        "lighting",
+        "detail"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            -64
+          ],
+          "sourcePath": "Objects/Furniture/Lighting, Outdoors.png",
+          "sourceRectPx": [
+            0,
+            0,
+            32,
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "key": "waterfall_front_a_static",
+      "label": "Waterfall front A \u00b7 reviewed static source frame",
+      "layer": "objects",
+      "footprintCells": [
+        3,
+        1
+      ],
+      "worldgenTags": [
+        "waterfall",
+        "water",
+        "elevation_feature",
+        "large_structure"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            -128
+          ],
+          "sourcePath": "Terrain/Waterfall.png",
+          "sourceRectPx": [
+            0,
+            0,
+            96,
+            160
+          ]
+        }
+      ]
+    },
+    {
+      "key": "cave_cliff_feature_a",
+      "label": "Cliff cave feature A \u00b7 reviewed source section",
+      "layer": "structures",
+      "footprintCells": [
+        3,
+        3
+      ],
+      "worldgenTags": [
+        "cliff",
+        "cave_entrance",
+        "elevation_feature",
+        "large_structure"
+      ],
+      "parts": [
+        {
+          "offsetPx": [
+            0,
+            -64
+          ],
+          "sourcePath": "Terrain/cliff_summer.png",
+          "sourceRectPx": [
+            192,
+            288,
+            96,
+            96
+          ]
+        }
+      ]
+    }
+  ]
+}

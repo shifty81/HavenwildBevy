@@ -15,7 +15,7 @@ use std::{
 
 pub const WORLD_SCHEMA: &str = "havenwild.bevy.world_composition.v1";
 pub const WORLD_CHUNK_SIDE: usize = 32;
-pub const WORLD_GENERATOR_ID: &str = "havenwild.source_backed.generated_world.v2";
+pub const WORLD_GENERATOR_ID: &str = "havenwild.source_backed.generated_world.v3";
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
@@ -27,6 +27,8 @@ pub struct GeneratedCell {
     pub biome: String,
     #[serde(default = "default_generated_region")]
     pub region_id: String,
+    #[serde(default)]
+    pub elevation: i16,
     pub source: SourceBinding,
 }
 
@@ -281,6 +283,7 @@ impl WorldDocument {
                     || cell.season.is_empty()
                     || cell.biome.is_empty()
                     || cell.region_id.is_empty()
+                    || !(0..=30).contains(&cell.elevation)
             }) {
                 return Err("Invalid generated world-cell intent metadata".into());
             }
@@ -548,6 +551,11 @@ impl WorldDocument {
         self.generated_cell(world)
             .map(|cell| cell.region_id.as_str())
     }
+    pub fn generated_elevation(&self, world: [i64; 2]) -> Option<i16> {
+        self.cell_override(world)
+            .and_then(|item| item.elevation)
+            .or_else(|| self.generated_cell(world).map(|cell| cell.elevation))
+    }
 
     pub fn cell_override(&self, world: [i64; 2]) -> Option<&WorldCellOverride> {
         let key = (world[1], world[0]);
@@ -587,6 +595,20 @@ impl WorldDocument {
         authority: &AssetAuthority,
     ) -> Option<Vec<SummerVisualPart>> {
         self.resolved_dual_grid_visual_parts_with_authority_at(vertex, authority, None)
+    }
+
+    fn render_season_for_vertex(&self, vertex: [i64; 2]) -> &'static str {
+        let corners = [
+            [vertex[0] - 1, vertex[1] - 1],
+            [vertex[0], vertex[1] - 1],
+            [vertex[0] - 1, vertex[1]],
+            vertex,
+        ];
+        corners
+            .into_iter()
+            .map(|world| worldgen_plan::season(self.seed, world))
+            .find(|season| *season != "ocean")
+            .unwrap_or("summer")
     }
 
     fn resolved_role_for_dual_grid(&self, world: [i64; 2]) -> String {
@@ -740,6 +762,7 @@ impl WorldDocument {
         ];
         let [nw, ne, sw, se] = roles;
         let role_refs = [nw.as_str(), ne.as_str(), sw.as_str(), se.as_str()];
+        let render_season = self.render_season_for_vertex(vertex);
         if role_refs.iter().all(|role| *role == role_refs[0]) {
             // M2D081C: homogeneous terrain is spatial, not temporal. RiverWater
             // remains on the conservative static source fill until explicit
@@ -748,7 +771,7 @@ impl WorldDocument {
             let entry = authority.summer_flatworld_fill_for_world(role_refs[0], self.seed, vertex);
             return entry.map(|entry| {
                 vec![SummerVisualPart {
-                    source: entry.binding(),
+                    source: authority.seasonalize_binding(&entry.binding(), render_season),
                     destination_rect_px: [0, 0, 32, 32],
                 }]
             });
@@ -759,14 +782,14 @@ impl WorldDocument {
                 .summer_flatworld_fill_for_world(projected[0], self.seed, vertex)
                 .map(|entry| {
                     vec![SummerVisualPart {
-                        source: entry.binding(),
+                        source: authority.seasonalize_binding(&entry.binding(), render_season),
                         destination_rect_px: [0, 0, 32, 32],
                     }]
                 });
         }
         if let Some(entry) = authority.summer_flatworld_corner(projected) {
             return Some(vec![SummerVisualPart {
-                source: entry.binding(),
+                source: authority.seasonalize_binding(&entry.binding(), render_season),
                 destination_rect_px: [0, 0, 32, 32],
             }]);
         }
@@ -776,7 +799,7 @@ impl WorldDocument {
         // material states fail closed to the directly authored SE material.
         authority.summer_flatworld_fill(projected[3]).map(|entry| {
             vec![SummerVisualPart {
-                source: entry.binding(),
+                source: authority.seasonalize_binding(&entry.binding(), render_season),
                 destination_rect_px: [0, 0, 32, 32],
             }]
         })
@@ -1354,11 +1377,11 @@ impl WorldDocument {
         for chunk in &mut self.chunks {
             let before = chunk.generated_objects.len();
             chunk.generated_objects.retain(|object| {
-                let exact_detail = object.footprint_cells == [1, 1]
-                    && object.parts.iter().all(|part| {
-                        part.source.source_rect[2] == 32 && part.source.source_rect[3] == 32
-                    });
-                exact_detail || authority.locally_certified_object_template(&object.template_id)
+                authority.worldgen_safe_object_template(&object.template_id)
+                    && object
+                        .parts
+                        .iter()
+                        .all(|part| authority.contains_binding(&part.source))
             });
             removed += before - chunk.generated_objects.len();
         }
@@ -1459,7 +1482,9 @@ fn baseline_source_for(
             .or_else(|| authority.summer_flatworld_fill_for_world(role, seed, world))
     }
     .ok_or_else(|| format!("Missing Summer flatworld source for {role}"))?;
-    Ok((role.to_owned(), mask, selected.binding()))
+    let source =
+        authority.seasonalize_binding(&selected.binding(), worldgen_plan::season(seed, world));
+    Ok((role.to_owned(), mask, source))
 }
 
 fn scatter_slot(seed: u64, world: [i64; 2], spacing: i64, salt: u64, chance: u64) -> bool {
@@ -1479,12 +1504,373 @@ fn scatter_slot(seed: u64, world: [i64; 2], spacing: i64, salt: u64, chance: u64
         ]
 }
 
+fn worldgen_land_role(role: &str) -> bool {
+    matches!(
+        role,
+        "Grass" | "MudBank" | "Sand" | "WetSand" | "PebblePath"
+    )
+}
+
+fn footprint_is_land(seed: u64, anchor: [i64; 2], footprint: [u32; 2]) -> bool {
+    (0..footprint[1]).all(|y| {
+        (0..footprint[0]).all(|x| {
+            worldgen_land_role(role_for(
+                seed,
+                [anchor[0] + i64::from(x), anchor[1] + i64::from(y)],
+            ))
+        })
+    })
+}
+
 fn footprint_is_grass(seed: u64, anchor: [i64; 2], footprint: [u32; 2]) -> bool {
     (0..footprint[1]).all(|y| {
         (0..footprint[0]).all(|x| {
             role_for(seed, [anchor[0] + i64::from(x), anchor[1] + i64::from(y)]) == "Grass"
         })
     })
+}
+
+fn world_chunk_coord(world: [i64; 2]) -> [i64; 2] {
+    let side = WORLD_CHUNK_SIDE as i64;
+    [world[0].div_euclid(side), world[1].div_euclid(side)]
+}
+
+fn centered_anchor(center: [i64; 2], footprint: [u32; 2]) -> [i64; 2] {
+    [
+        center[0] - i64::from(footprint[0] / 2),
+        center[1] - i64::from(footprint[1] / 2),
+    ]
+}
+
+fn template_parts_for_season(
+    authority: &AssetAuthority,
+    template: &ObjectTemplate,
+    season: &str,
+) -> Vec<WorldObjectPart> {
+    template
+        .parts
+        .iter()
+        .map(|part| {
+            let source = SourceBinding {
+                source_asset: part.source_path.clone(),
+                source_rect: part.source_rect_px,
+            };
+            WorldObjectPart {
+                offset_px: part.offset_px,
+                source: authority.seasonalize_binding(&source, season),
+            }
+        })
+        .collect()
+}
+
+fn push_generated_object(
+    objects: &mut Vec<WorldObject>,
+    authority: &AssetAuthority,
+    coord: [i64; 2],
+    seed: u64,
+    anchor: [i64; 2],
+    template: &ObjectTemplate,
+    kind: &str,
+) {
+    if world_chunk_coord(anchor) != coord {
+        return;
+    }
+    let season = worldgen_plan::season(seed, anchor);
+    let id = format!(
+        "{}:{}:{}:{}:{}:{}",
+        WORLD_GENERATOR_ID, kind, anchor[0], anchor[1], season, template.template_id
+    );
+    objects.push(WorldObject {
+        id,
+        template_id: template.template_id.clone(),
+        label: format!("Worldgen {kind}: {}", template.label),
+        layer: template.layer.clone(),
+        anchor_world: anchor,
+        footprint_cells: template.footprint_cells,
+        parts: template_parts_for_season(authority, template, season),
+        generator_id: WORLD_GENERATOR_ID.into(),
+    });
+}
+
+fn place_purpose_objects(
+    seed: u64,
+    coord: [i64; 2],
+    authority: &AssetAuthority,
+    objects: &mut Vec<WorldObject>,
+) {
+    let houses: Vec<_> = authority.templates_with_tag("house").collect();
+    let clutter: Vec<_> = authority.templates_with_tag("clutter").collect();
+    let lights: Vec<_> = authority.templates_with_tag("lighting").collect();
+    let bridges: Vec<_> = authority.templates_with_tag("bridge").collect();
+    let waterfalls: Vec<_> = authority.templates_with_tag("waterfall").collect();
+    let caves: Vec<_> = authority.templates_with_tag("cave_entrance").collect();
+
+    for island in worldgen_plan::ISLANDS {
+        let island_hash = coord_hash(seed, island.center, island.salt ^ 0x5055_5250_4f53_45);
+        for (settlement_index, settlement) in worldgen_plan::settlement_centers(seed, island)
+            .into_iter()
+            .enumerate()
+        {
+            if !houses.is_empty() {
+                let primary = houses[(island_hash as usize + settlement_index) % houses.len()];
+                let primary_center = if settlement.class == "town" {
+                    [settlement.center[0] - 3, settlement.center[1] - 4]
+                } else {
+                    [settlement.center[0], settlement.center[1] - 3]
+                };
+                let anchor = centered_anchor(primary_center, primary.footprint_cells);
+                if footprint_is_land(seed, anchor, primary.footprint_cells) {
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        anchor,
+                        primary,
+                        if settlement.class == "town" {
+                            "town house"
+                        } else {
+                            "hamlet house"
+                        },
+                    );
+                }
+
+                if settlement.class == "town" && houses.len() > 1 {
+                    let secondary =
+                        houses[(island_hash as usize + settlement_index + 1) % houses.len()];
+                    let secondary_center = [settlement.center[0] + 5, settlement.center[1] + 3];
+                    let anchor = centered_anchor(secondary_center, secondary.footprint_cells);
+                    if footprint_is_land(seed, anchor, secondary.footprint_cells) {
+                        push_generated_object(
+                            objects,
+                            authority,
+                            coord,
+                            seed,
+                            anchor,
+                            secondary,
+                            "town house",
+                        );
+                    }
+                }
+            }
+
+            for (index, offset) in [[-2, 2], [2, 2], [0, -2]].into_iter().enumerate() {
+                let anchor = [
+                    settlement.center[0] + offset[0],
+                    settlement.center[1] + offset[1],
+                ];
+                if !worldgen_land_role(role_for(seed, anchor)) {
+                    continue;
+                }
+                if !clutter.is_empty() && index < 2 {
+                    let template = clutter[(island_hash as usize + index) % clutter.len()];
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        anchor,
+                        template,
+                        "settlement clutter",
+                    );
+                } else if let Some(template) = lights.first().copied() {
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        anchor,
+                        template,
+                        "settlement lighting",
+                    );
+                }
+            }
+        }
+
+        if let Some(template) = choose_template(&bridges, island_hash >> 11) {
+            push_generated_object(
+                objects,
+                authority,
+                coord,
+                seed,
+                worldgen_plan::bridge_anchor(seed, island),
+                template,
+                "river bridge",
+            );
+        }
+        if let Some(template) = choose_template(&waterfalls, island_hash >> 17) {
+            push_generated_object(
+                objects,
+                authority,
+                coord,
+                seed,
+                worldgen_plan::waterfall_anchor(seed, island),
+                template,
+                "waterfall",
+            );
+        }
+        if let Some(template) = choose_template(&caves, island_hash >> 23) {
+            let cave = worldgen_plan::cave_anchor(seed, island);
+            let anchor = [cave[0] - 1, cave[1] - 2];
+            push_generated_object(
+                objects,
+                authority,
+                coord,
+                seed,
+                anchor,
+                template,
+                "cliff cave entrance",
+            );
+        }
+    }
+}
+
+fn place_natural_objects(
+    seed: u64,
+    coord: [i64; 2],
+    authority: &AssetAuthority,
+    objects: &mut Vec<WorldObject>,
+) {
+    let trees: Vec<_> = authority.templates_with_tag("tree").collect();
+    let shrubs: Vec<_> = authority.templates_with_tag("shrub").collect();
+    let foliage: Vec<_> = authority.templates_with_tag("foliage").collect();
+    let wildflowers: Vec<_> = authority.templates_with_tag("wildflower").collect();
+    let rocks: Vec<_> = authority.templates_with_tag("rock").collect();
+    let water_details: Vec<_> = authority.templates_with_tag("water_detail").collect();
+    let water_edges: Vec<_> = authority.templates_with_tag("water_edge").collect();
+
+    for ly in 0..WORLD_CHUNK_SIDE {
+        for lx in 0..WORLD_CHUNK_SIDE {
+            let world = [
+                coord[0] * WORLD_CHUNK_SIDE as i64 + lx as i64,
+                coord[1] * WORLD_CHUNK_SIDE as i64 + ly as i64,
+            ];
+            let role = role_for(seed, world);
+            let biome = worldgen_plan::biome(seed, world);
+            let hash = coord_hash(seed, world, 0x4e41_5455_5245);
+
+            if role == "RiverWater"
+                && !worldgen_plan::is_waterfall_site(seed, world)
+                && scatter_slot(seed, world, 5, 0x5741_5445_525f_44, 58)
+            {
+                if let Some(template) = choose_template(&water_details, hash) {
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        world,
+                        template,
+                        "water detail",
+                    );
+                }
+                continue;
+            }
+            if role == "MudBank" && scatter_slot(seed, world, 5, 0x5741_5445_525f_45, 42) {
+                if let Some(template) = choose_template(&water_edges, hash >> 5) {
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        world,
+                        template,
+                        "water-edge planting",
+                    );
+                }
+                continue;
+            }
+            if role != "Grass"
+                || matches!(biome, "settlement" | "road_corridor" | "coast")
+                || worldgen_plan::is_cave_approach(seed, world)
+            {
+                continue;
+            }
+
+            let tree_density = worldgen_plan::tree_density_percent(seed, world);
+            if tree_density > 0 && scatter_slot(seed, world, 4, 0x5452_4545_5f53_4c4f, tree_density)
+            {
+                if let Some(template) = choose_template(&trees, hash >> 8) {
+                    let anchor = centered_anchor(world, template.footprint_cells);
+                    if footprint_is_grass(seed, anchor, template.footprint_cells) {
+                        push_generated_object(
+                            objects,
+                            authority,
+                            coord,
+                            seed,
+                            anchor,
+                            template,
+                            "biome tree",
+                        );
+                        continue;
+                    }
+                }
+            }
+
+            if biome == "rocky_upland" && scatter_slot(seed, world, 6, 0x524f_434b_5f53_4c4f, 66) {
+                if let Some(template) = choose_template(&rocks, hash >> 13) {
+                    let anchor = centered_anchor(world, template.footprint_cells);
+                    if footprint_is_grass(seed, anchor, template.footprint_cells) {
+                        push_generated_object(
+                            objects,
+                            authority,
+                            coord,
+                            seed,
+                            anchor,
+                            template,
+                            "upland rock",
+                        );
+                        continue;
+                    }
+                }
+            }
+
+            if scatter_slot(
+                seed,
+                world,
+                3,
+                0x5348_5255_425f_534c,
+                if biome == "dense_forest" { 64 } else { 42 },
+            ) {
+                if let Some(template) = choose_template(&shrubs, hash >> 19) {
+                    push_generated_object(
+                        objects, authority, coord, seed, world, template, "shrub",
+                    );
+                    continue;
+                }
+            }
+            if scatter_slot(seed, world, 4, 0x464f_4c49_4147_455f, 44) {
+                if let Some(template) = choose_template(&foliage, hash >> 23) {
+                    let anchor = centered_anchor(world, template.footprint_cells);
+                    if footprint_is_grass(seed, anchor, template.footprint_cells) {
+                        push_generated_object(
+                            objects, authority, coord, seed, anchor, template, "foliage",
+                        );
+                        continue;
+                    }
+                }
+            }
+            if scatter_slot(
+                seed,
+                world,
+                4,
+                0x464c_4f57_4552_535f,
+                if biome == "meadow" { 72 } else { 32 },
+            ) {
+                if let Some(template) = choose_template(&wildflowers, hash >> 29) {
+                    push_generated_object(
+                        objects,
+                        authority,
+                        coord,
+                        seed,
+                        world,
+                        template,
+                        "wildflower",
+                    );
+                }
+            }
+        }
+    }
 }
 
 fn generate_chunk(
@@ -1515,97 +1901,24 @@ fn generate_chunk(
                 season: worldgen_plan::season(seed, world).into(),
                 biome: worldgen_plan::biome(seed, world).into(),
                 region_id: worldgen_plan::region_id(seed, world).into(),
+                elevation: worldgen_plan::elevation(seed, world),
                 source,
             });
         }
     }
-    // One-cell details are always safe. Larger trees/rocks re-enter worldgen only
-    // after the local source-bound mapper has isolated their alpha-connected sprite
-    // component and AssetAuthority has loaded that certified crop metadata.
-    let details: Vec<_> = authority
-        .terrain_object_templates()
-        .filter(|template| {
-            template.footprint_cells == [1, 1]
-                && template.parts.len() == 1
-                && template.parts[0].source_rect_px[2] == 32
-                && template.parts[0].source_rect_px[3] == 32
-        })
-        .collect();
-    let large_objects: Vec<_> = authority
-        .terrain_object_templates()
-        .filter(|template| {
-            template.footprint_cells != [1, 1]
-                && authority.locally_certified_object_template(&template.template_id)
-                && (template.label.contains("tree")
-                    || template.label.contains("rock")
-                    || template.label.contains("stone"))
-        })
-        .collect();
+
     let mut objects = Vec::new();
-    for ly in 0..WORLD_CHUNK_SIDE {
-        for lx in 0..WORLD_CHUNK_SIDE {
-            let world = [
-                coord[0] * WORLD_CHUNK_SIDE as i64 + lx as i64,
-                coord[1] * WORLD_CHUNK_SIDE as i64 + ly as i64,
-            ];
-            if role_for(seed, world) != "Grass" {
-                continue;
-            }
-            let hash = coord_hash(seed, world, 0x6f626a65637473);
-            let tree_density = worldgen_plan::tree_density_percent(seed, world);
-            let (kind, template) = if tree_density > 0
-                && scatter_slot(seed, world, 6, 0x6d616a6f725f6f62, tree_density)
-            {
-                (
-                    "certified biome object",
-                    choose_template(&large_objects, hash >> 8),
-                )
-            } else if scatter_slot(seed, world, 9, 0x64657461696c5f6f, 28) {
-                ("detail", choose_template(&details, hash))
-            } else {
-                continue;
-            };
-            let Some(template) = template else {
-                continue;
-            };
-            let anchor = if template.footprint_cells == [1, 1] {
-                world
-            } else {
-                [
-                    world[0] - i64::from((template.footprint_cells[0] - 1) / 2),
-                    world[1] - i64::from(template.footprint_cells[1] - 1),
-                ]
-            };
-            if !footprint_is_grass(seed, anchor, template.footprint_cells) {
-                continue;
-            }
-            let id = format!(
-                "{}:{}:{}:{}:{}:{}",
-                WORLD_GENERATOR_ID, coord[0], coord[1], lx, ly, template.template_id
-            );
-            let parts = template
-                .parts
-                .iter()
-                .map(|part| WorldObjectPart {
-                    offset_px: part.offset_px,
-                    source: SourceBinding {
-                        source_asset: part.source_path.clone(),
-                        source_rect: part.source_rect_px,
-                    },
-                })
-                .collect();
-            objects.push(WorldObject {
-                id,
-                template_id: template.template_id.clone(),
-                label: format!("Worldgen {kind}: {}", template.label),
-                layer: template.layer.clone(),
-                anchor_world: anchor,
-                footprint_cells: template.footprint_cells,
-                parts,
-                generator_id: WORLD_GENERATOR_ID.into(),
-            });
-        }
-    }
+    place_purpose_objects(seed, coord, authority, &mut objects);
+    place_natural_objects(seed, coord, authority, &mut objects);
+    objects.sort_by(|a, b| {
+        (a.anchor_world[1], a.anchor_world[0], a.template_id.as_str()).cmp(&(
+            b.anchor_world[1],
+            b.anchor_world[0],
+            b.template_id.as_str(),
+        ))
+    });
+    objects.dedup_by(|a, b| a.id == b.id);
+
     Ok(WorldChunk {
         coord,
         generator_id: WORLD_GENERATOR_ID.into(),
@@ -1677,6 +1990,69 @@ mod tests {
         assert!(biomes.contains("ocean"));
         assert!(biomes.contains("dense_forest"));
         assert!(biomes.contains("meadow"));
+        assert!(biomes.contains("settlement"));
+        assert!(biomes.contains("road_corridor"));
+
+        let elevations: BTreeSet<_> = world
+            .chunks
+            .iter()
+            .flat_map(|chunk| chunk.generated_cells.iter().map(|cell| cell.elevation))
+            .collect();
+        for expected in [0i16, 1, 2] {
+            assert!(
+                elevations.contains(&expected),
+                "missing generated elevation {expected}"
+            );
+        }
+
+        let labels = world
+            .chunks
+            .iter()
+            .flat_map(|chunk| {
+                chunk
+                    .generated_objects
+                    .iter()
+                    .map(|object| object.label.as_str())
+            })
+            .collect::<Vec<_>>();
+        for expected in [
+            "Worldgen river bridge",
+            "Worldgen waterfall",
+            "Worldgen cliff cave entrance",
+            "Worldgen town house",
+        ] {
+            assert!(
+                labels.iter().any(|label| label.starts_with(expected)),
+                "missing purpose-first object category {expected}"
+            );
+        }
+        assert!(labels
+            .iter()
+            .any(|label| label.starts_with("Worldgen biome tree")));
+        assert!(world
+            .chunks
+            .iter()
+            .flat_map(|chunk| &chunk.generated_objects)
+            .flat_map(|object| &object.parts)
+            .all(|part| a.contains_binding(&part.source)));
+    }
+
+    #[test]
+    fn generated_ground_uses_coordinate_equivalent_seasonal_source_sheets() {
+        let a = authority();
+        let seed = 0x484156454e57494c;
+        for island in worldgen_plan::ISLANDS {
+            let (_, _, source) = baseline_source_for(seed, island.center, &a).unwrap();
+            let expected = match island.season {
+                "spring" => "Terrain/terrain_spring.png",
+                "summer" => "Terrain/terrain_summer.png",
+                "autumn" => "Terrain/terrain_autumn.png",
+                "winter" => "Terrain/terrain_winter.png",
+                other => panic!("unexpected island season {other}"),
+            };
+            assert_eq!(source.source_asset, expected);
+            assert!(a.contains_binding(&source));
+        }
     }
 
     #[test]
@@ -1920,7 +2296,7 @@ mod tests {
     }
 
     #[test]
-    fn summer_flatworld_cells_never_resolve_from_cliff_sheets() {
+    fn generated_ground_uses_seasonal_terrain_sheets_and_never_cliff_sheets() {
         let a = authority();
         let mut w = WorldDocument::new(73);
         w.materialize_3x3([0, 0], &a).unwrap();
@@ -1928,7 +2304,17 @@ mod tests {
             .chunks
             .iter()
             .flat_map(|chunk| &chunk.generated_cells)
-            .all(|cell| cell.source.source_asset == "Terrain/terrain_summer.png"));
+            .all(|cell| {
+                let expected = match cell.season.as_str() {
+                    "spring" => "Terrain/terrain_spring.png",
+                    "autumn" => "Terrain/terrain_autumn.png",
+                    "winter" => "Terrain/terrain_winter.png",
+                    "summer" | "ocean" => "Terrain/terrain_summer.png",
+                    _ => return false,
+                };
+                cell.source.source_asset == expected
+                    && !cell.source.source_asset.contains("/cliff_")
+            }));
 
         for (world, role) in [
             ([4, 4], "Grass"),

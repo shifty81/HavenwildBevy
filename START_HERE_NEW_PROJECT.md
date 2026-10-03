@@ -4,13 +4,13 @@
 
 
 
-## Current checkpoint — M2D082F1 / source 0.8.10
+## Current checkpoint — M2D090A / source 0.9.1
 
-Generated World is the primary user-facing map. Source 0.8.10 is a gate-only regression repair over the 0.8.9 terrain/world behavior: diagonal land connectivity now accepts the deterministic Grass fill variant selected for that seed/vertex instead of requiring one hard-coded atlas cell.
+0.9.1 is a certification-only repair: the Generated World behavior remains the M2D090 0.9.0 kitchen-sink implementation, but the stale Rust test now accepts the intended seasonal `terrain_*` ground sheets while still rejecting `cliff_*` sheets as cell-ground authority.
 
-Generated World is the primary user-facing map. The Summer source-backed semantic palette now includes Grass, Dirt/MudBank, Sand, Wet Sand, Shallow Water, Deep Water and Pebble Path. Coast generation uses Deep → Shallow → Wet Sand → Sand → inland land, while interior rivers/lakes receive dirt banks. Ambiguous diagonal water contacts connect land; a real cardinal water channel remains open. Historical quadrant composites are evidence-only in the live world renderer. Terrain material selection lives in World Generator / World Authoring instead of the permanent left rail.
+Generated World is the primary user-facing map. Source 0.9.0 regenerates the old sparse cache as the four-season kitchen-sink showcase: exact seasonal terrain/tree/plant/wildflower/cliff source substitution, 0/+1/+2 elevation intent, hamlet/town anchors, roads and cave spurs, source-exact houses/clutter/lighting, bridges, waterfalls, cliff/cave showcase features and dense biome-aware nature population. The full 320-image ElizaWy lane remains discoverable; automatic placement is context/tag gated and generated artwork is forbidden.
 
-The old River/Summer scene is regression evidence only. Continue development on Generated World. Run PCC Full Gate after every patch/overwrite and publish only the certified source.
+Run PCC Full Gate after applying this source. Then launch Studio and inspect Generated World; use screenshots to drive the next cliff/shoreline/population corrections instead of editing the immutable ElizaWy PNGs.
 
 ## Goal
 
@@ -28,7 +28,7 @@ Develop the Havenwild Bevy game/editor lane as an independent project with its o
 ForgePY accepts an existing project containing `assets/elizawy`, an extracted `Terrain/Structure/Objects/FX` source tree, or source pack ZIP staging. It validates known source identities before copying anything into the local project.
 
 
-## Current checkpoint — M2D07Q canonical template-region repair / source 0.7.2
+## Historical checkpoint — M2D07Q canonical template-region repair / source 0.7.2
 
 After hydrating the existing ElizaWy assets and passing PCC Full Gate, open Studio and use **HW → World Generator** to materialize a deterministic 3×3 working region. The generator composes only exact canonical ElizaWy regions/templates; it never creates artwork. World edits are saved to the workstation-local `.forgepy/world/havenwild_world.local.json`, while original PNGs remain immutable. Use Collision / Elevation for the red 32×32 pixel mask layer. Regeneration preserves authored corrections and placement tombstones. World PIE is intentionally pending; use the Summer Scene for the existing PIE path.
 

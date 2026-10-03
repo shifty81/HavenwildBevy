@@ -1919,6 +1919,8 @@ def audit_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d082d_dual_grid_alignment_selftest.py")], label="m2d082d-dual-grid-alignment-selftest", debug_on_fail=False)),
         ("M2D082F land-connectivity + extended Summer materials", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
+        ("M2D090 ElizaWy kitchen-sink Generated World", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d090_kitchen_sink_world_selftest.py")], label="m2d090-kitchen-sink-world-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="audit-terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="audit-terrain-resolver", debug_on_fail=False)),
@@ -2082,6 +2084,8 @@ def full_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d082d_dual_grid_alignment_selftest.py")], label="m2d082d-dual-grid-alignment-selftest", debug_on_fail=False)),
         ("M2D082F land-connectivity + extended Summer materials", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
+        ("M2D090 ElizaWy kitchen-sink Generated World", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d090_kitchen_sink_world_selftest.py")], label="m2d090-kitchen-sink-world-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="terrain-resolver", debug_on_fail=False)),

@@ -34,12 +34,17 @@ def build() -> dict:
     if image.get("imageSizePx") != [512, 448]:
         raise ValueError(f"unexpected Summer cliff atlas size: {image.get('imageSizePx')}")
 
+    # The unified runtime lane may also contain larger reviewed cliff source
+    # sections (for example M2D090 cave/showcase templates).  This inventory is
+    # specifically the 32x32 semantic-classification grid, so keep those larger
+    # exact regions in the unified authority without counting them as cells.
     regions = [
         row for row in runtime.get("canonicalRuntimeRegions", [])
         if row.get("sourcePath") == ATLAS
+        and (row.get("sourceRectPx") or [0, 0, 0, 0])[2:] == [32, 32]
     ]
     if len(regions) != 205:
-        raise ValueError(f"expected 205 canonical Summer cliff cells, got {len(regions)}")
+        raise ValueError(f"expected 205 canonical Summer cliff 32x32 cells, got {len(regions)}")
 
     by_grid: dict[tuple[int, int], dict] = {}
     for row in regions:

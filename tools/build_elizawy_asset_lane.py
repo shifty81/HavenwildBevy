@@ -23,6 +23,47 @@ def region_key(path: str, rect) -> str:
     return "hw.elizawy.region." + hashlib.sha256(raw).hexdigest()[:24]
 
 
+def seasonal_variants(path: str) -> dict[str, str]:
+    """Coordinate-equivalent seasonal sheets manually reviewed for M2D090.
+
+    The Spring/Summer/Autumn/Winter terrain, tree, plant, wildflower and cliff
+    sheets use the same canvas size and source layout. We still register every
+    exact counterpart region in the canonical lane so runtime substitution
+    remains source-addressed and fail-closed instead of assuming arbitrary files.
+    """
+    families = {
+        "Terrain/terrain_summer.png": "Terrain/terrain_{season}.png",
+        "Terrain/trees_summer.png": "Terrain/trees_{season}.png",
+        "Terrain/plants_summer.png": "Terrain/plants_{season}.png",
+        "Terrain/wildflowers_summer.png": "Terrain/wildflowers_{season}.png",
+        "Terrain/cliff_summer.png": "Terrain/cliff_{season}.png",
+    }
+    pattern = families.get(path)
+    if not pattern:
+        return {}
+    return {season: pattern.format(season=season) for season in ("spring", "autumn", "winter")}
+
+
+def infer_worldgen_tags(label: str, parts: list[dict]) -> list[str]:
+    text = (label + " " + " ".join(part["sourcePath"] for part in parts)).lower()
+    tags: set[str] = set()
+    for token, tag in [
+        ("tree", "tree"), ("rock", "rock"), ("stone", "rock"),
+        ("shrub", "shrub"), ("foliage", "foliage"),
+        ("wildflower", "wildflower"), ("lily", "water_detail"),
+        ("water-edge", "water_edge"), ("house", "house"),
+    ]:
+        if token in text:
+            tags.add(tag)
+    if any(tag in tags for tag in ("tree", "rock", "shrub", "foliage", "wildflower")):
+        tags.add("nature")
+    if "house" in tags:
+        tags.update(("settlement", "large_structure"))
+    if all(part["sourceRectPx"][2:] == [32, 32] for part in parts):
+        tags.add("detail")
+    return sorted(tags)
+
+
 def build(root: pathlib.Path) -> dict:
     manifest_path = root / "content/catalog/core_source_manifest.json"
     historical_path = root / "content/mapping/recovered/region_candidates.v1.json"
@@ -30,6 +71,7 @@ def build(root: pathlib.Path) -> dict:
     scene_path = root / "content/scenes/elizawy_mapping_certification.scene.json"
     seed_path = root / "content/scenes/summer_world.visual_seed.v1.json"
     summer_map_path = root / "content/terrain/recovered/native/lpc_terrain_summer_complete_map_32.native.v1.json"
+    showcase_path = root / "content/worldgen/elizawy_showcase_templates.v1.json"
 
     manifest_raw = manifest_path.read_bytes()
     historical_raw = historical_path.read_bytes()
@@ -37,6 +79,7 @@ def build(root: pathlib.Path) -> dict:
     scene_raw = scene_path.read_bytes()
     seed_raw = seed_path.read_bytes()
     summer_map_raw = summer_map_path.read_bytes()
+    showcase_raw = showcase_path.read_bytes()
 
     manifest = json.loads(manifest_raw)
     historical = json.loads(historical_raw)
@@ -44,6 +87,7 @@ def build(root: pathlib.Path) -> dict:
     scene = json.loads(scene_raw)
     seed = json.loads(seed_raw)
     summer_map = json.loads(summer_map_raw)
+    showcase = json.loads(showcase_raw)
 
     if manifest.get("schema") != "havenwild.bevy.asset_manifest.v1":
         raise SystemExit("unexpected core source manifest schema")
@@ -59,6 +103,8 @@ def build(root: pathlib.Path) -> dict:
         raise SystemExit("unexpected Native Summer complete-map schema")
     if summer_map.get("summary", {}).get("mappedNonTransparentCells") != 305:
         raise SystemExit("Native Summer complete map no longer proves 305/305 source cells")
+    if showcase.get("schema") != "havenwild.worldgen.elizawy_showcase_templates.v1" or showcase.get("version") != 1:
+        raise SystemExit("unexpected showcase template schema/version")
 
     images = []
     runtime_paths: set[str] = set()
@@ -78,6 +124,7 @@ def build(root: pathlib.Path) -> dict:
             "sourceBytesPolicy": "immutable_hydrated_elizawy",
         })
     images.sort(key=lambda x: x["sourcePath"])
+    manifest_by_path = {entry["path"]: entry for entry in manifest["entries"] if entry["path"].endswith(".png")}
 
     historical_sources = {}
     runtime_regions = defaultdict(lambda: {
@@ -157,6 +204,48 @@ def build(root: pathlib.Path) -> dict:
                 raise SystemExit(f"seed object references source outside canonical runtime lane: {path}")
             runtime_regions[(path, rect)]["objectTemplateUses"] += 1
 
+    # M2D090 adds a small, explicitly reviewed set of complete source sprites /
+    # source sections for the Generated World showcase. These are source-address
+    # declarations only; no PNG bytes are copied or modified.
+    for template in showcase["templates"]:
+        for part in template["parts"]:
+            path = part["sourcePath"]
+            rect = tuple(part["sourceRectPx"])
+            entry = manifest_by_path.get(path)
+            if entry is None:
+                raise SystemExit(f"showcase template source absent from manifest: {path}")
+            width, height = entry["imageSizePx"]
+            x, y, w, h = rect
+            if min(x, y, w, h) < 0 or w <= 0 or h <= 0 or x + w > width or y + h > height:
+                raise SystemExit(f"showcase template source rectangle out of bounds: {path} {rect}")
+            rec = runtime_regions[(path, rect)]
+            rec["objectTemplateUses"] += 1
+            rec["familyHints"].add("m2d090_showcase_review")
+            rec["matchStates"].add("manual_source_region_review")
+
+    # Register coordinate-equivalent seasonal counterparts for every canonical
+    # Summer region currently in the runtime lane. This is what lets the renderer
+    # use actual Spring/Autumn/Winter source pixels without inventing art or
+    # silently treating arbitrary sheets as interchangeable.
+    seasonal_seed = list(runtime_regions.items())
+    for (path, rect), rec in seasonal_seed:
+        variants = seasonal_variants(path)
+        if not variants:
+            continue
+        for season, counterpart in variants.items():
+            entry = manifest_by_path.get(counterpart)
+            if entry is None:
+                raise SystemExit(f"seasonal counterpart missing from manifest: {counterpart}")
+            width, height = entry["imageSizePx"]
+            x, y, w, h = rect
+            if x + w > width or y + h > height:
+                raise SystemExit(f"seasonal counterpart rectangle out of bounds: {counterpart} {rect}")
+            target = runtime_regions[(counterpart, rect)]
+            target["familyHints"].update(rec["familyHints"] | {"m2d090_coordinate_equivalent_seasonal_layout"})
+            target["seasons"].add(season)
+            target["matchStates"].add("manual_coordinate_equivalence")
+            target["objectTemplateUses"] += rec["objectTemplateUses"]
+
     runtime_region_rows = []
     for (path, rect), rec in sorted(runtime_regions.items()):
         runtime_region_rows.append({
@@ -209,8 +298,38 @@ def build(root: pathlib.Path) -> dict:
             "authority": "source_exact_visual_study",
             "worldgenEligible": True,
             "defaultCollision": "unassigned_use_asset_or_world_override",
+            "worldgenTags": infer_worldgen_tags(obj["label"], parts),
         })
         row["observedInstances"] += 1
+
+    for obj in showcase["templates"]:
+        parts = []
+        for part in obj["parts"]:
+            path = part["sourcePath"]
+            rect = part["sourceRectPx"]
+            parts.append({
+                "offsetPx": part["offsetPx"],
+                "canonicalRegionId": region_key(path, rect),
+                "sourcePath": path,
+                "sourceRectPx": rect,
+            })
+        signature = json.dumps([obj["key"], obj["label"], obj["layer"], obj["footprintCells"], parts], sort_keys=True)
+        template_id = "hw.elizawy.showcase." + hashlib.sha256(signature.encode()).hexdigest()[:20]
+        if template_id in templates:
+            raise SystemExit(f"duplicate showcase template identity: {obj['key']}")
+        templates[template_id] = {
+            "templateId": template_id,
+            "label": obj["label"],
+            "layer": obj["layer"],
+            "footprintCells": obj["footprintCells"],
+            "parts": parts,
+            "observedInstances": 1,
+            "source": str(showcase_path.relative_to(root)).replace('\\','/'),
+            "authority": "manual_source_region_review",
+            "worldgenEligible": True,
+            "defaultCollision": "unassigned_use_asset_or_world_override",
+            "worldgenTags": sorted(set(obj.get("worldgenTags", []))),
+        }
 
     fixture_role_palette = defaultdict(list)
     for row in runtime_region_rows:
@@ -272,6 +391,7 @@ def build(root: pathlib.Path) -> dict:
             "summerFixture": {"path": str(scene_path.relative_to(root)).replace('\\','/'), "sha256": sha256_bytes(scene_raw)},
             "summerObjectSeed": {"path": str(seed_path.relative_to(root)).replace('\\','/'), "sha256": sha256_bytes(seed_raw)},
             "nativeSummerCompleteMap": {"path": str(summer_map_path.relative_to(root)).replace('\\','/'), "sha256": sha256_bytes(summer_map_raw)},
+            "showcaseTemplates": {"path": str(showcase_path.relative_to(root)).replace('\\','/'), "sha256": sha256_bytes(showcase_raw)},
         },
         "counts": {
             "runtimeSourceImages": len(images),

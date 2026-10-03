@@ -88,7 +88,7 @@ def main() -> int:
     world_text = WORLD.read_text(encoding="utf-8")
     authority_text = AUTHORITY.read_text(encoding="utf-8")
     pcc_text = PCC.read_text(encoding="utf-8")
-    check(re.search(r"Havenwild — Bevy Studio v0\.8\.\d+", main_text) is not None, "Studio 0.8.x version marker missing")
+    check(re.search(r"Havenwild — Bevy Studio v0\.\d+\.\d+", main_text) is not None, "Studio 0.x version marker missing")
     check("World Properties" in main_text and "Paint on canvas" in main_text, "friendly world-properties collision workflow missing")
     check("TraversalMode::Wadeable" in main_text and "TraversalMode::Swimmable" in main_text, "traversal workflow incomplete")
     check("clamp(0.125, 16.0)" in main_text, "16x world zoom missing")

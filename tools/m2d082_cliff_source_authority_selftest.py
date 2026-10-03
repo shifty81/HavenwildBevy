@@ -34,6 +34,7 @@ def main() -> int:
     runtime_ids = {
         row["canonicalRegionId"] for row in runtime.get("canonicalRuntimeRegions", [])
         if row.get("sourcePath") == "Terrain/cliff_summer.png"
+        and (row.get("sourceRectPx") or [0, 0, 0, 0])[2:] == [32, 32]
     }
     require(len(runtime_ids) == 205, "runtime authority does not contain 205 cliff regions")
     require(all(cell.get("canonicalRegionId") in runtime_ids for cell in cells), "cliff inventory escaped canonical runtime source authority")

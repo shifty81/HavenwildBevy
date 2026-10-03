@@ -1,7 +1,7 @@
 {
   "schema": "havenwild.worldgen.intent.v1",
-  "profileId": "havenwild.four_season_archipelago.v1",
-  "status": "generated_world_material_expansion_active",
+  "profileId": "havenwild.four_season_archipelago.v2",
+  "status": "m2d090_kitchen_sink_population_active",
   "authoritativeSurface": "Generated World",
   "legacyRiverScene": {
     "userFacing": false,
@@ -17,7 +17,7 @@
       "autumn",
       "winter"
     ],
-    "seasonVisualPolicy": "logical identity now; seasonal source-art substitution only after exact source mappings are certified",
+    "seasonVisualPolicy": "coordinate-equivalent Spring/Summer/Autumn/Winter terrain, tree, plant, wildflower and cliff source regions are exact-source runtime substitutions; non-equivalent families remain evidence-gated",
     "interiorHydrology": [
       "meandering_river",
       "pond_or_lake"
@@ -28,6 +28,9 @@
       "meadow",
       "light_woodland",
       "dense_forest",
+      "rocky_upland",
+      "settlement",
+      "road_corridor",
       "river_or_lake"
     ],
     "activeTerrainMaterials": [
@@ -67,7 +70,8 @@
       "farmland_or_resource_context_when_applicable",
       "terrain_support_and_entrance_validation"
     ],
-    "cityGoal": "purposeful authored-feeling settlements rather than repeated random house stamps"
+    "cityGoal": "purposeful authored-feeling settlements rather than repeated random house stamps",
+    "currentPrototype": "two deterministic purpose anchors per major island (hamlet + town) with source-exact houses, storage clutter and outdoor lighting"
   },
   "roads": {
     "authority": "connectivity_graph_before_geometry",
@@ -88,7 +92,7 @@
       "bridge_or_ford_water",
       "route_around_or_connect_cliffs"
     ],
-    "currentPrototype": "deterministic meandering pebble-path spine per major island; settlement/POI graph routing remains the next expansion"
+    "currentPrototype": "deterministic meandering island spine plus town-to-cave spur; source-exact bridge placed at the river crossing"
   },
   "caves": {
     "persistentEntrance": true,
@@ -107,13 +111,16 @@
     "resetExclusions": [
       "explicit_persistent_spaces",
       "player_owned_or_authored_persistent_state"
-    ]
+    ],
+    "overworldPrototype": "persistent source-exact cliff/cave entrance feature per major island at a road-connected cliff approach; weekly-reset interior generation remains the next cave-runtime stage"
   },
   "sourceArt": {
     "provider": "ElizaWy/LPC",
     "generatedArtwork": false,
-    "currentCertifiedGroundAuthority": "Terrain/terrain_summer.png v7 extended semantic-material authority",
-    "broaderLaneGoal": "classify and contextually expose the entire hydrated ElizaWy lane without forcing unrelated assets into one scene"
+    "currentCertifiedGroundAuthority": "Terrain/terrain_summer.png v7 semantic-material authority with exact coordinate-equivalent seasonal terrain substitutions registered in the unified lane",
+    "broaderLaneGoal": "all 320 hydrated ElizaWy PNG sheets remain discoverable; M2D090 promotes reviewed seasonal/purpose/nature families into visible Generated World placements without random asset dumping",
+    "runtimeExactRegions": 2890,
+    "worldgenTemplates": 28
   },
   "validation": {
     "requiredFutureChecks": [
@@ -125,7 +132,10 @@
       "cave_entrance_reachability",
       "complete_drainage",
       "shoreline_topology",
-      "critical_resource_progression"
+      "critical_resource_progression",
+      "seasonal_source_identity",
+      "purpose_object_source_identity",
+      "elevation_metadata_bounds"
     ]
   },
   "coordinateAuthority": {
@@ -140,5 +150,44 @@
     "directTile": "semantic_cell_exact_32x32",
     "cursor": "semantic_cell_rect",
     "rule": "cursor_cell_to_semantic_cell_to_dual_grid_vertices_to_source_parts"
+  },
+  "elevation": {
+    "active": true,
+    "range": [
+      0,
+      30
+    ],
+    "prototypeLevels": [
+      0,
+      1,
+      2
+    ],
+    "intent": "north terrace + inner ridge per island; generated cell elevation is authoritative metadata and cave/waterfall anchors are aligned to terrace transitions",
+    "cliffVisualPolicy": "source-exact seasonal cliff feature placements active at cave approaches; continuous contour cliff tiling remains screenshot-driven classification work rather than guessed atlas roles"
+  },
+  "waterfalls": {
+    "active": true,
+    "placement": "one deterministic source-exact front waterfall feature per major island where the river crosses the +1 terrace drop",
+    "animation": "static reviewed source frame for this pass; ordered animation semantics remain source-evidence-gated"
+  },
+  "population": {
+    "active": true,
+    "sourceTemplates": 28,
+    "families": [
+      "seasonal_trees",
+      "shrubs",
+      "foliage",
+      "wildflowers",
+      "rocks",
+      "water_details",
+      "water_edge_plants",
+      "houses",
+      "settlement_clutter",
+      "outdoor_lighting",
+      "bridges",
+      "waterfalls",
+      "cliff_cave_features"
+    ],
+    "rule": "purpose-first special placements plus deterministic biome-aware scatter; generated art remains forbidden"
   }
 }

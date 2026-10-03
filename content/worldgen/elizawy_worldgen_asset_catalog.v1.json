@@ -10,9 +10,9 @@
       "terrain_or_nature": 29
     },
     "states": {
-      "certified_template_source_available": 5,
+      "certified_template_source_available": 13,
       "certified_terrain_authority": 1,
-      "source_available_requires_context_mapping": 314
+      "source_available_requires_context_mapping": 306
     }
   },
   "assets": [
@@ -111,9 +111,9 @@
         "prop",
         "storage"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Objects/Furniture/Beds/Beds, Child Headboards.png",
@@ -521,9 +521,9 @@
         "prop",
         "storage"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Objects/Furniture/Desk, Office.png",
@@ -691,9 +691,9 @@
         "interior",
         "prop"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Objects/Furniture/Mirror, Standing.png",
@@ -3210,9 +3210,9 @@
         "bridge",
         "settlement"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Structure/Doors/32x48px Doors/12 Panel Door A.png",
@@ -4111,9 +4111,9 @@
       "contextTags": [
         "settlement"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Structure/Structures/Brick House B.png",
@@ -4141,9 +4141,9 @@
       "contextTags": [
         "settlement"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Structure/Wall Borders/Decorative Border A.png",
@@ -4736,9 +4736,9 @@
         "elevation",
         "summer"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Terrain/cliff_winter.png",
@@ -5097,9 +5097,9 @@
         "water",
         "waterfall"
       ],
-      "worldgenState": "source_available_requires_context_mapping",
+      "worldgenState": "certified_template_source_available",
       "generatedArtwork": false,
-      "autoPlacementPolicy": "disabled_until_mapped"
+      "autoPlacementPolicy": "allowed_through_existing_authority_only"
     },
     {
       "sourcePath": "Terrain/wildflowers_autumn.png",

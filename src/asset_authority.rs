@@ -195,6 +195,8 @@ pub struct ObjectTemplate {
     pub authority: String,
     pub worldgen_eligible: bool,
     pub default_collision: String,
+    #[serde(default)]
+    pub worldgen_tags: Vec<String>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -750,6 +752,87 @@ impl AssetAuthority {
     pub fn locally_certified_object_template_count(&self) -> usize {
         self.locally_certified_object_templates.len()
     }
+    pub fn object_template_has_tag(&self, template: &ObjectTemplate, tag: &str) -> bool {
+        template
+            .worldgen_tags
+            .iter()
+            .any(|candidate| candidate == tag)
+    }
+    pub fn worldgen_safe_object_template(&self, template_id: &str) -> bool {
+        let Some(template) = self
+            .object_templates
+            .iter()
+            .find(|template| template.template_id == template_id)
+        else {
+            return false;
+        };
+        if !template.worldgen_eligible
+            || !template.parts.iter().all(|part| {
+                self.contains_binding(&SourceBinding {
+                    source_asset: part.source_path.clone(),
+                    source_rect: part.source_rect_px,
+                })
+            })
+        {
+            return false;
+        }
+        if template.footprint_cells == [1, 1]
+            && template
+                .parts
+                .iter()
+                .all(|part| part.source_rect_px[2] <= 32 && part.source_rect_px[3] <= 128)
+        {
+            return true;
+        }
+        self.locally_certified_object_template(template_id)
+            || template.authority == "manual_source_region_review"
+            || template
+                .worldgen_tags
+                .iter()
+                .any(|tag| matches!(tag.as_str(), "tree" | "rock" | "foliage" | "house"))
+    }
+    pub fn templates_with_tag<'a>(
+        &'a self,
+        tag: &'a str,
+    ) -> impl Iterator<Item = &'a ObjectTemplate> {
+        self.object_templates.iter().filter(move |template| {
+            template.worldgen_eligible
+                && self.worldgen_safe_object_template(&template.template_id)
+                && self.object_template_has_tag(template, tag)
+        })
+    }
+    pub fn seasonalize_binding(&self, source: &SourceBinding, season: &str) -> SourceBinding {
+        let target_path = match (source.source_asset.as_str(), season) {
+            ("Terrain/terrain_summer.png", "spring") => Some("Terrain/terrain_spring.png"),
+            ("Terrain/terrain_summer.png", "autumn") => Some("Terrain/terrain_autumn.png"),
+            ("Terrain/terrain_summer.png", "winter") => Some("Terrain/terrain_winter.png"),
+            ("Terrain/trees_summer.png", "spring") => Some("Terrain/trees_spring.png"),
+            ("Terrain/trees_summer.png", "autumn") => Some("Terrain/trees_autumn.png"),
+            ("Terrain/trees_summer.png", "winter") => Some("Terrain/trees_winter.png"),
+            ("Terrain/plants_summer.png", "spring") => Some("Terrain/plants_spring.png"),
+            ("Terrain/plants_summer.png", "autumn") => Some("Terrain/plants_autumn.png"),
+            ("Terrain/plants_summer.png", "winter") => Some("Terrain/plants_winter.png"),
+            ("Terrain/wildflowers_summer.png", "spring") => Some("Terrain/wildflowers_spring.png"),
+            ("Terrain/wildflowers_summer.png", "autumn") => Some("Terrain/wildflowers_autumn.png"),
+            ("Terrain/wildflowers_summer.png", "winter") => Some("Terrain/wildflowers_winter.png"),
+            ("Terrain/cliff_summer.png", "spring") => Some("Terrain/cliff_spring.png"),
+            ("Terrain/cliff_summer.png", "autumn") => Some("Terrain/cliff_autumn.png"),
+            ("Terrain/cliff_summer.png", "winter") => Some("Terrain/cliff_winter.png"),
+            _ => None,
+        };
+        let Some(path) = target_path else {
+            return source.clone();
+        };
+        let candidate = SourceBinding {
+            source_asset: path.to_owned(),
+            source_rect: source.source_rect,
+        };
+        if self.contains_binding(&candidate) {
+            candidate
+        } else {
+            source.clone()
+        }
+    }
     pub fn unique_fixture_role(&self, source: &SourceBinding) -> Option<&str> {
         let region = self.canonical_region(source)?;
         (region.fixture_role_evidence.len() == 1)
@@ -963,7 +1046,7 @@ mod tests {
         .unwrap();
         assert_eq!(authority.counts.runtime_source_images, 320);
         assert_eq!(authority.counts.historical_source_regions, 1781);
-        assert_eq!(authority.counts.canonical_runtime_regions, 2316);
+        assert_eq!(authority.counts.canonical_runtime_regions, 2890);
         assert_eq!(authority.counts.fixture_role_regions, 64);
         assert_eq!(authority.lane_sha256.len(), 64);
         assert!(!authority.policy.generated_artwork_allowed);
@@ -1109,5 +1192,37 @@ mod tests {
             .unwrap();
         assert_eq!(base.source_path, "Terrain/terrain_summer.png");
         assert_eq!(base.source_rect_px, [384, 512, 32, 32]);
+    }
+    #[test]
+    fn seasonal_coordinate_equivalence_is_source_backed() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"));
+        let catalog =
+            SourceCatalog::load(&root.join("content/catalog/core_source_manifest.json")).unwrap();
+        let authority = AssetAuthority::load(
+            &root.join("content/assets/authority/elizawy_runtime_index.v1.json"),
+            &catalog,
+        )
+        .unwrap();
+        let summer = authority
+            .summer_flatworld_fill("Grass")
+            .expect("Summer Grass source exists")
+            .binding();
+        let autumn = authority.seasonalize_binding(&summer, "autumn");
+        assert_eq!(autumn.source_asset, "Terrain/terrain_autumn.png");
+        assert_eq!(autumn.source_rect, summer.source_rect);
+        assert!(authority.contains_binding(&autumn));
+        let winter_tree = authority
+            .object_templates
+            .iter()
+            .find(|template| template.worldgen_tags.iter().any(|tag| tag == "tree"))
+            .and_then(|template| template.parts.first())
+            .map(|part| SourceBinding {
+                source_asset: part.source_path.clone(),
+                source_rect: part.source_rect_px,
+            })
+            .map(|binding| authority.seasonalize_binding(&binding, "winter"))
+            .expect("tree template exists");
+        assert_eq!(winter_tree.source_asset, "Terrain/trees_winter.png");
+        assert!(authority.contains_binding(&winter_tree));
     }
 }
