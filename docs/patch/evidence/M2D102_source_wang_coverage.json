@@ -1,0 +1,131 @@
+{
+  "schema": "havenwild.shoreline.authority.audit.v1",
+  "source": "assets/elizawy/_jaidyn_tiled/lpc-tileset-terrain-summer.tsx",
+  "non_destructive": true,
+  "coverage": {
+    "Grass / Shallow Water": {
+      "authored": 14,
+      "total": 16,
+      "missing_masks": [
+        "0110",
+        "1001"
+      ]
+    },
+    "Grass / Deep Water": {
+      "authored": 2,
+      "total": 16,
+      "missing_masks": [
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110"
+      ]
+    },
+    "Dirt / Shallow Water": {
+      "authored": 14,
+      "total": 16,
+      "missing_masks": [
+        "0110",
+        "1001"
+      ]
+    },
+    "Dirt / Deep Water": {
+      "authored": 2,
+      "total": 16,
+      "missing_masks": [
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110"
+      ]
+    },
+    "Sand / Shallow Water": {
+      "authored": 14,
+      "total": 16,
+      "missing_masks": [
+        "0110",
+        "1001"
+      ]
+    },
+    "Sand / Deep Water": {
+      "authored": 2,
+      "total": 16,
+      "missing_masks": [
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110"
+      ]
+    },
+    "Deep Sand / Shallow Water": {
+      "authored": 2,
+      "total": 16,
+      "missing_masks": [
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110"
+      ]
+    },
+    "Deep Sand / Deep Water": {
+      "authored": 2,
+      "total": 16,
+      "missing_masks": [
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110"
+      ]
+    }
+  }
+}

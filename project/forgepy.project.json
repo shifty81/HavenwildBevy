@@ -38,19 +38,19 @@
     "initialScene": "content/scenes/elizawy_mapping_certification.scene.json",
     "visualTestFixture": "content/scenes/summer_river.scene.json (regression fixture only; not the user-facing world)",
     "chunkOverlay": "editor overlay only, default 32x32; no neighboring chunk materialization yet",
-    "structuralEditing": "explicit SceneV2 structural cell transaction; provisional PIE override only",
+    "structuralEditing": "Local 32x32 collision remains available; reusable generated-terrain collision/traversal is now keyed by semantic role + cardinal topology rather than raw source rectangle. Legacy source profiles are retained in saved documents but no longer leak into generated terrain.",
     "editorShell": "permanent compact left tool rail + permanent compact layer rail; all feature-rich tool applications are floating/dock-over-canvas windows; docking never reserves/reflows the world canvas",
     "toolLauncher": "bottom-left Havenwild launcher expands right/up over canvas; Ctrl+Space; only real wired applications enabled; planned World Generator/Pixel/Animation entries remain disabled until implemented",
     "commandRegistry": "src/editor_commands.rs central labels/descriptions/shortcuts shared by rail/toolbar/tooltips; direct canvas tools Q/B/E/P; Save Ctrl+S; Undo/Redo Ctrl+Z/Ctrl+Y; PIE F6; Focus F11",
     "collisionEditing": "Source artwork stays immutable. Collision is Havenwild metadata with reusable exact-source profiles and optional local 32x32 per-cell pixel masks; direct click-drag painting on the World canvas supports 1/2/4/8px brushes and 16x cursor-anchored zoom.",
-    "collisionPrecedence": "Local world collision override > reusable exact-source behavior profile > semantic traversal default. Removing an override reveals the inherited profile/default; no ElizaWy PNG bytes are modified.",
+    "collisionPrecedence": "local authored cell override > generated bridge walkable deck > semantic terrain-topology profile > semantic terrain default",
     "assetAuthority": "One canonical ElizaWy lane under content/assets/authority; original source pixels immutable; runtime/world composition references exact canonical source regions; generated artwork forbidden.",
-    "worldComposition": "M2D090 Generated World: four-season source-exact archipelago with deep/shallow coast, wet/dry sand, roads, biome/elevation metadata, dense seasonal nature population, source-exact settlement houses/clutter/lighting, bridges, waterfalls and cliff-cave showcase features. Local .forgepy/world/havenwild_world.local.json remains editable authority; generator v3 forces the old sparse cache to regenerate while preserving authored cell/behavior overrides.",
-    "worldGenerator": "Generated World is the primary editor surface. Source 0.9.1 materializes the 5x5 four-season kitchen-sink showcase with purpose-first hamlet/town anchors, road/cave spurs, bridges, waterfall drops, elevation 0..2 and source-exact contextual population; old River/Summer scene remains regression evidence only.",
+    "worldComposition": "M2D092C unified Generated World compositor: canonical seven-layer ordering now drives discrete world placements, same-layer objects depth-sort by ground foot, full visual bounds drive culling, stable far-detail LOD replaces the one-frame foliage cutoff, and Ground can be toggled from the real World Layers panel. Shared M2D092A cliff topology remains preserved.",
+    "worldGenerator": "Generated World v11 invalidates prior generated source bindings. Every terrain zoom level renders the same cached dual-grid vertex topology; far/Fit World changes object/collision detail only and never switches to GeneratedCell.source or a cell-top-left terrain grid. Modular bridge planning remains source-backed and span-aware.",
     "worldPanels": "Generated World is the primary user-facing world surface. Existing specialist panels remain overlays pending the Editor Shell v2 workspace-bar/tab refactor; legacy River/Summer scene is regression-only.",
     "worldgenContract": "content/worldgen/havenwild_generated_world.v1.json",
     "worldgenAssetCatalog": "content/worldgen/elizawy_worldgen_asset_catalog.v1.json",
-    "worldgenAssetCoverage": "320/320 canonical ElizaWy PNG sheets discoverable; 2890 exact runtime source regions and 28 reviewed worldgen templates are active, with automatic placement still context/tag-gated rather than random."
+    "worldgenAssetCoverage": "320/320 canonical PNG images browsable; 2892 source regions on 30 images; 28 reviewed templates on 13 images. Materialized world runtime auto-hydrates image dependencies on revision changes; visual/semantic certification and full source-region coverage are separate audited states."
   },
   "sourceControl": {
     "provider": "github",
@@ -72,21 +72,21 @@
     "patchSchema": "havenwild.bevy.pcc.patch.v1",
     "failurePolicy": "child failures are captured; interactive host remains open; debug bundle auto-generated",
     "assetBoundary": "source-only; hydrated art is excluded from patches/packages/debug bundles",
-    "telemetry": "phased full gate with unique phase receipts, exact-version governed patch chaining, Windows-safe patch identity checks, post-apply hashes, Cargo-free Rust source/module/dependency audit, authored-scene source-rect validation, Summer mapping recovery validation, 16-mask semantic resolver-lab validation, full resolved semantic-to-recipe edge/corner + bit-orientation pipeline validation, early complete-manifest preflight + immediate full core-asset identity certification, Cargo.lock snapshot + --locked metadata verification, per-job heartbeat, active-job recovery, gate receipts, recent-log diagnostics; runtime-generation handshake prevents pre-update PCC processes from certifying post-update source; M2D082C Generated World intent/shoreline/tree regression gate; M2D082D semantic-cell/dual-grid vertex coordinate authority regression gate; M2D082F land-connectivity + extended Summer-material regression gate; M2D090 seasonal-source/purpose-population/elevation/worldgen showcase regression gate",
+    "telemetry": "phased full gate with unique phase receipts, exact-version governed patch chaining, Windows-safe patch identity checks, post-apply hashes, Cargo-free Rust source/module/dependency audit, authored-scene source-rect validation, Summer mapping recovery validation, 16-mask semantic resolver-lab validation, full resolved semantic-to-recipe edge/corner + bit-orientation pipeline validation, early complete-manifest preflight + immediate full core-asset identity certification, Cargo.lock snapshot + --locked metadata verification, per-job heartbeat, active-job recovery, gate receipts, recent-log diagnostics; runtime-generation handshake prevents pre-update PCC processes from certifying post-update source; M2D082C Generated World intent/shoreline/tree regression gate; M2D082D semantic-cell/dual-grid vertex coordinate authority regression gate; M2D082F land-connectivity + extended Summer-material regression gate; M2D090 seasonal-source/purpose-population/elevation/worldgen showcase regression gate; M2D091 screenshot-driven visual-authority/island-differentiation regression gate",
     "gitPublish": "Full Gate records both Git state and a Git-history-independent publishable-source fingerprint. Primary option 2 can bootstrap Git or attach the canonical shifty81/HavenwildBevy origin after certification without invalidating the gate when source bytes are unchanged. Existing unrelated remote history is adopted with git reset --mixed so current source files are preserved, then certified changes are committed onto origin/main. Machine-readable Git filename queries keep stderr separate so Windows core.autocrlf warnings cannot become staged path names. Fetch/ahead-behind checks still fail closed on behind/diverged branches, forbidden local payloads, or post-gate source edits.",
     "mainWorkflow": "1 Full Quality Gate / certify current source; 2 Commit + Push certified source to canonical GitHub; 3 Patch scan/review/apply. Patch intake is manifest-first for root ZIPs and updates/inbox; manual extract/overwrite remains supported when followed by Full Gate."
   },
   "terrain": {
     "contract": "content/terrain/dual_grid_contract.v1.json",
     "initialRecipeFamily": "content/terrain/recipes/summer_grass_void.v1.json",
-    "status": "M2D090 kitchen-sink Generated World: the 81/81 Grass/Dirt/Water baseline and land-connectivity-first shoreline remain preserved; Sand/WetSand/DeepWater/PebblePath remain source-backed semantic materials. Exact coordinate-equivalent seasonal terrain/cliff source regions are registered; generated elevation 0..2, source-exact cave/cliff showcase features and static source-exact waterfalls are active while continuous contour cliff-role classification remains screenshot-driven.",
+    "status": "M2D097B water scrutiny: explicit Ocean/Coast/River/PondLake ecology context; lily pads prohibited from ocean/coast; pond/lake bank dirt reduced; mixed water-boundary TSX animations synchronized and slowed by water context; reviewed Barrel.png uses the full 32x64 sprite.",
     "fixtureCoverage": "16/16 topology masks covered by checked-in fixtures and the immutable semantic resolver seed; editor experiments persist separately under .forgepy",
     "mapper": "Normal authoring is semantic/canvas-first. World Generator / World Authoring exposes Grass, Dirt, Sand, Wet Sand, Shallow Water, Deep Water and Pebble Path. Terrain Rules retains the 305/305 Summer source inventory and 81/81 core G/D/W evidence grammar; live rendering uses complete authored tiles only for mixed states and keeps historical quadrant composites as evidence, not live output.",
     "summerRecovery": "content/terrain/recovery/summer_source_cells.v1.json",
     "historicalAuthority": "content/terrain/recovery/historical_authority.v1.json",
     "legacyRecoveryTool": "tools/recover_legacy_mapping.py",
     "confidencePolicy": "certified/reviewed/source_mapped/candidate/ambiguous/unsupported/unmapped; historical evidence never auto-promotes to certification",
-    "resolver": "One shared source-driven Summer resolver in AssetAuthority/WorldDocument drives generator, authored world paint and runtime preview. Ambiguous diagonal water contacts close to land unless a cardinal water path exists; mixed land materials project to one local source-backed land material and neighboring vertices carry the material hand-off. Live rendering never splices historical 16x16 quadrant composites. RiverWater remains static until explicit animation evidence exists.",
+    "resolver": "M2D097A Tiled/native-Wang renderer remains authoritative for core terrain. M2D097B adds water-context presentation/ecology intent without changing original-pixel authority or promoting WetSand/PebblePath.",
     "semanticLabSeed": "content/terrain/previews/dg01_grass_void.semantic_lab.v1.json",
     "semanticLabLocal": ".forgepy/semantic_lab.local.json",
     "runtimeResolver": "src/terrain_resolver.rs",
@@ -95,7 +95,11 @@
     "consolidationPolicy": "historical source/address only; no auto semantic promotion or recipe certification",
     "nativeDonorReview": "content/terrain/recovered/native/native_summer_authority_review.v1.json",
     "nativeCompleteMap": "content/terrain/recovered/native/lpc_terrain_summer_complete_map_32.native.v1.json",
-    "nativeTopology": "content/terrain/recovered/native/lpc_seasonal_terrain_topology.native.v1.json"
+    "nativeTopology": "content/terrain/recovered/native/lpc_seasonal_terrain_topology.native.v1.json",
+    "tiledAuthority": "src/tiled_terrain.rs (rs-tiled 0.16; Jaidyn configured TSX semantics/topology; no guessed atlas promotion)",
+    "nativeWangSolver": "src/tiled_terrain/native_wang.rs (project-native sparse Corner resolver; no bevy_map_autotile / no second Bevy stack)",
+    "tiledPromotion": "M2D097B / source 0.10.19 retains the exact Tiled/native-Wang visible cutover, removes the chase-light per-cell phase gradient, restricts terrain animation to mixed water-boundary Wang tiles while homogeneous water fills stay static, slows coast/river/pond cycles by 4x/5x/7x, persists waterContext on generated cells, and advances Generated World to v12 for ecology/prop rematerialization.",
+    "waterContext": "src/worldgen_plan.rs::WaterContext = None/Ocean/Coast/River/PondLake; generated cells persist the semantic; ecology rules consume it directly instead of overloading RiverWater."
   },
-  "sourceVersion": "0.9.1"
+  "sourceVersion": "0.10.44"
 }

@@ -168,6 +168,19 @@ def open_session() -> None:
     global _SESSION_PATH, _SESSION_HANDLE
     ensure_dirs()
     prune_state()
+    if (_numeric_version(installed_patch_state().get("source")) or (0,)) >= (0, 10, 36):
+        for source_root in ("legacy", "rust", "tools/rust", "content/architecture", "docs/architecture", "docs/audits", "LICENSES"):
+            candidate = ROOT / source_root
+            if candidate.is_dir():
+                for folder in sorted((p for p in candidate.rglob("*") if p.is_dir()), key=lambda p: len(p.parts), reverse=True):
+                    try:
+                        folder.rmdir()
+                    except OSError:
+                        pass
+                try:
+                    candidate.rmdir()
+                except OSError:
+                    pass
     _SESSION_PATH = LOG_ROOT / f"{now_id()}_pcc-session.log"
     _SESSION_HANDLE = _SESSION_PATH.open("a", encoding="utf-8", errors="replace")
     pcc_print(f"HAVENWILD BEVY PCC v{PCC_VERSION}")
@@ -554,8 +567,14 @@ def project_repository_url() -> str:
     return "https://github.com/shifty81/HavenwildBevy.git"
 
 
-def git_worktree_state() -> dict:
-    """Return Git state plus the source-byte fingerprint Full Gate certifies."""
+def git_worktree_state(*, progress=None) -> dict:
+    """Return Git state plus the source-byte fingerprint Full Gate certifies.
+
+    A progress callback is accepted only for interactive publish verification;
+    the Full Gate uses exactly the same source/Git checks without extra output.
+    """
+    if progress is not None:
+        progress("Hashing publishable source (local assets and builds excluded)...")
     source_fingerprint, source_paths = source_snapshot_fingerprint()
     state = {
         "available": False,
@@ -570,6 +589,8 @@ def git_worktree_state() -> dict:
     }
     if not shutil.which("git"):
         return state
+    if progress is not None:
+        progress("Checking Git branch and remote...")
     rc, inside = capture(["git", "rev-parse", "--is-inside-work-tree"])
     if rc or inside.lower() != "true":
         state["available"] = True
@@ -583,8 +604,12 @@ def git_worktree_state() -> dict:
     state["head"] = head or None
     state["origin"] = origin if remote_rc == 0 and origin else None
 
+    if progress is not None:
+        progress("Checking tracked source differences...")
     diff_rc, diff_bytes = git_bytes(["diff", "--binary", "--no-ext-diff", "HEAD", "--"])
     tracked_rc, tracked_bytes = git_bytes(["diff", "--name-only", "-z", "HEAD", "--"])
+    if progress is not None:
+        progress("Enumerating untracked source (respecting .gitignore)...")
     untracked_rc, untracked_bytes = git_bytes(["ls-files", "--others", "--exclude-standard", "-z"])
     if diff_rc or tracked_rc or untracked_rc:
         return state
@@ -599,6 +624,8 @@ def git_worktree_state() -> dict:
     untracked = decode_paths(untracked_bytes)
     changed = sorted(set(tracked + untracked), key=str.lower)
     state["changedPaths"] = changed
+    if progress is not None:
+        progress(f"Fingerprinting {len(untracked)} untracked and {len(tracked)} modified/deleted Git path(s)...")
 
     digest = hashlib.sha256()
     digest.update(b"havenwild.git.worktree.v1\0")
@@ -657,7 +684,31 @@ def source_snapshot_fingerprint() -> tuple[str, list[str]]:
     digest = hashlib.sha256()
     digest.update(b"havenwild.source.snapshot.v1\0")
     paths: list[str] = []
-    for path in sorted(ROOT.rglob("*"), key=lambda p: p.as_posix().lower()):
+    # Do not walk hydrated assets (potentially 63,991 files), Cargo caches,
+    # Git internals, or diagnostics merely to discard them *after* recursion.
+    # Preserve the exact v1 source fingerprint: same eligible relative paths,
+    # same case-insensitive ordering, same byte hashes. assets/README.md is
+    # the sole publishable file beneath the otherwise excluded assets root.
+    excluded_roots = {part.lower() for part in GIT_PUBLISH_FORBIDDEN_ROOTS}
+    candidates: list[Path] = []
+    for directory, dirs, files in os.walk(ROOT, topdown=True, followlinks=False):
+        parent = Path(directory)
+        if parent == ROOT:
+            dirs[:] = [
+                name for name in dirs
+                if name.lower() not in excluded_roots and name.lower() != "assets"
+            ]
+        elif parent == UPDATE_ROOT:
+            dirs[:] = [
+                name for name in dirs
+                if name.lower() not in {"inbox", "archive", "rejected"}
+            ]
+        for name in files:
+            candidates.append(parent / name)
+    assets_readme = ROOT / "assets" / "README.md"
+    if assets_readme.is_file():
+        candidates.append(assets_readme)
+    for path in sorted(candidates, key=lambda p: p.as_posix().lower()):
         if not path.is_file():
             continue
         try:
@@ -677,8 +728,8 @@ def source_snapshot_fingerprint() -> tuple[str, list[str]]:
     return digest.hexdigest(), paths
 
 
-def git_publish_readiness() -> tuple[bool, str, dict]:
-    state = git_worktree_state()
+def git_publish_readiness(*, progress=None) -> tuple[bool, str, dict]:
+    state = git_worktree_state(progress=progress)
     gate = read_json(LAST_GATE, {}) or {}
     gate_passed = gate.get("result") == "PASS"
     certified_source = (gate.get("sourceControl") or {}).get("sourceFingerprint")
@@ -747,6 +798,7 @@ def _git_remote_counts(branch: str) -> tuple[int, int, bool, int]:
 
 def source_publish(message: str | None = None) -> int:
     """Commit and push only the exact source state certified by Full Gate."""
+    pcc_print("GITHUB PUBLISH: re-verifying certified source before any Git write...")
     ready, reason, state = git_publish_readiness()
     pcc_print("GITHUB PUBLISH PREFLIGHT:", "READY" if ready else "BLOCKED", f"— {reason}")
     if not ready:
@@ -930,8 +982,37 @@ def source_publish(message: str | None = None) -> int:
     return 0
 
 
+def _interactive_publish_readiness() -> tuple[bool, str, dict]:
+    """Run the full fail-closed publish check with visible phases and a heartbeat.
+
+    Git may take time on Windows with large local worktrees. No network write,
+    staging, commit, or push occurs in this preflight.
+    """
+    started = time.monotonic()
+    finished = threading.Event()
+    phase = ["starting"]
+
+    def report(detail: str) -> None:
+        phase[0] = detail
+        pcc_print("  [PUBLISH PREFLIGHT]", detail)
+
+    def heartbeat() -> None:
+        while not finished.wait(8.0):
+            pcc_print(f"  [PUBLISH PREFLIGHT] Still checking ({time.monotonic() - started:.0f}s): {phase[0]}")
+
+    pcc_print("\nCOMMIT + PUSH: verifying certification and Git worktree. No upload has started.")
+    watcher = threading.Thread(target=heartbeat, name="pcc-publish-heartbeat", daemon=True)
+    watcher.start()
+    try:
+        return git_publish_readiness(progress=report)
+    finally:
+        finished.set()
+        watcher.join(timeout=0.5)
+        pcc_print(f"  [PUBLISH PREFLIGHT] Finished in {time.monotonic() - started:.1f}s")
+
+
 def source_publish_interactive() -> int:
-    ready, reason, state = git_publish_readiness()
+    ready, reason, state = _interactive_publish_readiness()
     pcc_print("\nCOMMIT + PUSH CERTIFIED SOURCE")
     pcc_print(" Status :", "READY" if ready else "BLOCKED")
     pcc_print(" Reason :", reason)
@@ -946,7 +1027,7 @@ def source_publish_interactive() -> int:
                 rc = git_bootstrap_interactive(preferred_url=canonical)
                 if rc:
                     return rc
-                ready, reason, state = git_publish_readiness()
+                ready, reason, state = _interactive_publish_readiness()
         elif not state.get("origin"):
             pcc_print(f" Canonical GitHub : {canonical}")
             answer = input("Connect/adopt the canonical GitHub origin now? [Y/n]: ").strip().lower()
@@ -954,7 +1035,7 @@ def source_publish_interactive() -> int:
                 rc = git_configure_origin_interactive(preferred_url=canonical)
                 if rc:
                     return rc
-                ready, reason, state = git_publish_readiness()
+                ready, reason, state = _interactive_publish_readiness()
 
     pcc_print(" Status :", "READY" if ready else "BLOCKED")
     pcc_print(" Reason :", reason)
@@ -1109,20 +1190,19 @@ def dashboard() -> int:
         pcc_print(f" Last gate  : {gate.get('result', '?')} / {gate.get('durationSeconds', '?')}s")
     else:
         pcc_print(" Last gate  : none")
-    recipe = read_json(ROOT / "content" / "terrain" / "recipes" / "summer_grass_void.v1.json", {}) or {}
-    states = recipe.get("states", {})
-    classified = sum(1 for entry in states.values() if entry.get("resolution") in ("sprite", "composite", "unsupported"))
-    certified = sum(
-        1
-        for entry in states.values()
-        if entry.get("resolution") in ("sprite", "composite", "unsupported")
-        and entry.get("confidence") == "certified"
-    )
     recovery = read_json(ROOT / "content" / "terrain" / "recovery" / "summer_source_cells.v1.json", {}) or {}
     recovered = recovery.get("recovery", {}).get("currentPixelReplayNonTransparent", "?")
     historical = recovery.get("recovery", {}).get("historicalNonTransparentMapped", "?")
+    runtime_profile = read_json(ROOT / "content" / "terrain" / "recipes" / "summer_flatworld_runtime.v1.json", {}) or {}
+    corner_recipes = len(runtime_profile.get("cornerRecipes", {}))
+    owner_families = len(runtime_profile.get("ownerSideTransitions", {}))
+    shore_roles = sum(
+        int(family.get("outerRoleCount", 0)) + int(family.get("innerRoleCount", 0))
+        for family in runtime_profile.get("shorelineOverlayFamilies", {}).values()
+    )
+    semantic_fills = len(runtime_profile.get("safeFill", {}))
     pcc_print(f" Summer map : {recovered}/{historical} non-transparent source cells recovered")
-    pcc_print(f" DG recipe  : {classified}/16 classified / {certified}/16 certified")
+    pcc_print(f" Terrain    : {corner_recipes} live recipes / {owner_families} owner families / {shore_roles} shore roles / {semantic_fills} fills")
     authority = read_json(ROOT / "content" / "assets" / "authority" / "elizawy_runtime_index.v1.json", {}) or {}
     counts = authority.get("counts", {})
     if authority.get("schema") == "havenwild.bevy.elizawy.runtime_index.v1":
@@ -1135,11 +1215,14 @@ def dashboard() -> int:
     pending = discover_updates()
     pcc_print(f" Updates    : {len(pending)} pending governed patch(es)")
     if shutil.which("git"):
-        rc, inside = capture(["git", "rev-parse", "--is-inside-work-tree"])
-        if rc == 0 and inside.lower() == "true":
-            _, branch = capture(["git", "branch", "--show-current"])
-            _, status = capture(["git", "status", "--porcelain"])
-            pcc_print(f" Git        : {branch or '(detached)'} / {'Modified' if status else 'Clean'}")
+        # A full `git status` scans the hydrated working tree, even though PCC
+        # excludes those files from publication. Use cheap branch discovery;
+        # option 2 explicitly performs the full certified readiness check.
+        rc, branch = capture(["git", "symbolic-ref", "--quiet", "--short", "HEAD"], timeout=5.0)
+        if rc == 0:
+            pcc_print(f" Git        : {branch} / changes checked on publish")
+        elif (ROOT / ".git").exists():
+            pcc_print(" Git        : detached or unborn / inspect in Source control")
         else:
             pcc_print(" Git        : local folder (not a checkout yet)")
     else:
@@ -1469,6 +1552,28 @@ def apply_patch(path: Path) -> int:
             tmp.replace(dst)
         for rel in deleted:
             ensure_patch_destination(rel).unlink(missing_ok=True)
+            parent = (ROOT / rel).parent
+            while parent != ROOT:
+                try:
+                    parent.rmdir()  # only empty directories; no untracked content removed
+                except OSError:
+                    break
+                parent = parent.parent
+        # Older archives may contain directories that were already empty.
+        # Prune these known foreign-source root directories, leaving any
+        # unexpected/user-owned contents untouched.
+        for source_root in ("legacy", "rust", "tools/rust", "content/architecture", "docs/architecture", "docs/audits", "LICENSES"):
+            candidate = ROOT / source_root
+            if candidate.is_dir():
+                for folder in sorted((p for p in candidate.rglob("*") if p.is_dir()), key=lambda p: len(p.parts), reverse=True):
+                    try:
+                        folder.rmdir()
+                    except OSError:
+                        pass
+                try:
+                    candidate.rmdir()
+                except OSError:
+                    pass
 
         # Verify the installed bytes before the patch leaves the inbox. A receipt
         # must never claim success for a partially promoted update.
@@ -1877,6 +1982,52 @@ def audit_gate() -> int:
         ("PCC certified Git publish workflow", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/pcc_git_workflow_selftest.py")],
             label="pcc-git-workflow-selftest", debug_on_fail=False)),
+        ("M2D108 fast PCC startup / unchanged source certification", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d108_pcc_fast_start_selftest.py")],
+            label="m2d108-pcc-fast-start-selftest", debug_on_fail=False)),
+        ("M2D109 Git publish preflight / generated-file exclusion", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d109_git_publish_preflight_selftest.py")],
+            label="m2d109-git-publish-preflight-selftest", debug_on_fail=False)),
+        ("M2D110 Bevy egui AssetMut mutable-borrow regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d110_egui_assetmut_borrow_selftest.py")],
+            label="m2d110-egui-assetmut-borrow-selftest", debug_on_fail=False)),
+        ("M2D112 unified authoring frames / atlas picker / viewport zoom", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d112_unified_authoring_selftest.py")],
+            label="m2d112-unified-authoring-selftest", debug_on_fail=False)),
+        ("M2D114 consolidated tool rail / terrain workflow", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d114_unified_tool_rail_selftest.py")],
+            label="m2d114-tool-rail-selftest", debug_on_fail=False)),
+        ("M2D116 World PIE / LPC player source contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d116_world_pie_characters_selftest.py")],
+            label="m2d116-world-pie-selftest", debug_on_fail=False)),
+        ("M2D117 unified dock / room-cave contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d117_workspace_rooms_selftest.py")],
+            label="m2d117-workspace-room-selftest", debug_on_fail=False)),
+
+        ("M2D119 World PIE house/cave transition + authored room", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d119_pie_room_transitions_selftest.py")],
+            label="m2d119-pie-room-transitions-selftest", debug_on_fail=False)),
+        ("M2D120 room authoring canvas / reversible wall topology", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d120_room_canvas_authoring_selftest.py")],
+            label="m2d120-room-canvas-selftest", debug_on_fail=False)),
+        ("M2D121 structure context / per-house doorway scene mapping", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d121_structure_context_door_mapping_selftest.py")],
+            label="m2d121-structure-door-selftest", debug_on_fail=False)),
+        ("M2D122 source-to-render coverage ledger / missing asset boundaries", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/audit_asset_render_coverage.py"), "--check"],
+            label="m2d122-asset-render-coverage", debug_on_fail=False)),
+        ("M2D122 regenerated-world runtime texture sync regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d122_runtime_asset_lane_selftest.py")],
+            label="m2d122-render-asset-sync-selftest", debug_on_fail=False)),
+        ("M2D123 original-alpha evidence integrity / all 320 hashes", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d123_alpha_source_review.py"), "--check"],
+            label="m2d123-alpha-census", debug_on_fail=False)),
+        ("M2D123 review-only vs reviewed-object placement regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d123_asset_review_placement_selftest.py")],
+            label="m2d123-reviewed-placement", debug_on_fail=False)),
+        ("M2D118 standalone Havenwild identity boundary", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/havenwild_identity_boundary_selftest.py")],
+            label="havenwild-identity-boundary-selftest", debug_on_fail=False)),
         ("Source-only package boundary", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/package_source_policy_selftest.py")],
             label="package-source-policy-selftest", debug_on_fail=False)),
@@ -1921,6 +2072,44 @@ def audit_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
         ("M2D090 ElizaWy kitchen-sink Generated World", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d090_kitchen_sink_world_selftest.py")], label="m2d090-kitchen-sink-world-selftest", debug_on_fail=False)),
+        ("M2D091 visual authority / island differentiation repair", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d091_visual_authority_repair_selftest.py")], label="m2d091-visual-authority-repair-selftest", debug_on_fail=False)),
+        ("M2D092B shoreline owner authority recovery", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d092b_shoreline_owner_authority_selftest.py")], label="m2d092b-shoreline-owner-authority-selftest", debug_on_fail=False)),
+        ("M2D092C unified world compositor / collision / modular bridge", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d092c_unified_compositor_selftest.py")], label="m2d092c-unified-compositor-selftest", debug_on_fail=False)),
+        ("M2D093A flat-terrain authority / Terrain Studio convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d093a_flat_terrain_convergence_selftest.py")], label="m2d093a-flat-terrain-convergence-selftest", debug_on_fail=False)),
+        ("M2D093B editor convergence / viewport cache", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d093b_editor_convergence_selftest.py")], label="m2d093b-editor-convergence-selftest", debug_on_fail=False)),
+        ("M2D101 independent docks / generated-object drag contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d101_editor_layout_and_move_selftest.py")], label="m2d101-editor-object-selftest", debug_on_fail=False)),
+        ("M2D102 coast-source Wang coverage / bridges / metrics", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d102_coast_editor_bridge_selftest.py")], label="m2d102-coast-editor-bridge-selftest", debug_on_fail=False)),
+        ("M2D094B Jaidyn Tiled parser / hydration contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d094b_tiled_authority_selftest.py"), str(ROOT)], label="m2d094b-tiled-authority-selftest", debug_on_fail=False)),
+        ("M2D095C Havenwild-native sparse Wang convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d095b_native_wang_selftest.py"), "--root", str(ROOT), "--stress", "5000"], label="m2d095c-native-wang-selftest", debug_on_fail=False)),
+        ("M2D095D Windows render-backend / DX12 resize guard", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d095d_window_backend_policy_selftest.py")], label="m2d095d-window-backend-policy-selftest", debug_on_fail=False)),
+        ("M2D096A Tiled live-renderer cutover / canonical-pixel bridge", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096a_tiled_live_renderer_selftest.py")], label="m2d096a-tiled-live-renderer-selftest", debug_on_fail=False)),
+        ("M2D096B shoreline animation auditor contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/audit_jaidyn_shoreline_animation.py"), "--selftest"], label="m2d096b-shoreline-animation-selftest", debug_on_fail=False)),
+        ("M2D096C canonical animation-presentation contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096c_animation_contract_selftest.py")], label="m2d096c-animation-contract-selftest", debug_on_fail=False)),
+        ("M2D096C shoreline promotion-readiness classifier contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096c_shoreline_promotion_readiness.py"), "--selftest"], label="m2d096c-shoreline-readiness-selftest", debug_on_fail=False)),
+        ("M2D096D complete Tiled-material bridge ledger", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096d_tiled_material_bridge.py"), "--selftest"], label="m2d096d-tiled-material-bridge-selftest", debug_on_fail=False)),
+        ("M2D096E vegetation / wildflower layer normalization", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096e_vegetation_layer_selftest.py")], label="m2d096e-vegetation-layer-selftest", debug_on_fail=False)),
+        ("M2D097A visible Tiled/native-Wang renderer convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d097a_visible_renderer_selftest.py")], label="m2d097a-visible-renderer-selftest", debug_on_fail=False)),
+        ("M2D097B water intent / ecology / prop sprite repair", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d097b_water_scrutiny_selftest.py")], label="m2d097b-water-scrutiny-selftest", debug_on_fail=False)),
+        ("Worldgen object-bound guide algorithm regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/worldgen_object_bounds_algorithm_selftest.py")], label="worldgen-object-bounds-algorithm-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="audit-terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="audit-terrain-resolver", debug_on_fail=False)),
@@ -2035,6 +2224,82 @@ def full_gate() -> int:
         pcc_print("GATE RECEIPT:", receipt)
         return rc
 
+    # M2D096A: the live terrain renderer consumes Jaidyn's pinned Tiled topology
+    # metadata, while exact canonical ElizaWy pixels remain the art authority.
+    # Source-only packages omit this third-party configured derivative, so verify
+    # or hydrate it before Cargo/runtime certification.
+    rc = phase(
+        "Jaidyn configured Tiled terrain availability",
+        lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/hydrate_jaidyn_tiled.py"), "--root", str(ROOT), "--check"],
+            label="jaidyn-tiled-check", debug_on_fail=False),
+    )
+    if rc:
+        rc = phase(
+            "Jaidyn configured Tiled terrain hydration",
+            lambda: run_stream(
+                [python_cmd(), str(ROOT / "tools/hydrate_jaidyn_tiled.py"), "--root", str(ROOT)],
+                label="jaidyn-tiled-hydrate", debug_on_fail=False),
+        )
+        if rc:
+            receipt = write_gate_receipt(gate_id, started_at, started, phases, "FAIL", rc)
+            pcc_print("FULL GATE: BLOCKED — pinned Jaidyn Tiled terrain metadata could not be verified or hydrated.")
+            pcc_print("The legacy ElizaWy renderer remains available at runtime, but certification requires the live Tiled topology lane.")
+            pcc_print("GATE RECEIPT:", receipt)
+            return rc
+
+    rc = phase(
+        "Jaidyn complete Terrain material bridge accounting",
+        lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096d_tiled_material_bridge.py"), "--root", str(ROOT)],
+            label="jaidyn-tiled-material-bridge", debug_on_fail=False),
+    )
+    if rc:
+        receipt = write_gate_receipt(gate_id, started_at, started, phases, "FAIL", rc)
+        pcc_print("FULL GATE: BLOCKED — configured Summer Terrain contains material semantics not explicitly accounted by Havenwild.")
+        pcc_print("GATE RECEIPT:", receipt)
+        return rc
+
+    rc = phase(
+        "Jaidyn shoreline / animation evidence audit",
+        lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/audit_jaidyn_shoreline_animation.py"), "--root", str(ROOT)],
+            label="jaidyn-shoreline-animation-audit", debug_on_fail=False),
+    )
+    if rc:
+        receipt = write_gate_receipt(gate_id, started_at, started, phases, "FAIL", rc)
+        pcc_print("FULL GATE: BLOCKED — hydrated Jaidyn shoreline animation metadata could not be audited.")
+        pcc_print("GATE RECEIPT:", receipt)
+        return rc
+
+    rc = phase(
+        "Jaidyn shoreline promotion-readiness classification",
+        lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096c_shoreline_promotion_readiness.py"), "--root", str(ROOT)],
+            label="jaidyn-shoreline-promotion-readiness", debug_on_fail=False),
+    )
+    if rc:
+        receipt = write_gate_receipt(gate_id, started_at, started, phases, "FAIL", rc)
+        pcc_print("FULL GATE: BLOCKED — shoreline evidence could not be classified safely.")
+        pcc_print("GATE RECEIPT:", receipt)
+        return rc
+
+    # Large natural-object atlas slots are stable source identities, but transparent
+    # padding / slot-edge guide pixels are not rendering contracts. Once immutable
+    # assets are verified, derive local v3 edge-guide-safe alpha render crops for seven seasonal
+    # trees and two grassland rock/stone templates. Source art remains untouched.
+    rc = phase(
+        "Hydrated worldgen object render-bound certification",
+        lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/certify_worldgen_object_bounds.py")],
+            label="worldgen-object-render-bounds-certify", debug_on_fail=False),
+    )
+    if rc:
+        receipt = write_gate_receipt(gate_id, started_at, started, phases, "FAIL", rc)
+        pcc_print("FULL GATE: BLOCKED — exact tree/rock/stone render bounds could not be certified from immutable source alpha.")
+        pcc_print("GATE RECEIPT:", receipt)
+        return rc
+
     phase_specs = [
         ("Python source syntax", python_source_check),
         ("Project metadata / dependency contract", project_contract_check),
@@ -2042,6 +2307,52 @@ def full_gate() -> int:
         ("PCC certified Git publish workflow", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/pcc_git_workflow_selftest.py")],
             label="pcc-git-workflow-selftest", debug_on_fail=False)),
+        ("M2D108 fast PCC startup / unchanged source certification", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d108_pcc_fast_start_selftest.py")],
+            label="m2d108-pcc-fast-start-selftest", debug_on_fail=False)),
+        ("M2D109 Git publish preflight / generated-file exclusion", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d109_git_publish_preflight_selftest.py")],
+            label="m2d109-git-publish-preflight-selftest", debug_on_fail=False)),
+        ("M2D110 Bevy egui AssetMut mutable-borrow regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d110_egui_assetmut_borrow_selftest.py")],
+            label="m2d110-egui-assetmut-borrow-selftest", debug_on_fail=False)),
+        ("M2D112 unified authoring frames / atlas picker / viewport zoom", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d112_unified_authoring_selftest.py")],
+            label="m2d112-unified-authoring-selftest", debug_on_fail=False)),
+        ("M2D114 consolidated tool rail / terrain workflow", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d114_unified_tool_rail_selftest.py")],
+            label="m2d114-tool-rail-selftest", debug_on_fail=False)),
+        ("M2D116 World PIE / LPC player source contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d116_world_pie_characters_selftest.py")],
+            label="m2d116-world-pie-selftest", debug_on_fail=False)),
+        ("M2D117 unified dock / room-cave contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d117_workspace_rooms_selftest.py")],
+            label="m2d117-workspace-room-selftest", debug_on_fail=False)),
+
+        ("M2D119 World PIE house/cave transition + authored room", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d119_pie_room_transitions_selftest.py")],
+            label="m2d119-pie-room-transitions-selftest", debug_on_fail=False)),
+        ("M2D120 room authoring canvas / reversible wall topology", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d120_room_canvas_authoring_selftest.py")],
+            label="m2d120-room-canvas-selftest", debug_on_fail=False)),
+        ("M2D121 structure context / per-house doorway scene mapping", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d121_structure_context_door_mapping_selftest.py")],
+            label="m2d121-structure-door-selftest", debug_on_fail=False)),
+        ("M2D122 source-to-render coverage ledger / missing asset boundaries", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/audit_asset_render_coverage.py"), "--check"],
+            label="m2d122-asset-render-coverage", debug_on_fail=False)),
+        ("M2D122 regenerated-world runtime texture sync regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d122_runtime_asset_lane_selftest.py")],
+            label="m2d122-render-asset-sync-selftest", debug_on_fail=False)),
+        ("M2D123 original-alpha evidence integrity / all 320 hashes", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d123_alpha_source_review.py"), "--check"],
+            label="m2d123-alpha-census", debug_on_fail=False)),
+        ("M2D123 review-only vs reviewed-object placement regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d123_asset_review_placement_selftest.py")],
+            label="m2d123-reviewed-placement", debug_on_fail=False)),
+        ("M2D118 standalone Havenwild identity boundary", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/havenwild_identity_boundary_selftest.py")],
+            label="havenwild-identity-boundary-selftest", debug_on_fail=False)),
         ("Source-only package boundary", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/package_source_policy_selftest.py")],
             label="package-source-policy-selftest", debug_on_fail=False)),
@@ -2086,6 +2397,44 @@ def full_gate() -> int:
             [python_cmd(), str(ROOT / "tools/m2d082f_land_connectivity_materials_selftest.py")], label="m2d082f-land-connectivity-materials-selftest", debug_on_fail=False)),
         ("M2D090 ElizaWy kitchen-sink Generated World", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d090_kitchen_sink_world_selftest.py")], label="m2d090-kitchen-sink-world-selftest", debug_on_fail=False)),
+        ("M2D091 visual authority / island differentiation repair", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d091_visual_authority_repair_selftest.py")], label="m2d091-visual-authority-repair-selftest", debug_on_fail=False)),
+        ("M2D092B shoreline owner authority recovery", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d092b_shoreline_owner_authority_selftest.py")], label="m2d092b-shoreline-owner-authority-selftest", debug_on_fail=False)),
+        ("M2D092C unified world compositor / collision / modular bridge", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d092c_unified_compositor_selftest.py")], label="m2d092c-unified-compositor-selftest", debug_on_fail=False)),
+        ("M2D093A flat-terrain authority / Terrain Studio convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d093a_flat_terrain_convergence_selftest.py")], label="m2d093a-flat-terrain-convergence-selftest", debug_on_fail=False)),
+        ("M2D093B editor convergence / viewport cache", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d093b_editor_convergence_selftest.py")], label="m2d093b-editor-convergence-selftest", debug_on_fail=False)),
+        ("M2D101 independent docks / generated-object drag contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d101_editor_layout_and_move_selftest.py")], label="m2d101-editor-object-selftest", debug_on_fail=False)),
+        ("M2D102 coast-source Wang coverage / bridges / metrics", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d102_coast_editor_bridge_selftest.py")], label="m2d102-coast-editor-bridge-selftest", debug_on_fail=False)),
+        ("M2D094B Jaidyn Tiled parser / hydration contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d094b_tiled_authority_selftest.py"), str(ROOT)], label="m2d094b-tiled-authority-selftest", debug_on_fail=False)),
+        ("M2D095C Havenwild-native sparse Wang convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d095b_native_wang_selftest.py"), "--root", str(ROOT), "--stress", "5000"], label="m2d095c-native-wang-selftest", debug_on_fail=False)),
+        ("M2D095D Windows render-backend / DX12 resize guard", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d095d_window_backend_policy_selftest.py")], label="m2d095d-window-backend-policy-selftest", debug_on_fail=False)),
+        ("M2D096A Tiled live-renderer cutover / canonical-pixel bridge", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096a_tiled_live_renderer_selftest.py")], label="m2d096a-tiled-live-renderer-selftest", debug_on_fail=False)),
+        ("M2D096B shoreline animation auditor contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/audit_jaidyn_shoreline_animation.py"), "--selftest"], label="m2d096b-shoreline-animation-selftest", debug_on_fail=False)),
+        ("M2D096C canonical animation-presentation contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096c_animation_contract_selftest.py")], label="m2d096c-animation-contract-selftest", debug_on_fail=False)),
+        ("M2D096C shoreline promotion-readiness classifier contract", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096c_shoreline_promotion_readiness.py"), "--selftest"], label="m2d096c-shoreline-readiness-selftest", debug_on_fail=False)),
+        ("M2D096D complete Tiled-material bridge ledger", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096d_tiled_material_bridge.py"), "--selftest"], label="m2d096d-tiled-material-bridge-selftest", debug_on_fail=False)),
+        ("M2D096E vegetation / wildflower layer normalization", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d096e_vegetation_layer_selftest.py")], label="m2d096e-vegetation-layer-selftest", debug_on_fail=False)),
+        ("M2D097A visible Tiled/native-Wang renderer convergence", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d097a_visible_renderer_selftest.py")], label="m2d097a-visible-renderer-selftest", debug_on_fail=False)),
+        ("M2D097B water intent / ecology / prop sprite repair", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d097b_water_scrutiny_selftest.py")], label="m2d097b-water-scrutiny-selftest", debug_on_fail=False)),
+        ("Worldgen object-bound guide algorithm regression", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/worldgen_object_bounds_algorithm_selftest.py")], label="worldgen-object-bounds-algorithm-selftest", debug_on_fail=False)),
         ("Authored scene source-address integrity", authored_scene_check),
         ("DG contract + fixtures", lambda: run_terrain(["fixtures"], label="terrain-fixtures", debug_on_fail=False)),
         ("DG semantic resolver lab", lambda: run_terrain(["resolver"], label="terrain-resolver", debug_on_fail=False)),
@@ -2198,13 +2547,15 @@ def build_job() -> int:
     return run_backend(["build"], label="build")
 
 
-def run_job(backend: str, native_frame: bool = False, verbose_gpu: bool = False) -> int:
+def run_job(backend: str, native_frame: bool = False, verbose_gpu: bool = False, allow_dx12_resize: bool = False) -> int:
     args = ["run", "--backend", backend]
     if native_frame:
         args.append("--native-frame")
     if verbose_gpu:
         args.append("--verbose-gpu")
-    suffix = ("-native" if native_frame else "") + ("-gpu-debug" if verbose_gpu else "")
+    if allow_dx12_resize:
+        args.append("--allow-dx12-resize")
+    suffix = ("-dx12-resize-diagnostic" if allow_dx12_resize else "") + ("-gpu-debug" if verbose_gpu else "")
     return run_backend(args, label=f"run-{backend}{suffix}")
 
 
@@ -2539,9 +2890,9 @@ def terrain_menu() -> int:
         pcc_print("\nTERRAIN / DUAL-GRID / MAPPING AUTHORITY")
         pcc_print(" 1. Contract + recovery + resolver status")
         pcc_print(" 2. Fixture topology coverage")
-        pcc_print(" 3. Semantic resolver lab (16-mask path)")
-        pcc_print(" 4. Resolved semantic -> recipe pipeline")
-        pcc_print(" 5. Strict DG recipe certification")
+        pcc_print(" 3. Legacy DG semantic resolver lab (16-mask test path)")
+        pcc_print(" 4. Legacy DG semantic -> recipe pipeline test")
+        pcc_print(" 5. Legacy Grass/Void DG recipe certification")
         pcc_print(" 6. Summer mapping recovery evidence")
         pcc_print(" 7. Find/recover older Havenwild mapping metadata")
         pcc_print(" 8. Local legacy-recovery index status")
@@ -2549,6 +2900,9 @@ def terrain_menu() -> int:
         pcc_print("10. Native Summer convergence status")
         pcc_print("11. Legacy pixel-classifier diagnostic (not runtime authority)")
         pcc_print("12. Summer cliff source authority / evidence status")
+        pcc_print("13. Jaidyn shoreline / animation evidence audit")
+        pcc_print("14. Shoreline promotion-readiness classification")
+        pcc_print("15. Complete Tiled material bridge coverage")
         pcc_print(" 0. Back")
         choice = input("> ").strip()
         if choice == "0": return 0
@@ -2574,6 +2928,24 @@ def terrain_menu() -> int:
             run_summer_flatworld_mapper(["build", "--dry-run"], label="terrain-summer-classifier-diagnostic", debug_on_fail=False)
         elif choice == "12":
             run_cliff_summer_authority(["--check"], label="terrain-cliff-source-authority", debug_on_fail=False)
+        elif choice == "13":
+            run_stream(
+                [python_cmd(), str(ROOT / "tools/audit_jaidyn_shoreline_animation.py"), "--root", str(ROOT)],
+                label="jaidyn-shoreline-animation-audit",
+                debug_on_fail=False,
+            )
+        elif choice == "14":
+            run_stream(
+                [python_cmd(), str(ROOT / "tools/m2d096c_shoreline_promotion_readiness.py"), "--root", str(ROOT)],
+                label="jaidyn-shoreline-promotion-readiness",
+                debug_on_fail=False,
+            )
+        elif choice == "15":
+            run_stream(
+                [python_cmd(), str(ROOT / "tools/m2d096d_tiled_material_bridge.py"), "--root", str(ROOT)],
+                label="jaidyn-tiled-material-bridge",
+                debug_on_fail=False,
+            )
         input("Press Enter...")
 
 
@@ -2660,20 +3032,20 @@ def patch_scan_apply_workflow() -> int:
 def studio_menu() -> int:
     while True:
         pcc_print("\nSTUDIO / BUILD / RUN")
-        pcc_print(" 1. Run Studio (DX12)")
-        pcc_print(" 2. Run Studio (Vulkan)")
+        pcc_print(" 1. Run Studio (Vulkan - recommended / resizable)")
+        pcc_print(" 2. Run Studio (DX12 safe window - fixed size)")
         pcc_print(" 3. Build Studio")
-        pcc_print(" 4. Run Studio (DX12 native frame)")
-        pcc_print(" 5. Run Studio (DX12 verbose GPU diagnostics)")
-        pcc_print(" 6. Run Studio (Vulkan verbose GPU diagnostics)")
+        pcc_print(" 4. Run Studio (DX12 resize diagnostic - may trigger upstream crash)")
+        pcc_print(" 5. Run Studio (DX12 safe + verbose GPU diagnostics)")
+        pcc_print(" 6. Run Studio (Vulkan + verbose GPU diagnostics)")
         pcc_print(" 0. Back")
         choice = input("> ").strip()
         if choice == "0": return 0
         action = {
-            "1": lambda: run_job("dx12"),
-            "2": lambda: run_job("vulkan"),
+            "1": lambda: run_job("vulkan"),
+            "2": lambda: run_job("dx12"),
             "3": build_job,
-            "4": lambda: run_job("dx12", True),
+            "4": lambda: run_job("dx12", allow_dx12_resize=True),
             "5": lambda: run_job("dx12", verbose_gpu=True),
             "6": lambda: run_job("vulkan", verbose_gpu=True),
         }.get(choice)
@@ -2720,12 +3092,14 @@ def menu() -> int:
     while True:
         try:
             dashboard()
-            ready, reason, _ = git_publish_readiness()
+            # Keep the normal menu O(1) with respect to source/assets size.
+            # Full publish readiness is enforced in source_publish_interactive,
+            # never skipped during commit/push or the Full Quality Gate.
+            last_gate = read_json(LAST_GATE, {}) or {}
+            publish_hint = "VERIFY ON SELECTION" if last_gate.get("result") == "PASS" else "FULL GATE REQUIRED"
             pcc_print(" PRIMARY WORKFLOW")
             pcc_print("  1. FULL QUALITY GATE / CERTIFY CURRENT SOURCE")
-            pcc_print(f"  2. COMMIT + PUSH CERTIFIED SOURCE TO GITHUB [{'READY' if ready else 'BLOCKED'}]")
-            if not ready:
-                pcc_print(f"     {reason}")
+            pcc_print(f"  2. COMMIT + PUSH CERTIFIED SOURCE TO GITHUB [{publish_hint}]")
             pcc_print("  3. PATCH SCAN / REVIEW / APPLY")
             pcc_print("\n OPERATE")
             pcc_print("  4. Studio / build / run")

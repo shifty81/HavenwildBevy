@@ -1,0 +1,22 @@
+HAVENWILD BARREL GATE DOCTOR: MISSING_TEMPLATE
+SOURCE: 0.8.1
+  manifest_exact_one_barrel: True
+  hydrated_image_matches_manifest: None
+  hydrated_image_bytecount_matches_manifest: None
+  runtime_image_registered_once: True
+  manifest_runtime_image_identity_matches: True
+  canonical_full_height_region_exists: False
+  reviewed_barrel_template_exists: False
+  reviewed_template_full_32x64_sprite: False
+  reviewed_template_canonical_region_matches: False
+  lane_runtime_barrel_template_consistent: True
+  runtime_lane_hash_consistent: True
+  object_template_count_consistent: True
+  summer_seed_contains_barrel: False
+  builder_is_seed_only_for_templates: True
+  failing_test_present: False
+NEXT:
+ - Register one reviewed barrel template in the builder's canonical inputs; do not manually edit generated runtime index alone.
+ - Use a source-verified complete 32x64 column of the original 160x64 barrel sheet; do not guess a variant or split it into 32x32 halves.
+ - Legacy seed-only builder pattern detected. Add a separate source-reviewed object-template registry rather than creating a bogus placed seed object.
+ - After a source-backed fix: regenerate both authority JSONs; run builder --check, targeted cargo test, cargo fmt --check, cargo test --all-targets, then the PCC full gate.

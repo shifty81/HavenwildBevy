@@ -1,0 +1,30 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpoint": "M2D096E",
+  "sourceVersion": "0.10.17",
+  "parentCheckpoint": "M2D096A live renderer + M2D096B evidence + M2D096C animation contract + M2D096D material ledger",
+  "status": "SOURCE_ONLY_PREBUILD_NATIVE_ACCEPTANCE_PENDING",
+  "summary": "Live core terrain remains on Tiled/canonical pixels; animation presentation prepared but disabled; 12/12 Summer Tiled materials explicitly accounted; wildflowers normalized to Objects/Vegetation.",
+  "liveCertifiedTiledMaterials": [
+    "Grass",
+    "Sand",
+    "Dirt",
+    "Shallow Water",
+    "Deep Water"
+  ],
+  "blockedOrDeferredTiledMaterials": [
+    "Light Till",
+    "Deep Till",
+    "Melted Ice",
+    "Deep Sand",
+    "Mountain",
+    "Grassy Mountain",
+    "Vine"
+  ],
+  "blockedHavenwildRoles": [
+    "WetSand",
+    "PebblePath"
+  ],
+  "vegetationCorrection": "Wildflower seed/runtime placements -> Objects; flower source images -> Vegetation semantic Source Browser category; original source paths unchanged.",
+  "nativeEvidence": "Pending Windows Full Gate/build/runtime when user returns to build machine."
+}

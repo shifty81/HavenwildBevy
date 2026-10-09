@@ -1,0 +1,129 @@
+land,water,water_mask,wang_id,status,tile_ids
+Grass,Shallow Water,0000,"0,1,0,1,0,1,0,1",authored,"65,67,68,69,131,132,133,257,391"
+Grass,Shallow Water,0001,"0,1,0,1,0,1,0,6",authored,"1218,1538"
+Grass,Shallow Water,0010,"0,6,0,1,0,1,0,1",authored,"1216,1536"
+Grass,Shallow Water,0011,"0,6,0,1,0,1,0,6",authored,"1217,1537"
+Grass,Shallow Water,0100,"0,1,0,1,0,6,0,1",authored,"1090,1410"
+Grass,Shallow Water,0101,"0,1,0,1,0,6,0,6",authored,"1154,1474"
+Grass,Shallow Water,0110,"0,6,0,1,0,6,0,1",missing,
+Grass,Shallow Water,0111,"0,6,0,1,0,6,0,6",authored,"1280,1600"
+Grass,Shallow Water,1000,"0,1,0,6,0,1,0,1",authored,"1088,1408"
+Grass,Shallow Water,1001,"0,1,0,6,0,1,0,6",missing,
+Grass,Shallow Water,1010,"0,6,0,6,0,1,0,1",authored,"1152,1472"
+Grass,Shallow Water,1011,"0,6,0,6,0,1,0,6",authored,"1281,1601"
+Grass,Shallow Water,1100,"0,1,0,6,0,6,0,1",authored,"1089,1409"
+Grass,Shallow Water,1101,"0,1,0,6,0,6,0,6",authored,"1344,1664"
+Grass,Shallow Water,1110,"0,6,0,6,0,6,0,1",authored,"1345,1665"
+Grass,Shallow Water,1111,"0,6,0,6,0,6,0,6",authored,"1153,1233,1793"
+Grass,Deep Water,0000,"0,1,0,1,0,1,0,1",authored,"65,67,68,69,131,132,133,257,391"
+Grass,Deep Water,0001,"0,1,0,1,0,1,0,7",missing,
+Grass,Deep Water,0010,"0,7,0,1,0,1,0,1",missing,
+Grass,Deep Water,0011,"0,7,0,1,0,1,0,7",missing,
+Grass,Deep Water,0100,"0,1,0,1,0,7,0,1",missing,
+Grass,Deep Water,0101,"0,1,0,1,0,7,0,7",missing,
+Grass,Deep Water,0110,"0,7,0,1,0,7,0,1",missing,
+Grass,Deep Water,0111,"0,7,0,1,0,7,0,7",missing,
+Grass,Deep Water,1000,"0,1,0,7,0,1,0,1",missing,
+Grass,Deep Water,1001,"0,1,0,7,0,1,0,7",missing,
+Grass,Deep Water,1010,"0,7,0,7,0,1,0,1",missing,
+Grass,Deep Water,1011,"0,7,0,7,0,1,0,7",missing,
+Grass,Deep Water,1100,"0,1,0,7,0,7,0,1",missing,
+Grass,Deep Water,1101,"0,1,0,7,0,7,0,7",missing,
+Grass,Deep Water,1110,"0,7,0,7,0,7,0,1",missing,
+Grass,Deep Water,1111,"0,7,0,7,0,7,0,7",authored,"1985,2497"
+Dirt,Shallow Water,0000,"0,3,0,3,0,3,0,3",authored,"195,196,197,259,260,261"
+Dirt,Shallow Water,0001,"0,3,0,3,0,3,0,6",authored,"1224,1544"
+Dirt,Shallow Water,0010,"0,6,0,3,0,3,0,3",authored,"1222,1542"
+Dirt,Shallow Water,0011,"0,6,0,3,0,3,0,6",authored,"1223,1543"
+Dirt,Shallow Water,0100,"0,3,0,3,0,6,0,3",authored,"1096,1416"
+Dirt,Shallow Water,0101,"0,3,0,3,0,6,0,6",authored,"1160,1480"
+Dirt,Shallow Water,0110,"0,6,0,3,0,6,0,3",missing,
+Dirt,Shallow Water,0111,"0,6,0,3,0,6,0,6",authored,"1284,1604"
+Dirt,Shallow Water,1000,"0,3,0,6,0,3,0,3",authored,"1094,1414"
+Dirt,Shallow Water,1001,"0,3,0,6,0,3,0,6",missing,
+Dirt,Shallow Water,1010,"0,6,0,6,0,3,0,3",authored,"1158,1478"
+Dirt,Shallow Water,1011,"0,6,0,6,0,3,0,6",authored,"1285,1605"
+Dirt,Shallow Water,1100,"0,3,0,6,0,6,0,3",authored,"1095,1415"
+Dirt,Shallow Water,1101,"0,3,0,6,0,6,0,6",authored,"1348,1668"
+Dirt,Shallow Water,1110,"0,6,0,6,0,6,0,3",authored,"1349,1669"
+Dirt,Shallow Water,1111,"0,6,0,6,0,6,0,6",authored,"1153,1233,1793"
+Dirt,Deep Water,0000,"0,3,0,3,0,3,0,3",authored,"195,196,197,259,260,261"
+Dirt,Deep Water,0001,"0,3,0,3,0,3,0,7",missing,
+Dirt,Deep Water,0010,"0,7,0,3,0,3,0,3",missing,
+Dirt,Deep Water,0011,"0,7,0,3,0,3,0,7",missing,
+Dirt,Deep Water,0100,"0,3,0,3,0,7,0,3",missing,
+Dirt,Deep Water,0101,"0,3,0,3,0,7,0,7",missing,
+Dirt,Deep Water,0110,"0,7,0,3,0,7,0,3",missing,
+Dirt,Deep Water,0111,"0,7,0,3,0,7,0,7",missing,
+Dirt,Deep Water,1000,"0,3,0,7,0,3,0,3",missing,
+Dirt,Deep Water,1001,"0,3,0,7,0,3,0,7",missing,
+Dirt,Deep Water,1010,"0,7,0,7,0,3,0,3",missing,
+Dirt,Deep Water,1011,"0,7,0,7,0,3,0,7",missing,
+Dirt,Deep Water,1100,"0,3,0,7,0,7,0,3",missing,
+Dirt,Deep Water,1101,"0,3,0,7,0,7,0,7",missing,
+Dirt,Deep Water,1110,"0,7,0,7,0,7,0,3",missing,
+Dirt,Deep Water,1111,"0,7,0,7,0,7,0,7",authored,"1985,2497"
+Sand,Shallow Water,0000,"0,2,0,2,0,2,0,2",authored,"74,201,202,203"
+Sand,Shallow Water,0001,"0,2,0,2,0,2,0,6",authored,1858
+Sand,Shallow Water,0010,"0,6,0,2,0,2,0,2",authored,1856
+Sand,Shallow Water,0011,"0,6,0,2,0,2,0,6",authored,1857
+Sand,Shallow Water,0100,"0,2,0,2,0,6,0,2",authored,1730
+Sand,Shallow Water,0101,"0,2,0,2,0,6,0,6",authored,1794
+Sand,Shallow Water,0110,"0,6,0,2,0,6,0,2",missing,
+Sand,Shallow Water,0111,"0,6,0,2,0,6,0,6",authored,1731
+Sand,Shallow Water,1000,"0,2,0,6,0,2,0,2",authored,1728
+Sand,Shallow Water,1001,"0,2,0,6,0,2,0,6",missing,
+Sand,Shallow Water,1010,"0,6,0,6,0,2,0,2",authored,1792
+Sand,Shallow Water,1011,"0,6,0,6,0,2,0,6",authored,1732
+Sand,Shallow Water,1100,"0,2,0,6,0,6,0,2",authored,1729
+Sand,Shallow Water,1101,"0,2,0,6,0,6,0,6",authored,1795
+Sand,Shallow Water,1110,"0,6,0,6,0,6,0,2",authored,1796
+Sand,Shallow Water,1111,"0,6,0,6,0,6,0,6",authored,"1153,1233,1793"
+Sand,Deep Water,0000,"0,2,0,2,0,2,0,2",authored,"74,201,202,203"
+Sand,Deep Water,0001,"0,2,0,2,0,2,0,7",missing,
+Sand,Deep Water,0010,"0,7,0,2,0,2,0,2",missing,
+Sand,Deep Water,0011,"0,7,0,2,0,2,0,7",missing,
+Sand,Deep Water,0100,"0,2,0,2,0,7,0,2",missing,
+Sand,Deep Water,0101,"0,2,0,2,0,7,0,7",missing,
+Sand,Deep Water,0110,"0,7,0,2,0,7,0,2",missing,
+Sand,Deep Water,0111,"0,7,0,2,0,7,0,7",missing,
+Sand,Deep Water,1000,"0,2,0,7,0,2,0,2",missing,
+Sand,Deep Water,1001,"0,2,0,7,0,2,0,7",missing,
+Sand,Deep Water,1010,"0,7,0,7,0,2,0,2",missing,
+Sand,Deep Water,1011,"0,7,0,7,0,2,0,7",missing,
+Sand,Deep Water,1100,"0,2,0,7,0,7,0,2",missing,
+Sand,Deep Water,1101,"0,2,0,7,0,7,0,7",missing,
+Sand,Deep Water,1110,"0,7,0,7,0,7,0,2",missing,
+Sand,Deep Water,1111,"0,7,0,7,0,7,0,7",authored,"1985,2497"
+Deep Sand,Shallow Water,0000,"0,9,0,9,0,9,0,9",authored,"265,266,267,394"
+Deep Sand,Shallow Water,0001,"0,9,0,9,0,9,0,6",missing,
+Deep Sand,Shallow Water,0010,"0,6,0,9,0,9,0,9",missing,
+Deep Sand,Shallow Water,0011,"0,6,0,9,0,9,0,6",missing,
+Deep Sand,Shallow Water,0100,"0,9,0,9,0,6,0,9",missing,
+Deep Sand,Shallow Water,0101,"0,9,0,9,0,6,0,6",missing,
+Deep Sand,Shallow Water,0110,"0,6,0,9,0,6,0,9",missing,
+Deep Sand,Shallow Water,0111,"0,6,0,9,0,6,0,6",missing,
+Deep Sand,Shallow Water,1000,"0,9,0,6,0,9,0,9",missing,
+Deep Sand,Shallow Water,1001,"0,9,0,6,0,9,0,6",missing,
+Deep Sand,Shallow Water,1010,"0,6,0,6,0,9,0,9",missing,
+Deep Sand,Shallow Water,1011,"0,6,0,6,0,9,0,6",missing,
+Deep Sand,Shallow Water,1100,"0,9,0,6,0,6,0,9",missing,
+Deep Sand,Shallow Water,1101,"0,9,0,6,0,6,0,6",missing,
+Deep Sand,Shallow Water,1110,"0,6,0,6,0,6,0,9",missing,
+Deep Sand,Shallow Water,1111,"0,6,0,6,0,6,0,6",authored,"1153,1233,1793"
+Deep Sand,Deep Water,0000,"0,9,0,9,0,9,0,9",authored,"265,266,267,394"
+Deep Sand,Deep Water,0001,"0,9,0,9,0,9,0,7",missing,
+Deep Sand,Deep Water,0010,"0,7,0,9,0,9,0,9",missing,
+Deep Sand,Deep Water,0011,"0,7,0,9,0,9,0,7",missing,
+Deep Sand,Deep Water,0100,"0,9,0,9,0,7,0,9",missing,
+Deep Sand,Deep Water,0101,"0,9,0,9,0,7,0,7",missing,
+Deep Sand,Deep Water,0110,"0,7,0,9,0,7,0,9",missing,
+Deep Sand,Deep Water,0111,"0,7,0,9,0,7,0,7",missing,
+Deep Sand,Deep Water,1000,"0,9,0,7,0,9,0,9",missing,
+Deep Sand,Deep Water,1001,"0,9,0,7,0,9,0,7",missing,
+Deep Sand,Deep Water,1010,"0,7,0,7,0,9,0,9",missing,
+Deep Sand,Deep Water,1011,"0,7,0,7,0,9,0,7",missing,
+Deep Sand,Deep Water,1100,"0,9,0,7,0,7,0,9",missing,
+Deep Sand,Deep Water,1101,"0,9,0,7,0,7,0,7",missing,
+Deep Sand,Deep Water,1110,"0,7,0,7,0,7,0,9",missing,
+Deep Sand,Deep Water,1111,"0,7,0,7,0,7,0,7",authored,"1985,2497"

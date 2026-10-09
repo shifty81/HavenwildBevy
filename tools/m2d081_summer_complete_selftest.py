@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import json
-import re
 from collections import Counter
 from pathlib import Path
+
+from source_version_contract import studio_title_uses_cargo_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "content/terrain/recipes/summer_flatworld_runtime.v1.json"
@@ -20,7 +21,7 @@ def require(ok, msg):
 
 def main():
     profile, runtime, donor = map(load, (PROFILE, RUNTIME, DONOR))
-    require(profile.get("version") == 7, "runtime profile is not v7 land-connectivity/material expansion")
+    require(profile.get("version") == 8, "runtime profile is not v8 owner-side shoreline authority")
     require(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor is not 305/305")
     groups = profile.get("sourceGroups", {})
     require(len(groups) == 41, f"expected 41 Summer groups, got {len(groups)}")
@@ -105,15 +106,15 @@ def main():
     require("a.contains_source_slice(&part.source)" in world_text, "flatworld regression does not validate canonical source slices")
     require("strict Summer flatworld paint must resolve\")" not in world_text, "stale single-binding flatworld regression remains")
     require("water_animation_ms" not in main_text, "stale fake water animation clock remains")
-    require(re.search(r"Havenwild — Bevy Studio v0\.\d+\.\d+", main_text) is not None, "Studio 0.x marker missing")
+    require(studio_title_uses_cargo_version(main_text), "Studio package-version title marker missing")
     require("land_connectivity_first_no_quadrant_splice" in PROFILE.read_text(encoding="utf-8"), "land-connectivity policy missing from profile")
-    require("TRANSITION_PROMOTIONS" in gen_text, "extended terrain transition promotion missing")
+    require("ACTIVE_OWNER_SIDE_FAMILIES" in gen_text and "shared_8_neighbor_owner_side" in gen_text, "owner-side transition promotion missing")
     print("M2D082F SUMMER MATERIAL / LAND-CONNECTIVITY SELFTEST: PASS")
     print("  Summer runtime cells : 305/305 across 41 source groups")
     print(f"  runtime authority    : {runtime.get('counts', {}).get('canonicalRuntimeRegions')} exact regions")
     print("  G/D/W grammar        : 81/81 states (14/14 pairwise + 36 tri-material)")
     print("  homogeneous variants : Grass 6 / Dirt 6 / Water 1 / Sand 3 / WetSand 3 / Path 4 / Deep 1")
-    print("  water animation      : OFF / RepeatableFill variants are static source/detail cells")
+    print("  legacy water profile : animation OFF / RepeatableFill detail cells stay static; configured TSX canonical clips are a separate live path")
     print("  ambiguous diagonals  : live resolver connects land; historical composites evidence-only")
     print("  extended materials   : Sand / WetSand / DeepWater / PebblePath source-backed")
     return 0

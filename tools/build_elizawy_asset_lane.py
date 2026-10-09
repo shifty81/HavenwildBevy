@@ -44,6 +44,20 @@ def seasonal_variants(path: str) -> dict[str, str]:
     return {season: pattern.format(season=season) for season in ("spring", "autumn", "winter")}
 
 
+def semantic_source_category(path: str) -> str:
+    """Editor-facing semantic bucket independent from source-directory provenance."""
+    lower = path.lower()
+    name = pathlib.PurePosixPath(path).name.lower()
+    if (
+        "wildflower" in name
+        or name in {"flowers.png", "mushrooms.png"}
+        or name.startswith("plants_")
+        or name.startswith("trees_")
+    ):
+        return "Vegetation"
+    return path.split("/", 1)[0]
+
+
 def infer_worldgen_tags(label: str, parts: list[dict]) -> list[str]:
     text = (label + " " + " ".join(part["sourcePath"] for part in parts)).lower()
     tags: set[str] = set()
@@ -119,6 +133,7 @@ def build(root: pathlib.Path) -> dict:
             "bytes": entry["bytes"],
             "imageSizePx": entry["imageSizePx"],
             "family": entry["path"].split("/", 1)[0],
+            "semanticCategory": semantic_source_category(entry["path"]),
             "pack": entry.get("pack"),
             "runtimePlaceable": True,
             "sourceBytesPolicy": "immutable_hydrated_elizawy",

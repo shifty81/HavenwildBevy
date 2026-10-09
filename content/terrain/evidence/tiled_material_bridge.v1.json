@@ -1,0 +1,108 @@
+{
+  "schema": "havenwild.tiled_material_bridge.v1",
+  "authority": "explicit_promotion_ledger",
+  "season": "summer",
+  "wangSet": "Terrain",
+  "policy": {
+    "unknownMaterial": "fail_closed",
+    "unknownHavenwildRole": "fail_closed",
+    "derivativePixels": "never_runtime_art_authority",
+    "liveArt": "exact_canonical_elizawy_pixel_match_required"
+  },
+  "tiledMaterials": [
+    {
+      "material": "Grass",
+      "state": "live_certified",
+      "havenwildRole": "Grass",
+      "lane": "flat_terrain",
+      "reason": "M2D096A core live bridge"
+    },
+    {
+      "material": "Sand",
+      "state": "live_certified",
+      "havenwildRole": "Sand",
+      "lane": "flat_terrain",
+      "reason": "M2D096A core live bridge"
+    },
+    {
+      "material": "Dirt",
+      "state": "live_certified",
+      "havenwildRole": "MudBank",
+      "lane": "flat_terrain",
+      "reason": "M2D096A current Dirt/Bank semantic bridge; future generic Dirt naming can be normalized separately"
+    },
+    {
+      "material": "Light Till",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "farming_soil",
+      "reason": "Agriculture/tilling material, not a generic worldgen shoreline material"
+    },
+    {
+      "material": "Deep Till",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "farming_soil",
+      "reason": "Agriculture/tilling material, not a generic worldgen shoreline material"
+    },
+    {
+      "material": "Shallow Water",
+      "state": "live_certified",
+      "havenwildRole": "RiverWater",
+      "lane": "water",
+      "reason": "M2D096A core live bridge"
+    },
+    {
+      "material": "Deep Water",
+      "state": "live_certified",
+      "havenwildRole": "DeepWater",
+      "lane": "water",
+      "reason": "M2D096A core live bridge"
+    },
+    {
+      "material": "Melted Ice",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "seasonal_water",
+      "reason": "Seasonal ice/water transition; requires seasonal runtime policy rather than Summer flat-terrain guessing"
+    },
+    {
+      "material": "Deep Sand",
+      "state": "evidence_blocked",
+      "havenwildRole": null,
+      "candidateHavenwildRole": "WetSand",
+      "lane": "shoreline",
+      "reason": "Distinct authored Tiled material, but WetSand equivalence is not yet proven; M2D096B/C evidence decides"
+    },
+    {
+      "material": "Mountain",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "cliff_elevation",
+      "reason": "Structural elevation/cliff authority, not flat ground paint"
+    },
+    {
+      "material": "Grassy Mountain",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "cliff_elevation",
+      "reason": "Structural elevation/cliff authority, not flat ground paint"
+    },
+    {
+      "material": "Vine",
+      "state": "deferred_explicit",
+      "havenwildRole": null,
+      "lane": "traversal_vegetation",
+      "reason": "Traversal/vegetation structural material; must not be flattened into ordinary terrain paint"
+    }
+  ],
+  "havenwildRoles": [
+    {"role": "Grass", "state": "live_certified", "tiledMaterial": "Grass"},
+    {"role": "MudBank", "state": "live_certified", "tiledMaterial": "Dirt"},
+    {"role": "Sand", "state": "live_certified", "tiledMaterial": "Sand"},
+    {"role": "RiverWater", "state": "live_certified", "tiledMaterial": "Shallow Water"},
+    {"role": "DeepWater", "state": "live_certified", "tiledMaterial": "Deep Water"},
+    {"role": "WetSand", "state": "evidence_blocked", "tiledMaterial": null, "candidateTiledMaterial": "Deep Sand"},
+    {"role": "PebblePath", "state": "evidence_blocked", "tiledMaterial": null, "candidateTiledMaterial": null}
+  ]
+}

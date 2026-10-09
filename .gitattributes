@@ -17,3 +17,6 @@ Cargo.lock text eol=lf
 *.jpg binary
 *.jpeg binary
 *.zip binary
+
+# Immutable upstream LPC credits must retain exact original CRLF bytes.
+assets/elizawy/**/Credits.txt -text

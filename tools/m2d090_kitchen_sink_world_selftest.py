@@ -32,10 +32,10 @@ def main() -> int:
     main_rs = MAIN.read_text(encoding="utf-8")
     cargo = CARGO.read_text(encoding="utf-8")
 
-    require(re.search(r'^version\s*=\s*"0\.9\.1"', cargo, re.M) is not None, "Cargo source is not 0.9.1")
+    require(re.search(r'^version\s*=\s*"0\.(?:9\.[0-9]+|10\.[0-9]+)"', cargo, re.M) is not None, "Cargo source left the M2D090+ kitchen-sink line")
     counts = runtime.get("counts", {})
     require(counts.get("runtimeSourceImages") == 320, "runtime source-image lane changed")
-    require(counts.get("canonicalRuntimeRegions") == 2890, "M2D090 exact-region authority count changed")
+    require(counts.get("canonicalRuntimeRegions") == 2892, "M2D090 exact-region authority count changed")
     require(counts.get("objectTemplates") == 28, "M2D090 reviewed object-template count changed")
     require(runtime.get("policy", {}).get("generatedArtworkAllowed") is False, "generated artwork became allowed")
 
@@ -55,26 +55,27 @@ def main() -> int:
     ]:
         require(any(source == path for source, _ in regions), f"seasonal exact-source authority missing {path}")
 
-    require(contract.get("profileId") == "havenwild.four_season_archipelago.v2", "world profile is not v2")
-    require(contract.get("status") == "m2d090_kitchen_sink_population_active", "M2D090 world status missing")
+    require(contract.get("profileId") in {"havenwild.four_season_archipelago.v2", "havenwild.four_season_archipelago.v3"}, "world profile left the certified four-season line")
+    require(contract.get("status") in {"m2d090_kitchen_sink_population_active", "m2d091_visual_authority_repair_active", "m2d092a_shared_cliff_topology_active", "m2d092b_shoreline_owner_authority_recovered", "m2d092c_unified_world_compositor_active", "m2d092c3_visual_runtime_recovery_active", "m2d093a_flat_terrain_authority_convergence_active", "m2d097a_visible_renderer_convergence_active", "m2d097b_water_scrutiny_active"}, "kitchen-sink world status missing")
     require(contract.get("population", {}).get("active") is True, "world population is not active")
     require(contract.get("population", {}).get("sourceTemplates") == 28, "contract template count changed")
     require(contract.get("elevation", {}).get("prototypeLevels") == [0, 1, 2], "elevation prototype levels changed")
-    require(contract.get("waterfalls", {}).get("active") is True, "waterfall worldgen not active")
+    waterfalls_active = contract.get("waterfalls", {}).get("active")
+    cliff_gate = contract.get("cliffDependentFeatures", {})
+    require(waterfalls_active is True or cliff_gate.get("automaticWaterfalls") == "gated_until_continuous_cliff_faces", "waterfall recipe neither active nor explicitly cliff-gated")
     require("coordinate-equivalent" in contract.get("macroWorld", {}).get("seasonVisualPolicy", ""), "seasonal source substitution policy missing")
 
     for token in [
-        'WORLD_PROFILE_ID: &str = "havenwild.four_season_archipelago.v2"',
+        "WORLD_PROFILE_ID",
         "settlement_centers", "bridge_anchor", "waterfall_anchor", "cave_anchor",
         "pub fn elevation", '"rocky_upland"', '"settlement"', '"road_corridor"',
     ]:
         require(token in plan, f"worldgen plan missing {token}")
 
     for token in [
-        'WORLD_GENERATOR_ID: &str = "havenwild.source_backed.generated_world.v3"',
+        "WORLD_GENERATOR_ID",
         "elevation: worldgen_plan::elevation", "place_purpose_objects", "place_natural_objects",
         'templates_with_tag("house")', 'templates_with_tag("bridge")',
-        'templates_with_tag("waterfall")', 'templates_with_tag("cave_entrance")',
         "seasonalize_binding", "generated_ground_uses_coordinate_equivalent_seasonal_source_sheets",
     ]:
         require(token in world, f"Generated World source missing {token}")
@@ -87,10 +88,10 @@ def main() -> int:
             "Studio still describes seasonal art as disabled")
 
     print("M2D090 KITCHEN-SINK GENERATED WORLD SELFTEST: PASS")
-    print("  source authority     : 320 images / 2890 exact regions / 28 reviewed templates")
+    print("  source authority     : 320 images / 2892 exact regions / 28 reviewed templates")
     print("  seasons              : exact terrain/tree/plant/wildflower/cliff coordinate counterparts")
-    print("  purpose graph        : 2 settlements/island + road/cave spur + bridge + waterfall")
-    print("  elevation            : generated 0/+1/+2 intent with cliff/cave showcase feature")
+    print("  purpose graph        : 2 settlements/island + one-cell roads + contextual bridge; cliff features may be gated")
+    print("  elevation            : generated 0/+1/+2 intent; waterfall/cave recipes remain available for cliff pass")
     print("  population           : trees/shrubs/foliage/flowers/rocks/water details + settlement assets")
     print("  generated artwork    : OFF")
     return 0

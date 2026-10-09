@@ -20,6 +20,7 @@ from pathlib import Path
 import sys
 
 from inspect_elizawy_source_alpha import rgba_rows
+from certify_worldgen_object_bounds import build as build_certified_object_bounds, runtime_shape as certified_object_runtime_shape
 
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = "Terrain/terrain_summer.png"
@@ -134,92 +135,18 @@ def verified_png(asset: str, manifest_entries):
     return meta, digest, width, height, rows
 
 
-def largest_connected_crop(rows, source_size, rect, *, padding=18):
-    width, height = source_size
-    x, y, w, h = rect
-    left = max(0, x - padding)
-    top = max(0, y - padding)
-    right = min(width, x + w + padding)
-    bottom = min(height, y + h + padding)
-    points = set()
-    for py in range(top, bottom):
-        for px in range(left, right):
-            if rows[py][px][3] > 0:
-                points.add((px, py))
-    components = []
-    while points:
-        seed = points.pop()
-        stack = [seed]
-        component = [seed]
-        while stack:
-            px, py = stack.pop()
-            for dy in (-1, 0, 1):
-                for dx in (-1, 0, 1):
-                    if not dx and not dy:
-                        continue
-                    q = (px + dx, py + dy)
-                    if q in points:
-                        points.remove(q)
-                        stack.append(q)
-                        component.append(q)
-        components.append(component)
-    if not components:
-        return None
-    def score(component):
-        overlap = sum(1 for px, py in component if x <= px < x + w and y <= py < y + h)
-        return overlap, len(component)
-    component = max(components, key=score)
-    overlap, total = score(component)
-    if overlap < 24 or total < 48:
-        return None
-    min_x = min(px for px, _ in component)
-    max_x = max(px for px, _ in component)
-    min_y = min(py for _, py in component)
-    max_y = max(py for _, py in component)
-    return [min_x, min_y, max_x - min_x + 1, max_y - min_y + 1]
-
-
 def build_object_bounds(manifest_entries, runtime_index):
-    decoded = {}
-    output = []
-    for template in runtime_index.get("objectTemplates", []):
-        label = str(template.get("label", "")).lower()
-        if not any(token in label for token in ("tree", "rock", "stone")):
-            continue
-        parts_out = []
-        ok = True
-        for part in template.get("parts", []):
-            asset = part.get("sourcePath")
-            rect = part.get("sourceRectPx")
-            if asset not in ("Terrain/trees_summer.png", "Terrain/Rocks, Grasslands.png") or not isinstance(rect, list):
-                ok = False
-                break
-            if asset not in decoded:
-                _, digest, width, height, rows = verified_png(asset, manifest_entries)
-                decoded[asset] = (digest, width, height, rows)
-            digest, width, height, rows = decoded[asset]
-            cropped = largest_connected_crop(rows, (width, height), rect)
-            if cropped is None:
-                ok = False
-                break
-            dx = cropped[0] - rect[0]
-            dy = cropped[1] - rect[1]
-            old_offset = part.get("offsetPx", [0, 0])
-            parts_out.append({
-                "sourcePath": asset,
-                "sourceRectPx": cropped,
-                "offsetPx": [old_offset[0] + dx, old_offset[1] + dy],
-                "sourceSha256": digest,
-                "originalSourceRectPx": rect,
-            })
-        if ok and parts_out:
-            output.append({"templateId": template["templateId"], "parts": parts_out})
-    return {
-        "schema": "havenwild.terrain.worldgen_object_bounds.v1",
-        "version": 1,
-        "policy": "largest-alpha-connected-component-from-hash-verified-original-source",
-        "templates": output,
-    }
+    """Delegate object render-bound certification to the single v3 authority.
+
+    Terrain mapping must never maintain a second tree/rock crop algorithm. The
+    dedicated certifier verifies immutable source identities, unions seasonal
+    tree alpha bounds, strips only guide-like slot-edge components, and emits
+    the runtime-safe shape consumed by AssetAuthority. The legacy connected-
+    component crop used here before M2D093B could pull neighbour/guide pixels.
+    """
+    del manifest_entries, runtime_index
+    return certified_object_runtime_shape(build_certified_object_bounds())
+
 
 def build(*, dry_run: bool = False):
     manifest = load_json(MANIFEST)
@@ -307,6 +234,7 @@ def build(*, dry_run: bool = False):
             "unmappedTransitionFallback": "safe_fill",
             "artworkAuthority": "exact_elizawy_source_region",
             "mappingAuthority": "local_source_pixel_corner_classifier",
+            "objectBoundsAuthority": "tools/certify_worldgen_object_bounds.py:v3",
         },
         "safeFill": safe,
         "transitionFamilies": {},
@@ -331,6 +259,7 @@ def build(*, dry_run: bool = False):
         "topCandidates": sorted(candidates, key=lambda item: item["score"], reverse=True)[:96],
         "output": str(OUT.relative_to(ROOT)),
         "objectBoundsOutput": str(OBJECT_OUT.relative_to(ROOT)),
+        "objectBoundsAuthority": "tools/certify_worldgen_object_bounds.py:v3",
         "certifiedObjectTemplateCount": len(object_bounds["templates"]),
     }
     if not dry_run:

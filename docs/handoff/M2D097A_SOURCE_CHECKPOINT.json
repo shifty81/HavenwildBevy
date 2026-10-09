@@ -1,0 +1,22 @@
+{
+  "schema": "havenwild.bevy.source_checkpoint.v1",
+  "checkpoint": "M2D097A_VISIBLE_TILED_RENDERER_CONVERGENCE_01018_PREBUILD",
+  "sourceVersion": "0.10.18",
+  "baseCheckpoint": "M2D096E_01017_PREBUILD",
+  "baseArchiveSha256": "54a902ce45b396c371f79780f2d7de83b9f01f30190cfb283e78133dd63b10bb",
+  "summary": "Visible terrain renderer convergence: one near/far dual-grid renderer, exact Tiled-first topology, shared origin-stable native-Wang solve, generated WetSand ring and second pale-shore repaint retired, complete canonical TSX clips presented live.",
+  "artAuthority": "original ElizaWy source pixels",
+  "topologyAuthority": "pinned Jaidyn configured Tiled TSX plus Havenwild native sparse-Wang solve",
+  "worldAuthority": "Havenwild semantic/procedural world state",
+  "generatedWorldVersion": 11,
+  "liveCoreMaterials": ["Grass", "Dirt", "Sand", "Shallow Water", "Deep Water"],
+  "evidenceBlockedRoles": ["WetSand", "PebblePath"],
+  "nativeWindowsAcceptance": "PENDING",
+  "recommendedBackend": "Vulkan",
+  "nextAcceptance": [
+    "PCC Full Quality Gate",
+    "Cargo fmt/check/test/build/lock verification",
+    "Vulkan visual comparison of same seed at near and Fit World zoom",
+    "Hydrated M2D096B/M2D096C shoreline animation evidence review"
+  ]
+}

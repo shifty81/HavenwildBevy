@@ -44,8 +44,8 @@ def main() -> int:
     require("resolved_role_for_dual_grid" in world and "role_for(self.seed,world)" in cworld,
             "outer dual-grid vertices cannot resolve deterministic virtual neighbours")
 
-    require("resolved_dual_grid_visual_parts_with_authority(vertex,&state.asset_authority)" in cmain,
-            "Generated World renderer still uses semantic-cell resolver as vertex output")
+    require("resolved_dual_grid_visual_parts_with_authorities(" in cmain and "vertex,&state.asset_authority,state.tiled_terrain.as_ref()" in cmain,
+            "Generated World near/editor renderer lost the vertex-centered dual-grid path")
     require("dual_grid_vertex_tile_min([vx,vy])" in cmain,
             "renderer is not consuming shared half-cell centering")
     require(".min(size[0]+1)" in cmain and ".min(size[1]+1)" in cmain,

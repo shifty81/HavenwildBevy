@@ -12,7 +12,7 @@ assert lane['policy']['sourcePixelsImmutable'] is True
 assert lane['counts']==runtime['counts']
 assert lane['counts']['runtimeSourceImages']==320
 assert lane['counts']['historicalSourceRegions']==1781
-assert lane['counts']['canonicalRuntimeRegions']==2890
+assert lane['counts']['canonicalRuntimeRegions']==2892
 assert lane['counts']['fixtureRoleRegions']==64
 assert lane['counts']['objectTemplates']==28
 assert set(runtime['fixtureRolePalette'])=={'Grass','MudBank','RiverWater'}
@@ -30,4 +30,4 @@ for t in runtime['objectTemplates']:
         canonical=regions[p['canonicalRegionId']]
         assert canonical['sourcePath']==p['sourcePath']
         assert canonical['sourceRectPx']==p['sourceRectPx']
-print('M2D07 ASSET LANE SELFTEST: PASS / 320 images / 1781 historical regions / 2890 runtime regions / 28 template regions canonical / topology evidence / generated artwork OFF')
+print('M2D07 ASSET LANE SELFTEST: PASS / 320 images / 1781 historical regions / 2892 runtime regions / 28 template regions canonical / topology evidence / generated artwork OFF')

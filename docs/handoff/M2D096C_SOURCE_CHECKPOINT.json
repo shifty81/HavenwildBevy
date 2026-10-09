@@ -1,0 +1,26 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpoint": "M2D096C",
+  "sourceVersion": "0.10.17",
+  "parentCheckpoint": "M2D096A / 0.10.16 + M2D096B evidence instrumentation",
+  "status": "SOURCE_ONLY_PREBUILD_NATIVE_ACCEPTANCE_PENDING",
+  "summary": "Canonical shoreline/water animation contract prepared; live presentation remains disabled.",
+  "preserved": [
+    "M2D096A live Tiled core-terrain cutover",
+    "Bevy 0.19 only",
+    "Vulkan recommended Studio path",
+    "native sparse Wang solver"
+  ],
+  "added": [
+    "canonical all-frame-exact animation clips",
+    "signed world-space phase contract",
+    "pinned ElizaWy test-scene reference manifest",
+    "shoreline promotion-readiness classifier"
+  ],
+  "blockedPromotions": [
+    "WetSand -> Deep Sand",
+    "PebblePath terrain-transition semantics",
+    "live shoreline animation presentation"
+  ],
+  "nativeEvidence": "Pending Windows Full Gate/build/runtime when user returns to build machine."
+}

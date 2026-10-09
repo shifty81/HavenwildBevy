@@ -113,9 +113,10 @@ def main() -> int:
     # a native Cargo build and interactive Windows test remain independent gates.
     for required in (
         "tool: CanvasTool::Select", "fn draw_tool_rail(", "fn draw_layer_rail(",
-        "fn draw_layer_panel(", "fn draw_app_launcher(",
+        "fn draw_inspector_rail(", "fn draw_app_launcher(",
         "fn draw_alpha_checker(", "fn sample_canvas_source(",
         "fn save_scene(", "state.canvas_controls_rect.contains(pointer)",
+        "state.editor_layout.world_layer_visibility[slot]", "RailIcon::Eye",
     ):
         if not has_token(main_text, required):
             fail(errors, f"M2D02-A scene-first safe UI contract missing: {required}")
@@ -123,7 +124,7 @@ def main() -> int:
         if retired_ui in main_text:
             fail(errors, f"M2D02-A obsolete default action remains: {retired_ui}")
     layout_text = (SRC / "editor_layout.rs").read_text(encoding="utf-8")
-    for required in ("pub layers_open: bool", "pub inspect_alpha: bool", "terrain_mapper.visible = false"):
+    for required in ("pub world_layer_visibility: [bool; 7]", "pub inspect_alpha: bool", "terrain_mapper.visible = false"):
         if required not in layout_text:
             fail(errors, f"M2D02-A local layout default missing: {required}")
     if not has_token(main_text, "resolve_semantic_lab(&state.semantic_lab, &state.terrain_mapper)"):
@@ -153,7 +154,7 @@ def main() -> int:
             fail(errors, f"M2D082D WorldDocument dual-grid authority missing: {required}")
     for required in (
         "dual_grid_vertex_tile_min([vx, vy])",
-        "resolved_dual_grid_visual_parts_with_authority(vertex, &state.asset_authority)",
+        "resolved_dual_grid_visual_parts_with_authorities(",
         "size[0] + 1",
         "size[1] + 1",
         "VisualOverrideMode::Replace",
@@ -270,14 +271,15 @@ def main() -> int:
     for retired in ('CanvasTool::Move', '"MOV"', 'fn move_selected_object_to_foot('):
         if retired in main_text:
             fail(errors, f'M2D03-C redundant move tool unexpectedly in live UI: {retired}')
-    for required in ('drag_preview_origin: Option<[i32; 2]>', 'fn draw_layer_panel(',
-                     'Scene / Layers', 'Placed objects (', 'Open Source Browser',
-                     'Place selected source at cell', 'state.layered_history.mark_saved()',
+    for required in ('drag_preview_origin: Option<[i32; 2]>', 'fn draw_layer_rail(',
+                     'state.editor_layout.world_layer_visibility[slot]',
+                     'fn draw_inspector_rail(',
+                     'open_mapper_tab', 'state.layered_history.mark_saved()',
                      'state.playtest_layered = Some(state.layered_scene.clone());'):
         if not has_token(main_text, required):
             fail(errors, f'M2D03-C consolidated scene workbench missing: {required}')
-    if main_text.count('"▶ Play Scene"') != 1:
-        fail(errors, 'Exactly one Play Scene launcher must remain in native Studio')
+    if '"Play in Editor"' not in main_text or 'WorldPlaySession::start' not in main_text:
+        fail(errors, 'Single top-bar Play/Stop PIE launcher is missing from native Studio')
     if 'pub fn can_move_object_to(' not in v2_text:
         fail(errors, 'SceneV2 drag preview bounds probe missing')
     result = run([sys.executable, str(ROOT / 'tools/m2d03b_selftest.py')],
@@ -328,7 +330,7 @@ def main() -> int:
         result = run([sys.executable, str(ROOT / 'tools' / script)], cwd=ROOT, capture_output=True, text=True, timeout=35)
         if result.returncode:
             fail(errors, f'M2D07 selftest failed ({script}): ' + (result.stdout + result.stderr)[-1200:])
-    for required in ('mod asset_authority;', 'mod world_doc;', 'state.world_doc\n                            .materialize([cx, cy], radius', 'draw_world_workspace(ui, state);'):
+    for required in ('mod asset_authority;', 'mod world_doc;', 'materialize_world_with_current_authorities(', 'draw_world_workspace(ui, state);'):
         if not has_token(main_text, required):
             fail(errors, f'M2D07 unified asset/world wiring missing: {required}')
 
@@ -353,10 +355,9 @@ def main() -> int:
         'egui::Panel::top("havenwild.command.toolbar")',
         'egui::Panel::bottom("havenwild.status.chrome")',
         'egui::Panel::left("havenwild.tool.rail")',
-        'egui::Panel::right("havenwild.layer.rail")',
-        'egui::Window::new("ElizaWy · Source / Terrain / Evidence")',
+        'egui::Panel::right("havenwild.inspector.rail")',
+        'egui::Window::new("Terrain Studio · ElizaWy Authority")',
         'egui::Window::new("World Properties")',
-        'egui::Window::new("Scene / Layers")',
         'egui::Window::new("Havenwild Tools")',
     ):
         if not has_token(main_text, required_panel):
@@ -377,13 +378,26 @@ def main() -> int:
         'input.key_pressed(egui::Key::F6)',
         'input.key_pressed(egui::Key::Space)',
         'fn draw_world_generator_panel(',
-        'fn draw_chunk_manager_panel(',
-        'fn draw_asset_authority_panel(',
+        'fn draw_inspector_rail(',
+        'Materialized chunks · debug',
         'Pixel Studio · planned',
         'Animation Studio · planned',
     ):
         if not has_token(main_text, required_shell):
             fail(errors, f"M2D06 launcher/command contract missing: {required_shell}")
+    for retired_surface in (
+        'fn draw_layer_panel(', 'egui::Window::new("Scene / Layers")',
+        'fn draw_chunk_manager_panel(', 'fn draw_asset_authority_panel(',
+        'ElizaWy Asset Authority', 'Source / mapping information',
+    ):
+        if retired_surface in main_text:
+            fail(errors, f"duplicate editor surface returned: {retired_surface}")
+    for retired_layout_state in (
+        'pub layers_open: bool', 'pub scene_layers_compact: bool',
+        'pub asset_authority_open: bool', 'pub chunk_manager_open: bool',
+    ):
+        if retired_layout_state in layout_text:
+            fail(errors, f"retired duplicate panel state returned: {retired_layout_state}")
     if re.search(r"egui::CentralPanel::default\(\)[\s\S]{0,180}\.show\(ctx,", main_text):
         fail(errors, "CentralPanel is still being shown directly on Context instead of the root viewport Ui")
 

@@ -8,7 +8,8 @@ layout=(ROOT/'src/editor_layout.rs').read_text(encoding='utf8')
 rulers=(ROOT/'src/canvas_rulers.rs').read_text(encoding='utf8')
 assert 'mod canvas_rulers;' in main
 assert 'state.scene_rect = scene;' in main
-assert 'canvas_rulers::draw(' in main and '&painter' in main and 'canvas, scene, px' in main
+compact=re.sub(r'\s+',' ',main)
+assert 'canvas_rulers::draw(' in main and '&painter' in main and 'canvas, scene, px' in compact
 assert 'canvas_rulers::blocks_scene_edit(' in main and 'state.canvas_rect' in main
 assert 'state.canvas_selection_rect' not in main, 'selection chrome cannot overlap ruler/canvas hit testing'
 assert 'canvas.top() + ruler_inset.y' in main

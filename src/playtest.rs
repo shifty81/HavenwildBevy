@@ -91,6 +91,9 @@ pub struct PlaySession {
     pub position: [f32; 2], // continuous coordinates in 32px source cells
     pub elapsed: f32,
     pub blocked_steps: u32,
+    /// LPC 4-way rows (North, West, South, East); visual state only.
+    pub facing_row: u32,
+    pub moving: bool,
     pub structural_snapshot: Vec<StructuralCell>,
     pub collision_snapshot: Vec<CollisionCell>,
 }
@@ -141,6 +144,8 @@ impl PlaySession {
                     position,
                     elapsed: 0.0,
                     blocked_steps: 0,
+                    facing_row: 2,
+                    moving: false,
                     structural_snapshot: structural.to_vec(),
                     collision_snapshot: collision.to_vec(),
                 });
@@ -153,9 +158,21 @@ impl PlaySession {
         let dt = dt.clamp(0.0, 0.05);
         self.elapsed += dt;
         let magnitude = direction[0].hypot(direction[1]);
-        if magnitude < 0.001 {
+        self.moving = magnitude >= 0.001;
+        if !self.moving {
             return;
         }
+        self.facing_row = if direction[0].abs() > direction[1].abs() {
+            if direction[0] < 0.0 {
+                1
+            } else {
+                3
+            }
+        } else if direction[1] < 0.0 {
+            0
+        } else {
+            2
+        };
         const SPEED_CELLS_PER_SECOND: f32 = 4.0;
         let movement = [
             direction[0] / magnitude * SPEED_CELLS_PER_SECOND * dt,

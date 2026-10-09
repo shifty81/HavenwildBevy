@@ -40,6 +40,8 @@ pub struct RuntimeImage {
     pub source_sha256: String,
     pub image_size_px: [u32; 2],
     pub family: String,
+    #[serde(default)]
+    pub semantic_category: String,
     pub runtime_placeable: bool,
 }
 
@@ -102,10 +104,26 @@ pub struct CornerCompositeRecipe {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SummerVisualAnimationFrame {
+    pub source: SourceBinding,
+    pub duration_ms: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct SummerVisualAnimation {
+    pub frames: Vec<SummerVisualAnimationFrame>,
+    pub total_duration_ms: u64,
+    pub phase_ms: u64,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SummerVisualPart {
     pub source: SourceBinding,
     /// Destination rectangle inside one logical 32x32 rendered terrain cell.
     pub destination_rect_px: [u32; 4],
+    /// Optional source-authored animation already translated back to canonical
+    /// ElizaWy source pixels. Topology never changes while the clip advances.
+    pub animation: Option<SummerVisualAnimation>,
 }
 
 #[derive(Clone, Debug, Deserialize, Default)]
@@ -151,6 +169,42 @@ pub struct SummerAnimation {
 
 #[derive(Clone, Debug, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
+pub struct OwnerSideTransitionFamily {
+    pub topology_rule: String,
+    pub owner: String,
+    pub neighbor: String,
+    pub source_owner: String,
+    pub source_neighbor: String,
+    pub outer_role_count: usize,
+    pub inner_role_count: usize,
+    #[serde(default)]
+    pub roles: BTreeMap<String, PaletteEntry>,
+    #[serde(default)]
+    pub center: Option<PaletteEntry>,
+    #[serde(default)]
+    pub runtime_use: Option<String>,
+}
+
+fn owner_side_role_for_bits(bits: [bool; 4]) -> Option<&'static str> {
+    match bits {
+        [false, false, false, true] => Some("outer_north_west"),
+        [false, false, true, true] => Some("outer_north"),
+        [false, false, true, false] => Some("outer_north_east"),
+        [false, true, false, true] => Some("outer_west"),
+        [true, false, true, false] => Some("outer_east"),
+        [false, true, false, false] => Some("outer_south_west"),
+        [true, true, false, false] => Some("outer_south"),
+        [true, false, false, false] => Some("outer_south_east"),
+        [true, true, true, false] => Some("inner_south_east"),
+        [true, true, false, true] => Some("inner_south_west"),
+        [true, false, true, true] => Some("inner_north_east"),
+        [false, true, true, true] => Some("inner_north_west"),
+        _ => None,
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, Default)]
+#[serde(rename_all = "camelCase")]
 pub struct SummerFlatworldProfile {
     pub schema: String,
     pub version: u32,
@@ -172,6 +226,10 @@ pub struct SummerFlatworldProfile {
     pub fill_variants: BTreeMap<String, Vec<PaletteEntry>>,
     #[serde(default)]
     pub animations: BTreeMap<String, SummerAnimation>,
+    #[serde(default)]
+    pub owner_side_transitions: BTreeMap<String, OwnerSideTransitionFamily>,
+    #[serde(default)]
+    pub shoreline_overlay_families: BTreeMap<String, OwnerSideTransitionFamily>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -300,10 +358,10 @@ impl AssetAuthority {
                 if overrides.schema != "havenwild.terrain.worldgen_object_bounds.v1" {
                     return Err("Invalid local object-bound authority identity".into());
                 }
-                // Version 1 was produced by the experimental connected-alpha crop
-                // pass and could retain guide bars / neighboring pixels. It is
-                // deliberately quarantined. Only a future source-reviewed v2 may
-                // re-enable generated large object templates.
+                // Version 1 was produced by the experimental connected-alpha crop pass
+                // and could retain guide bars / neighboring pixels. Version 2 is
+                // derived only from manifest-verified immutable alpha: a seasonal
+                // union crop for trees and a single-source alpha crop for rocks.
                 if overrides.version < 2 {
                     authority.validate(catalog)?;
                     return Ok(authority);
@@ -440,7 +498,7 @@ impl AssetAuthority {
         }
 
         if self.summer_flatworld.schema != "havenwild.terrain.summer_flatworld_runtime.v1"
-            || !matches!(self.summer_flatworld.version, 1..=7)
+            || !matches!(self.summer_flatworld.version, 1..=8)
             || self.summer_flatworld.source_atlas != "Terrain/terrain_summer.png"
             || self.summer_flatworld.safe_fill.len() < 3
         {
@@ -566,6 +624,126 @@ impl AssetAuthority {
                     {
                         return Err("Invalid Summer RiverWater animation frame".into());
                     }
+                }
+            }
+        }
+
+        if self.summer_flatworld.version >= 8 {
+            let expected_owner_side = [
+                ("summer_grass_over_dirt", "Grass", "MudBank", 8usize, 4usize),
+                ("summer_grass_over_sand", "Grass", "Sand", 8, 4),
+                (
+                    "summer_pebble_path_over_dirt",
+                    "PebblePath",
+                    "MudBank",
+                    8,
+                    0,
+                ),
+                ("summer_grass_bank_pond_a", "RiverWater", "Grass", 8, 4),
+                ("summer_dirt_bank_pond_a", "RiverWater", "MudBank", 8, 4),
+                ("summer_sand_bank_pond", "RiverWater", "Sand", 8, 4),
+                ("summer_sand_over_wet_sand", "WetSand", "Sand", 8, 4),
+                ("summer_deep_water_basin", "DeepWater", "RiverWater", 8, 4),
+            ];
+            if self.summer_flatworld.owner_side_transitions.len() != expected_owner_side.len() {
+                return Err(format!(
+                    "Summer owner-side authority expected {} active families, got {}",
+                    expected_owner_side.len(),
+                    self.summer_flatworld.owner_side_transitions.len()
+                ));
+            }
+            let role_bits = [
+                ("outer_north_west", [false, false, false, true]),
+                ("outer_north", [false, false, true, true]),
+                ("outer_north_east", [false, false, true, false]),
+                ("outer_west", [false, true, false, true]),
+                ("outer_east", [true, false, true, false]),
+                ("outer_south_west", [false, true, false, false]),
+                ("outer_south", [true, true, false, false]),
+                ("outer_south_east", [true, false, false, false]),
+                ("inner_south_east", [true, true, true, false]),
+                ("inner_south_west", [true, true, false, true]),
+                ("inner_north_east", [true, false, true, true]),
+                ("inner_north_west", [false, true, true, true]),
+            ];
+            for (family_id, owner, neighbor, outer_count, inner_count) in expected_owner_side {
+                let Some(family) = self.summer_flatworld.owner_side_transitions.get(family_id)
+                else {
+                    return Err(format!("Summer owner-side authority missing {family_id}"));
+                };
+                if family.topology_rule != "shared_8_neighbor_owner_side"
+                    || family.owner != owner
+                    || family.neighbor != neighbor
+                    || family.outer_role_count != outer_count
+                    || family.inner_role_count != inner_count
+                {
+                    return Err(format!(
+                        "Invalid Summer owner-side family contract: {family_id}"
+                    ));
+                }
+                for (source_role, bits) in &role_bits {
+                    let Some(entry) = family.roles.get(*source_role) else {
+                        if source_role.starts_with("inner_") && inner_count == 0 {
+                            continue;
+                        }
+                        return Err(format!(
+                            "Summer owner-side family {family_id} missing role {source_role}"
+                        ));
+                    };
+                    if entry.weight == 0
+                        || entry.source_path != self.summer_flatworld.source_atlas
+                        || !region_ids.contains(entry.canonical_region_id.as_str())
+                        || !catalog.contains_rect(&entry.source_path, entry.source_rect_px)
+                    {
+                        return Err(format!(
+                            "Invalid source entry for Summer owner-side family {family_id}:{source_role}"
+                        ));
+                    }
+                    let corner_key = bits
+                        .iter()
+                        .map(|is_owner| if *is_owner { owner } else { neighbor })
+                        .collect::<Vec<_>>()
+                        .join("|");
+                    let Some(recipe) = self.summer_flatworld.corner_recipes.get(&corner_key) else {
+                        return Err(format!(
+                            "Summer owner-side family {family_id} has no live corner recipe for {corner_key}"
+                        ));
+                    };
+                    if recipe.canonical_region_id != entry.canonical_region_id
+                        || recipe.source_path != entry.source_path
+                        || recipe.source_rect_px != entry.source_rect_px
+                    {
+                        return Err(format!(
+                            "Summer owner-side orientation mismatch for {family_id}:{source_role}"
+                        ));
+                    }
+                }
+            }
+
+            let Some(pale) = self
+                .summer_flatworld
+                .shoreline_overlay_families
+                .get("summer_pale_shore_ring_overlay")
+            else {
+                return Err("Summer pale-shore source family is not certified".into());
+            };
+            if pale.topology_rule != "shared_8_neighbor_owner_side"
+                || pale.owner != "RiverWater"
+                || pale.neighbor != "pale_shore"
+                || pale.outer_role_count != 8
+                || pale.inner_role_count != 4
+                || pale.roles.len() != 12
+                || pale.runtime_use.as_deref() != Some("certified_source_visual_bridge_for_wetsand")
+            {
+                return Err("Invalid Summer pale-shore source family contract".into());
+            }
+            for entry in pale.roles.values() {
+                if entry.weight == 0
+                    || entry.source_path != self.summer_flatworld.source_atlas
+                    || !region_ids.contains(entry.canonical_region_id.as_str())
+                    || !catalog.contains_rect(&entry.source_path, entry.source_rect_px)
+                {
+                    return Err("Invalid Summer pale-shore source address".into());
                 }
             }
         }
@@ -827,7 +1005,7 @@ impl AssetAuthority {
             source_asset: path.to_owned(),
             source_rect: source.source_rect,
         };
-        if self.contains_binding(&candidate) {
+        if self.contains_source_slice(&candidate) {
             candidate
         } else {
             source.clone()
@@ -859,6 +1037,17 @@ impl AssetAuthority {
     }
     pub fn summer_flatworld_fill(&self, role: &str) -> Option<&PaletteEntry> {
         self.summer_flatworld.safe_fill.get(role)
+    }
+    pub fn summer_owner_side_family(&self, family_id: &str) -> Option<&OwnerSideTransitionFamily> {
+        self.summer_flatworld.owner_side_transitions.get(family_id)
+    }
+    pub fn summer_shoreline_overlay_family(
+        &self,
+        family_id: &str,
+    ) -> Option<&OwnerSideTransitionFamily> {
+        self.summer_flatworld
+            .shoreline_overlay_families
+            .get(family_id)
     }
     pub fn summer_source_group_count(&self) -> usize {
         self.summer_flatworld.source_groups.len()
@@ -940,6 +1129,32 @@ impl AssetAuthority {
             .get(family)
             .and_then(|masks| masks.get(&format!("{mask:02x}")))
     }
+    pub fn summer_shoreline_overlay_for_pair(
+        &self,
+        family_id: &str,
+        owner_semantic: &str,
+        neighbor_semantic: &str,
+        corners: [&str; 4],
+    ) -> Option<&PaletteEntry> {
+        let family = self
+            .summer_flatworld
+            .shoreline_overlay_families
+            .get(family_id)?;
+        if family.topology_rule != "shared_8_neighbor_owner_side" || family.owner != owner_semantic
+        {
+            return None;
+        }
+        let mut bits = [false; 4];
+        for (index, role) in corners.iter().enumerate() {
+            if *role == owner_semantic {
+                bits[index] = true;
+            } else if *role != neighbor_semantic {
+                return None;
+            }
+        }
+        let source_role = owner_side_role_for_bits(bits)?;
+        family.roles.get(source_role)
+    }
     pub fn summer_flatworld_corner(&self, corners: [&str; 4]) -> Option<&PaletteEntry> {
         self.summer_flatworld.corner_recipes.get(&corners.join("|"))
     }
@@ -956,6 +1171,7 @@ impl AssetAuthority {
             return Some(vec![SummerVisualPart {
                 source: entry.binding(),
                 destination_rect_px: [0, 0, 32, 32],
+                animation: None,
             }]);
         }
         self.summer_flatworld_composite(corners).map(|recipe| {
@@ -968,6 +1184,7 @@ impl AssetAuthority {
                         source_rect: part.source_rect_px,
                     },
                     destination_rect_px: part.destination_rect_px,
+                    animation: None,
                 })
                 .collect()
         })
@@ -1046,7 +1263,7 @@ mod tests {
         .unwrap();
         assert_eq!(authority.counts.runtime_source_images, 320);
         assert_eq!(authority.counts.historical_source_regions, 1781);
-        assert_eq!(authority.counts.canonical_runtime_regions, 2890);
+        assert_eq!(authority.counts.canonical_runtime_regions, 2892);
         assert_eq!(authority.counts.fixture_role_regions, 64);
         assert_eq!(authority.lane_sha256.len(), 64);
         assert!(!authority.policy.generated_artwork_allowed);
@@ -1077,6 +1294,44 @@ mod tests {
         );
         assert_eq!(authority.summer_water_animation_frame_count(), 0);
         assert_eq!(authority.summer_water_animation_frame_duration_ms(), 0);
+    }
+
+    #[test]
+    fn summer_pale_shore_bridges_riverwater_to_wetsand_with_exact_source_roles() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR"));
+        let catalog =
+            SourceCatalog::load(&root.join("content/catalog/core_source_manifest.json")).unwrap();
+        let authority = AssetAuthority::load(
+            &root.join("content/assets/authority/elizawy_runtime_index.v1.json"),
+            &catalog,
+        )
+        .unwrap();
+        let entry = authority
+            .summer_shoreline_overlay_for_pair(
+                "summer_pale_shore_ring_overlay",
+                "RiverWater",
+                "WetSand",
+                ["WetSand", "WetSand", "WetSand", "RiverWater"],
+            )
+            .expect("pale-shore NW outer role");
+        assert_eq!(entry.source_path, "Terrain/terrain_summer.png");
+        assert_eq!(entry.source_rect_px, [320, 640, 32, 32]);
+        assert!(authority
+            .summer_shoreline_overlay_for_pair(
+                "summer_pale_shore_ring_overlay",
+                "RiverWater",
+                "Sand",
+                ["Sand", "Sand", "Sand", "RiverWater"],
+            )
+            .is_some());
+        assert!(authority
+            .summer_shoreline_overlay_for_pair(
+                "summer_pale_shore_ring_overlay",
+                "RiverWater",
+                "WetSand",
+                ["Grass", "WetSand", "WetSand", "RiverWater"],
+            )
+            .is_none());
     }
 
     #[test]
@@ -1223,6 +1478,26 @@ mod tests {
             .map(|binding| authority.seasonalize_binding(&binding, "winter"))
             .expect("tree template exists");
         assert_eq!(winter_tree.source_asset, "Terrain/trees_winter.png");
-        assert!(authority.contains_binding(&winter_tree));
+        assert!(authority.contains_source_slice(&winter_tree));
+
+        let summer_tree_region = authority
+            .object_templates
+            .iter()
+            .find(|template| template.worldgen_tags.iter().any(|tag| tag == "tree"))
+            .and_then(|template| template.parts.first())
+            .expect("tree template exists");
+        let [x, y, width, height] = summer_tree_region.source_rect_px;
+        assert!(width > 2 && height > 2);
+        let cropped_summer_tree = SourceBinding {
+            source_asset: summer_tree_region.source_path.clone(),
+            source_rect: [x + 1, y + 1, width - 2, height - 2],
+        };
+        let cropped_winter_tree = authority.seasonalize_binding(&cropped_summer_tree, "winter");
+        assert_eq!(cropped_winter_tree.source_asset, "Terrain/trees_winter.png");
+        assert_eq!(
+            cropped_winter_tree.source_rect,
+            cropped_summer_tree.source_rect
+        );
+        assert!(authority.contains_source_slice(&cropped_winter_tree));
     }
 }

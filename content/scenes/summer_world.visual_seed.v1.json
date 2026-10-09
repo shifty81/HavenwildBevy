@@ -8,7 +8,7 @@
   "objects": [
     {
       "id": "summer.house.east",
-      "label": "East-bank brick house · original whole sprite",
+      "label": "East-bank brick house \u00b7 original whole sprite",
       "layer": "structures",
       "anchor": [
         32,
@@ -42,7 +42,7 @@
     },
     {
       "id": "summer.broadleaf.northwest",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         2,
@@ -76,7 +76,7 @@
     },
     {
       "id": "summer.broadleaf.west",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         11,
@@ -110,7 +110,7 @@
     },
     {
       "id": "summer.broadleaf.east",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         29,
@@ -144,7 +144,7 @@
     },
     {
       "id": "summer.broadleaf.riverside",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         32,
@@ -178,7 +178,7 @@
     },
     {
       "id": "summer.broadleaf.southbank",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         26,
@@ -212,7 +212,7 @@
     },
     {
       "id": "summer.broadleaf.southwest",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         2,
@@ -246,7 +246,7 @@
     },
     {
       "id": "summer.broadleaf.southeast",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         32,
@@ -280,7 +280,7 @@
     },
     {
       "id": "summer.conifer.west",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         7,
@@ -314,7 +314,7 @@
     },
     {
       "id": "summer.conifer.southeast",
-      "label": "Summer tree · exact whole source sprite",
+      "label": "Summer tree \u00b7 exact whole source sprite",
       "layer": "objects",
       "anchor": [
         27,
@@ -348,7 +348,7 @@
     },
     {
       "id": "summer.fern.west",
-      "label": "Summer foliage · exact source region",
+      "label": "Summer foliage \u00b7 exact source region",
       "layer": "objects",
       "anchor": [
         23,
@@ -382,7 +382,7 @@
     },
     {
       "id": "summer.fern.east",
-      "label": "Summer foliage · exact source region",
+      "label": "Summer foliage \u00b7 exact source region",
       "layer": "objects",
       "anchor": [
         29,
@@ -416,7 +416,7 @@
     },
     {
       "id": "summer.shrub.west1",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         5,
@@ -450,7 +450,7 @@
     },
     {
       "id": "summer.shrub.west2",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         17,
@@ -484,7 +484,7 @@
     },
     {
       "id": "summer.shrub.house",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         31,
@@ -518,7 +518,7 @@
     },
     {
       "id": "summer.shrub.east",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         38,
@@ -552,7 +552,7 @@
     },
     {
       "id": "summer.shrub.southbank",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         34,
@@ -586,7 +586,7 @@
     },
     {
       "id": "summer.shrub.southwest",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         8,
@@ -620,7 +620,7 @@
     },
     {
       "id": "summer.shrub.edge",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         0,
@@ -654,7 +654,7 @@
     },
     {
       "id": "summer.shrub.west3",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         6,
@@ -688,7 +688,7 @@
     },
     {
       "id": "summer.shrub.east3",
-      "label": "Summer shrub · exact original source cell",
+      "label": "Summer shrub \u00b7 exact original source cell",
       "layer": "objects",
       "anchor": [
         38,
@@ -722,8 +722,8 @@
     },
     {
       "id": "summer.flowers.west",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         5,
         4
@@ -756,8 +756,8 @@
     },
     {
       "id": "summer.flowers.north",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         15,
         6
@@ -790,8 +790,8 @@
     },
     {
       "id": "summer.flowers.east",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         29,
         9
@@ -824,8 +824,8 @@
     },
     {
       "id": "summer.flowers.mid",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         38,
         14
@@ -858,8 +858,8 @@
     },
     {
       "id": "summer.flowers.southwest",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         6,
         26
@@ -892,8 +892,8 @@
     },
     {
       "id": "summer.flowers.southeast",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         31,
         26
@@ -926,8 +926,8 @@
     },
     {
       "id": "summer.flowers.northeast",
-      "label": "Wildflower detail · original source grouping",
-      "layer": "terrain_details",
+      "label": "Wildflower detail \u00b7 original source grouping",
+      "layer": "objects",
       "anchor": [
         38,
         3
@@ -960,7 +960,7 @@
     },
     {
       "id": "summer.reed.north",
-      "label": "Water-edge planting study · not traversal authority",
+      "label": "Water-edge planting study \u00b7 not traversal authority",
       "layer": "objects",
       "anchor": [
         24,
@@ -994,7 +994,7 @@
     },
     {
       "id": "summer.reed.mid",
-      "label": "Water-edge planting study · not traversal authority",
+      "label": "Water-edge planting study \u00b7 not traversal authority",
       "layer": "objects",
       "anchor": [
         19,
@@ -1028,7 +1028,7 @@
     },
     {
       "id": "summer.reed.west",
-      "label": "Water-edge planting study · not traversal authority",
+      "label": "Water-edge planting study \u00b7 not traversal authority",
       "layer": "objects",
       "anchor": [
         13,
@@ -1062,7 +1062,7 @@
     },
     {
       "id": "summer.reed.south",
-      "label": "Water-edge planting study · not traversal authority",
+      "label": "Water-edge planting study \u00b7 not traversal authority",
       "layer": "objects",
       "anchor": [
         11,
@@ -1096,7 +1096,7 @@
     },
     {
       "id": "summer.lily.north",
-      "label": "Lily pad study · original water detail",
+      "label": "Lily pad study \u00b7 original water detail",
       "layer": "objects",
       "anchor": [
         24,
@@ -1130,7 +1130,7 @@
     },
     {
       "id": "summer.lily.south",
-      "label": "Lily pad study · original water detail",
+      "label": "Lily pad study \u00b7 original water detail",
       "layer": "objects",
       "anchor": [
         15,
@@ -1164,7 +1164,7 @@
     },
     {
       "id": "summer.rock.east",
-      "label": "Grasslands rock · original complete source region",
+      "label": "Grasslands rock \u00b7 original complete source region",
       "layer": "objects",
       "anchor": [
         35,
@@ -1198,7 +1198,7 @@
     },
     {
       "id": "summer.rock.west",
-      "label": "Grasslands stone · original complete source region",
+      "label": "Grasslands stone \u00b7 original complete source region",
       "layer": "objects",
       "anchor": [
         2,

@@ -1,6 +1,6 @@
 {
   "schema": "havenwild.terrain.summer_flatworld_runtime.v1",
-  "version": 7,
+  "version": 8,
   "sourceAtlas": "Terrain/terrain_summer.png",
   "sourceAtlasSha256": "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752",
   "policy": {
@@ -508,10 +508,10 @@
   },
   "cornerRecipes": {
     "DeepWater|DeepWater|DeepWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.c584fe92d490c68d1b83694b",
+      "canonicalRegionId": "hw.elizawy.region.95c219cb176a24bf1a7f9732",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        0,
+        96,
         736,
         32,
         32
@@ -519,10 +519,10 @@
       "weight": 1
     },
     "DeepWater|DeepWater|RiverWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.c6d9ef639e9b0cd9511357a5",
+      "canonicalRegionId": "hw.elizawy.region.609d7fab0fcdb278d9a689e6",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
+        128,
         736,
         32,
         32
@@ -530,32 +530,32 @@
       "weight": 1
     },
     "DeepWater|DeepWater|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.18422d24ec1cb48fd05d92be",
+      "canonicalRegionId": "hw.elizawy.region.bc049df0cd961224b88279d8",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         32,
-        736,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "DeepWater|RiverWater|DeepWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.113e0166b3383059f2a673bf",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        0,
         800,
         32,
         32
       ],
       "weight": 1
     },
-    "DeepWater|RiverWater|DeepWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.0cd5124149a099e5ee35f2dc",
+    "DeepWater|RiverWater|DeepWater|DeepWater": {
+      "canonicalRegionId": "hw.elizawy.region.27dc4dbce7959e92e5620942",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        0,
+        96,
+        768,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "DeepWater|RiverWater|DeepWater|RiverWater": {
+      "canonicalRegionId": "hw.elizawy.region.375b0ba13c1ac1eb4e93c008",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        64,
         768,
         32,
         32
@@ -563,11 +563,11 @@
       "weight": 1
     },
     "DeepWater|RiverWater|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.d0f0534f29ddd01e53b393db",
+      "canonicalRegionId": "hw.elizawy.region.5055605d71997c76f822aeb3",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        128,
-        768,
+        64,
+        800,
         32,
         32
       ],
@@ -992,21 +992,21 @@
       "weight": 1
     },
     "RiverWater|DeepWater|DeepWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.5055605d71997c76f822aeb3",
+      "canonicalRegionId": "hw.elizawy.region.d0f0534f29ddd01e53b393db",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
-        800,
+        128,
+        768,
         32,
         32
       ],
       "weight": 1
     },
     "RiverWater|DeepWater|RiverWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.375b0ba13c1ac1eb4e93c008",
+      "canonicalRegionId": "hw.elizawy.region.0cd5124149a099e5ee35f2dc",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
+        0,
         768,
         32,
         32
@@ -1014,11 +1014,11 @@
       "weight": 1
     },
     "RiverWater|DeepWater|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.27dc4dbce7959e92e5620942",
+      "canonicalRegionId": "hw.elizawy.region.113e0166b3383059f2a673bf",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        96,
-        768,
+        0,
+        800,
         32,
         32
       ],
@@ -1091,21 +1091,21 @@
       "weight": 1
     },
     "RiverWater|RiverWater|DeepWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.bc049df0cd961224b88279d8",
+      "canonicalRegionId": "hw.elizawy.region.18422d24ec1cb48fd05d92be",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         32,
-        800,
+        736,
         32,
         32
       ],
       "weight": 1
     },
     "RiverWater|RiverWater|DeepWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.609d7fab0fcdb278d9a689e6",
+      "canonicalRegionId": "hw.elizawy.region.c6d9ef639e9b0cd9511357a5",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        128,
+        64,
         736,
         32,
         32
@@ -1157,10 +1157,10 @@
       "weight": 1
     },
     "RiverWater|RiverWater|RiverWater|DeepWater": {
-      "canonicalRegionId": "hw.elizawy.region.95c219cb176a24bf1a7f9732",
+      "canonicalRegionId": "hw.elizawy.region.c584fe92d490c68d1b83694b",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        96,
+        0,
         736,
         32,
         32
@@ -1190,10 +1190,10 @@
       "weight": 1
     },
     "RiverWater|RiverWater|RiverWater|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.6f204eeef00acbd45bd1db26",
+      "canonicalRegionId": "hw.elizawy.region.d5b3281e8386d7ea9a7fd94f",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        0,
+        96,
         640,
         32,
         32
@@ -1201,10 +1201,10 @@
       "weight": 1
     },
     "RiverWater|RiverWater|Sand|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.81d790785ed359a77ee0d606",
+      "canonicalRegionId": "hw.elizawy.region.cd414ffb6a570f9792eeff0b",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
+        128,
         640,
         32,
         32
@@ -1212,32 +1212,32 @@
       "weight": 1
     },
     "RiverWater|RiverWater|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.9aaf8091ae5fe593ea6e8c21",
+      "canonicalRegionId": "hw.elizawy.region.554331f713ff6b1016ed1504",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         32,
-        640,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "RiverWater|Sand|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.f8d9a263b91b10b9362c515b",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        0,
         704,
         32,
         32
       ],
       "weight": 1
     },
-    "RiverWater|Sand|RiverWater|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.578949d94b0e85c77adce79a",
+    "RiverWater|Sand|RiverWater|RiverWater": {
+      "canonicalRegionId": "hw.elizawy.region.4bd3f4c635adef0a6e9cf9a9",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        0,
+        96,
+        672,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "RiverWater|Sand|RiverWater|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.3a0f8b174ec10471231c2936",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        64,
         672,
         32,
         32
@@ -1245,11 +1245,11 @@
       "weight": 1
     },
     "RiverWater|Sand|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.aa8ba1fe526ae9db33430ea7",
+      "canonicalRegionId": "hw.elizawy.region.75d27e1d7af69f9abb3f2635",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        128,
-        672,
+        64,
+        704,
         32,
         32
       ],
@@ -1289,21 +1289,21 @@
       "weight": 1
     },
     "Sand|RiverWater|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.75d27e1d7af69f9abb3f2635",
+      "canonicalRegionId": "hw.elizawy.region.aa8ba1fe526ae9db33430ea7",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
-        704,
+        128,
+        672,
         32,
         32
       ],
       "weight": 1
     },
     "Sand|RiverWater|Sand|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.3a0f8b174ec10471231c2936",
+      "canonicalRegionId": "hw.elizawy.region.578949d94b0e85c77adce79a",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        64,
+        0,
         672,
         32,
         32
@@ -1311,11 +1311,11 @@
       "weight": 1
     },
     "Sand|RiverWater|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.4bd3f4c635adef0a6e9cf9a9",
+      "canonicalRegionId": "hw.elizawy.region.f8d9a263b91b10b9362c515b",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        96,
-        672,
+        0,
+        704,
         32,
         32
       ],
@@ -1344,21 +1344,21 @@
       "weight": 1
     },
     "Sand|Sand|RiverWater|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.554331f713ff6b1016ed1504",
+      "canonicalRegionId": "hw.elizawy.region.9aaf8091ae5fe593ea6e8c21",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         32,
-        704,
+        640,
         32,
         32
       ],
       "weight": 1
     },
     "Sand|Sand|RiverWater|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.cd414ffb6a570f9792eeff0b",
+      "canonicalRegionId": "hw.elizawy.region.81d790785ed359a77ee0d606",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        128,
+        64,
         640,
         32,
         32
@@ -1377,10 +1377,10 @@
       "weight": 1
     },
     "Sand|Sand|Sand|RiverWater": {
-      "canonicalRegionId": "hw.elizawy.region.d5b3281e8386d7ea9a7fd94f",
+      "canonicalRegionId": "hw.elizawy.region.6f204eeef00acbd45bd1db26",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
-        96,
+        0,
         640,
         32,
         32
@@ -1388,116 +1388,17 @@
       "weight": 1
     },
     "Sand|Sand|Sand|WetSand": {
-      "canonicalRegionId": "hw.elizawy.region.91cd481e6ea4e0913ecf234f",
+      "canonicalRegionId": "hw.elizawy.region.a5c134c1bd04ad9edd1ba60a",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         288,
-        256,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "Sand|Sand|WetSand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.9ca70d1ac19e6bfc6aa14c2a",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        320,
-        256,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "Sand|Sand|WetSand|WetSand": {
-      "canonicalRegionId": "hw.elizawy.region.c21a2623b89f8a5e3feeb51b",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        320,
-        224,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "Sand|WetSand|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.12c733bd5ccec85848235908",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        288,
-        288,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "Sand|WetSand|Sand|WetSand": {
-      "canonicalRegionId": "hw.elizawy.region.c710da9eeb747fb4b3ba62a1",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        352,
-        192,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "Sand|WetSand|WetSand|WetSand": {
-      "canonicalRegionId": "hw.elizawy.region.4f00852b0abd1643d25cf94f",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        352,
-        224,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "WetSand|Sand|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.62d2b3eaf8e14337f4de02c1",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        320,
-        288,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "WetSand|Sand|WetSand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.7365261eab2f4848635c4743",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        288,
-        192,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "WetSand|Sand|WetSand|WetSand": {
-      "canonicalRegionId": "hw.elizawy.region.bb74d2454cb4f9e1caffdc91",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        288,
-        224,
-        32,
-        32
-      ],
-      "weight": 1
-    },
-    "WetSand|WetSand|Sand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.9d77e179f732666c54f44f6e",
-      "sourcePath": "Terrain/terrain_summer.png",
-      "sourceRectPx": [
-        320,
         160,
         32,
         32
       ],
       "weight": 1
     },
-    "WetSand|WetSand|Sand|WetSand": {
+    "Sand|Sand|WetSand|Sand": {
       "canonicalRegionId": "hw.elizawy.region.3c56ffb13525ee3337a50deb",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
@@ -1508,12 +1409,111 @@
       ],
       "weight": 1
     },
-    "WetSand|WetSand|WetSand|Sand": {
-      "canonicalRegionId": "hw.elizawy.region.a5c134c1bd04ad9edd1ba60a",
+    "Sand|Sand|WetSand|WetSand": {
+      "canonicalRegionId": "hw.elizawy.region.9d77e179f732666c54f44f6e",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        320,
+        160,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "Sand|WetSand|Sand|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.bb74d2454cb4f9e1caffdc91",
       "sourcePath": "Terrain/terrain_summer.png",
       "sourceRectPx": [
         288,
-        160,
+        224,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "Sand|WetSand|Sand|WetSand": {
+      "canonicalRegionId": "hw.elizawy.region.7365261eab2f4848635c4743",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        288,
+        192,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "Sand|WetSand|WetSand|WetSand": {
+      "canonicalRegionId": "hw.elizawy.region.62d2b3eaf8e14337f4de02c1",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        320,
+        288,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|Sand|Sand|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.4f00852b0abd1643d25cf94f",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        352,
+        224,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|Sand|WetSand|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.c710da9eeb747fb4b3ba62a1",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        352,
+        192,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|Sand|WetSand|WetSand": {
+      "canonicalRegionId": "hw.elizawy.region.12c733bd5ccec85848235908",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        288,
+        288,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|WetSand|Sand|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.c21a2623b89f8a5e3feeb51b",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        320,
+        224,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|WetSand|Sand|WetSand": {
+      "canonicalRegionId": "hw.elizawy.region.9ca70d1ac19e6bfc6aa14c2a",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        320,
+        256,
+        32,
+        32
+      ],
+      "weight": 1
+    },
+    "WetSand|WetSand|WetSand|Sand": {
+      "canonicalRegionId": "hw.elizawy.region.91cd481e6ea4e0913ecf234f",
+      "sourcePath": "Terrain/terrain_summer.png",
+      "sourceRectPx": [
+        288,
+        256,
         32,
         32
       ],
@@ -4382,7 +4382,9 @@
     "All 305 non-transparent cells in the Summer atlas are canonical runtime-selectable source regions grouped by the recovered Native authority.",
     "The original Grass/Dirt/Water 81-state evidence grammar remains preserved for compatibility and audit, while live ambiguous shoreline resolution is land-connectivity-first and never requires quadrant-spliced output.",
     "Sand, WetSand, PebblePath and DeepWater are promoted as source-backed semantic materials from existing Summer groups; no pixels are synthesized.",
-    "Source-authored Grass/Sand, Sand/WetSand, Sand/Water, shallow/deep-water and PebblePath/Dirt boundaries are available to the semantic resolver where their source families provide an exact role.",
+    "All active source-authored material boundaries are projected from the Native shared_8_neighbor_owner_side authority; family names are never used to guess foreground/background ownership.",
+    "Sand/WetSand, Sand/Water and shallow/deep-water corner orientation is owner-correct: WetSand, RiverWater and DeepWater respectively own their source families, preventing outer/inner corner inversion on island coasts.",
+    "The Summer pale-shore ring is certified as a 12-role source visual family and is used by the live resolver as the exact Water/WetSand visual bridge; WetSand then hands off to Sand through its separate owner-side family.",
     "Ambiguous diagonal land/water contacts connect land by default. Water remains open only when its two corners are cardinally adjacent, so one-cell square water notches do not appear between near-touching land.",
     "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
     "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
@@ -8934,12 +8936,1319 @@
       "PebblePath"
     ],
     "transitionRecipeCounts": {
+      "summer_grass_over_dirt": 12,
       "summer_grass_over_sand": 12,
-      "summer_sand_over_wet_sand": 12,
+      "summer_pebble_path_over_dirt": 8,
+      "summer_grass_bank_pond_a": 12,
+      "summer_dirt_bank_pond_a": 12,
       "summer_sand_bank_pond": 12,
-      "summer_deep_water_basin": 12,
-      "summer_pebble_path_over_dirt": 8
+      "summer_sand_over_wet_sand": 12,
+      "summer_deep_water_basin": 12
     },
-    "diagonalPolicy": "land_connectivity_first_no_quadrant_splice"
+    "diagonalPolicy": "land_connectivity_first_no_quadrant_splice",
+    "topologyAuthority": "native_shared_8_neighbor_owner_side"
+  },
+  "ownerSideTransitions": {
+    "summer_grass_over_dirt": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "Grass",
+      "neighbor": "MudBank",
+      "sourceOwner": "grass",
+      "sourceNeighbor": "dirt",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.ffccc75149bac2b5221936c8",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.90b32f1f44b9f2b01230b2c2",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.08857863dc519ee8a8a5ffba",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.9e970711036d7f3ea3e52faf",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            32,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.234952f4397f20599a130251",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            32,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.08fa88a77a7cda510df620d2",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.03def0ae523835624aa4a264",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.2c91ddbe444d7a307c621888",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.a9adc71032759b31e098c460",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            96,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.ea07ceecf80802b5001cd56e",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            96,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.6e3d53885fe58e377aa4b736",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            128,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.0054812815391a7aff51d49d",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            128,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      }
+    },
+    "summer_grass_over_sand": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "Grass",
+      "neighbor": "Sand",
+      "sourceOwner": "grass",
+      "sourceNeighbor": "sand",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.1176b56c20a3d4c689ccea28",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.24c0a2149c594c862f5aeeaf",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.2ff8387b91a0bd4d3f933bc6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.b1c9e70e03a53ef8838105f7",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            192,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.826ecd9d393b6388ba44732b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            192,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.02f3a2e34b17edac92edc18d",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.2350993e8dcbe3a6367cd9c6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.f65ff073270f619686cbee01",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.b0d407f735cc8d25035ec8c2",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            256,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.8e366676aa4de87c2ea4993e",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            256,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.1f29a2e2d4de0e7dee7000a6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            288,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.5e95d7ae65f6e26c5413d1a9",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            288,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      }
+    },
+    "summer_pebble_path_over_dirt": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "PebblePath",
+      "neighbor": "MudBank",
+      "sourceOwner": "pebble_path",
+      "sourceNeighbor": "dirt",
+      "outerRoleCount": 8,
+      "innerRoleCount": 0,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.4bdb3260f73e42c6ee4589c4",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.51014e461bbaa92370aa5ca7",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.6b0e93cabbecce702f029736",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            0,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.4579afee878299082a3c4b29",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            32,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.8af3a714e261a8c1b08eb3d5",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            32,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.e7ed884388c987fec073f65b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.d190fa4b1f1a8f1458446c12",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.2514f2d2f2bd0c4e0bb82f2e",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            64,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "center": {
+        "canonicalRegionId": "hw.elizawy.region.3195771f2ee369ebe8c3b0c4",
+        "sourcePath": "Terrain/terrain_summer.png",
+        "sourceRectPx": [
+          320,
+          32,
+          32,
+          32
+        ],
+        "weight": 1
+      }
+    },
+    "summer_grass_bank_pond_a": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "RiverWater",
+      "neighbor": "Grass",
+      "sourceOwner": "shallow_water",
+      "sourceNeighbor": "grass",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.7791ef58c53fde008f64cb53",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.165bafd60a7c8e113c5784c5",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.505dca2b7fa5458a086502a1",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.c84da60391cafa99aee60435",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            352,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.81212a25c1df7a55b4cb7052",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            352,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.0de1ae818dd40d4b1bed3101",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.89b48e9d7c6a99086883ba2c",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.8f995236abe7a11c6571cedc",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.c13e47639d5a69802f5d3151",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            416,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.5531a62680b9397432a4b339",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            416,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.a7d84e7ae110ba4a1fdc835f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            448,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.c6c7a575a8d66afafc75072f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            448,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "center": {
+        "canonicalRegionId": "hw.elizawy.region.827b306748ea6cbe0d709a17",
+        "sourcePath": "Terrain/terrain_summer.png",
+        "sourceRectPx": [
+          32,
+          352,
+          32,
+          32
+        ],
+        "weight": 1
+      }
+    },
+    "summer_dirt_bank_pond_a": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "RiverWater",
+      "neighbor": "MudBank",
+      "sourceOwner": "shallow_water",
+      "sourceNeighbor": "dirt",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.2da6aa6984fdfe637a951bcb",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.1938227969a004e25ea83cd4",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.0110317a2d16eb8021237fa3",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            320,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.283d3fa3de5126b578d5b697",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            352,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.bf7b5879a99aaf12e7a8093d",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            352,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.3a9135774d399f30b50691ef",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.ec2878447b6f991e185835fb",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.c2f3b9d5b7e0d75a5d362986",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            256,
+            384,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.3d94b2f683737e45e9b065b6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            416,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.a9fbb80261b2716437c4a7f6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            416,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.75bae5f74fd9494956480062",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            192,
+            448,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.76d8a199cbbb7ac1aad0f504",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            224,
+            448,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      }
+    },
+    "summer_sand_bank_pond": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "RiverWater",
+      "neighbor": "Sand",
+      "sourceOwner": "shallow_water",
+      "sourceNeighbor": "sand",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.6f204eeef00acbd45bd1db26",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.9aaf8091ae5fe593ea6e8c21",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.81d790785ed359a77ee0d606",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.578949d94b0e85c77adce79a",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.3a0f8b174ec10471231c2936",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.f8d9a263b91b10b9362c515b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.554331f713ff6b1016ed1504",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.75d27e1d7af69f9abb3f2635",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.d5b3281e8386d7ea9a7fd94f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            96,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.cd414ffb6a570f9792eeff0b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            128,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.4bd3f4c635adef0a6e9cf9a9",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            96,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.aa8ba1fe526ae9db33430ea7",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            128,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "center": {
+        "canonicalRegionId": "hw.elizawy.region.13233e6c9ab1434b726a7642",
+        "sourcePath": "Terrain/terrain_summer.png",
+        "sourceRectPx": [
+          32,
+          672,
+          32,
+          32
+        ],
+        "weight": 1
+      }
+    },
+    "summer_sand_over_wet_sand": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "WetSand",
+      "neighbor": "Sand",
+      "sourceOwner": "wet_sand",
+      "sourceNeighbor": "sand",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.a5c134c1bd04ad9edd1ba60a",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.9d77e179f732666c54f44f6e",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.3c56ffb13525ee3337a50deb",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            160,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.7365261eab2f4848635c4743",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            192,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.c710da9eeb747fb4b3ba62a1",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            192,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.bb74d2454cb4f9e1caffdc91",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.c21a2623b89f8a5e3feeb51b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.4f00852b0abd1643d25cf94f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            224,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.91cd481e6ea4e0913ecf234f",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            256,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.9ca70d1ac19e6bfc6aa14c2a",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            256,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.12c733bd5ccec85848235908",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            288,
+            288,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.62d2b3eaf8e14337f4de02c1",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            288,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "center": {
+        "canonicalRegionId": "hw.elizawy.region.f0f5cf935ffd071eb1f0daf2",
+        "sourcePath": "Terrain/terrain_summer.png",
+        "sourceRectPx": [
+          320,
+          192,
+          32,
+          32
+        ],
+        "weight": 1
+      }
+    },
+    "summer_deep_water_basin": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "DeepWater",
+      "neighbor": "RiverWater",
+      "sourceOwner": "deep_water",
+      "sourceNeighbor": "shallow_water",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.c584fe92d490c68d1b83694b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            736,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.18422d24ec1cb48fd05d92be",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            736,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.c6d9ef639e9b0cd9511357a5",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            736,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.0cd5124149a099e5ee35f2dc",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            768,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.375b0ba13c1ac1eb4e93c008",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            768,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.113e0166b3383059f2a673bf",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            0,
+            800,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.bc049df0cd961224b88279d8",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            32,
+            800,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.5055605d71997c76f822aeb3",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            64,
+            800,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.95c219cb176a24bf1a7f9732",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            96,
+            736,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.609d7fab0fcdb278d9a689e6",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            128,
+            736,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.27dc4dbce7959e92e5620942",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            96,
+            768,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.d0f0534f29ddd01e53b393db",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            128,
+            768,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "center": {
+        "canonicalRegionId": "hw.elizawy.region.9cd0d6b4258e4debb4074107",
+        "sourcePath": "Terrain/terrain_summer.png",
+        "sourceRectPx": [
+          32,
+          768,
+          32,
+          32
+        ],
+        "weight": 1
+      }
+    }
+  },
+  "shorelineOverlayFamilies": {
+    "summer_pale_shore_ring_overlay": {
+      "topologyRule": "shared_8_neighbor_owner_side",
+      "owner": "RiverWater",
+      "neighbor": "pale_shore",
+      "sourceOwner": "shallow_water",
+      "sourceNeighbor": "pale_shore",
+      "outerRoleCount": 8,
+      "innerRoleCount": 4,
+      "roles": {
+        "outer_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.e13568411bb855fb67f2767c",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north": {
+          "canonicalRegionId": "hw.elizawy.region.95eefd18864c16e38d53399b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.9610cfa9045df09eeefb3759",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            384,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_west": {
+          "canonicalRegionId": "hw.elizawy.region.fd13837bc7b6148060a696ec",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_east": {
+          "canonicalRegionId": "hw.elizawy.region.7485aa86772879646a4c5b47",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            384,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.3e375590f1e3038aa108c19a",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            320,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south": {
+          "canonicalRegionId": "hw.elizawy.region.e166ab10eefe07f5319042ec",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            352,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "outer_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.26d3b18bebc1f872d9f3ed4b",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            384,
+            704,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_east": {
+          "canonicalRegionId": "hw.elizawy.region.df7d9a6e1f76bf1c4af3fa28",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            416,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_south_west": {
+          "canonicalRegionId": "hw.elizawy.region.af444d6b13e338813c0466b1",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            448,
+            640,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_east": {
+          "canonicalRegionId": "hw.elizawy.region.ee13626d5668269dc38748fb",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            416,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        },
+        "inner_north_west": {
+          "canonicalRegionId": "hw.elizawy.region.60f133e47f8b13646bbb1d72",
+          "sourcePath": "Terrain/terrain_summer.png",
+          "sourceRectPx": [
+            448,
+            672,
+            32,
+            32
+          ],
+          "weight": 1
+        }
+      },
+      "runtimeUse": "certified_source_visual_bridge_for_wetsand"
+    }
   }
 }

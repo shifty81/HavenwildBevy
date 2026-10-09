@@ -19,6 +19,7 @@ def main() -> int:
         Path("docs/PROJECT_CONTROL_CENTER.md"),
         Path("assets/README.md"),
         Path("updates/README.md"),
+        Path("LICENSES/HAVENWILD_CREDITS.md"),
     ]
     blocked = [
         Path("old-handoff.zip"),
@@ -37,6 +38,13 @@ def main() -> int:
         Path("reference/donor.zip"),
         Path("updates/inbox/new.pccpatch.zip"),
         Path("content/scenes/derived/local-draft.json"),
+        Path("rust/crates/nh_core/src/lib.rs"),
+        Path("legacy/archive/docs/file.md"),
+        Path("tools/rust/project_control.py"),
+        Path("content/architecture/other_project.json"),
+        Path("PROJECT_SOURCE_MANIFEST.json"),
+        Path("Null" + "Harbor.cmd"),
+        Path("docs/architecture/NULL_" + "HARBOR_SOURCE.md"),
     ]
     errors = []
     for rel in allowed:

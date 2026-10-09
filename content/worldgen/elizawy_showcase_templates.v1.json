@@ -68,16 +68,18 @@
     },
     {
       "key": "bridge_wood_a_rails",
-      "label": "Wood Bridge A \u00b7 reviewed source section",
+      "label": "Wood Bridge A \u00b7 modular horizontal crossing (left + repeatable middle + right)",
       "layer": "structures",
       "footprintCells": [
-        4,
-        3
+        3,
+        2
       ],
       "worldgenTags": [
         "bridge",
-        "river_crossing",
-        "large_structure"
+        "large_structure",
+        "modular_bridge",
+        "repeatable_span",
+        "river_crossing"
       ],
       "parts": [
         {
@@ -87,17 +89,43 @@
           ],
           "sourcePath": "Structure/Bridges/Wood Bridge A - Rails.png",
           "sourceRectPx": [
-            0,
-            0,
             128,
-            96
+            0,
+            32,
+            64
+          ]
+        },
+        {
+          "offsetPx": [
+            32,
+            0
+          ],
+          "sourcePath": "Structure/Bridges/Wood Bridge A - Rails.png",
+          "sourceRectPx": [
+            160,
+            0,
+            32,
+            64
+          ]
+        },
+        {
+          "offsetPx": [
+            64,
+            0
+          ],
+          "sourcePath": "Structure/Bridges/Wood Bridge A - Rails.png",
+          "sourceRectPx": [
+            192,
+            0,
+            32,
+            64
           ]
         }
       ]
     },
     {
       "key": "barrel_a",
-      "label": "Barrel \u00b7 reviewed source cell",
+      "label": "Barrel \u00b7 reviewed full 32x64 sprite",
       "layer": "objects",
       "footprintCells": [
         1,
@@ -113,14 +141,14 @@
         {
           "offsetPx": [
             0,
-            0
+            -32
           ],
           "sourcePath": "Objects/Furniture/Barrel.png",
           "sourceRectPx": [
             0,
             0,
             32,
-            32
+            64
           ]
         }
       ]
@@ -186,11 +214,11 @@
     },
     {
       "key": "waterfall_front_a_static",
-      "label": "Waterfall front A \u00b7 reviewed static source frame",
+      "label": "Waterfall front A \u00b7 south-facing body/splash without north cap",
       "layer": "objects",
       "footprintCells": [
         3,
-        1
+        4
       ],
       "worldgenTags": [
         "waterfall",
@@ -202,24 +230,24 @@
         {
           "offsetPx": [
             0,
-            -128
+            0
           ],
           "sourcePath": "Terrain/Waterfall.png",
           "sourceRectPx": [
             0,
-            0,
+            32,
             96,
-            160
+            128
           ]
         }
       ]
     },
     {
       "key": "cave_cliff_feature_a",
-      "label": "Cliff cave feature A \u00b7 reviewed source section",
+      "label": "Cliff cave feature A \u00b7 complete wide entrance section",
       "layer": "structures",
       "footprintCells": [
-        3,
+        5,
         3
       ],
       "worldgenTags": [
@@ -232,13 +260,13 @@
         {
           "offsetPx": [
             0,
-            -64
+            0
           ],
           "sourcePath": "Terrain/cliff_summer.png",
           "sourceRectPx": [
-            192,
+            224,
             288,
-            96,
+            160,
             96
           ]
         }

@@ -1,0 +1,12 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpointId": "M2D095D",
+  "sourceVersion": "0.10.13",
+  "parentCheckpoint": "M2D095C",
+  "parentSourceVersion": "0.10.12",
+  "parentSourceSha256": "7c6ea7116746ae278fca2847c43040e7921968a9735edc4a68072deeca565152",
+  "purpose": "DX12 live-resize surface guard after green 0.10.12 native build; normal resizable Studio path moved to Vulkan; DX12 retained in fixed-size safe mode and explicit resize diagnostic mode.",
+  "terrainAuthorityUnchanged": true,
+  "bevy": "0.19.0",
+  "tiled": "0.16.0"
+}

@@ -507,10 +507,49 @@ def _write_character_state(*, count: int, archive: Path, verification: str = "ar
     _save_json(ASSET_STATE, state)
 
 
+def verify_character_archive(archive: Path) -> tuple[bool, str]:
+    """Fail closed against the pinned LPC character pack before catalog/hydration.
+
+    A local `assets/optional/Characters.zip` must not bypass source validation.
+    Member CRC32 is checked by ZipExtFile while extracting, and explicitly
+    checked against hydrated files when --verify is requested.
+    """
+    expected = (_load_json(CORE_MANIFEST, {}) or {}).get("optionalArchives", {}).get("Characters.zip", {})
+    if not archive.is_file():
+        return False, "character archive missing"
+    if not expected.get("bytes") or not expected.get("sha256"):
+        return False, "canonical Characters.zip authority missing"
+    if archive.stat().st_size != expected["bytes"]:
+        return False, f"archive byte count differs from pinned source: {archive.stat().st_size}"
+    digest = _sha256(archive)
+    if digest != expected["sha256"]:
+        return False, f"archive SHA256 differs from pinned source: {digest}"
+    return True, "pinned size and SHA256 verified"
+
+
+def _character_file_matches_crc32(path: Path, expected_size: int, expected_crc: int) -> bool:
+    """Explicit --verify: check hydrated member bytes, not only file sizes."""
+    import zlib
+    try:
+        if path.stat().st_size != expected_size:
+            return False
+        crc = 0
+        with path.open("rb") as f:
+            for block in iter(lambda: f.read(1024 * 1024), b""):
+                crc = zlib.crc32(block, crc)
+        return (crc & 0xffffffff) == expected_crc
+    except OSError:
+        return False
+
+
 def build_character_catalog(archive: Path | None = None) -> int:
     archive = archive or (OPTIONAL_ROOT / "Characters.zip")
     entries = []
     if archive.is_file():
+        valid, reason = verify_character_archive(archive)
+        if not valid:
+            print(f"CHARACTER CATALOG BLOCKED: {reason}")
+            return 3
         with zipfile.ZipFile(archive) as z:
             infos = [item for item in z.infolist() if not item.is_dir()]
             total = len(infos)
@@ -581,6 +620,11 @@ def hydrate_characters(source_arg: str | None = None, *, verify: bool = False) -
     if not archive.is_file():
         print("Characters.zip is unavailable. Run assets sync with a source containing the archive.")
         return 2
+    valid, reason = verify_character_archive(archive)
+    if not valid:
+        print(f"CHARACTERS: refused unverified archive: {reason}")
+        return 3
+    print(f"CHARACTERS SOURCE: {reason}")
 
     base = ASSET_ROOT
     with zipfile.ZipFile(archive) as z:
@@ -619,20 +663,28 @@ def hydrate_characters(source_arg: str | None = None, *, verify: bool = False) -
             if not rel.parts or rel.parts[0] != "Characters":
                 raise RuntimeError(f"Unexpected character archive path: {item.filename}")
             dst = base / rel
-            try:
-                if dst.stat().st_size == item.file_size:
-                    current += 1
-                else:
-                    raise OSError
-            except OSError:
+            intact = (_character_file_matches_crc32(dst, item.file_size, item.CRC)
+                      if verify else (dst.is_file() and dst.stat().st_size == item.file_size))
+            if intact:
+                current += 1
+            else:
                 dst.parent.mkdir(parents=True, exist_ok=True)
-                with z.open(item) as source, dst.open("wb") as target:
-                    shutil.copyfileobj(source, target, length=1024 * 1024)
+                # ZipExtFile checks source CRC32 upon decompression. Write to a
+                # temporary neighbor and only publish complete, verified bytes.
+                tmp = dst.with_name(dst.name + ".hydrate-tmp")
+                try:
+                    with z.open(item) as source, tmp.open("wb") as target:
+                        shutil.copyfileobj(source, target, length=1024 * 1024)
+                    if not _character_file_matches_crc32(tmp, item.file_size, item.CRC):
+                        raise RuntimeError(f"Invalid member CRC: {item.filename}")
+                    tmp.replace(dst)
+                finally:
+                    tmp.unlink(missing_ok=True)
                 written += 1
             if idx % 2500 == 0 or idx == total:
                 print(f"CHARACTERS: {idx}/{total} checked | new={written} current={current}")
 
-    _write_character_state(count=total, archive=archive, verification="archive_member_size")
+    _write_character_state(count=total, archive=archive, verification=("archive_member_crc32" if verify else "archive_member_size"))
     print(f"CHARACTERS: ready {total} files in {base / 'Characters'}")
     return build_character_catalog(archive)
 
@@ -1003,7 +1055,7 @@ def build(release: bool = False, *, refresh_source: bool = True) -> int:
     return _stream(cmd, label="build-release" if release else "build")
 
 
-def run(backend: str = "dx12", native_frame: bool = False, verbose_gpu: bool = False) -> int:
+def run(backend: str = "vulkan", native_frame: bool = False, verbose_gpu: bool = False, allow_dx12_resize: bool = False) -> int:
     if asset_status() != 0:
         print("RUN BLOCKED: required source sheets are not hydrated.")
         return 3
@@ -1012,14 +1064,15 @@ def run(backend: str = "dx12", native_frame: bool = False, verbose_gpu: bool = F
         return 127
     env = {
         "WGPU_BACKEND": backend,
-        "STUDIO_NATIVE_FRAME": "1" if native_frame else "0",
+        "STUDIO_NATIVE_FRAME": "1",
+        "HAVENWILD_DX12_ALLOW_RESIZE": "1" if allow_dx12_resize else "0",
         "RUST_BACKTRACE": "full" if verbose_gpu else "1",
     }
     if verbose_gpu:
         # Keep the normal run readable. This opt-in profile increases renderer/window
         # evidence only when diagnosing a backend-specific launch or draw failure.
         env["RUST_LOG"] = "info,wgpu_core=debug,wgpu_hal=info,bevy_render=debug,bevy_winit=debug"
-    suffix = ("-native" if native_frame else "") + ("-gpu-debug" if verbose_gpu else "")
+    suffix = ("-dx12-resize-diagnostic" if allow_dx12_resize else "") + ("-gpu-debug" if verbose_gpu else "")
     return _stream(["cargo", "run"], env=env, label=f"run-{backend}{suffix}")
 
 
@@ -1078,11 +1131,19 @@ def clean() -> int:
 def _source_package_include(rel: Path) -> bool:
     """Return True only for files that belong in a deployable source-only rollup."""
     rel_posix = rel.as_posix()
-    excluded_roots = {".git", "target", "artifacts", ".vs", ".idea", ".vscode", ".forgepy", ".pcc", "__pycache__"}
+    # Deliberate source boundary: the Bevy game is not a donor aggregate.
+    excluded_roots = {".git", "target", "artifacts", ".vs", ".idea", ".vscode", ".forgepy", ".pcc", "__pycache__", "rust", "legacy"}
+    foreign_names = ("null" + "harbor", "null_" + "harbor", "null-" + "harbor", "sub" + "space", "ship" + "yard")
+    if rel.parts and any(token in part.lower() for part in rel.parts for token in foreign_names):
+        return False
+    if len(rel.parts) >= 2 and (rel.parts[0], rel.parts[1]) in {( "tools", "rust"), ("content", "architecture")} :
+        return False
 
     if rel.suffix.lower() == ".pyc":
         return False
     if rel_posix in {"LOCAL_SEED_MANIFEST.json", "LOCAL_SEED_OVERLAY_README.txt", "pcc_patch.json"}:
+        return False
+    if rel_posix in {"PROJECT_SOURCE_MANIFEST.json", "R200_HANDOFF_README.md", "cd", "docs/rollup/M2D100_SOURCE_FILE_SHA256.json", "docs/rollup/M2D116_SOURCE_FILE_SHA256_20261009.json"}:
         return False
     if rel_posix in SOURCE_PACKAGE_EXCLUDE_EXACT:
         return False
@@ -1192,9 +1253,10 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     full_p = sub.add_parser("full")
     full_p.add_argument("--source")
     run_p = sub.add_parser("run")
-    run_p.add_argument("--backend", choices=["dx12", "vulkan"], default="dx12")
+    run_p.add_argument("--backend", choices=["dx12", "vulkan"], default="vulkan")
     run_p.add_argument("--native-frame", action="store_true")
     run_p.add_argument("--verbose-gpu", action="store_true")
+    run_p.add_argument("--allow-dx12-resize", action="store_true")
     assets = sub.add_parser("assets")
     aset = assets.add_subparsers(dest="asset_command")
     status_p = aset.add_parser("status")
@@ -1235,7 +1297,7 @@ def main(argv: list[str]) -> int:
     if command == "package": return package_source()
     if command == "setup": return setup(args.source)
     if command == "full": return full(args.source)
-    if command == "run": return run(args.backend, args.native_frame, args.verbose_gpu)
+    if command == "run": return run(args.backend, args.native_frame, args.verbose_gpu, args.allow_dx12_resize)
     if command == "assets":
         if args.asset_command == "status": return asset_status(full_verify=args.full, require_complete=args.complete)
         if args.asset_command == "sync": return sync_assets(args.source, characters=args.characters, include_optional=args.include_optional, reference=args.reference, local_only=args.local_only)

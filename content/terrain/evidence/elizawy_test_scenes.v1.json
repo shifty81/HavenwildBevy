@@ -1,0 +1,56 @@
+{
+  "schema": "havenwild.elizawy.test_scene_reference.v1",
+  "authority": "visual_reference_only_no_runtime_promotion",
+  "repository": "https://github.com/ElizaWy/LPC",
+  "pinnedRevision": "f07f7f5892e67c932c68f70bb04472f2c64e46bc",
+  "notes": [
+    "The upstream _ Test Scenes directory contains rendered reference images, not a runnable map/demo project.",
+    "Static scene PNGs are composition evidence only and cannot prove frame-by-frame terrain animation behavior.",
+    "Animation timing and frame ownership must come from authored TSX/animation metadata or original animated source assets.",
+    "No test-scene image may become Havenwild runtime art authority."
+  ],
+  "files": [
+    {
+      "path": "_ Test Scenes/DemoGame - 1 - Spring.png",
+      "gitBlobSha": "7f674f53485af3492b0cc64fd8fd5363b5074a15",
+      "bytes": 295377,
+      "season": "spring",
+      "kind": "static_reference"
+    },
+    {
+      "path": "_ Test Scenes/DemoGame - 2 - Summer.png",
+      "gitBlobSha": "b14449f3de6190b47011ec33e60cbe3f0ae09c61",
+      "bytes": 296311,
+      "season": "summer",
+      "kind": "static_reference"
+    },
+    {
+      "path": "_ Test Scenes/DemoGame - 3 - Autumn.png",
+      "gitBlobSha": "e6acfa44a20cd89b945780f89a9f250926e7b372",
+      "bytes": 297077,
+      "season": "autumn",
+      "kind": "static_reference"
+    },
+    {
+      "path": "_ Test Scenes/DemoGame - 4 - Winter.png",
+      "gitBlobSha": "baaaeac0a2c1b62aaa9bbacfd06c875b56c8b16a",
+      "bytes": 285680,
+      "season": "winter",
+      "kind": "static_reference"
+    },
+    {
+      "path": "_ Test Scenes/DemoGame - Seasons.gif",
+      "gitBlobSha": "108b8ba893639b0664bfa331cf7df6f0e30729a8",
+      "bytes": 760375,
+      "season": "multi",
+      "kind": "season_reference_animation"
+    },
+    {
+      "path": "_ Test Scenes/Test Landscape.png",
+      "gitBlobSha": "08b156637a9d8c11f5d5b091faf4e5c20abafca7",
+      "bytes": 124875,
+      "season": "unspecified",
+      "kind": "static_reference"
+    }
+  ]
+}

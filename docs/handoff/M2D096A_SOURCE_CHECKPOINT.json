@@ -1,0 +1,26 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpoint": "M2D096A",
+  "sourceVersion": "0.10.16",
+  "parentCheckpoint": "M2D095F",
+  "parentSourceVersion": "0.10.15",
+  "purpose": "Promote evidence-backed Jaidyn/Tiled Summer core terrain into the live Paint, near/far renderer and Generated World paths while preserving canonical ElizaWy pixels as art authority.",
+  "runtimeBehaviorChanged": true,
+  "terrainBehaviorChanged": true,
+  "rendererAuthority": "Configured Jaidyn Wang topology -> exact RGBA concordance -> canonical ElizaWy source tile; legacy certified source resolver on any unproven case.",
+  "promotedRoles": [
+    "Grass -> Grass",
+    "MudBank -> Dirt",
+    "Sand -> Sand",
+    "RiverWater -> Shallow Water",
+    "DeepWater -> Deep Water"
+  ],
+  "evidenceGatedRoles": [
+    "WetSand",
+    "PebblePath"
+  ],
+  "animationState": "TSX frame IDs and durations retained and canonical-frame coverage measured; live animation presentation deferred.",
+  "worldGenerator": "havenwild.source_backed.generated_world.v10",
+  "recommendedBackend": "Vulkan",
+  "windowsEvidence": "Pending 0.10.16 Full Quality Gate and interactive visual acceptance on the user machine."
+}

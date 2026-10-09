@@ -1,0 +1,1844 @@
+{
+  "schema": "havenwild.bevy.source_snapshot.v1",
+  "sourceVersion": "0.10.41",
+  "excludes": [
+    "docs/rollup/M2D123_HAVENWILD_SOURCE_SHA256.json"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 522,
+      "sha256": "78c7a38bc496085fd8596951d9634b65c23d2b8765b0272a55b8ec3c68555a3d"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 702,
+      "sha256": "dcab1f58ede7331feaf87cde7e9b2d9972d05a8698c734876bf94d75df99bcd1"
+    },
+    {
+      "path": "ASSEMBLE_CHARACTER_LIBRARY.cmd",
+      "bytes": 431,
+      "sha256": "05b5c65baafed1051ed624a5e40e6a15c2d0d3242afcb243253988f2b2dc9fbb"
+    },
+    {
+      "path": "Apply_Havenwild_M2D097C_Reconcile.py",
+      "bytes": 8590,
+      "sha256": "c320355a3a5cb34f05b349089de615cda62857b8214119f201537308d44fe67f"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 163610,
+      "sha256": "b9c2c19657a859be4f3204a8934b0314b601843c1bf0774da03969cdf30c06bd"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 640,
+      "sha256": "d2dead7c56f0649c3b78f639bffbe8f2d5fa31e38e8ea68f770232be2cf3be9b"
+    },
+    {
+      "path": "ForgePY.cmd",
+      "bytes": 151,
+      "sha256": "5f02d0e7966e47376497668c823a6979be074ba4759ee21c3f9576f7f355c641"
+    },
+    {
+      "path": "ForgePY.py",
+      "bytes": 55019,
+      "sha256": "4104cef9f5ebae9810bfff8305508ee0d09acad152f7ce88e75040820d4f9f28"
+    },
+    {
+      "path": "PCC.cmd",
+      "bytes": 1004,
+      "sha256": "4e37df38e390289ce195ac297eecb806a3d8daff859d5c8e711d3ba2fed3e326"
+    },
+    {
+      "path": "ProjectControlCenter.cmd",
+      "bytes": 70,
+      "sha256": "95634b18813d64e50e0d950c0701116dbf340c2854df5e9abab21b5dc8cecdce"
+    },
+    {
+      "path": "ProjectControlCenter.py",
+      "bytes": 164677,
+      "sha256": "11058996d24c8af0dd2e87c27c210a47692a9fff5a957f9cbab92c044b1904b9"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3952,
+      "sha256": "3e683c2469e39cdf66d5be14443dd55244e2a2bb74a52815b7854fbac0caa43f"
+    },
+    {
+      "path": "START_HERE_NEW_PROJECT.md",
+      "bytes": 192,
+      "sha256": "67f0b433fdc9bda9ed0d1b4dc5fb771a0ee8a187b2185056db6f2a254b455099"
+    },
+    {
+      "path": "Studio.cmd",
+      "bytes": 76,
+      "sha256": "205177597f8b4272467174baf474d21107c10a09c47b28fe02ce0b29c86d4a24"
+    },
+    {
+      "path": "assets/README.md",
+      "bytes": 1658,
+      "sha256": "91cfc4eed38cf4ebaf1bb0ea3bcfda21a71eae429c800fe0507d5139aaf9fc94"
+    },
+    {
+      "path": "content/README.md",
+      "bytes": 322,
+      "sha256": "452097746557e4aae6a5920c9e677e1586bb921a01518d0e252cfd03652e55f4"
+    },
+    {
+      "path": "content/assets/authority/elizawy_asset_lane.v1.json",
+      "bytes": 9698796,
+      "sha256": "a60f65bc49c9239a2b4c607e705cbab31806dc57abeb2bc86e4d807ea7ec0dee"
+    },
+    {
+      "path": "content/assets/authority/elizawy_runtime_index.v1.json",
+      "bytes": 3813312,
+      "sha256": "d377caf7682e4e31e2b9a433a20c6b83a9eeffde565769ac629ab7ffd7029592"
+    },
+    {
+      "path": "content/assets/review/original_alpha_candidates.v1.json",
+      "bytes": 152036,
+      "sha256": "b22b078bface20747e5d20ed5e06bc9df45574bb7bdd2d62b44205d43407b702"
+    },
+    {
+      "path": "content/catalog/active_sheets.json",
+      "bytes": 990,
+      "sha256": "f27c131d541922ae1d25f209696a3c7dd72fa16a3688b3a4475e3f7281040e9e"
+    },
+    {
+      "path": "content/catalog/character_rollup_parts.v1.json",
+      "bytes": 796,
+      "sha256": "befd5d0fddc84125ac9e747c1af32b936f0ef3a61a466f0272934b105a5a0c29"
+    },
+    {
+      "path": "content/catalog/core_source_manifest.json",
+      "bytes": 142201,
+      "sha256": "5b4bc8bc506268104bdd88629a6481511937ee7708e7d42949fc988824a214d1"
+    },
+    {
+      "path": "content/catalog/mapping_inventory.v1.json",
+      "bytes": 461316,
+      "sha256": "68203f02386e4f785b2ab8e246c4434b28e6398a8102a222c6c4e551a8b5b6dc"
+    },
+    {
+      "path": "content/mapping/recovered/bevy_migration_contract.v3.json",
+      "bytes": 2061,
+      "sha256": "0366381e1fed59c0bbbc4fb43cd675ce2568ed7a408fe2d5f7c3980e3c0d614b"
+    },
+    {
+      "path": "content/mapping/recovered/consolidation_audit.v1.json",
+      "bytes": 2142,
+      "sha256": "4b08f9fede43ae1b4094f5f8129a774e83c34bd59e5ad21993fd5b91387fc8b6"
+    },
+    {
+      "path": "content/mapping/recovered/elizawy_all_seasons_split_source_crosswalk_b48r9_v0_1.json",
+      "bytes": 7325155,
+      "sha256": "8fb7aa5ebc4500e47953387626af20f81f148677557810516ce636a4abe667bf"
+    },
+    {
+      "path": "content/mapping/recovered/havenwild_terrain_standard_v1.json",
+      "bytes": 19989,
+      "sha256": "f1dd3544575016f3e4ea46e1f7da95e78dcd65a9854b38d89288f9b6ecf1f40a"
+    },
+    {
+      "path": "content/mapping/recovered/havenwild_terrain_tuple_catalog_v1.json",
+      "bytes": 368129,
+      "sha256": "efc220ae177ae9fee2eac2103e01b779ed20db37419753bd45f96579c92b4991"
+    },
+    {
+      "path": "content/mapping/recovered/reconciliation_report.v1.json",
+      "bytes": 13704,
+      "sha256": "d9f7e3cd53472d59dedbc4ffdcc0fbe848995c446d85aeaca5de9230beca041b"
+    },
+    {
+      "path": "content/mapping/recovered/recovered_index.v1.json",
+      "bytes": 24642,
+      "sha256": "a1853b8992b310665ca6a92e2b2c626cae50c655ebb02b99c910bcd725e78bf8"
+    },
+    {
+      "path": "content/mapping/recovered/recovery_lineage.v2.json",
+      "bytes": 15353,
+      "sha256": "c4c8461b874da6f76faccbbac6e2017832ab5dbaec3378953386382ca024aaf0"
+    },
+    {
+      "path": "content/mapping/recovered/region_candidates.v1.json",
+      "bytes": 7335265,
+      "sha256": "19d8697849bedb50ffead2b65ebb0809aba03bf8a7c7857d9b32247249400dab"
+    },
+    {
+      "path": "content/mapping/recovered/review_ledger.v1.json",
+      "bytes": 1589,
+      "sha256": "21b8d4afbc060e683756566df674b69a55f5c5eda4cdb4157abce76c65d1d12f"
+    },
+    {
+      "path": "content/mapping/recovered/review_triage.v3.json",
+      "bytes": 607949,
+      "sha256": "7d6d1a5ca33da8ffb520bbb16175c955b10ec163836e7f8d66fb028afac2d7ed"
+    },
+    {
+      "path": "content/mapping/recovered/source_registry.v1.json",
+      "bytes": 21216,
+      "sha256": "d98b58db0e89e105c2efbbba6afb1f7c1e2bfbc06dc88a4997dac481737841ad"
+    },
+    {
+      "path": "content/rooms/starter_house.room.json",
+      "bytes": 257738,
+      "sha256": "42d7990140aabe7b71a1a8bc4efcd1f9d04583e002d9784deed4a58eedbcb340"
+    },
+    {
+      "path": "content/scenes/elizawy_mapping_certification.index.json",
+      "bytes": 2144,
+      "sha256": "fdc0b207cf96ff0f27a583e7340f0c63db0b22cae793a18966ad214fcf97d538"
+    },
+    {
+      "path": "content/scenes/elizawy_mapping_certification.scene.json",
+      "bytes": 120422,
+      "sha256": "a698bf14b4a9ab5390f37d4471ccffad5d394ab9aac43957326b747969785c31"
+    },
+    {
+      "path": "content/scenes/summer_river.scene.json",
+      "bytes": 215618,
+      "sha256": "9e5ade01d388c6184984c61c8bf97cd3dafcb436a4c9c060b8db9e3c842b09e7"
+    },
+    {
+      "path": "content/scenes/summer_world.visual_seed.v1.json",
+      "bytes": 25039,
+      "sha256": "2312d9342ae98a6b3f6800ac0e1f5de7458bf7c8865fea6d0bde87feef3aa1cf"
+    },
+    {
+      "path": "content/terrain/dual_grid_contract.v1.json",
+      "bytes": 1055,
+      "sha256": "3be0e277d3dbbadfb6391c10ac784829d2d29f6c8191b96800fcabec72dd0f46"
+    },
+    {
+      "path": "content/terrain/evidence/elizawy_test_scenes.v1.json",
+      "bytes": 1995,
+      "sha256": "c3410dc257e11e30d031ecb9a4e752f8d1d9d8aa6b86984c05fbee3c12929f75"
+    },
+    {
+      "path": "content/terrain/evidence/tiled_material_bridge.v1.json",
+      "bytes": 3733,
+      "sha256": "067aebdf66602a3c69c42c2609328ec799d0fe2d4866a3b3522382cb79d46e9f"
+    },
+    {
+      "path": "content/terrain/fixtures/diagonal_ne_sw.v1.json",
+      "bytes": 288,
+      "sha256": "7067b3884b69fb9589447f6db05b21fc50d191cf4e6f6d227b70eda380dcc4e1"
+    },
+    {
+      "path": "content/terrain/fixtures/diagonal_nw_se.v1.json",
+      "bytes": 288,
+      "sha256": "9789b194ec9d4f26be868210e781514ea6b6ee7b85e060a15284ad9c3d2d1baf"
+    },
+    {
+      "path": "content/terrain/fixtures/dual_grid_reference.v1.json",
+      "bytes": 414,
+      "sha256": "73c2387b7a08dd897a6aedb2a9a3cf4c4969e97f8a5c7cc0e33cdd32c856430c"
+    },
+    {
+      "path": "content/terrain/fixtures/three_corner_no_se.v1.json",
+      "bytes": 292,
+      "sha256": "7bcb286d4393aa008cf4cf7a6a986b120b2d762900f1dfea7edb00a37a13e334"
+    },
+    {
+      "path": "content/terrain/previews/dg01_grass_void.semantic_lab.v1.json",
+      "bytes": 368,
+      "sha256": "f5ef371f97ce07dc9811382f1afd5bc5d935d57708e1ea98cf66b8003c533c86"
+    },
+    {
+      "path": "content/terrain/recipes/summer_flatworld_runtime.v1.json",
+      "bytes": 252075,
+      "sha256": "2520ded890e419a8eb91770657ceb8fcc07ab9d1135b4aa5298f423b3cddde54"
+    },
+    {
+      "path": "content/terrain/recipes/summer_grass_void.v1.json",
+      "bytes": 1091,
+      "sha256": "c0308d3d83bfd21448ff191b7ccfc3ec766821851421eae99ca685d043acc9e0"
+    },
+    {
+      "path": "content/terrain/recovered/native/cliff_summer_source_authority.v1.json",
+      "bytes": 636384,
+      "sha256": "2ebb442193f85c53675b1a6e7f88805c7b2b6bf3aff386ae58f206d1872b46b9"
+    },
+    {
+      "path": "content/terrain/recovered/native/lpc_seasonal_terrain_topology.native.v1.json",
+      "bytes": 148618,
+      "sha256": "2b448c1a3f281413f7a735e3ddee7550ee29d073005e279b4da3aa55c16f2e4d"
+    },
+    {
+      "path": "content/terrain/recovered/native/lpc_terrain_summer_complete_map_32.native.v1.json",
+      "bytes": 274375,
+      "sha256": "6e6a64725208f6ec18b6f0a203ca25701db87c1facf3941e30077ac1f88c5c3e"
+    },
+    {
+      "path": "content/terrain/recovered/native/native_summer_authority_review.v1.json",
+      "bytes": 2703,
+      "sha256": "32700bdf2d67b8bd29b76bd00dcc5e3504efe1fdc0c7af4142df8052a29bb668"
+    },
+    {
+      "path": "content/terrain/recovery/historical_authority.v1.json",
+      "bytes": 3682,
+      "sha256": "039dd268a772e5504f64e2d9163671d43098bc308d265d2f15fae7f71cf190a8"
+    },
+    {
+      "path": "content/terrain/recovery/summer_source_cells.v1.json",
+      "bytes": 173734,
+      "sha256": "6cbfe8ed5c77bfdc226768c262fb0d8812b9b90f20b311454f58ab784c0136a2"
+    },
+    {
+      "path": "content/worldgen/elizawy_showcase_templates.v1.json",
+      "bytes": 5728,
+      "sha256": "6442d2d9ef7b783ae01af4f5f622c1af3398d6c184c7fd17c08d423d93811d2d"
+    },
+    {
+      "path": "content/worldgen/elizawy_worldgen_asset_catalog.v1.json",
+      "bytes": 147216,
+      "sha256": "56a06103c60106132449f12d42bf9e12c77ac0fbf12cdcedf75a0999e4834c1c"
+    },
+    {
+      "path": "content/worldgen/havenwild_generated_world.v1.json",
+      "bytes": 13818,
+      "sha256": "487f8280a591576802f6a709ee3c8a35d71d9e5c403236a153387f3fe1820086"
+    },
+    {
+      "path": "docs/ASSET_AUTHORITY.md",
+      "bytes": 3961,
+      "sha256": "567d12295a0b7456baa15336d0d34440d744f3700720d8081bda051cfc039634"
+    },
+    {
+      "path": "docs/BUILD_DEBUG_SESSION_V052.md",
+      "bytes": 4396,
+      "sha256": "3503510a5e2a5d56bb79c0e777bb975696ef6d90361fc9f1f3e0c76c82b61c0a"
+    },
+    {
+      "path": "docs/BUILD_DEBUG_SESSION_V053.md",
+      "bytes": 5203,
+      "sha256": "7c75cb2833446603981dcb3f805af11ade6529099d8949fe9d172305de90d326"
+    },
+    {
+      "path": "docs/BUILD_DEBUG_SESSION_V054.md",
+      "bytes": 2020,
+      "sha256": "f1b3984aaa990fa0e9a28b379c397100e8a00dcf3b1763bba24f070858b51cae"
+    },
+    {
+      "path": "docs/BUILD_DEBUG_SESSION_V055.md",
+      "bytes": 2549,
+      "sha256": "a397ec3c5e7385b2a1cd80a728fd120c6036be6ddeb7b23c25d74ad299f31301"
+    },
+    {
+      "path": "docs/BUILD_DEBUG_SESSION_V056.md",
+      "bytes": 1461,
+      "sha256": "8bbf511c09c26e10e51c1716eb1cc8fd06d108834b5b95c5154baf567c19338e"
+    },
+    {
+      "path": "docs/BUILD_FIX_V041.md",
+      "bytes": 1108,
+      "sha256": "097d4dabd3cd3e12069c5e2b0f3445836edc48967ce9f660b20ba727a5f3f073"
+    },
+    {
+      "path": "docs/DG01_TERRAIN_MAPPER.md",
+      "bytes": 3010,
+      "sha256": "2a1cc020ba9a2c651a667402db012fb9da2f19dcae4c078b76878bf90bdcd93c"
+    },
+    {
+      "path": "docs/DG02_RESOLVER_LAB_V052.md",
+      "bytes": 3291,
+      "sha256": "bba1fbba4714145f61e3acc8c45353dce164407efac4cb76da46a54268f4b918"
+    },
+    {
+      "path": "docs/DG03_SHARED_RESOLVER_V054.md",
+      "bytes": 1717,
+      "sha256": "511fc459f8f9e9d3674bb28853f744f43adcda88d54fdd9f4456aef7cafc2f61"
+    },
+    {
+      "path": "docs/DOCKABLE_TERRAIN_MAPPER_V050.md",
+      "bytes": 1689,
+      "sha256": "2d7b471e06af19891dcee02e98743905aace18339bf4d2e14eaa027970458872"
+    },
+    {
+      "path": "docs/DONOR_BOUNDARIES.md",
+      "bytes": 1915,
+      "sha256": "093ae4ee2cdab43cf0196b08b869ea377ab7ffcae4b992788418482e8fb5181c"
+    },
+    {
+      "path": "docs/DUAL_GRID_IMPLEMENTATION.md",
+      "bytes": 3120,
+      "sha256": "2a0ab3f36366524cda27249b3de27e93d35bf78c1acc1991284161619f14a1f0"
+    },
+    {
+      "path": "docs/ELIZAWY_TERRAIN_SOURCE_NOTES.md",
+      "bytes": 959,
+      "sha256": "a3f72eef615ee8978054fb07958f616d775fda474938c1ebaa033fb76261a6e2"
+    },
+    {
+      "path": "docs/FORGEPY_WORKFLOW.md",
+      "bytes": 4937,
+      "sha256": "08b369d9e76ef144c6f0cff05ac877dbd4161d119c9dd9684864d1450b00fcc7"
+    },
+    {
+      "path": "docs/GUI_AND_TOOL_APPS.md",
+      "bytes": 2392,
+      "sha256": "d0da52580f1b94d66d8e03cb96182a019951416a0fe862e91f4af04fbe5e95d1"
+    },
+    {
+      "path": "docs/HARDENING_V051.md",
+      "bytes": 1980,
+      "sha256": "966b8a7fc868a0aa74791679946e51f6f370461f031f4e7da425d7b54630abc8"
+    },
+    {
+      "path": "docs/LAST_GATE_REVIEW_20260922.md",
+      "bytes": 1392,
+      "sha256": "6e28e41befceb577672f07a833d7052fbf19d919075c9fb225f070dc0ddd69c9"
+    },
+    {
+      "path": "docs/MAPPING_AUTHORITY_RECOVERY_V050.md",
+      "bytes": 2450,
+      "sha256": "f20a15598a7165bd6ac608754969de685c04fc9748272834414a94d63e567d26"
+    },
+    {
+      "path": "docs/NORTH_STAR.md",
+      "bytes": 4109,
+      "sha256": "d4f56bb63e5d8e7b070e2ac5433dd4bf7d92f595cb5919cc10c810f383c882d1"
+    },
+    {
+      "path": "docs/PCC_V1_1.md",
+      "bytes": 1703,
+      "sha256": "0b977059e5f5fe2be554923e68adf0250891b727ea2c996e15c2822c62349c35"
+    },
+    {
+      "path": "docs/PROJECT_AUDIT_V053.md",
+      "bytes": 1376,
+      "sha256": "97d44ce7a368580e71117d54f45a4992d8656775c99ee88b19b5b893b7594fdb"
+    },
+    {
+      "path": "docs/PROJECT_AUDIT_V054.md",
+      "bytes": 997,
+      "sha256": "671edd14f89c97a4af8f5c855d2a2d98ea713f41bcd1187ba24ebd330307a2c7"
+    },
+    {
+      "path": "docs/PROJECT_AUDIT_V055.md",
+      "bytes": 1262,
+      "sha256": "681f3df2a785a25f7402618a870c137f50e730be3df33936c556796b2fed4e32"
+    },
+    {
+      "path": "docs/PROJECT_AUDIT_V056.md",
+      "bytes": 968,
+      "sha256": "4b3a6f3a54828318356e000db1d793327c2d9c11ea95b3aa64b7c5be7fa8263f"
+    },
+    {
+      "path": "docs/PROJECT_CONTROL_CENTER.md",
+      "bytes": 9364,
+      "sha256": "23415fb4e7c88582269556730174e57dcdf10697c241e602be8aba7528b961d7"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "bytes": 17931,
+      "sha256": "3d2b00c32bd62d76c11da574f785cba74bef99158aa7b39b4a7317e5060c12ef"
+    },
+    {
+      "path": "docs/SOURCE_INVENTORY.json",
+      "bytes": 490,
+      "sha256": "cf58e93e532239a946f70b4c20950e0910499a0104776d671a081b9c2eaa525b"
+    },
+    {
+      "path": "docs/STANDALONE_AUDIT.md",
+      "bytes": 5189,
+      "sha256": "28ea0ee1beb06f8c870fe888b098d13b91d1c454ac2bf4ca35664304ed39f06e"
+    },
+    {
+      "path": "docs/SUMMER_SOURCE_MAPPING.md",
+      "bytes": 2050,
+      "sha256": "f5ad8f2a8e4a467b575160ace4888ee2627fd7c131390eb8aa1d490db6956930"
+    },
+    {
+      "path": "docs/handoff/M2D02D_SOURCE_CHECKPOINT.json",
+      "bytes": 1445,
+      "sha256": "21a920b19acd2d75023b35d68ffe9c79bad0abc7e2f8495d5da5e6734e21cb59"
+    },
+    {
+      "path": "docs/handoff/M2D02E_SOURCE_CHECKPOINT.json",
+      "bytes": 1162,
+      "sha256": "ffa89366327f417fc332e9da2c7a93b1aa99c2b89b7a2509bd2c9e797a2ae736"
+    },
+    {
+      "path": "docs/handoff/M2D02F1_SOURCE_CHECKPOINT.json",
+      "bytes": 1175,
+      "sha256": "40b92360fd5e76291ba8c6c65741670b6f2e3f331e3e4c204a36d5da58f48d1a"
+    },
+    {
+      "path": "docs/handoff/M2D03A_SOURCE_CHECKPOINT.json",
+      "bytes": 1165,
+      "sha256": "e2a428fec640c63f6a3b0abb4ebddbd0a5da5aff193951de47b070457ee373d6"
+    },
+    {
+      "path": "docs/handoff/M2D03B_SOURCE_CHECKPOINT.json",
+      "bytes": 1100,
+      "sha256": "eb69dc4c52534283c569efd06f3a93b1bbf3d8b0d036ccfdc191e56a638e663a"
+    },
+    {
+      "path": "docs/handoff/M2D03C_SOURCE_CHECKPOINT.json",
+      "bytes": 891,
+      "sha256": "c542f165177982dfa642459543dfc574d88129329dd4ce789dac572ad5e97318"
+    },
+    {
+      "path": "docs/handoff/M2D095C_SOURCE_CHECKPOINT.json",
+      "bytes": 7504,
+      "sha256": "0c756f0b39f03cde89c55c4ff7aad7a7b55f839b44f977d9a42a457a195b23f8"
+    },
+    {
+      "path": "docs/handoff/M2D095D_SOURCE_CHECKPOINT.json",
+      "bytes": 549,
+      "sha256": "03d41809800dbc5c10ccbb388fa4bb7dad9078180b1e71e8d814fc03ab42e06c"
+    },
+    {
+      "path": "docs/handoff/M2D095E_SOURCE_CHECKPOINT.json",
+      "bytes": 668,
+      "sha256": "384fe7f04df6720130604df3ba45a4f08d7fdd05d656f7d1104ea9f2b384f750"
+    },
+    {
+      "path": "docs/handoff/M2D095F_SOURCE_CHECKPOINT.json",
+      "bytes": 552,
+      "sha256": "0db4936bc9330f108815334ed212404e318f108b9a8af31f06be82f2c3479ec4"
+    },
+    {
+      "path": "docs/handoff/M2D096A_SOURCE_CHECKPOINT.json",
+      "bytes": 1184,
+      "sha256": "bb7f4cb979069c81b8ef07c478034e435c9cbf112eb586a0bc8faa476a2e49a3"
+    },
+    {
+      "path": "docs/handoff/M2D096C_SOURCE_CHECKPOINT.json",
+      "bytes": 969,
+      "sha256": "d5b488e225d22bfe86e2cfbfef46cd922fff4a7448c8df4299a7ede55973ba41"
+    },
+    {
+      "path": "docs/handoff/M2D096E_SOURCE_CHECKPOINT.json",
+      "bytes": 1123,
+      "sha256": "1c19e9de60b595f637097be799c0ded88ec403c204cd23a0a623346ce4939d8b"
+    },
+    {
+      "path": "docs/handoff/M2D097A_SOURCE_CHECKPOINT.json",
+      "bytes": 1264,
+      "sha256": "ba7f2c0008ae98817428fd06fe64fc0f16d52c84785d50322bf140909a9e27df"
+    },
+    {
+      "path": "docs/handoff/M2D097B_SOURCE_CHECKPOINT.json",
+      "bytes": 2000,
+      "sha256": "4de68fd635d2418ded0fa51af66588fe6fa3397c1495d9f288cd91604aca274c"
+    },
+    {
+      "path": "docs/handoff/retired/M2D02D_RETIREMENT_MANIFEST.json",
+      "bytes": 890,
+      "sha256": "fdad471cc09371539d7de18b41b97394fea2301395e16bb5a469b309f42ab51f"
+    },
+    {
+      "path": "docs/handoff/retired/M2D02D_guessed_assembled_index.archive.json",
+      "bytes": 8877,
+      "sha256": "1748abcac25c5683666b97e9312e70a21cd7ba141bfc4fc83f629b7cfd3afdc0"
+    },
+    {
+      "path": "docs/handoff/retired/M2D02D_guessed_assembled_scene.archive.json",
+      "bytes": 254701,
+      "sha256": "e9c85931e3a147e5bda6ac671c72edaca409ee76b25a148aea059c79967a0f5b"
+    },
+    {
+      "path": "docs/patch/Havenwild_Bevy_GUI_Input_Unblock_01.md",
+      "bytes": 1153,
+      "sha256": "d6e9a08833ed992a420f69deba9212b69f883f89a2abcedc2e5da68e1f9f2ad3"
+    },
+    {
+      "path": "docs/patch/M1B_NATIVE_WINDOW_CHROME.md",
+      "bytes": 764,
+      "sha256": "fec5c7502e29d53d972ad1e337d2dcd365fae0fff8c795ce02925f186fdc84f9"
+    },
+    {
+      "path": "docs/patch/M1C_NATIVE_CHROME_AUDIT.md",
+      "bytes": 269,
+      "sha256": "b83dc5ce1833ac742d9a65f4a6fe17a83bf54dcc0d8ae0eafba39a121c41ca5c"
+    },
+    {
+      "path": "docs/patch/M1_NATIVE_WINDOW_STABILIZATION.md",
+      "bytes": 1202,
+      "sha256": "31af6031ab934f1d9c4c9b17facb73141b80741c130ebcbb6965015ee56da7ef"
+    },
+    {
+      "path": "docs/patch/M2A_MAPPING_INVENTORY.md",
+      "bytes": 925,
+      "sha256": "b6b5f24463cada34606493a17a8e7a89681eef60ceefd94beff1870e9785cd23"
+    },
+    {
+      "path": "docs/patch/M2B_RECONCILIATION.md",
+      "bytes": 574,
+      "sha256": "0bebe73280479c016e70044438a9211d6a511d103a35e6d4e68a5fdea8334454"
+    },
+    {
+      "path": "docs/patch/M2C2_ELIZAWY_CONCORDANCE.md",
+      "bytes": 5060,
+      "sha256": "9bb5af96412cfded07671ef2f670fc44dfe7f7624f239d03d5b6770691ad257e"
+    },
+    {
+      "path": "docs/patch/M2C3_ELIZAWY_DERIVATIVE_TILED_RECONCILIATION.md",
+      "bytes": 6642,
+      "sha256": "6f30fce5b5971e80bf0c73e10ae048307a96e8306fa38fffdca5b6c1dc05f5f8"
+    },
+    {
+      "path": "docs/patch/M2C4_COMPLETE_REVIEW_REGISTRY_AND_GATE.md",
+      "bytes": 4285,
+      "sha256": "8d7dd7ebaaea67cbd05859755dff9a98b623fc91cd4b320442bbbe3cf8c841e8"
+    },
+    {
+      "path": "docs/patch/M2D01_NATIVE_ELIZAWY_REVIEW_BROWSER.md",
+      "bytes": 3612,
+      "sha256": "b869086ac190e0664f97512b3386f9b58443a039092f160747a1b49f2f98847e"
+    },
+    {
+      "path": "docs/patch/M2D02A1_EGUI_KEYBOARD_API_REPAIR.md",
+      "bytes": 1178,
+      "sha256": "fa6771333487e0eee580dd4b9d0f4f97ee75bbd7cb1997b78160bfeb14ebaced"
+    },
+    {
+      "path": "docs/patch/M2D02A_SCENE_FIRST_LEAN_UI.md",
+      "bytes": 3678,
+      "sha256": "d2683b55e18d335e8f6e3063a747727e5f0f3fe13222cdd88e9b26e9edc90b4e"
+    },
+    {
+      "path": "docs/patch/M2D02B1_SCENE_V2_FOUNDATION.md",
+      "bytes": 3226,
+      "sha256": "c91410316d9d880f185efdbb6e4f183ad136540fa40df76c4e5001432cb6dc79"
+    },
+    {
+      "path": "docs/patch/M2D02B2_CANVAS_RULERS.md",
+      "bytes": 2138,
+      "sha256": "dff6ba0797b95c6542e025d24bf64f405c27f748d761c427c2a4c7add61fc95a"
+    },
+    {
+      "path": "docs/patch/M2D02C_UNIFIED_MAPPING_CERTIFICATION_LAB.md",
+      "bytes": 3526,
+      "sha256": "ff42bfc78f391da4093126faa572acffeed04fdb3c8c96d5dbc966417cf2278f"
+    },
+    {
+      "path": "docs/patch/M2D02D_ASSEMBLED_MAPPING_ENVIRONMENT.md",
+      "bytes": 3640,
+      "sha256": "0f005f3f094e2b44fc9def3d87329b923542d81ca92066610ea00ff2c871c9a7"
+    },
+    {
+      "path": "docs/patch/M2D02E_SOURCE_EXACT_RECONCILIATION.md",
+      "bytes": 2607,
+      "sha256": "dcd0fcbc321c9dc852f1c4fe444c9e2432205b03668443fc018a249209abf623"
+    },
+    {
+      "path": "docs/patch/M2D02F1_PIE_SOURCE_SCENE.md",
+      "bytes": 3341,
+      "sha256": "290cea9c742cfafb77aee71830b0ee3dc9a4335dcdaa7b1d6331058b21336dfb"
+    },
+    {
+      "path": "docs/patch/M2D02_A1_B1_B2_CUMULATIVE_HANDOFF.md",
+      "bytes": 1800,
+      "sha256": "1bf6bc640f76bb316ad0515e454ed77977914862f019b6ecee4236150cbd6337"
+    },
+    {
+      "path": "docs/patch/M2D03A_ORIGINAL_SOURCE_CATALOG_LIVE_SCENE_LAYERS.md",
+      "bytes": 6561,
+      "sha256": "9bb729a257e28f883e344f0fca08d6e0231819fe32b378237fb0fa5d169a1c77"
+    },
+    {
+      "path": "docs/patch/M2D03B_COMPLETE_OBJECT_PLACEMENT_ALPHA_EVIDENCE.md",
+      "bytes": 7014,
+      "sha256": "0855ce55605a73059645819a60ea816e158f0362cf347f6e5b4cbffee725a134"
+    },
+    {
+      "path": "docs/patch/M2D03C_SINGLE_SCENE_WORKBENCH.md",
+      "bytes": 6428,
+      "sha256": "6936605be55dad80080d34617f21f9e85214b58b8cd134f7e7eb2dcf9e002efd"
+    },
+    {
+      "path": "docs/patch/M2D04_CANVAS_FIRST_SUMMER_COMPOSITION_STUDY.md",
+      "bytes": 5795,
+      "sha256": "08ebb28ae717f20533b04e6f278860a0bb871dba39afae1930d42c1f9f2a575e"
+    },
+    {
+      "path": "docs/patch/M2D05A_CHUNKS_EVIDENCE_STRUCTURAL_AUTHORITY.md",
+      "bytes": 4650,
+      "sha256": "ea1d094ee4af0ba7ba53ec8b8fa23a17143cd13fa01bd3a5284b0c55774bff77"
+    },
+    {
+      "path": "docs/patch/M2D05B_EVIDENCE_NULL_ATLAS_REPAIR.md",
+      "bytes": 1628,
+      "sha256": "612c5127ab75977c57dd6a956d2e5ce81a553e8cb47f7c284226577e7a938185"
+    },
+    {
+      "path": "docs/patch/M2D06A_CANVAS_FIRST_SHELL.md",
+      "bytes": 2479,
+      "sha256": "b162317a5e0f71796c13bcd84a0f237b5f2902e01eabf4a8810a926478a4f87f"
+    },
+    {
+      "path": "docs/patch/M2D06B_PIXEL_COLLISION_AUTHORING.md",
+      "bytes": 2526,
+      "sha256": "c4bd209b391354d1dd10765f1865f9e267d5e75903a904f5c5d6c6e7b9d07715"
+    },
+    {
+      "path": "docs/patch/M2D07P_WINDOWS_CARGO_CHECK_REPAIR.md",
+      "bytes": 630,
+      "sha256": "ddcdef9a3ef1ac63a45d0127225c6694483c9a52c2b0fa6b5631481ee5d6d80b"
+    },
+    {
+      "path": "docs/patch/M2D07Q_CANONICAL_TEMPLATE_REGION_REPAIR.md",
+      "bytes": 1136,
+      "sha256": "bcbef297e131df1a0f1edf4551ce3d3a02de4c28ed9b3bc7b7377296ffbc85b5"
+    },
+    {
+      "path": "docs/patch/M2D07R_WORLDGEN_LEARNING_RENDER_PERFORMANCE.md",
+      "bytes": 1393,
+      "sha256": "5c2c3955ba9c742a91cfd06f5a9bbaf213ed88509891656a512d176c4039967a"
+    },
+    {
+      "path": "docs/patch/M2D07S_DIRECT_SOURCE_WORLDGEN_REPAIR.md",
+      "bytes": 2682,
+      "sha256": "39165214b00c438eec822f0d7cfae8220c5d239531ba5eb744e88ad3eb34ad99"
+    },
+    {
+      "path": "docs/patch/M2D07U_SUMMER_TERRAIN_AUTOTILE_BRUSH.md",
+      "bytes": 1041,
+      "sha256": "2af90cfffb9147f762c64eb716ed34380760869deeb6e35e61c48e1ebf69bf07"
+    },
+    {
+      "path": "docs/patch/M2D07V_SUMMER_FLATWORLD_STRICT_MAPPING.md",
+      "bytes": 1596,
+      "sha256": "18d11806b9d27ef9f88bb41aac4d4fd6e990f99a00db800820e4a7bffba92566"
+    },
+    {
+      "path": "docs/patch/M2D07W_SUMMER_DUAL_GRID_SOURCE_MAPPING_AND_STROKE_PERF.md",
+      "bytes": 2928,
+      "sha256": "3e3eba301f14f69061d2108c31a41478e192fbde0b98cf923998f2af322b1028"
+    },
+    {
+      "path": "docs/patch/M2D07_UNIFIED_ELIZAWY_WORLD_COMPOSITION_15_PASS.md",
+      "bytes": 4664,
+      "sha256": "8d2603e50361c42483fe81421df858ee784fb2e56dd68d7775c598bc830713d3"
+    },
+    {
+      "path": "docs/patch/M2D080_NATIVE_SUMMER_AUTHORITY_ONE_PASS.md",
+      "bytes": 3307,
+      "sha256": "6135cfd23e742b392a8fe2d0f2ecd7ba0c3fb4a4523a2a1716b56b062f47cb55"
+    },
+    {
+      "path": "docs/patch/M2D081A_COMPOSITE_AWARE_TEST_HOTFIX.md",
+      "bytes": 797,
+      "sha256": "69a7a4df63073a628388c2ec6092f906f934a070e197cae608c243dd51f179c4"
+    },
+    {
+      "path": "docs/patch/M2D081B_CANONICAL_SOURCE_SLICE_HOTFIX.md",
+      "bytes": 1008,
+      "sha256": "dec4764416ba907138c26b4effa6f41f50fe97ecf23c7aacb0c9fc99aafb88fd"
+    },
+    {
+      "path": "docs/patch/M2D081C_WATER_AUTHORITY_AND_PCC135_INTAKE_REPAIR.md",
+      "bytes": 3071,
+      "sha256": "f259356e1e9a691b7cb0a3e045145f57b096c236cb2a8ad660a4ee7fa999c074"
+    },
+    {
+      "path": "docs/patch/M2D081_SUMMER_COMPLETE_WATER_ANIMATION.md",
+      "bytes": 4972,
+      "sha256": "ec1618c0d02d2dc86171096931aa3f6c1baeecd88ed022bc4a99adf7942251e1"
+    },
+    {
+      "path": "docs/patch/M2D082A_RUST_GATE_REPAIR.md",
+      "bytes": 816,
+      "sha256": "d8e8eed72abc17d18c9dda6343ffae46bd07495a9c3fc9cf6df3b4d4691306eb"
+    },
+    {
+      "path": "docs/patch/M2D082B_RUNTIME_TIME_WIRING_REPAIR.md",
+      "bytes": 659,
+      "sha256": "af7312f28b8fcb29f18ba0c1e9256c7631aaaf33eb6aa5d269c915c792190e72"
+    },
+    {
+      "path": "docs/patch/M2D082C1_TERRAIN_AUTHORITY_VERSION_SKEW_REPAIR.md",
+      "bytes": 737,
+      "sha256": "b59598d2562e1af270281cebbc6196f39b56c87b8c70d6fc4262b9cb79855839"
+    },
+    {
+      "path": "docs/patch/M2D082C_GENERATED_WORLD_CONSOLIDATION.md",
+      "bytes": 1468,
+      "sha256": "b73613d685b7533bc52da0486ea1857d0ae48c9ecfcd9c0d3b00dd2eb8ed86f8"
+    },
+    {
+      "path": "docs/patch/M2D082D_DUAL_GRID_COORDINATE_AUTHORITY.md",
+      "bytes": 872,
+      "sha256": "ed5b779ca8a32ab2d27536d38c16e7f364fdb65f91c0f34491724ba14dcc9af7"
+    },
+    {
+      "path": "docs/patch/M2D082E_SEAM_SAFE_SHORELINE_COMPOSITES.md",
+      "bytes": 873,
+      "sha256": "fabcc327ddfa2941b688a5fbfafbe6dbb1e9536d800cd8af79ac96bf510bfc02"
+    },
+    {
+      "path": "docs/patch/M2D082F1_DETERMINISTIC_FILL_REGRESSION_REPAIR.md",
+      "bytes": 956,
+      "sha256": "ca3f57dedd55705bb63e0607d72e41c771bfee7239b37cfbd17b773a18381786"
+    },
+    {
+      "path": "docs/patch/M2D082F_LAND_CONNECTIVITY_EXTENDED_SUMMER_MATERIALS.md",
+      "bytes": 2133,
+      "sha256": "f8ff0d200bb15ae714fb92f17e8f8509c200bc3009b483d760de148ce9ec1cad"
+    },
+    {
+      "path": "docs/patch/M2D090A_SEASONAL_GROUND_GATE_REPAIR.md",
+      "bytes": 1304,
+      "sha256": "98eadf73078b229e6c7324ba9b1d9420453bebae42ed3e2c9dc3dab81542150d"
+    },
+    {
+      "path": "docs/patch/M2D090_ELIZAWY_KITCHEN_SINK_GENERATED_WORLD.md",
+      "bytes": 1786,
+      "sha256": "e40927122ed3182899be5fded9ec2575eda9b9a2745ee3067522f70da304cb3e"
+    },
+    {
+      "path": "docs/patch/M2D091A_CLIFF_GATE_ACCEPTANCE_ALIGNMENT.md",
+      "bytes": 1368,
+      "sha256": "74f7426c57368a1034703976cc0f5b8061603522cf3500a01677aed735b9cf3a"
+    },
+    {
+      "path": "docs/patch/M2D091B_GATE_STABLE_VISUAL_AUTHORITY.md",
+      "bytes": 1297,
+      "sha256": "c56f0f98c4e3e6ec74eb53e7193738cd091ed13933e828a90b76581115512df5"
+    },
+    {
+      "path": "docs/patch/M2D091_VISUAL_AUTHORITY_ISLAND_DIFFERENTIATION_REPAIR.md",
+      "bytes": 2868,
+      "sha256": "0b07415aabad238724458fa4621c763bab6bfb3d297fb7728047d2124624e59a"
+    },
+    {
+      "path": "docs/patch/M2D092A_SHARED_CLIFF_TOPOLOGY_SETTLEMENT_REPAIR.md",
+      "bytes": 1995,
+      "sha256": "90550ad0f509c34e34e36c76c3e005db510425321473439a76977959adecce81"
+    },
+    {
+      "path": "docs/patch/M2D092B_SHORELINE_OWNER_AUTHORITY_RECOVERY.md",
+      "bytes": 4778,
+      "sha256": "ddfe2dccd7bec406059df9cc0e9ec9318ba65881e5fcfcdea433bfc78134555f"
+    },
+    {
+      "path": "docs/patch/M2D092C1_CARGO_TEST_COMPILE_REPAIR.md",
+      "bytes": 973,
+      "sha256": "bb3a16b93ff1fc6c78fff81236a257c74ade7288f270e259711512b81a80033f"
+    },
+    {
+      "path": "docs/patch/M2D092C2_CARGO_TEST_TYPE_REPAIR.md",
+      "bytes": 819,
+      "sha256": "aed7120ee303107a719a8f2fa7811d4dff6f46f621e4bdb9fd11462378594958"
+    },
+    {
+      "path": "docs/patch/M2D092C3_COAST_LAYER_VEGETATION_RUNTIME_RECOVERY.md",
+      "bytes": 1751,
+      "sha256": "6154a859014f8c35cb85ded935de412c95aa11a3120b7907972f25c4e9e16ec5"
+    },
+    {
+      "path": "docs/patch/M2D092C_UNIFIED_WORLD_COMPOSITOR_COLLISION_BRIDGE.md",
+      "bytes": 4581,
+      "sha256": "9bb95ae034c7464bcfb49492673eab6a57e19be6fb6c0d62e0244de1326e849f"
+    },
+    {
+      "path": "docs/patch/M2D093A1_ICON_RAIL_COMPILE_REPAIR.md",
+      "bytes": 672,
+      "sha256": "db0877f12e785c8a2cf27698a9e65435c2eb0e4e8217e3dd0cade0b328dcae0c"
+    },
+    {
+      "path": "docs/patch/M2D093A2_PALE_SHORE_TEST_CONTRACT_REPAIR.md",
+      "bytes": 909,
+      "sha256": "d085deb3bf0e74827c8ad42f9eabbcfbb6a6e772e4d12a2a787267a513c5e5d7"
+    },
+    {
+      "path": "docs/patch/M2D093A3_SEASONAL_RENDER_CROP_REPAIR.md",
+      "bytes": 933,
+      "sha256": "a79a0bce95e7bf880cc6fe00f2fe401c572a3b7ee89cf4afd10bf4d33de1bfbe"
+    },
+    {
+      "path": "docs/patch/M2D093A4_GENERATED_OBJECT_SOURCE_SLICE_VALIDATION_REPAIR.md",
+      "bytes": 901,
+      "sha256": "35b41894a8e0107f79f12a20f2b359b59615b5609018e430fe0ec8fbe30aeec2"
+    },
+    {
+      "path": "docs/patch/M2D093A5_GENERATED_OBJECT_SOURCE_SLICE_AUTHORITY_CONSISTENCY_REPAIR.md",
+      "bytes": 1028,
+      "sha256": "df5f791018d790c8a2c523db3bcede4f72e2d9d1ad6a82b92bbe43519203e7b0"
+    },
+    {
+      "path": "docs/patch/M2D093A6_RUST_DELIMITER_REPAIR.md",
+      "bytes": 806,
+      "sha256": "af994939ea6e3a3f4a919f9e302c347ede23f780543108ca1f56e4c3dda87b61"
+    },
+    {
+      "path": "docs/patch/M2D093A7_TEST_TARGET_COMPILE_REPAIR.md",
+      "bytes": 813,
+      "sha256": "ce14c48bccda0bac66e4a5be8bc6cc713383cfb613331bbdbffad6eb916d48fc"
+    },
+    {
+      "path": "docs/patch/M2D093A8_TEST_FIXTURE_SOURCE_BINDING_COMPILE_REPAIR.md",
+      "bytes": 639,
+      "sha256": "08cb1cda78755bd47a6b76c1b8f917bf6cd2e3d52a5a358004d5f38fb75004d6"
+    },
+    {
+      "path": "docs/patch/M2D093A9_CANONICAL_TEMPLATE_QUARANTINE_FIXTURE_REPAIR.md",
+      "bytes": 1154,
+      "sha256": "0402d1ef8bff3c935619fba54e31c981d41258ab6b3913a009082bba17c86404"
+    },
+    {
+      "path": "docs/patch/M2D093A_FLAT_TERRAIN_AUTHORITY_CONVERGENCE.md",
+      "bytes": 3148,
+      "sha256": "e4d7e454bd2d6a60918a4027fc31df0ebe667938bb3130670f4dc5cf3d653a7c"
+    },
+    {
+      "path": "docs/patch/M2D093B_EDITOR_CONVERGENCE_VIEWPORT_CACHE.md",
+      "bytes": 4487,
+      "sha256": "ef80200c75f130805df8076c0e84e72dee4cba968abc37a839c080979136834c"
+    },
+    {
+      "path": "docs/patch/M2D094B_JAIDYN_TILED_TEST_READINESS.md",
+      "bytes": 5106,
+      "sha256": "b2a2e754b5c6ef2ed3a676fd975cf6bed3ef39eada68bb33d3ce49f96b2093a7"
+    },
+    {
+      "path": "docs/patch/M2D095B_NATIVE_WANG_PROJECT_COLLAPSE.md",
+      "bytes": 2380,
+      "sha256": "6c0697c9534638a6505824883dc2f30ab7e7d3685bf347e5bb427ab4b24929b9"
+    },
+    {
+      "path": "docs/patch/M2D095C_INTEGRATED_SOURCE_01012.md",
+      "bytes": 1172,
+      "sha256": "51ee9ef06bb0d6d1551a7e1ab4cfc49e4b7d88b9e64229d5c497b7cb891e4057"
+    },
+    {
+      "path": "docs/patch/M2D095D_DX12_SURFACE_GUARD_01013.md",
+      "bytes": 700,
+      "sha256": "a982dba18e53cb537a1dab4df29d68e0c61de53ae64a7e3731b03182d0516d8f"
+    },
+    {
+      "path": "docs/patch/M2D095E_REGRESSION_CONTRACT_REPAIR_01014.md",
+      "bytes": 848,
+      "sha256": "832bef244dc508cd24eec6dad30f074f7057ea3dfc6d5c06e267dcceb0a5dfc7"
+    },
+    {
+      "path": "docs/patch/M2D095F_SHARED_TITLE_CONTRACT_01015.md",
+      "bytes": 774,
+      "sha256": "35d283e071e18353b8acab417592a1ecc2d944418a5ec18083267af24ba567e7"
+    },
+    {
+      "path": "docs/patch/M2D096A_TILED_LIVE_RENDERER_CUTOVER_01016.md",
+      "bytes": 2916,
+      "sha256": "c541f7ed6b20541cc8111f21ca7392c830a84dbe77f9fcd31e043bb6eeb6cc77"
+    },
+    {
+      "path": "docs/patch/M2D096B_SHORELINE_ANIMATION_EVIDENCE.md",
+      "bytes": 3539,
+      "sha256": "e67be8733924196c474d028c8e8f10c5873f2f2e64c93516363eaddd9304bec3"
+    },
+    {
+      "path": "docs/patch/M2D096C_CANONICAL_SHORELINE_ANIMATION_PREP_01017.md",
+      "bytes": 1407,
+      "sha256": "0e66d0606a4e4b1f7d75a8dc2662cd8e372b287afd98d80c4200a3d3966904e4"
+    },
+    {
+      "path": "docs/patch/M2D096E_VEGETATION_AND_MATERIAL_COVERAGE_01017.md",
+      "bytes": 1478,
+      "sha256": "b06ef740fc63447eba4a2d1010571c3cb2050bf5a0d5e43c2bb74f9fa4b6cd90"
+    },
+    {
+      "path": "docs/patch/M2D097A_VISIBLE_TILED_RENDERER_CONVERGENCE_01018.md",
+      "bytes": 4389,
+      "sha256": "9eae3f9d26a046536aa9e4b8b4a8ec2f93bb9b5d53c8fa034e5a2028210dd8f3"
+    },
+    {
+      "path": "docs/patch/M2D097B_WATER_SCRUTINY_01019.md",
+      "bytes": 2638,
+      "sha256": "91ea57da2d6ccd01ea7df1e2ade6b3a4c0bbb313c56599969af76fe0d3a96325"
+    },
+    {
+      "path": "docs/patch/M2D097C_BARREL_GATE_INVESTIGATION.md",
+      "bytes": 5115,
+      "sha256": "013e269e7901e3cc8baf1e257ec2dc5c7c48166e8ac2dd75b11c7d5593fcd377"
+    },
+    {
+      "path": "docs/patch/M2D097C_BARREL_TEMPLATE_LOOKUP_GATE_REPAIR.md",
+      "bytes": 2385,
+      "sha256": "9d31d7b17c887f347e46f30952a7acaceab77848cdf717ead98d988a30886a84"
+    },
+    {
+      "path": "docs/patch/M2D099_SOURCE_CREDIT_IDENTITY_RECOVERY.md",
+      "bytes": 3738,
+      "sha256": "2a9f0d7def81ad1bd19ca75fb338589567ee03172d8db283ef14e5ac9fa94e5b"
+    },
+    {
+      "path": "docs/patch/M2D100_ROLLUP_M2D099_AND_CHARACTER_LIBRARY.md",
+      "bytes": 2594,
+      "sha256": "27d107c087c96a46b4184d7cdcead279ee87c68b3e0afb53af6064c286cead4c"
+    },
+    {
+      "path": "docs/patch/M2D101_EDITOR_15_70_15_ASSET_AND_OBJECT_RECOVERY.md",
+      "bytes": 5428,
+      "sha256": "97c3bf9e49b54647f7489e15ab4855edb58771e63201dbbe885e5d709ab2a6c5"
+    },
+    {
+      "path": "docs/patch/M2D102_CUMULATIVE_COAST_EDITOR_METRICS_BRIDGE.md",
+      "bytes": 6810,
+      "sha256": "06952c2d8759f03b22a6f58e444e22d3307091a72cd1c737c43c9f329d927042"
+    },
+    {
+      "path": "docs/patch/M2D103_PAINTED_COAST_RIGHT_CLICK_SEASON_SCENE_BOUNDARIES.md",
+      "bytes": 6354,
+      "sha256": "965eeb2ff617e4aad338f6aad809ad9a6b5e0c6da3dac85d24b214ecb355b6aa"
+    },
+    {
+      "path": "docs/patch/M2D104_CARGO_CHECK_RECOVERY.md",
+      "bytes": 2139,
+      "sha256": "eb2c763a1d465c5787c761b37e5c77a99de5ebf06bf142916949a687eaef4ba3"
+    },
+    {
+      "path": "docs/patch/M2D105_COAST_TEST_SEMANTIC_RECOVERY.md",
+      "bytes": 2555,
+      "sha256": "7472fef6dcf85a311e47bbf69c0968ecb16dda83136491d1853ef6663e88675d"
+    },
+    {
+      "path": "docs/patch/M2D106_PREMULTIPLIED_ALPHA_TREE_SPRITE_REPAIR.md",
+      "bytes": 2734,
+      "sha256": "b11f123526fd8529a4a0295d08345cadb68e4a05d98a8d3e36626f6a74af95eb"
+    },
+    {
+      "path": "docs/patch/M2D107_CANVAS_BRUSH_COMPACT_UI01_BR01.md",
+      "bytes": 4621,
+      "sha256": "bf890005d4cee1ea6cf9d4bd859c4bc9ab13120735a47104bf2b680170ddff43"
+    },
+    {
+      "path": "docs/patch/M2D108_PCC_FAST_START.md",
+      "bytes": 2424,
+      "sha256": "7ee7f43e29e1d13fefc91ddb2ec42718be271eb141ec892e5eea880579d46eea"
+    },
+    {
+      "path": "docs/patch/M2D109_GIT_PUBLISH_PREFLIGHT_RECOVERY.md",
+      "bytes": 2545,
+      "sha256": "46137d3a246a0419e59470628fadbaaf7cc53bb97d1215d05d0e390ff535815d"
+    },
+    {
+      "path": "docs/patch/M2D110_COMBINED_PUBLISH_AND_NATIVE_CARGO_CHECK.md",
+      "bytes": 2521,
+      "sha256": "405ae593207108552d1dd2ab2f8c787649cf1be59ef032def959828f54800cce"
+    },
+    {
+      "path": "docs/patch/M2D112_UA01_UNIFIED_AUTHORING_P1.md",
+      "bytes": 3775,
+      "sha256": "150ba6a22331928f00a99b42b2f84f3b05453f9ecb64ffc697540cd1d0537624"
+    },
+    {
+      "path": "docs/patch/M2D113_UA01_EDITOR_LAYOUT_RUST_TEST_REPAIR.md",
+      "bytes": 1347,
+      "sha256": "b62005d5cd6b34012b8b226dc214d2bf3d4e9ddeedc5ce19055f3b7d881b8fd1"
+    },
+    {
+      "path": "docs/patch/M2D114_UNIFIED_TOOL_RAIL_TERRAIN_WORKFLOW.md",
+      "bytes": 3360,
+      "sha256": "7287076ec1a6669badaf8c43e3a60371f57c64be509be68fdc8c594ce82bcf1b"
+    },
+    {
+      "path": "docs/patch/M2D116_WORLD_PIE_CHARACTER_VERTICAL_SLICE.md",
+      "bytes": 5636,
+      "sha256": "65f6cafd4c2469b42f74696de0bb72a779b68436b4a95b3b4bb9eea60bd64ec5"
+    },
+    {
+      "path": "docs/patch/M2D117_WORKSPACE_ROOMS_STONE.md",
+      "bytes": 4087,
+      "sha256": "e69fa1cca3d471b15ef877dc85efeb109510111176922904644a6dcfa2c3ce5e"
+    },
+    {
+      "path": "docs/patch/M2D118_STANDALONE_SOURCE_BOUNDARY.md",
+      "bytes": 1079,
+      "sha256": "5ec5039036fd969d6997da7465056f1afbe6c57b643ac70be4aefa8e1b4be598"
+    },
+    {
+      "path": "docs/patch/M2D119_PLAYABLE_PORTALS.md",
+      "bytes": 2166,
+      "sha256": "1f9d05d46d647ec2f5bbc897e2ccd54701d2ccafaaac5c411d521fa0037e707d"
+    },
+    {
+      "path": "docs/patch/M2D120_ROOM_CANVAS_EDITING.md",
+      "bytes": 3043,
+      "sha256": "847f9020ba81ef1c2f247ee073888aa375a1e463f34223e533ab2f5bca2fad36"
+    },
+    {
+      "path": "docs/patch/M2D121_PER_STRUCTURE_DOORWAY_SCENE_MAPPING.md",
+      "bytes": 2834,
+      "sha256": "b915325ced137df65db70de5ca4ca761e5522c0c0ca0640a8db092c764cae058"
+    },
+    {
+      "path": "docs/patch/M2D122_ASSET_RENDER_COVERAGE_AND_LAZY_BINDING.md",
+      "bytes": 6253,
+      "sha256": "eaf81be27003d54f3d5a0c97941d0cac32b7d7ce900f73f258187d87888cb81d"
+    },
+    {
+      "path": "docs/patch/M2D123_SOURCE_ALPHA_REVIEW_AND_REVIEWED_PLACEMENT.md",
+      "bytes": 1552,
+      "sha256": "0a4ddd063cfdb8c4840623bcb3eacf18cb24773a82d8cbec8ed7c25f0a555b75"
+    },
+    {
+      "path": "docs/patch/PCC_1_2_7_CERTIFIED_GITHUB_WORKFLOW.md",
+      "bytes": 1878,
+      "sha256": "df3ebb075bdf76ece9f6a0f001fb35913f0e58a74e1211f8021a2074da1c2104"
+    },
+    {
+      "path": "docs/patch/PCC_1_2_8_FIRST_DEPLOY_BOOTSTRAP.md",
+      "bytes": 1540,
+      "sha256": "10e23fe06eca5cc7690387fc797692879506e4fb502df489ba829f1aba33ca4a"
+    },
+    {
+      "path": "docs/patch/PCC_1_2_9_GITHUB_FIRST_ASSET_HYDRATION.md",
+      "bytes": 1104,
+      "sha256": "7bc3a8116f0895010241d67d9113e066577c92ad6c57cc0084feab41d315b510"
+    },
+    {
+      "path": "docs/patch/PCC_1_3_0_GITHUB_TEXT_EOL_FIX.md",
+      "bytes": 1191,
+      "sha256": "5d18857786d2c2d7f8cc26e501f5b6adc3e1f0758c37b7014138f7aaa8edef9e"
+    },
+    {
+      "path": "docs/patch/PCC_1_3_1_ASSET_PREFLIGHT_COMPLETENESS.md",
+      "bytes": 1370,
+      "sha256": "051086e6601e11234de556a0fa0c0194f19024d5ba442d6a1319f2742d21b669"
+    },
+    {
+      "path": "docs/patch/PCC_1_3_2_CANONICAL_GITHUB_ORIGIN.md",
+      "bytes": 1527,
+      "sha256": "e4ae48d1a585e7b170413de9d0dec6670713b1f991ac38132010be025879f0eb"
+    },
+    {
+      "path": "docs/patch/PCC_1_3_3_GIT_STDERR_FILENAME_ISOLATION.md",
+      "bytes": 956,
+      "sha256": "28847785ea192ca92e8c6f29d0a0ef5f769add818b30f2ac5eb317732ed49c8a"
+    },
+    {
+      "path": "docs/patch/PCC_1_3_4_RETRY_SAFE_DELETION_STAGING.md",
+      "bytes": 739,
+      "sha256": "d7e155cf0364d30a07244bd47f3c6cf5bdaa1ea3d41180216470c106d44f0b12"
+    },
+    {
+      "path": "docs/patch/RECON_V081_DIAGNOSIS.json",
+      "bytes": 2679,
+      "sha256": "d9c150b52f0159aa6a168b082e38da2c58d2ac030d7db7b99aadf4d325661ebd"
+    },
+    {
+      "path": "docs/patch/RECON_V081_DIAGNOSIS.txt",
+      "bytes": 1287,
+      "sha256": "7b496feca26520b21c8b85062618d61252268ec66dfa49e9242a6c21872cb3b1"
+    },
+    {
+      "path": "docs/patch/evidence/M2C3_JAIDYNREIMAN_TILED_CONCORDANCE.v1.json",
+      "bytes": 17057,
+      "sha256": "da37a33966c457ba09c15d9f841ac54298771b2ae439c44b415ded4cecea8f2e"
+    },
+    {
+      "path": "docs/patch/evidence/M2D102_source_wang_coverage.csv",
+      "bytes": 7357,
+      "sha256": "13b57a7e41eff461813019b3e25a42f38b46c23808dab17a43112415c181dc12"
+    },
+    {
+      "path": "docs/patch/evidence/M2D102_source_wang_coverage.json",
+      "bytes": 2270,
+      "sha256": "0a39faad9c01ae55850802dc810fa2a4f1ad6da99a97d61c62fb8e1b1d070e1c"
+    },
+    {
+      "path": "docs/research/ELIZAWY_ORIGINAL_DEMO_REFERENCES.json",
+      "bytes": 1418,
+      "sha256": "fc24fa3e367a0c83e22907ca53180ea0024f2e46363eeb0bcef74e84c5a0d2ed"
+    },
+    {
+      "path": "docs/rollup/M2D100_SPLIT_ARCHIVE_INSTALL.md",
+      "bytes": 1885,
+      "sha256": "c735142486778adad176b0bf75d8f360bb5efc58c6ee09c7c3848a5622604d60"
+    },
+    {
+      "path": "docs/rollup/M2D116_SOURCE_ROLLUP_RECONSTRUCTION_20261009.md",
+      "bytes": 2777,
+      "sha256": "00f4a71d9aadb07ab79a4322c3091ec67bd52567c7dda0f9175c7cd32c525e2a"
+    },
+    {
+      "path": "docs/rollup/M2D118_HAVENWILD_CLEAN_SOURCE_SHA256.json",
+      "bytes": 40682,
+      "sha256": "8204cfe7b583dce14d9e5c3bbcac66d8d7bc75ae5e952a40b7796365ab776838"
+    },
+    {
+      "path": "docs/rollup/M2D119_HAVENWILD_SOURCE_SHA256.json",
+      "bytes": 61820,
+      "sha256": "2d34331f9377ccad339e99572432ffaec15dcfee32b2558f73d2bcc0b0797275"
+    },
+    {
+      "path": "docs/rollup/M2D120_HAVENWILD_SOURCE_SHA256.json",
+      "bytes": 62515,
+      "sha256": "55b209bc7f2c77644312c7786f955aea81e02171df65e1dcc54fbe79f3e72265"
+    },
+    {
+      "path": "docs/rollup/M2D121_HAVENWILD_SOURCE_SHA256.json",
+      "bytes": 63079,
+      "sha256": "1e78bcb38a72a093c996be3909859b2e1d86de2cca002272229b9928dc7add05"
+    },
+    {
+      "path": "docs/rollup/M2D122_HAVENWILD_SOURCE_SHA256.json",
+      "bytes": 63964,
+      "sha256": "151728df0a637288d100879178bd500cdaf2f47ef213e1ec0cb1ab377d9d44b1"
+    },
+    {
+      "path": "project/forgepy.project.json",
+      "bytes": 11221,
+      "sha256": "2fdece7b83dc66e423d2c758e1f19a6c874d78ee46f89ddaf4a723f24f1da8bb"
+    },
+    {
+      "path": "src/asset_authority.rs",
+      "bytes": 62255,
+      "sha256": "366b8999100049ba4b1d88764930e82c8bd6a3bab45a06ff3bf51f595fa23189"
+    },
+    {
+      "path": "src/asset_review.rs",
+      "bytes": 3205,
+      "sha256": "4594398d8415ff189b745bffa96a9865b06832659c38f321ad479bca6b335daf"
+    },
+    {
+      "path": "src/atomic_file.rs",
+      "bytes": 5459,
+      "sha256": "8f15aade06341a1dc4ac393f8d647af803d9119bc8f56ae60a4044395f5a6f2c"
+    },
+    {
+      "path": "src/canvas_rulers.rs",
+      "bytes": 8532,
+      "sha256": "e6fda4f734df3677cf7cc2f8674c42c449cbf2b8cd08680665a3d862b5e37e08"
+    },
+    {
+      "path": "src/document.rs",
+      "bytes": 5436,
+      "sha256": "7ffec34e44206026bb15adf5dc9f90b6fa4c3b002810b59a7487c9012f4bf263"
+    },
+    {
+      "path": "src/editor_commands.rs",
+      "bytes": 4737,
+      "sha256": "077aa52a0163b73ad397074273d2b75d7f6187c6689f0076863047e44dafec88"
+    },
+    {
+      "path": "src/editor_icons.rs",
+      "bytes": 7438,
+      "sha256": "6fb2d78c2da7341ac876c1395aaa4e4b1a49e62c10cb4156ed061be6b73633ef"
+    },
+    {
+      "path": "src/editor_layout.rs",
+      "bytes": 15967,
+      "sha256": "8bfd2e6f1ce6c876febbc4c369c940afd112f0c10ea976dc376825e480ee5442"
+    },
+    {
+      "path": "src/elizawy_review.rs",
+      "bytes": 11400,
+      "sha256": "43a8fae0fdb4c55a619ae6a7fb5f876e26a9c970a6680fd34274adc0c4febad4"
+    },
+    {
+      "path": "src/historical_evidence.rs",
+      "bytes": 11093,
+      "sha256": "cf33ba4e81e5c4d16178f3e3f6aad89244fc0cb38a678b9581d934af90891836"
+    },
+    {
+      "path": "src/main.rs",
+      "bytes": 397150,
+      "sha256": "2446014fb505764661fc7bb15d4d2731fa1b1477e49e6da4b5855dcada892d55"
+    },
+    {
+      "path": "src/playtest.rs",
+      "bytes": 11778,
+      "sha256": "ff65ec5f675cab12371072f7dc3366d80625da626e01deee1d60e7bbf432521c"
+    },
+    {
+      "path": "src/project_root.rs",
+      "bytes": 2102,
+      "sha256": "86be4e1110070c417bec12265417d8e568a97f464fb28c329b7feda3d89aab6c"
+    },
+    {
+      "path": "src/render_asset_sync.rs",
+      "bytes": 3265,
+      "sha256": "38555f734085324996b7acbb87485dad5bc9f96b7afa55ceb641097ea8077bb4"
+    },
+    {
+      "path": "src/room_authoring.rs",
+      "bytes": 6408,
+      "sha256": "42b40a6c84446416078262ba87714de593b97c626a833fd1fc338e1ccc661912"
+    },
+    {
+      "path": "src/room_scene.rs",
+      "bytes": 18597,
+      "sha256": "75d3fa84f81ced8a5130ccc95b9e5bb1c9859ac5fae8299e1407afa0bbd6e469"
+    },
+    {
+      "path": "src/scene_v2.rs",
+      "bytes": 58611,
+      "sha256": "b86397ff46d9e319415cab4eca50be72b792a001316acd9b2c67e3f3155d5353"
+    },
+    {
+      "path": "src/semantic_lab.rs",
+      "bytes": 3274,
+      "sha256": "995ae3ef340945b9a935bf725d1c18b2150a6e2e479fd957252f586f8129d90e"
+    },
+    {
+      "path": "src/source_catalog.rs",
+      "bytes": 5202,
+      "sha256": "12277352505d8507858889cd9e9d7940b25f6cef64b88cf79f59b847cfd43ae6"
+    },
+    {
+      "path": "src/summer_seed.rs",
+      "bytes": 3442,
+      "sha256": "7c2bfa4c802d3e166e84dd75fb6631c582ace9173283ad7b87b69ed26eeeaa07"
+    },
+    {
+      "path": "src/terrain.rs",
+      "bytes": 5737,
+      "sha256": "82ee173d3c646fc05f37be5ce2821b5cfb9e78b861a388cd62f8519fb368553b"
+    },
+    {
+      "path": "src/terrain_mapper.rs",
+      "bytes": 27814,
+      "sha256": "bdf527adf6661820b46520c7e13b356de2cd76863af6b00b349b699096062df6"
+    },
+    {
+      "path": "src/terrain_resolver.rs",
+      "bytes": 9453,
+      "sha256": "cae590ff04916c0c618c69098384ff12f3252106a34467924285f9f80c90fade"
+    },
+    {
+      "path": "src/tiled_terrain.rs",
+      "bytes": 47082,
+      "sha256": "3e375961dbe2ca4310df57b236921a8e07d824d1d365607e41effaa88c5139eb"
+    },
+    {
+      "path": "src/tiled_terrain/native_wang.rs",
+      "bytes": 11858,
+      "sha256": "193df11b78ccf372ce61270bbf98d60149d203143cf8aad0d0fcbb4f7c16839f"
+    },
+    {
+      "path": "src/world_chunks.rs",
+      "bytes": 7789,
+      "sha256": "a733fc120f4b2d5a536c6847d01ff822b7290f1f83cad898fbec3d3ebc64b6fd"
+    },
+    {
+      "path": "src/world_doc.rs",
+      "bytes": 154686,
+      "sha256": "92dcac1e6387d222d16549622f058446db7f064363016931de8d404c05508bff"
+    },
+    {
+      "path": "src/world_pie.rs",
+      "bytes": 16576,
+      "sha256": "51bd5f67453c3ba689650f70817538e12057110f15d0bf9efebbefef8637d1a7"
+    },
+    {
+      "path": "src/worldgen_plan.rs",
+      "bytes": 41462,
+      "sha256": "cb72f1eaeba52582696d0dd54357a1d18c8925ab50bfb1275df934afd9f0ae37"
+    },
+    {
+      "path": "tests/test_character_archive_integrity.py",
+      "bytes": 3010,
+      "sha256": "2b3c4ad9313451e37576eb8168334fef954a1796d09cf8bc8b82a1adbf0a96c7"
+    },
+    {
+      "path": "tests/test_elizawy_credit_identity_recovery.py",
+      "bytes": 3994,
+      "sha256": "fdb8f81ad94520b941fe5f43f316f3374c88c5c22ed829d28e0f1e0286eda79a"
+    },
+    {
+      "path": "tests/test_hw_barrel_gate_doctor.py",
+      "bytes": 5070,
+      "sha256": "626d4ca779610e9bdfd7e14c4a8a1719617b8f0f802c7f3c5fd452041a28ceb2"
+    },
+    {
+      "path": "tools/asset_hydration_policy_selftest.py",
+      "bytes": 4751,
+      "sha256": "eb3760940dc53250370cb5a2c79bee50acf6f4b98041520265289c610680ab93"
+    },
+    {
+      "path": "tools/audit_asset_render_coverage.py",
+      "bytes": 7618,
+      "sha256": "69b970253d7de1706e6434283c9133058c9020108fa0025a7b717bf60dab58c7"
+    },
+    {
+      "path": "tools/audit_consolidated_mapping.py",
+      "bytes": 3777,
+      "sha256": "12a0078a3ab0315b5cb30d027e978d6c930bef5a37527612b3534bff3b5383ef"
+    },
+    {
+      "path": "tools/audit_elizawy_asset_consumption.py",
+      "bytes": 10306,
+      "sha256": "1874a2c189f873de0f18bf4627270fbf59077cbfb46d1507468ad191537f6644"
+    },
+    {
+      "path": "tools/audit_elizawy_concordance.py",
+      "bytes": 16928,
+      "sha256": "e9e11c3ebc11bc8e3f0d821823c42de2aaf3f7e8d8ef2907894cf2724b1008b2"
+    },
+    {
+      "path": "tools/audit_jaidyn_shoreline_animation.py",
+      "bytes": 11732,
+      "sha256": "b6e776bc6ff6ce0e615f69791155a5e888ea769475fa0a40088d4bb6036b5847"
+    },
+    {
+      "path": "tools/audit_tiled_shoreline_recipes.py",
+      "bytes": 3524,
+      "sha256": "099ee12b9cfafb06bbe1eee8c661313b24033faaf74bcc102b3a98d1261f2b48"
+    },
+    {
+      "path": "tools/build_cliff_summer_authority.py",
+      "bytes": 8200,
+      "sha256": "d36bf2c751173abec51cc0591630d23cefa69fd9bd2649ba00db5fc33b3037b0"
+    },
+    {
+      "path": "tools/build_elizawy_asset_lane.py",
+      "bytes": 22563,
+      "sha256": "d9dc70f8405ecb59759a731e39b0f1ad540147902f5bc6817514f2077f931f3f"
+    },
+    {
+      "path": "tools/build_mapping_certification_scene.py",
+      "bytes": 5184,
+      "sha256": "d3520bb2154b080797e3dbbdc2f55031e3c09bc3dcf63b2c0b6e0235f912d85b"
+    },
+    {
+      "path": "tools/build_mapping_inventory.py",
+      "bytes": 4767,
+      "sha256": "e13edb1bbbbf4ce4758b73ef27341e964602134875cc198dffcf04eb5a91e00f"
+    },
+    {
+      "path": "tools/build_summer_complete_runtime.py",
+      "bytes": 20141,
+      "sha256": "41b04d3aabcee28dc7c2100e62d3931499f98f9d4028ee28c68c9d8d4b34f981"
+    },
+    {
+      "path": "tools/build_summer_flatworld_mapping.py",
+      "bytes": 12520,
+      "sha256": "b0313960df4c9c70a3afa87df30f96351c8732c4980943458608960f028b6771"
+    },
+    {
+      "path": "tools/build_worldgen_asset_catalog.py",
+      "bytes": 5075,
+      "sha256": "56da06d7e8b8431c7030d6dfaca968d094ca54b2d07c338605a84ff82d749050"
+    },
+    {
+      "path": "tools/certify_worldgen_object_bounds.py",
+      "bytes": 10371,
+      "sha256": "3e6072de8d0db8a5a2955cfa8376774fc2f31c9b63d96fe7117301028fe78a7a"
+    },
+    {
+      "path": "tools/certify_worldgen_tree_bounds.py",
+      "bytes": 216,
+      "sha256": "07b21c1d13b8912d134a0fe64774f3a2eb05951e03338eced3ba32e3b9c10a19"
+    },
+    {
+      "path": "tools/converge_native_summer_authority.py",
+      "bytes": 9070,
+      "sha256": "f332eda6c6e41865a2932311ebd4579905ff732886093604bba8c20a984d572f"
+    },
+    {
+      "path": "tools/elizawy_derivative_gate_selftest.py",
+      "bytes": 1872,
+      "sha256": "1841ec39c14af5a6ef00aa06b905e72fab77b84e0795d74b633894fd8f6f2b78"
+    },
+    {
+      "path": "tools/elizawy_m2c2_selftest.py",
+      "bytes": 3875,
+      "sha256": "e7ea96dba89a60f518cc2c634cc8de96b6e4224e2fa73d547481019d8f7a76f1"
+    },
+    {
+      "path": "tools/elizawy_m2c3_selftest.py",
+      "bytes": 2861,
+      "sha256": "aac27d05becab53d736bae76fa73a4b0638e8b62419dfe199ebc1debe908b81d"
+    },
+    {
+      "path": "tools/elizawy_m2c4_selftest.py",
+      "bytes": 2445,
+      "sha256": "02bf735f11dcf187d8d1c2011ad14383d6ee8daec7c8e834853c52288690d720"
+    },
+    {
+      "path": "tools/export_elizawy_review_registry.py",
+      "bytes": 14593,
+      "sha256": "7e1d695703256f4b75daf7719b351a68a123d8f060bd8bf51959e77680d358ea"
+    },
+    {
+      "path": "tools/havenwild_identity_boundary_selftest.py",
+      "bytes": 2752,
+      "sha256": "0468331484b281ddd6fb951e96928d31fc2124ad85e29fedf8b30b49e51da3b7"
+    },
+    {
+      "path": "tools/hw_barrel_gate_doctor.py",
+      "bytes": 12625,
+      "sha256": "7ebabbea84d27480bc53781ea92f70d8ae68a9071b8bcbe5dc0c3930e00dabfe"
+    },
+    {
+      "path": "tools/hydrate_jaidyn_tiled.py",
+      "bytes": 11261,
+      "sha256": "22f8db1b396cd41c98062c72015fd3587c838b63d4d60f485ef4f34773074573"
+    },
+    {
+      "path": "tools/inspect_elizawy_source_alpha.py",
+      "bytes": 7644,
+      "sha256": "3e469a0ab023b904b9ec48bf6adf55c7bd750675c66c967c37a9ad0bbf04e598"
+    },
+    {
+      "path": "tools/inspect_elizawy_tiled.py",
+      "bytes": 9890,
+      "sha256": "e89d74194a6a960ad53a6967ec02485a84bc33341f2730da401755b0b196c270"
+    },
+    {
+      "path": "tools/m2d02a_selftest.py",
+      "bytes": 1966,
+      "sha256": "029a9b88655cefd026989795053ffd20463a12582b26d7a2643094be3d2c2c7c"
+    },
+    {
+      "path": "tools/m2d02b2_rulers_selftest.py",
+      "bytes": 1318,
+      "sha256": "d7bad4d84f783bed5848f3b88ea6cd3cd221a295d77ab1ad05dc0bc4fde94e02"
+    },
+    {
+      "path": "tools/m2d02b_selftest.py",
+      "bytes": 3394,
+      "sha256": "0abb99580c2070799d0ba61ab9f6ea35a723f2bdfa1f9e897584d6602cbec502"
+    },
+    {
+      "path": "tools/m2d02c_lab_selftest.py",
+      "bytes": 2529,
+      "sha256": "edc0a49cb47014b6d201c92596261ceebcf4a2952fc73b2b9625979418a27f62"
+    },
+    {
+      "path": "tools/m2d03b_selftest.py",
+      "bytes": 1497,
+      "sha256": "57564c56f5a5067ce85681aa80eef348bebed3bdcda4d0b4edbafc2a278f4cc9"
+    },
+    {
+      "path": "tools/m2d03c_selftest.py",
+      "bytes": 1934,
+      "sha256": "3f9e0c4c44ff73e5032d87c63978e95975c90b6ca21a5a3a9a932c9269fda124"
+    },
+    {
+      "path": "tools/m2d04_summer_scene_selftest.py",
+      "bytes": 5916,
+      "sha256": "aee2f8c902f293793f73aeebd08ca7f664c34b674ce503d9454b948e2e2fa881"
+    },
+    {
+      "path": "tools/m2d06_shell_selftest.py",
+      "bytes": 2599,
+      "sha256": "4ced6aef1608991d1e7d9dd354c7162e943ce46b7ac8fa8defed88a06f2046de"
+    },
+    {
+      "path": "tools/m2d06b_collision_selftest.py",
+      "bytes": 1917,
+      "sha256": "f0f45fc50aab767a48ef2d454b45a6757e54667c4f3fa4079b1edca667b37666"
+    },
+    {
+      "path": "tools/m2d07_asset_lane_selftest.py",
+      "bytes": 2278,
+      "sha256": "93bab4b7a09e00c1ef3cb75a8094e9ba3c9b64e9cf44d474b4c01dcd63fd2d8d"
+    },
+    {
+      "path": "tools/m2d07_world_contract_selftest.py",
+      "bytes": 1380,
+      "sha256": "4d8838551b71b6976b9f239d21e462db5bc8049136add0ac5033a1a80ef13215"
+    },
+    {
+      "path": "tools/m2d07u_autotile_brush_selftest.py",
+      "bytes": 1748,
+      "sha256": "02e099ea7d0f9d79b715e20fbc01d85d1b2b36e7a7f1424a6d381c0417371872"
+    },
+    {
+      "path": "tools/m2d07v_summer_flatworld_selftest.py",
+      "bytes": 3101,
+      "sha256": "1720585f62529fffc8496c891ea8a7212d630a50af838a9a84bf649a8b7fd0da"
+    },
+    {
+      "path": "tools/m2d07w_summer_dual_grid_selftest.py",
+      "bytes": 3730,
+      "sha256": "e850466a793f1d4728a3d92a3b58f3359f508d082c7cfa4a001bc1b59c478ad9"
+    },
+    {
+      "path": "tools/m2d080_native_summer_authority_selftest.py",
+      "bytes": 6808,
+      "sha256": "b847fbfff2533733ff8c97bbfaad846886f5d23506c26b2ddc97179cb286cd24"
+    },
+    {
+      "path": "tools/m2d081_summer_complete_selftest.py",
+      "bytes": 8472,
+      "sha256": "2088dedc1aa6d57efb1998d007006cf39be30b45f69f54fa4347b64cc108e630"
+    },
+    {
+      "path": "tools/m2d082_cliff_source_authority_selftest.py",
+      "bytes": 3657,
+      "sha256": "9ab3b4dea59eac5485ceeaffbe05811f4f7fccf1067d0cf01d93ed768cec2c4a"
+    },
+    {
+      "path": "tools/m2d082c_generated_world_selftest.py",
+      "bytes": 4714,
+      "sha256": "95224215b474e171857ee02c6187dddd8ed48e445d2bae1978c72dfb8818187f"
+    },
+    {
+      "path": "tools/m2d082d_dual_grid_alignment_selftest.py",
+      "bytes": 3370,
+      "sha256": "74538fa74dd37e3cdda521784d30fbd76f534dd7c66acec1035b0d5e3d637427"
+    },
+    {
+      "path": "tools/m2d082e_seam_safe_shoreline_selftest.py",
+      "bytes": 655,
+      "sha256": "fc02f858fbe06db7c02076abc8fa9ebbbe783149475c60ac5ef4b9d4e602a299"
+    },
+    {
+      "path": "tools/m2d082f_land_connectivity_materials_selftest.py",
+      "bytes": 4234,
+      "sha256": "829018c450a8f133379795cb1db2356acd3949aebb72e3e902ca6814d0386995"
+    },
+    {
+      "path": "tools/m2d090_kitchen_sink_world_selftest.py",
+      "bytes": 6103,
+      "sha256": "ad6896a72e30c8c1d085c0ce16f56afab16d9bde647515191a9a1dc957b9863f"
+    },
+    {
+      "path": "tools/m2d091_visual_authority_repair_selftest.py",
+      "bytes": 8680,
+      "sha256": "aaddc4cd7ab206b74c059f5ba6da5f4d71d931aa502453b354ec3aae98f14971"
+    },
+    {
+      "path": "tools/m2d092b_shoreline_owner_authority_selftest.py",
+      "bytes": 9255,
+      "sha256": "971e79545e7755639d98d2dc27788a24633d8570ce3e1b906f8cf2428b41e15e"
+    },
+    {
+      "path": "tools/m2d092c_unified_compositor_selftest.py",
+      "bytes": 10218,
+      "sha256": "2f2ddfae53476247c7ab77d93bfb8d0f2020f3a92e51d89927c52500ba3d4f4a"
+    },
+    {
+      "path": "tools/m2d093a_flat_terrain_convergence_selftest.py",
+      "bytes": 7582,
+      "sha256": "4205fbd52d91224ab8549832d15405484d54e5fb38f61e9847270359e1d4805d"
+    },
+    {
+      "path": "tools/m2d093b_editor_convergence_selftest.py",
+      "bytes": 7144,
+      "sha256": "975118836dd5fac09acdad0bc87dcac6bbd0fdf3be51dcf164e0e4731d7c3de5"
+    },
+    {
+      "path": "tools/m2d094b_tiled_authority_selftest.py",
+      "bytes": 9055,
+      "sha256": "7f69f9399f179a4ab3ec906e756824b22d982a38f9bb25d6244362d4b3f0f0bf"
+    },
+    {
+      "path": "tools/m2d095b_native_wang_selftest.py",
+      "bytes": 5093,
+      "sha256": "a0523a5f257ebb11a8bde92430695b12229951aaa2253bfcac717897e2005fda"
+    },
+    {
+      "path": "tools/m2d095d_window_backend_policy_selftest.py",
+      "bytes": 2230,
+      "sha256": "699b6dd7d898342f42efca6295fbda3443c720676781da0fa58b74bf7b2c6dd6"
+    },
+    {
+      "path": "tools/m2d096a_tiled_live_renderer_selftest.py",
+      "bytes": 5768,
+      "sha256": "f8d61510b0c33473d03786234e05caa4b114002323d86dd78814b77a5613cf0a"
+    },
+    {
+      "path": "tools/m2d096c_animation_contract_selftest.py",
+      "bytes": 4677,
+      "sha256": "ca3a11f8c276f3ba7d78872a3d4b48e69b2315ee8baa3112951514e805032bcc"
+    },
+    {
+      "path": "tools/m2d096c_shoreline_promotion_readiness.py",
+      "bytes": 7515,
+      "sha256": "18eaf2196b5cc989bf1887e2e408fb9bc109f498848c7649b47292b76ac7fe44"
+    },
+    {
+      "path": "tools/m2d096d_tiled_material_bridge.py",
+      "bytes": 5806,
+      "sha256": "93e65e1add5ff902671289d30cc2c176bf29b9e3167e4050adb527e6745bbf17"
+    },
+    {
+      "path": "tools/m2d096e_vegetation_layer_selftest.py",
+      "bytes": 3015,
+      "sha256": "727e369d10b288bc69a29e0c111a14fde0ce194c39d477ebc3506e55fc81c94f"
+    },
+    {
+      "path": "tools/m2d097a_visible_renderer_selftest.py",
+      "bytes": 6769,
+      "sha256": "f51d7c20bc5ed3e8423f144547bdb3bae3a965829a4f15611bce33fe19917b7c"
+    },
+    {
+      "path": "tools/m2d097b_water_scrutiny_selftest.py",
+      "bytes": 6665,
+      "sha256": "53cc73cfcb7f9acea41f7a7ab55f5a2abfcba26ce3579b3baa970442fc8b20d3"
+    },
+    {
+      "path": "tools/m2d101_editor_layout_and_move_selftest.py",
+      "bytes": 3006,
+      "sha256": "d23d778f556f51fd22950dbe5d689fc18d78b502fe362fa7a29cb7ee6d6042ef"
+    },
+    {
+      "path": "tools/m2d102_coast_editor_bridge_selftest.py",
+      "bytes": 4543,
+      "sha256": "1a377706bf4297e2cd643a85928caba3fa56d956aec6df679710bc029327de25"
+    },
+    {
+      "path": "tools/m2d103_edited_coast_context_selftest.py",
+      "bytes": 2920,
+      "sha256": "fd3ab4bdbb0e3e29a7e0193ceb078b821d59f982f7a5d489ded5f4f61a8a7828"
+    },
+    {
+      "path": "tools/m2d106_egui_source_alpha_selftest.py",
+      "bytes": 1733,
+      "sha256": "26a185ec7b56383c2a7c20742a957c151e4b82d7d4ba4aa256c8c463b18a198d"
+    },
+    {
+      "path": "tools/m2d107_canvas_brush_selftest.py",
+      "bytes": 2748,
+      "sha256": "497291963240bf802cc7484197f4bd9a0e746e71cc384de9983b6c5149d26642"
+    },
+    {
+      "path": "tools/m2d108_pcc_fast_start_selftest.py",
+      "bytes": 4588,
+      "sha256": "9858cf6920e5e332a15507833fc5543d22243c73f82b7c811e81928c1e778712"
+    },
+    {
+      "path": "tools/m2d109_git_publish_preflight_selftest.py",
+      "bytes": 4360,
+      "sha256": "b48a15de83ec9ddb14b6d337e9fb596a4631ee57bf2b23e44dee9401fa2cfffd"
+    },
+    {
+      "path": "tools/m2d110_egui_assetmut_borrow_selftest.py",
+      "bytes": 1404,
+      "sha256": "29a479d7df33f07773c746139dfceed58a4612e64b2704fec63674733755f049"
+    },
+    {
+      "path": "tools/m2d112_unified_authoring_selftest.py",
+      "bytes": 3002,
+      "sha256": "bdece0d591d3e57ea3b3b7f0ed92dd4738e3b841fad1f57f539a7dc7329917a7"
+    },
+    {
+      "path": "tools/m2d114_unified_tool_rail_selftest.py",
+      "bytes": 2468,
+      "sha256": "e1c5e796d3f6b3680eb0036b65dc1265cd595f7c6f66066e2ceb4a715adb8427"
+    },
+    {
+      "path": "tools/m2d116_world_pie_characters_selftest.py",
+      "bytes": 2036,
+      "sha256": "e3c4b9b66a5cca6e2819de809fc3bfb5d149c5375034519af8b40626516bff73"
+    },
+    {
+      "path": "tools/m2d117_workspace_rooms_selftest.py",
+      "bytes": 3177,
+      "sha256": "f318d0b8d530a18a31474370e75ea6c6eedac6557f173588590e896a52faa6ca"
+    },
+    {
+      "path": "tools/m2d119_pie_room_transitions_selftest.py",
+      "bytes": 3137,
+      "sha256": "f903f07cebc2d7daef8276adf9f7237e20fce9c796c0fe6154a6e7a549129515"
+    },
+    {
+      "path": "tools/m2d120_room_canvas_authoring_selftest.py",
+      "bytes": 3106,
+      "sha256": "3e668c1185124424e27df697ef7eb7950b5ae3948d0141edb3d4c57dfdebfeff"
+    },
+    {
+      "path": "tools/m2d121_structure_context_door_mapping_selftest.py",
+      "bytes": 2109,
+      "sha256": "9c4456e8115ec1f7cef5bd9f0264baaac74c194c4a8e430fc702dc63e1a7c44b"
+    },
+    {
+      "path": "tools/m2d122_runtime_asset_lane_selftest.py",
+      "bytes": 2567,
+      "sha256": "69dde8c571b8bf16f7c07aa7222f1594a9ede715557362425d541046f5f7f522"
+    },
+    {
+      "path": "tools/m2d123_alpha_source_review.py",
+      "bytes": 7428,
+      "sha256": "e82719ef1f76da816c4af42fb622cc43d5ed3a42138e59ba29793989fe03c1b8"
+    },
+    {
+      "path": "tools/m2d123_asset_review_placement_selftest.py",
+      "bytes": 2413,
+      "sha256": "0d40e16c1a8a9553b2114db3cce0fc1f5a11e3bf1c53b6aabc6d3596aac27a00"
+    },
+    {
+      "path": "tools/package_source.py",
+      "bytes": 362,
+      "sha256": "01bf342f91997ba183ba2c6e6848bba7409c93d0540d16fa8ee4d63ddf76f25d"
+    },
+    {
+      "path": "tools/package_source_policy_selftest.py",
+      "bytes": 2148,
+      "sha256": "c6a44f49d300c196d3dd13f3fa2f26267f4c2cd2eb5598224e6c436da41089b7"
+    },
+    {
+      "path": "tools/pcc_git_workflow_selftest.py",
+      "bytes": 11077,
+      "sha256": "585cb9a1d3434055e096d23727e2218bbfac648b43c7c4bf69b1fcda061c0395"
+    },
+    {
+      "path": "tools/pcc_patch_selftest.py",
+      "bytes": 8233,
+      "sha256": "c0d460c7f3a4333905fd99932d012f7285121d0a6d84338d7b2de0ef830e703c"
+    },
+    {
+      "path": "tools/pie_source_contract_selftest.py",
+      "bytes": 1670,
+      "sha256": "be3cf5ceb25e8aba7dbdeccc5213df846f05c150985cbfa5a23f203388af1c4c"
+    },
+    {
+      "path": "tools/reassemble_character_archive.py",
+      "bytes": 2735,
+      "sha256": "c2943ff677fa4c808afd09b392723be3fb22917c7d62a92bcaeb1cb9519586db"
+    },
+    {
+      "path": "tools/reconcile_elizawy_tiled.py",
+      "bytes": 17046,
+      "sha256": "0d91fa333822372f7256501dfe67fc5fb69a12943d736e77a530de12165a69c8"
+    },
+    {
+      "path": "tools/reconcile_mapping_evidence.py",
+      "bytes": 3824,
+      "sha256": "1f7b1d8b8d68445b8574425056b607e9ed7d284a35fb44f212268fea5e1188ff"
+    },
+    {
+      "path": "tools/recover_legacy_mapping.py",
+      "bytes": 7426,
+      "sha256": "1c83fbc8a511c63e308521f02ef20c24734e47cccb86e7a828222a905dc6ce54"
+    },
+    {
+      "path": "tools/repair_elizawy_credit_identity.py",
+      "bytes": 8034,
+      "sha256": "9d8c3b339d287803fc3fd26dfb89421e4a69a76266f077a0cd04b018ad906d36"
+    },
+    {
+      "path": "tools/rust_source_audit.py",
+      "bytes": 25475,
+      "sha256": "eb6e062c2b3e42017f36304ee1f0227e8e8c037d81acd76f0adc499316c41c98"
+    },
+    {
+      "path": "tools/source_version_contract.py",
+      "bytes": 1582,
+      "sha256": "aece197135ebeb154ab9b288626dfe2028b2967a11357a8432a1d09c03f62ef8"
+    },
+    {
+      "path": "tools/terrain_validate.py",
+      "bytes": 24239,
+      "sha256": "ae10e35d3efeef0326e70a83ac1789ed45ea4116483c94c4dc54e08d749ea069"
+    },
+    {
+      "path": "tools/verify_elizawy_derivative_evidence.py",
+      "bytes": 5197,
+      "sha256": "b45aad274f6edab2e63bf1a40384808f9cb94088659fd24be8150f4329f025b2"
+    },
+    {
+      "path": "tools/verify_jaidyn_tiled_runtime.py",
+      "bytes": 24828,
+      "sha256": "0cfa0f973fee5810de6b45fef7e19f4a2f5028627cb4ee9a7ee44352cfecd2a7"
+    },
+    {
+      "path": "tools/worldgen_object_bounds_algorithm_selftest.py",
+      "bytes": 2296,
+      "sha256": "15ee793b1be7914799bb3ec4ba832aa48fa6f9f96b64823f659e3f572f5ffeed"
+    },
+    {
+      "path": "updates/README.md",
+      "bytes": 670,
+      "sha256": "1dc304cdf67b1f4112e8bbb763a3a6244d8418535abdb0768d3f597faaf8d4e7"
+    }
+  ]
+}

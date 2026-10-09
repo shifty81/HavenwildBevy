@@ -77,8 +77,8 @@ def verify() -> dict:
     review = load(REVIEW)
     metrics = profile_metrics(profile)
 
-    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") not in {5, 6, 7}:
-        raise ValueError("Checked-in Summer runtime profile is not a supported v5/v6/v7 static-water source authority")
+    if profile.get("schema") != "havenwild.terrain.summer_flatworld_runtime.v1" or profile.get("version") not in {5, 6, 7, 8}:
+        raise ValueError("Checked-in Summer runtime profile is not a supported v5/v6/v7/v8 static-water source authority")
     if profile.get("sourceAtlas") != ATLAS_REL or profile.get("sourceAtlasSha256") != PINNED_SHA:
         raise ValueError("Summer runtime profile source identity mismatch")
     summary = donor_map.get("summary", {})

@@ -34,7 +34,7 @@ Accepted layouts:
 - extracted canonical tree containing `Terrain/`, `Structure/`, `Objects/`, and `FX/`;
 - a source pack folder containing `Terrain.zip`, `Structure.zip`, `Objects.zip`, and `FX.zip`.
 
-The tracked `core_source_manifest.json` contains hashes for all 349 non-character canonical source files. Core sync copies/extracts and verifies those files. `Characters.zip` is retained as a local optional archive and hydrated only when requested. Character hydration reports progress and writes a separate metadata-only `characters_index.local.json`; normal PCC operations do not SHA-256 hash all 63,991 character files. Once hydration state is certified, repeat hydration commands return immediately; use `--verify` when an explicit full file-size recheck is wanted. `FourSeasonAlternative.zip` may be retained locally but is never merged automatically.
+The tracked `core_source_manifest.json` contains hashes for all 349 non-character canonical source files. Core sync copies/extracts and verifies those files. `Characters.zip` is retained as a local optional archive and hydrated only when requested. Character hydration reports progress and writes a separate metadata-only `characters_index.local.json`; normal PCC operations do not SHA-256 hash all 63,991 character files. Once hydration state is certified, repeat hydration commands return immediately; use `--verify` for an explicit CRC32 recheck of every hydrated character file. `FourSeasonAlternative.zip` may be retained locally but is never merged automatically.
 
 ## Repository policy
 
@@ -66,4 +66,8 @@ A source ZIP extracted into a normal folder is not automatically turned into a G
 
 ## Character hydration migration
 
-If a pre-v0.2 ForgePY run already printed `CHARACTERS: hydrated 63991 files`, v0.2 adopts that completed local tree by file count, writes local hydration state, and builds the metadata catalog without re-hashing the files. Use `PCC.cmd assets hydrate-characters --verify` whenever an explicit full file-size verification pass is desired.
+If a pre-v0.2 ForgePY run already printed `CHARACTERS: hydrated 63991 files`, v0.2 adopts that completed local tree by file count, writes local hydration state, and builds the metadata catalog without re-hashing the files. Use `PCC.cmd assets hydrate-characters --verify` whenever an explicit full CRC32 verification pass is desired.
+
+## M2D100 source rollup character availability
+
+The user-supplied `Characters.zip` is included in recovery source rollups under `assets/optional/Characters.zip`, pinned by the canonical manifest at 299,252,779 bytes and SHA-256 `0de481a33c458d600fb3adaed043dcd953f58dec436dac0ca241c7dc5a0368f9`. Hydration is on demand using `PCC.cmd assets hydrate-characters`. Do not copy thousands of source sprites directly into the repository; the 63,991 member archive remains byte-exact and can be hydrated to `assets/elizawy/Characters` locally. The hydrator verifies archive source identity and, with `--verify`, CRC32 of every hydrated member. This is asset availability, not gameplay animation/character creator integration certification.

@@ -38,7 +38,7 @@ pub fn spec(command: StudioCommand) -> CommandSpec {
             id: "havenwild.canvas.paint",
             label: "Paint",
             shortcut: "B",
-            description: "Place the currently selected exact source region on the active visual layer.",
+            description: "Use the active Terrain or Tile Brush on its correct document layer; Pixel Brush requires a derived image target.",
         },
         StudioCommand::Erase => CommandSpec {
             id: "havenwild.canvas.erase",

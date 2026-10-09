@@ -1,7 +1,7 @@
 {
   "schema": "havenwild.worldgen.intent.v1",
-  "profileId": "havenwild.four_season_archipelago.v2",
-  "status": "m2d090_kitchen_sink_population_active",
+  "profileId": "havenwild.four_season_archipelago.v3",
+  "status": "m2d097b_water_scrutiny_active",
   "authoritativeSurface": "Generated World",
   "legacyRiverScene": {
     "userFacing": false,
@@ -19,8 +19,10 @@
     ],
     "seasonVisualPolicy": "coordinate-equivalent Spring/Summer/Autumn/Winter terrain, tree, plant, wildflower and cliff source regions are exact-source runtime substitutions; non-equivalent families remain evidence-gated",
     "interiorHydrology": [
-      "meandering_river",
-      "pond_or_lake"
+      "spring_cross_island_creek_and_twin_ponds",
+      "summer_north_south_river_and_lake",
+      "autumn_west_river_and_broad_lake",
+      "winter_short_feeder_river_and_large_lake"
     ],
     "biomeIntent": [
       "ocean",
@@ -42,7 +44,7 @@
       "dirt_bank",
       "pebble_path"
     ],
-    "coastProfile": "deep_ocean -> shallow_water -> wet_sand -> dry_sand -> inland_land"
+    "coastProfile": "deep_ocean -> shallow_water -> sand -> inland grass; configured Tiled/native-Wang topology owns the live boundary; legacy WetSand/pale-shore evidence is reference-only"
   },
   "purposeFirstGenerationOrder": [
     "macro_geography",
@@ -71,7 +73,7 @@
       "terrain_support_and_entrance_validation"
     ],
     "cityGoal": "purposeful authored-feeling settlements rather than repeated random house stamps",
-    "currentPrototype": "two deterministic purpose anchors per major island (hamlet + town) with source-exact houses, storage clutter and outdoor lighting"
+    "currentPrototype": "season-specific purpose anchors with class-correct house labels and deterministic nearby buildable-parcel fallback; Summer/Autumn remain denser while Spring/Winter stay smaller"
   },
   "roads": {
     "authority": "connectivity_graph_before_geometry",
@@ -92,7 +94,7 @@
       "bridge_or_ford_water",
       "route_around_or_connect_cliffs"
     ],
-    "currentPrototype": "deterministic meandering island spine plus town-to-cave spur; source-exact bridge placed at the river crossing"
+    "currentPrototype": "one-cell warm dirt roads using the source-backed Dirt/Mud fill family; reviewed horizontal bridge only where a real road/water crossing exists; PebblePath remains a manual/POI material"
   },
   "caves": {
     "persistentEntrance": true,
@@ -112,14 +114,14 @@
       "explicit_persistent_spaces",
       "player_owned_or_authored_persistent_state"
     ],
-    "overworldPrototype": "persistent source-exact cliff/cave entrance feature per major island at a road-connected cliff approach; weekly-reset interior generation remains the next cave-runtime stage"
+    "overworldPrototype": "reviewed complete wide cave/cliff source section retained as a recipe; automatic entrance placement gated until continuous cliff faces own the entrance"
   },
   "sourceArt": {
     "provider": "ElizaWy/LPC",
     "generatedArtwork": false,
-    "currentCertifiedGroundAuthority": "Terrain/terrain_summer.png v7 semantic-material authority with exact coordinate-equivalent seasonal terrain substitutions registered in the unified lane",
-    "broaderLaneGoal": "all 320 hydrated ElizaWy PNG sheets remain discoverable; M2D090 promotes reviewed seasonal/purpose/nature families into visible Generated World placements without random asset dumping",
-    "runtimeExactRegions": 2890,
+    "currentCertifiedGroundAuthority": "exact coordinate-equivalent Terrain/terrain_{spring,summer,autumn,winter}.png semantic-material authority; cliff sheets are never ordinary cell-ground authority",
+    "broaderLaneGoal": "all 320 hydrated ElizaWy PNG sheets remain discoverable; visual repair now prioritizes correct crops/anchors/recipes before adding more automatic families",
+    "runtimeExactRegions": 2892,
     "worldgenTemplates": 28
   },
   "validation": {
@@ -162,12 +164,12 @@
       1,
       2
     ],
-    "intent": "north terrace + inner ridge per island; generated cell elevation is authoritative metadata and cave/waterfall anchors are aligned to terrace transitions",
-    "cliffVisualPolicy": "source-exact seasonal cliff feature placements active at cave approaches; continuous contour cliff tiling remains screenshot-driven classification work rather than guessed atlas roles"
+    "intent": "season-specific terraces/ridges; generated elevation and cardinal cliff-drop masks are authoritative shared metadata; source-exact cliff visuals/collision/navigation will consume the same mask",
+    "cliffVisualPolicy": "shared cliff topology is active as a 4-bit N/E/S/W elevation-drop mask per generated cell; source-art role classification/rendering is the next stage; waterfall/cave sprites remain gated until those continuous faces render"
   },
   "waterfalls": {
-    "active": true,
-    "placement": "one deterministic source-exact front waterfall feature per major island where the river crosses the +1 terrace drop",
+    "active": false,
+    "placement": "reviewed south-facing body/splash recipe retained; automatic placement gated until continuous cliff faces provide a real drop",
     "animation": "static reviewed source frame for this pass; ordered animation semantics remain source-evidence-gated"
   },
   "population": {
@@ -185,9 +187,92 @@
       "settlement_clutter",
       "outdoor_lighting",
       "bridges",
-      "waterfalls",
-      "cliff_cave_features"
+      "reviewed_waterfall_recipe_gated",
+      "reviewed_cave_recipe_gated"
     ],
-    "rule": "purpose-first special placements plus deterministic biome-aware scatter; generated art remains forbidden"
+    "rule": "purpose-first special placements plus deterministic biome-aware scatter; water details route to Water, bank plants/wildflowers to Terrain Details, vegetation to Objects; lighting stays on road edges, bridges require real crossings, cliff-dependent waterfall/cave recipes remain gated, generated art remains forbidden"
+  },
+  "visualRepair": {
+    "treeAtlasSampling": "Full Gate derives v2 union-alpha render bounds across immutable Spring/Summer/Autumn/Winter tree PNGs; runtime uses exact certified crops and normal half-pixel atlas sampling, with no tree-specific UV inset hack.",
+    "waterfallCrop": "reviewed south-facing [0,32,96,128] body/splash retained; automatic placement gated until continuous cliff faces are active",
+    "caveCrop": "reviewed complete [224,288,160,96] wide entrance retained; automatic placement gated until continuous cliff faces are active",
+    "bridgeAnchor": "modular horizontal bridge measures a contiguous road/interior-water crossing, keeps one land approach cell on each side, and repeats the exact 32x64 middle source slice to span the river",
+    "bankPolicy": "grass bank is the default around inland water; smooth clustered dirt-bank erosion is seasonal/sparse and isolated one-cell dirt hooks are rejected",
+    "sandPolicy": "Generated coast is DeepWater -> RiverWater/Shallow Water -> Sand -> Grass. Legacy WetSand generation and the second pale-shore repaint are retired until Deep Sand/shore-animation evidence explicitly proves a replacement.",
+    "ownerSideTerrainTransitions": "legacy owner-side families remain evidence/reference data only when Tiled/Wang resolves the live core terrain. Exact configured Tiled topology is attempted first, shared native-Wang repair handles sparse checkerboards across one materialized visual grid, and conservative compatibility fallback is used only when the configured/canonical lane cannot resolve.",
+    "coastNoise": "seasonal island edge perturbation uses smooth deterministic interpolation across coarse lattice samples; no piecewise 5x5 score cells",
+    "paleShore": "exact Summer pale-shore ring remains cataloged and browsable as historical source evidence, but it is no longer a live Water/WetSand compositor pass layered after Tiled terrain.",
+    "spatialReservation": "purpose objects are emitted before ecology; structures reserve their footprint plus a one-cell visual/entrance margin and other purpose objects reserve their footprint before natural placement.",
+    "naturalObjectRenderBounds": "Full Gate certifies exact immutable-alpha render crops for 7 seasonal tree templates and 2 grassland rock/stone templates; atlas slots remain provenance/placement identity while render/collision/depth contracts stay separate.",
+    "tiledRenderer": "near and far terrain share one dual-grid vertex renderer; exact configured Tiled Terrain Wang topology maps back to canonical ElizaWy pixels; complete canonical TSX clips animate with stable world-space phase; unsupported legacy roles fail closed."
+  },
+  "cliffDependentFeatures": {
+    "automaticWaterfalls": "gated_until_continuous_cliff_faces",
+    "automaticCaveEntrances": "gated_until_continuous_cliff_faces",
+    "reviewedRecipesRetained": true,
+    "reason": "Do not stamp standalone cliff-dependent sprites onto flat ground."
+  },
+  "cliffTopology": {
+    "active": true,
+    "authority": "elevation_neighbor_drop_mask",
+    "bits": {
+      "north": 1,
+      "east": 2,
+      "south": 4,
+      "west": 8
+    },
+    "persistedOnGeneratedCell": true,
+    "sharedConsumers": [
+      "studio_rendering",
+      "built_runtime",
+      "collision",
+      "navigation",
+      "waterfalls",
+      "cave_entrances"
+    ],
+    "sourceArtState": "topology active; exact cliff_summer role projection remains evidence/review gated"
+  },
+  "generatorVersion": 12,
+  "worldComposition": {
+    "layerAuthority": "Generated World partitions semantic terrain into Ground/TerrainDetails/Water and routes discrete placements through canonical Ground/TerrainDetails/Water/Elevation/Structures/Objects/Foreground ordering; object-layer peers depth-sort by ground foot.",
+    "objectDepthSort": "layer rank, then anchorY + footprintHeight, then stable X/id tie-break; reviewed tall sprites may extend upward with negative part offsets while retaining a one-cell foot anchor",
+    "visualBoundsCulling": "generated objects cull against complete source-part visual bounds and query an 8-cell neighbour margin so overhanging vegetation cannot disappear at chunk boundaries while panning",
+    "detailLod": "minor-object overview LOD only hides at the absolute far zoom (<=4.05 px/cell) and restores at >=5.5 px/cell; expanded neighbour-chunk queries prevent pan-edge flashing",
+    "farTerrainLod": "all zoom levels render the same cached dual-grid vertex topology; far zoom only reduces object/collision detail and never switches to GeneratedCell.source or a cell-top-left terrain grid",
+    "waterEcology": "water context is explicit: Ocean/Coast/River/PondLake; lily pads are prohibited in Ocean/Coast, common in ponds/lakes, and sparse in rivers",
+    "waterAnimation": "water-bearing Tiled Terrain animations only; synchronized shared clock removes chase-light phase gradients; presentation cadence is slowed by context (coast 4x, river 5x, pond/lake 7x)"
+  },
+  "collisionAuthority": {
+    "reusableTerrainKey": "semantic role + cardinal same-role topology mask",
+    "legacySourceProfiles": "preserved for compatibility but inactive for generated-terrain collision/traversal",
+    "overlayPerformance": "hidden below 6 px/cell; coarse cells below 16 px/cell; exact masks merge contiguous horizontal pixel runs at editing zoom"
+  },
+  "bridgeSystem": {
+    "status": "modular_horizontal_source_backed_v1",
+    "source": "Structure/Bridges/Wood Bridge A - Rails.png",
+    "recipe": "32x64 left end + repeatable 32x64 middle + 32x64 right end, all exact slices from the reviewed 96x64 source region",
+    "placement": "measure contiguous road/water run, include one land approach cell on each side, repeat middle to fit",
+    "traversal": "generated bridge footprint overrides underlying water as walkable unless a local authored override exists",
+    "railLayerSplit": "pending exact rail-only source-role certification; current modular recipe remains on Structures"
+  },
+  "terrainStudio": {
+    "status": "production_pattern_matrix_foundation",
+    "authority": "same Summer owner-side runtime profile used by Generated World",
+    "tabs": [
+      "Pattern Matrix",
+      "Source Browser",
+      "Legacy / Composite Lab",
+      "Source Evidence"
+    ],
+    "sourceMutation": false,
+    "next": [
+      "editable derived candidate recipes",
+      "layered source composition",
+      "in-context pixel correction layers",
+      "3x3/5x5/live world preview"
+    ]
+  },
+  "hydrology": {
+    "riverMouthPolicy": "Spring/Summer/Autumn primary river corridors continue through the irregular island mask to shallow ocean; coastal shoulders resolve as Sand so river-bank and beach topology merge through the same configured Sand/Shallow-Water authority. Winter retains an inland feeder/lake profile."
   }
 }

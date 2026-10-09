@@ -1,0 +1,69 @@
+{
+  "schema": "havenwild.bevy.source_checkpoint.v1",
+  "checkpoint": "M2D097B_WATER_SCRUTINY_01019_PREBUILD",
+  "sourceVersion": "0.10.19",
+  "baseCheckpoint": "M2D097A_01018_PREBUILD",
+  "baseArchiveSha256": "6adee9d0bca7ceda61a8039cd1d79b280612a24b6bcb4d8aafc8aa9334a9ccf8",
+  "summary": "Water intent and visible cleanup: explicit hydrology context, ocean lily-pad ban, pond-heavy/river-sparse lily ecology, reduced pond-bank dirt, synchronized/slower mixed-boundary animation, full-height barrel source repair, Generated World v12.",
+  "artAuthority": "original ElizaWy source pixels",
+  "topologyAuthority": "pinned Jaidyn configured Tiled TSX plus Havenwild native sparse-Wang solve",
+  "worldAuthority": "Havenwild semantic/procedural world state",
+  "generatedWorldVersion": 12,
+  "waterContexts": [
+    "none",
+    "ocean",
+    "coast",
+    "river",
+    "pond_lake"
+  ],
+  "waterAnimation": {
+    "scope": "mixed water-boundary Wang tiles only",
+    "phase": "seed-stable synchronized",
+    "coastScale": 4,
+    "riverScale": 5,
+    "pondLakeScale": 7,
+    "homogeneousWater": "static"
+  },
+  "lilyPads": {
+    "ocean": 0,
+    "coast": 0,
+    "riverPercent": 14,
+    "pondLakePercent": 58
+  },
+  "barrel": {
+    "source": "Objects/Furniture/Barrel.png",
+    "sourceImageSizePx": [
+      160,
+      64
+    ],
+    "sourceRectPx": [
+      0,
+      0,
+      32,
+      64
+    ],
+    "offsetPx": [
+      0,
+      -32
+    ],
+    "footprintCells": [
+      1,
+      1
+    ]
+  },
+  "evidenceBlockedRoles": [
+    "WetSand",
+    "PebblePath"
+  ],
+  "recommendedBackend": "Vulkan",
+  "nativeWindowsAcceptance": "PENDING",
+  "nextAcceptance": [
+    "PCC Full Quality Gate",
+    "Cargo fmt/check/test/build/lock verification",
+    "Regenerate same seed under Generated World v12",
+    "Inspect synchronized/slower coast animation",
+    "Verify no ocean/coast lily pads and sparse river lily pads",
+    "Verify full-height barrel rendering",
+    "Recheck remaining shoreline/path transition outliers"
+  ]
+}

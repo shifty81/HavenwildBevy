@@ -1,0 +1,15 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpoint": "M2D095E",
+  "sourceVersion": "0.10.14",
+  "parentCheckpoint": "M2D095D",
+  "parentSourceVersion": "0.10.13",
+  "purpose": "Repair stale regression contracts exposed by the 0.10.13 Windows Full Gate without changing runtime terrain or backend behavior.",
+  "preserves": [
+    "Bevy 0.19 only",
+    "tiled 0.16 authority",
+    "Havenwild native sparse Wang solver",
+    "M2D095D Vulkan-first and DX12-safe-window policy"
+  ],
+  "windowsEvidence": "0.10.13 Full Gate stopped at M2D080 stale title-source assertion before Cargo phases; prior 0.10.12 Cargo check/tests/build/lock verification were green."
+}

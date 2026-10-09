@@ -1,0 +1,231 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpointId": "M2D095C",
+  "sourceVersion": "0.10.12",
+  "baseline": {
+    "checkpointId": "M2D093B",
+    "sourceVersion": "0.10.11",
+    "archive": "Havenwild_Bevy_Standalone_SOURCE_ONLY_20261007_M2D093B_0111.zip",
+    "sha256": "3724c9fb32c8cf104f78eb0a66f6f5b67c94877ea8a7937453d1299ef175cc4c"
+  },
+  "lineage": [
+    "M2D093B",
+    "M2D094B",
+    "M2D095B",
+    "M2D095C"
+  ],
+  "engine": {
+    "bevy": "0.19.0",
+    "bevyEgui": "0.42.0",
+    "rustMinimum": "1.95",
+    "tiled": "0.16.0"
+  },
+  "terrainAuthority": {
+    "parser": "src/tiled_terrain.rs",
+    "nativeWangSolver": "src/tiled_terrain/native_wang.rs",
+    "worldSemanticAuthority": "Havenwild",
+    "tiledRole": "configured TSX/Wang topology authority and metadata evidence",
+    "liveRendererPromotion": "pending subsequent visual integration pass"
+  },
+  "removedExperimentalDependencies": [
+    "bevy_map_autotile 0.6.0",
+    "parallel Bevy 0.18 dependency stack"
+  ],
+  "thirdPartyPayload": {
+    "jaidynConfiguredArtEmbedded": false,
+    "hydrationTool": "tools/hydrate_jaidyn_tiled.py",
+    "verificationTool": "tools/verify_jaidyn_tiled_runtime.py"
+  },
+  "validation": [
+    {
+      "name": "python compile",
+      "status": "PASS",
+      "files": 66
+    },
+    {
+      "name": "rust source structural audit",
+      "status": "PASS"
+    },
+    {
+      "name": "source package policy",
+      "status": "PASS"
+    },
+    {
+      "name": "PCC patch validator selftest",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D091 visual authority regression",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D092B shoreline authority regression",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D092C compositor regression",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D093A terrain convergence regression",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D093B editor convergence regression",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D094B Tiled authority selftest",
+      "status": "PASS"
+    },
+    {
+      "name": "M2D095B native Wang stress",
+      "status": "PASS",
+      "grids": 10000
+    },
+    {
+      "name": "Windows Cargo/Bevy Full Gate",
+      "status": "PENDING_NATIVE_HOST"
+    }
+  ],
+  "changes": [
+    {
+      "path": "Cargo.lock",
+      "operation": "modify",
+      "sha256": "947ece9b3b936138eb68347083b5a6ebb4b0df8a6dab35ed6d74f483bd4b67db",
+      "bytes": 163593,
+      "baselineSha256": "a53f2ba13a1e0fb3c5683687c0e55a6dcd8556ea7b42042c357631523412e3c5"
+    },
+    {
+      "path": "Cargo.toml",
+      "operation": "modify",
+      "sha256": "2246e8f307398dffa07d24c72b64eb387d933c886465446e4c04c0b45b5ff869",
+      "bytes": 561,
+      "baselineSha256": "b2981be3ee0fb371c2780179d77abebacf78df2c4252ecd0117140b30d95a294"
+    },
+    {
+      "path": "ProjectControlCenter.py",
+      "operation": "modify",
+      "sha256": "a2ffcd11dc719be4402410723b49e58ef2f2f668f034629a44f04181a4f511f7",
+      "bytes": 142214,
+      "baselineSha256": "a1fa78348591cec9f22d42a9455d221e5377992ce91c196b1de03538fe2b21aa"
+    },
+    {
+      "path": "README.md",
+      "operation": "modify",
+      "sha256": "a843c6833c807402cb94e66a7245db745902012ac30e2b6b0863436cfb735e8d",
+      "bytes": 38527,
+      "baselineSha256": "b02e556376e45a1fa5af5802d98a4f0c7ca6e75e7afe784286c9c79beaf937b3"
+    },
+    {
+      "path": "START_HERE_NEW_PROJECT.md",
+      "operation": "modify",
+      "sha256": "52021a8bf8ed97d35a70225c5a8b86ff08503a77e9e2709c1a98cd1a94c97662",
+      "bytes": 11629,
+      "baselineSha256": "44c1705ad8cb70e9e3fb4e7accfc7664334d95573ff92b97d20933afe37955d2"
+    },
+    {
+      "path": "docs/patch/M2D094B_JAIDYN_TILED_TEST_READINESS.md",
+      "operation": "add",
+      "sha256": "b2a2e754b5c6ef2ed3a676fd975cf6bed3ef39eada68bb33d3ce49f96b2093a7",
+      "bytes": 5106
+    },
+    {
+      "path": "docs/patch/M2D095B_NATIVE_WANG_PROJECT_COLLAPSE.md",
+      "operation": "add",
+      "sha256": "6c0697c9534638a6505824883dc2f30ab7e7d3685bf347e5bb427ab4b24929b9",
+      "bytes": 2380
+    },
+    {
+      "path": "docs/patch/M2D095C_INTEGRATED_SOURCE_01012.md",
+      "operation": "add",
+      "sha256": "51ee9ef06bb0d6d1551a7e1ab4cfc49e4b7d88b9e64229d5c497b7cb891e4057",
+      "bytes": 1172
+    },
+    {
+      "path": "project/forgepy.project.json",
+      "operation": "modify",
+      "sha256": "cf8a3d5683679a184fd65a8e65e8943ae03afc670aa21916b8538e8f3f0bf2ab",
+      "bytes": 10876,
+      "baselineSha256": "e2659d0a49830433df20afa17d601baf9db74ff4a1344981e9b6d60ea0492910"
+    },
+    {
+      "path": "src/main.rs",
+      "operation": "modify",
+      "sha256": "8ca13796e6d794329594514250fc8d48ddcac273f49ebd49bc636eb8085c27eb",
+      "bytes": 302653,
+      "baselineSha256": "77c90ff2c8099498fef2ca356a7a4f3078a8bc9e1bcf4fb0f4b3338639f96392"
+    },
+    {
+      "path": "src/tiled_terrain.rs",
+      "operation": "add",
+      "sha256": "a36bd85e977e99feb2049e0d547bd2d901e01ff6f5ae5b988588fa5704ae4bc9",
+      "bytes": 21703
+    },
+    {
+      "path": "src/tiled_terrain/native_wang.rs",
+      "operation": "add",
+      "sha256": "109d2ae6964f6ee862c9926526cb4a098c5dde22d8a98b63b23e4df2d09e8471",
+      "bytes": 10938
+    },
+    {
+      "path": "tools/hydrate_jaidyn_tiled.py",
+      "operation": "add",
+      "sha256": "22f8db1b396cd41c98062c72015fd3587c838b63d4d60f485ef4f34773074573",
+      "bytes": 11261
+    },
+    {
+      "path": "tools/m2d091_visual_authority_repair_selftest.py",
+      "operation": "modify",
+      "sha256": "140255124b3c7eaabf7f59b4d199076e9daa0f9e518034caae0bcfb2bb2a2567",
+      "bytes": 8236,
+      "baselineSha256": "d20f03f9f47eb74b849c2d2f5d4aabfd716eeb8757bb4a5f868c4828b33c34d9"
+    },
+    {
+      "path": "tools/m2d092b_shoreline_owner_authority_selftest.py",
+      "operation": "modify",
+      "sha256": "aa88c47f764e8f50737ff94dd95fd25531c12e4d32da45eb819a083a719aa03c",
+      "bytes": 8780,
+      "baselineSha256": "855766bc28bad3470d06b32438afdc381d4d89ce518612ac88846e6d271d599d"
+    },
+    {
+      "path": "tools/m2d092c_unified_compositor_selftest.py",
+      "operation": "modify",
+      "sha256": "1bccad1f37e71adc94cd8dceb341fc9716fb045e652d02e9baa2e0de44791358",
+      "bytes": 9833,
+      "baselineSha256": "88ba2c3ffeff737a7dd73e35b17793699202caf8d2121ec8f52e07413c717611"
+    },
+    {
+      "path": "tools/m2d093a_flat_terrain_convergence_selftest.py",
+      "operation": "modify",
+      "sha256": "51e92c3b8d7ec02535c09ef34cd4d9efdbbc42e1a1817d77eb49e30852d11ca8",
+      "bytes": 7054,
+      "baselineSha256": "1ef416b0bdea86eb452a53beae5dac360cbfad044d67ea482165822ab1d001c0"
+    },
+    {
+      "path": "tools/m2d093b_editor_convergence_selftest.py",
+      "operation": "modify",
+      "sha256": "e6788d407f764fd2606985af7d15b62a1bbc8ed031619b2e6aa8ca383185a4fe",
+      "bytes": 6380,
+      "baselineSha256": "79b716d32ddba92040d3c46fd3698737a09f87269c03f22b486c6012aea0ed8a"
+    },
+    {
+      "path": "tools/m2d094b_tiled_authority_selftest.py",
+      "operation": "add",
+      "sha256": "7f69f9399f179a4ab3ec906e756824b22d982a38f9bb25d6244362d4b3f0f0bf",
+      "bytes": 9055
+    },
+    {
+      "path": "tools/m2d095b_native_wang_selftest.py",
+      "operation": "add",
+      "sha256": "b83c0447ec1487a5a8fb6479576fffaef9d6be3c996587256c39e735a5670f6e",
+      "bytes": 4992
+    },
+    {
+      "path": "tools/verify_jaidyn_tiled_runtime.py",
+      "operation": "add",
+      "sha256": "0cfa0f973fee5810de6b45fef7e19f4a2f5028627cb4ee9a7ee44352cfecd2a7",
+      "bytes": 24828
+    }
+  ]
+}

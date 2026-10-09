@@ -26,7 +26,7 @@ def main() -> int:
     plan = PLAN.read_text(encoding="utf-8")
     main_rs = MAIN.read_text(encoding="utf-8")
 
-    require(profile.get("version") == 7, "Summer profile is not v7")
+    require(profile.get("version") == 8, "Summer profile is not v8")
     safe = profile.get("safeFill", {})
     require(set(safe) >= {"Grass","MudBank","Sand","WetSand","RiverWater","DeepWater","PebblePath"}, "seven source-backed semantic materials are not present")
     variants = profile.get("fillVariants", {})
@@ -39,22 +39,25 @@ def main() -> int:
 
     require("fn land_connectivity_projection" in world, "land-connectivity projection missing")
     require("Two water corners that only touch diagonally" in world, "diagonal-water land-win policy missing")
-    require("Historical quadrant composites remain evidence/tooling records only" in world, "live quadrant-composite ban missing")
+    require("Historical quadrant composites and the old RiverWater/WetSand pale-" in world and "shore repaint are not live compositor authorities anymore" in world, "live quadrant/pale-shore repaint ban missing")
     require("summer_flatworld_visual_parts(role_refs)" not in world, "live resolver still invokes quadrant composite visual parts")
     require("ambiguous_diagonal_water_connects_land_without_quadrant_parts" in world, "land-connectivity Rust regression missing")
     require("summer_flatworld_fill_for_world(\"Grass\", w.seed, vertex)" in world, "diagonal land regression must accept the deterministic Grass fill variant instead of pinning one atlas coordinate")
     require("cardinal_water_channel_remains_open" in world, "explicit/cardinal water-channel regression missing")
 
-    for token in ['"WetSand"', '"Sand"', '"DeepWater"', '"PebblePath"']:
-        require(token in plan, f"Generated World plan does not emit {token}")
+    plan_runtime = plan.split("#[cfg(test)]", 1)[0]
+    require('return "Sand";' in plan_runtime and '"DeepWater"' in plan_runtime, "Generated World core coast materials missing")
+    require('return "WetSand";' not in plan_runtime, "Generated World still emits legacy WetSand")
+    require('return "PebblePath";' not in plan_runtime, "Generated World still emits legacy PebblePath")
+    require('generated_coast_uses_core_sand_without_legacy_wetsand_ring' in plan, "no regression proving legacy WetSand ring stays retired")
     require('ui.small("TERR")' not in main_rs, "material abbreviations remain on permanent left tool rail")
     require("WorldTerrainBrush::Sand" in main_rs and "WorldTerrainBrush::DeepWater" in main_rs, "World Generator does not expose extended material brushes")
 
     print("M2D082F LAND-CONNECTIVITY / MATERIAL EXPANSION SELFTEST: PASS")
     print("  ambiguous shoreline  : diagonal water closes; cardinal water remains open")
-    print("  live composites      : exact full tiles only; quadrant composites evidence-only")
+    print("  live composites      : exact Tiled/native-Wang tiles first; quadrant+pale-shore repaint evidence-only")
     print("  semantic materials   : Grass Dirt Sand WetSand Shallow Deep PebblePath")
-    print("  generated coast      : Deep -> Shallow -> WetSand -> Sand -> inland land")
+    print("  generated coast      : Deep -> Shallow -> Sand -> inland land; legacy WetSand/PebblePath not generated")
     return 0
 
 

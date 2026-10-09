@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Build the M2D081 complete Summer runtime profile.
+"""Build the current complete Summer runtime profile.
 
 This generator is intentionally metadata-only. It promotes every reviewed
 non-transparent 32x32 cell from the immutable Native Summer complete map into a
 cataloged source group, adds deterministic fill-variant sets for the normal
-Grass/Dirt/Water authoring lane, builds exact-source three-material junction
-composites, and declares the source-backed Summer water interior animation cycle.
+terrain authoring lane, projects source-authored material boundaries from the
+Native owner-side topology authority, and keeps water animation evidence-gated.
 
 No PNG bytes are created or modified.
 """
@@ -19,6 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "content/terrain/recipes/summer_flatworld_runtime.v1.json"
 DONOR = ROOT / "content/terrain/recovered/native/lpc_terrain_summer_complete_map_32.native.v1.json"
+TOPOLOGY = ROOT / "content/terrain/recovered/native/lpc_seasonal_terrain_topology.native.v1.json"
 RUNTIME = ROOT / "content/assets/authority/elizawy_runtime_index.v1.json"
 ATLAS = "Terrain/terrain_summer.png"
 
@@ -31,17 +32,37 @@ ROLE_GROUP = {
     "PebblePath": "summer_pebble_path_fill",
 }
 
-# Source-authored transition/stamp families that can be promoted into the
-# semantic terrain lane without synthesizing pixels. 13-piece families cover
-# the 12 non-diagonal mixed corner states plus their center; diagonal states are
-# resolved by the runtime's land-connectivity policy instead of quadrant splicing.
-TRANSITION_PROMOTIONS = (
-    ("Grass", "Sand", "summer_grass_over_sand"),
-    ("Sand", "WetSand", "summer_sand_over_wet_sand"),
-    ("Sand", "RiverWater", "summer_sand_bank_pond"),
-    ("RiverWater", "DeepWater", "summer_deep_water_basin"),
-    ("PebblePath", "MudBank", "summer_pebble_path_over_dirt"),
+# M2D092B: consume the Native topology owner's meaning directly.  Earlier
+# extended-material promotion guessed a generic foreground/background order from
+# family names.  That reversed three real ElizaWy families (wet-sand/sand,
+# shallow-water/sand and deep-water/shallow-water), turning outer corners into
+# inner corners around generated coasts.  The topology donor already records the
+# correct owner and neighbour for every family, so that is now authoritative.
+SEMANTIC_ROLE_BY_TOPOLOGY_ROLE = {
+    "grass": "Grass",
+    "dirt": "MudBank",
+    "sand": "Sand",
+    "wet_sand": "WetSand",
+    "shallow_water": "RiverWater",
+    "deep_water": "DeepWater",
+    "pebble_path": "PebblePath",
+}
+
+ACTIVE_OWNER_SIDE_FAMILIES = (
+    "summer_grass_over_dirt",
+    "summer_grass_over_sand",
+    "summer_pebble_path_over_dirt",
+    "summer_grass_bank_pond_a",
+    "summer_dirt_bank_pond_a",
+    "summer_sand_bank_pond",
+    "summer_sand_over_wet_sand",
+    "summer_deep_water_basin",
 )
+
+# Pale shore is a source-authored 12-role shoreline visual family rather than a
+# stand-alone fill material.  Keep it certified/addressable without pretending it
+# has a homogeneous center tile or forcing it onto every beach.
+CERTIFIED_SHORELINE_OVERLAYS = ("summer_pale_shore_ring_overlay",)
 
 # Keep plain grass/dirt variation spatial and deterministic. Water is deliberately
 # restricted to one conservative base fill until the source sheet provides explicit
@@ -140,23 +161,72 @@ def donor_group_role_entries(donor, lookup, group_id):
     return out
 
 
-def promote_transition_recipes(corner_recipes, donor, lookup, foreground, background, group_id):
-    entries = donor_group_role_entries(donor, lookup, group_id)
+def topology_family(topology, family_id):
+    matches = [row for row in topology.get("families", []) if row.get("id") == family_id]
+    if len(matches) != 1:
+        raise ValueError(f"expected one topology family {family_id}, got {len(matches)}")
+    family = matches[0]
+    if family.get("topologyRule") != "shared_8_neighbor_owner_side":
+        raise ValueError(f"{family_id} is not owner-side topology authority")
+    return family
+
+
+def semantic_role(raw_role):
+    try:
+        return SEMANTIC_ROLE_BY_TOPOLOGY_ROLE[raw_role]
+    except KeyError as exc:
+        raise ValueError(f"unsupported semantic topology role: {raw_role}") from exc
+
+
+def owner_side_family_record(donor, topology, lookup, family_id, *, allow_visual_neighbor=False):
+    family = topology_family(topology, family_id)
+    owner_raw = family.get("owner")
+    neighbor_raw = family.get("neighbor")
+    owner = semantic_role(owner_raw)
+    neighbor = (
+        neighbor_raw
+        if allow_visual_neighbor and neighbor_raw not in SEMANTIC_ROLE_BY_TOPOLOGY_ROLE
+        else semantic_role(neighbor_raw)
+    )
+    entries = donor_group_role_entries(donor, lookup, family_id)
+    roles = {role: entries[role] for role in ROLE_TO_CORNERS if role in entries}
+    center = entries.get("center")
+    return {
+        "topologyRule": "shared_8_neighbor_owner_side",
+        "owner": owner,
+        "neighbor": neighbor,
+        "sourceOwner": owner_raw,
+        "sourceNeighbor": neighbor_raw,
+        "outerRoleCount": sum(role.startswith("outer_") for role in roles),
+        "innerRoleCount": sum(role.startswith("inner_") for role in roles),
+        "roles": roles,
+        **({"center": center} if center is not None else {}),
+    }
+
+
+def promote_owner_side_transition(corner_recipes, donor, topology, lookup, family_id):
+    record = owner_side_family_record(donor, topology, lookup, family_id)
+    owner = record["owner"]
+    neighbor = record["neighbor"]
     promoted = 0
     for source_role, bits in ROLE_TO_CORNERS.items():
-        entry = entries.get(source_role)
+        entry = record["roles"].get(source_role)
         if entry is None:
             continue
-        corners = [foreground if bit else background for bit in bits]
+        corners = [owner if bit else neighbor for bit in bits]
         corner_recipes["|".join(corners)] = entry
         promoted += 1
-    return promoted
+    return record, promoted
 
 def build() -> dict:
     profile = load(PROFILE)
     donor = load(DONOR)
+    topology = load(TOPOLOGY)
     runtime = load(RUNTIME)
     lookup = runtime_lookup(runtime)
+
+    if topology.get("summary", {}).get("familyCount") != 20:
+        raise ValueError("Native seasonal topology no longer proves 20 Summer families")
 
     summary = donor.get("summary", {})
     if summary.get("mappedNonTransparentCells") != 305 or summary.get("nonTransparentCells") != 305:
@@ -231,14 +301,27 @@ def build() -> dict:
         safe_fill[role] = dict(fill_variants[role][0])
     safe_fill["DeepWater"] = dict(fill_variants["DeepWater"][0])
 
-    # Promote complete source-authored material boundaries into the semantic lane.
-    # No diagonal tile is invented: the runtime resolves ambiguous diagonals by
-    # connecting land unless an actual continuous water path exists.
+    # Promote complete source-authored material boundaries from the Native
+    # owner/neighbour topology authority.  This intentionally rewrites all active
+    # pairwise families, including the older Grass/Dirt/Water lane, so one rule
+    # determines corner ownership everywhere.  No diagonal tile is invented.
     corner_recipes = dict(profile.get("cornerRecipes", {}))
+    owner_side_transitions = {}
     promoted_transition_counts = {}
-    for foreground, background, group_id in TRANSITION_PROMOTIONS:
-        promoted_transition_counts[group_id] = promote_transition_recipes(
-            corner_recipes, donor, lookup, foreground, background, group_id
+    for group_id in ACTIVE_OWNER_SIDE_FAMILIES:
+        record, promoted = promote_owner_side_transition(
+            corner_recipes, donor, topology, lookup, group_id
+        )
+        owner_side_transitions[group_id] = record
+        promoted_transition_counts[group_id] = promoted
+
+    shoreline_overlays = {}
+    for group_id in CERTIFIED_SHORELINE_OVERLAYS:
+        shoreline_overlays[group_id] = owner_side_family_record(
+            donor, topology, lookup, group_id, allow_visual_neighbor=True
+        )
+        shoreline_overlays[group_id]["runtimeUse"] = (
+            "certified_source_visual_bridge_for_wetsand"
         )
 
     # Animation authority is evidence-gated. RepeatableFill variants may never be
@@ -318,7 +401,7 @@ def build() -> dict:
     if three_material != 36:
         raise ValueError(f"expected 36 three-material junction states, got {three_material}")
 
-    profile["version"] = 7
+    profile["version"] = 8
     profile["safeFill"] = safe_fill
     profile["sourceGroups"] = built_groups
     profile["fillVariants"] = fill_variants
@@ -329,12 +412,17 @@ def build() -> dict:
         "roles": ["Sand", "WetSand", "DeepWater", "PebblePath"],
         "transitionRecipeCounts": promoted_transition_counts,
         "diagonalPolicy": "land_connectivity_first_no_quadrant_splice",
+        "topologyAuthority": "native_shared_8_neighbor_owner_side",
     }
+    profile["ownerSideTransitions"] = owner_side_transitions
+    profile["shorelineOverlayFamilies"] = shoreline_overlays
     profile["notes"] = [
         "All 305 non-transparent cells in the Summer atlas are canonical runtime-selectable source regions grouped by the recovered Native authority.",
         "The original Grass/Dirt/Water 81-state evidence grammar remains preserved for compatibility and audit, while live ambiguous shoreline resolution is land-connectivity-first and never requires quadrant-spliced output.",
         "Sand, WetSand, PebblePath and DeepWater are promoted as source-backed semantic materials from existing Summer groups; no pixels are synthesized.",
-        "Source-authored Grass/Sand, Sand/WetSand, Sand/Water, shallow/deep-water and PebblePath/Dirt boundaries are available to the semantic resolver where their source families provide an exact role.",
+        "All active source-authored material boundaries are projected from the Native shared_8_neighbor_owner_side authority; family names are never used to guess foreground/background ownership.",
+        "Sand/WetSand, Sand/Water and shallow/deep-water corner orientation is owner-correct: WetSand, RiverWater and DeepWater respectively own their source families, preventing outer/inner corner inversion on island coasts.",
+        "The Summer pale-shore ring is certified as a 12-role source visual family and is used by the live resolver as the exact Water/WetSand visual bridge; WetSand then hands off to Sand through its separate owner-side family.",
         "Ambiguous diagonal land/water contacts connect land by default. Water remains open only when its two corners are cardinally adjacent, so one-cell square water notches do not appear between near-touching land.",
         "Grass and Dirt homogeneous interiors choose deterministic source variants; no generated terrain artwork is created.",
         "RiverWater uses one conservative static base fill. The other seven recovered water-looking RepeatableFill cells remain available as explicit source/detail regions but are not shuffled into base water and are not treated as animation frames.",
@@ -354,7 +442,7 @@ def main() -> int:
     if args.check:
         if not PROFILE.is_file() or PROFILE.read_bytes() != data:
             raise SystemExit(f"Summer complete runtime profile is stale: {PROFILE}")
-        print("M2D082F SUMMER PROFILE: PASS / 305 cells / 41 groups / 81-state G/D/W baseline + Sand/WetSand/DeepWater/PebblePath / land-connectivity-first")
+        print("M2D092B SUMMER PROFILE: PASS / 305 cells / 41 groups / owner-side transition authority + certified pale shore / land-connectivity-first")
         return 0
     PROFILE.write_bytes(data)
     print(f"WROTE {PROFILE}")

@@ -1,0 +1,26 @@
+{
+  "schema": "havenwild.characters.multipart.v1",
+  "release": "M2D100",
+  "parts": [
+    {
+      "path": "assets/optional/Characters.zip.part01",
+      "bytes": 75000000,
+      "sha256": "37f5b3a9d915ecb79296470242bad7ed89a1d4d8654f0633f5a7a49c94b4dd16"
+    },
+    {
+      "path": "assets/optional/Characters.zip.part02",
+      "bytes": 75000000,
+      "sha256": "5607e0ac0facd5c4e80a9c4c74059f70bc1b4f1030eda898c6a3fbfac35fdc74"
+    },
+    {
+      "path": "assets/optional/Characters.zip.part03",
+      "bytes": 75000000,
+      "sha256": "7ebfa37f1eaf165af7f58fcc4c3a80eb828ef5c6e84e4cbc0e6737a7376e62a3"
+    },
+    {
+      "path": "assets/optional/Characters.zip.part04",
+      "bytes": 74252779,
+      "sha256": "6cdf027f6424c30be3766fe3f19b1f9d94002d3bf66667e354e9f36be437167f"
+    }
+  ]
+}

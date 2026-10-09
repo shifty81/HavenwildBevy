@@ -4,6 +4,8 @@ from pathlib import Path
 import json
 import sys
 
+from source_version_contract import studio_title_uses_cargo_version
+
 ROOT = Path(__file__).resolve().parents[1]
 
 def require(cond, message):
@@ -31,10 +33,11 @@ def main():
     require('quarantine_uncertified_large_objects' in world_rs, 'large object quarantine missing')
     require('worldgen_object_bounds.local.json' in authority_rs and 'locally_certified_object_template' in authority_rs, 'local object-crop authority missing')
     require('world_stroke_seen: BTreeSet' in main_rs and 'world_stroke_apply_segment' in main_rs, 'responsive drag-stroke contract missing')
-    require('Havenwild — Bevy Studio v0.' in main_rs, 'visible Studio identity missing')
+    require(studio_title_uses_cargo_version(main_rs), 'visible Studio identity missing')
     require(('ONE-PASS Native -> Bevy Summer authority convergence' in pcc or 'BUILD Summer GRS/DIR/WTR autotile map' in pcc) and 'summer-map' in pcc, 'PCC Summer mapper/convergence entry missing')
     require('rgba_rows' in mapper and 'cornerRecipes' in mapper and 'cliff' in mapper.lower(), 'source-pixel mapper safeguards missing')
-    require('largest_connected_crop' in mapper and 'worldgen_object_bounds.local.json' in mapper, 'tree/rock source-bound certification missing')
+    require('largest_connected_crop' not in mapper, 'legacy duplicate connected-component object crop algorithm returned')
+    require('build_certified_object_bounds' in mapper and 'certified_object_runtime_shape' in mapper and 'worldgen_object_bounds.local.json' in mapper, 'terrain mapper does not delegate tree/rock bounds to canonical certifier')
     require('"assets" / "elizawy"' in mapper and 'sha256' in mapper, 'mapper must use local verified original source')
     print('M2D07W SUMMER DUAL-GRID SELFTEST: PASS / exact Summer source map + true four-corner resolver + batched strokes + large-object quarantine')
     return 0

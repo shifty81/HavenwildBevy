@@ -36,10 +36,11 @@ for object in objects:
     foot_role=base['tiles'][foot_y*40+foot_x]['role']
     if '.reed.' in object['id'] or '.lily.' in object['id']:
         assert foot_role=='RiverWater',(object['id'],foot_role)
-    elif object['layer'] in ('structures','terrain_details') or object['id'].startswith(('summer.broadleaf','summer.conifer','summer.fern','summer.shrub','summer.rock')):
+    elif object['layer'] in ('structures','terrain_details') or object['id'].startswith(('summer.broadleaf','summer.conifer','summer.fern','summer.shrub','summer.rock','summer.flowers')):
         assert foot_role=='Grass',(object['id'],foot_role)
     paths[p['source_asset']]+=1;layers[object['layer']]+=1
-assert len(paths)>=5 and {'objects','structures','terrain_details'}<=set(layers)
+assert len(paths)>=5 and {'objects','structures'}<=set(layers)
+assert all(o['layer']=='objects' for o in objects if o['id'].startswith('summer.flowers.')), 'wildflowers must route to Objects / vegetation' 
 assert by_id['summer.house.east']['parts'][0]['source']['source_rect']==[0,0,192,192]
 assert len([o for o in objects if o['id'].startswith(('summer.broadleaf','summer.conifer'))])>=9
 assert len([o for o in objects if '.reed.' in o['id']])>=4
@@ -57,10 +58,11 @@ assert 'mod summer_seed;' in main and 'summer_seed::populate_new_scene(' in main
 assert 'let layered_path = root.join("content/scenes/derived/summer_world.layered.draft.json")' in main
 assert 'SceneV2::read_draft(&layered_path)' in main and 'state.scene_needs_initial_save = false;' in main
 assert 'state.playtest_layered = Some(state.layered_scene.clone());' in main
-assert main.count('"▶ Play Scene"')==1 and 'start_playtest(&mut state)' in main and 'stop_playtest(&mut state)' in main
-assert 'properties_open: false' in main and 'egui::Window::new("Object properties · on demand")' in main
-assert 'scene_panel_v3_initialized: true' in layout and 'canvas_first_v4_initialized: true' in layout
-assert 'layers_open: false' in layout and 'terrain_mapper.visible = false' in layout
+assert '"Play in Editor"' in main and 'WorldPlaySession::start' in main and 'start_playtest(&mut state)' in main and 'stop_playtest(&mut state)' in main
+assert 'properties_open' not in main and 'fn draw_inspector_rail(' in main
+assert 'canvas_first_v4_initialized: true' in layout
+assert 'pub world_layer_visibility: [bool; 7]' in layout and 'terrain_mapper.visible = false' in layout
+assert 'layers_open' not in layout and 'scene_panel_v3_initialized' not in layout
 assert 'if !layout.canvas_first_v4_initialized' in layout
 assert 'summer_world.layered.draft.json' in v2
 assert 'doc.validate()?' in seed_rs and 'source_sha256' in seed_rs

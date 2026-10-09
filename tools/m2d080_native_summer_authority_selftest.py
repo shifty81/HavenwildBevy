@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
+
+from source_version_contract import studio_title_uses_cargo_version
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILE = ROOT / "content/terrain/recipes/summer_flatworld_runtime.v1.json"
@@ -33,7 +34,7 @@ def main() -> int:
     review = load(REVIEW)
     runtime = load(RUNTIME)
 
-    check(profile.get("version") in {3, 4, 5, 6, 7}, "Summer profile must be v3-v7 source authority")
+    check(profile.get("version") in {3, 4, 5, 6, 7, 8}, "Summer profile must be v3-v8 source authority")
     check(profile.get("sourceAtlas") == "Terrain/terrain_summer.png", "wrong source atlas")
     check(profile.get("sourceAtlasSha256") == "1251a6ea556330190ccb1e3af166eb69fbec4b7a3f7d51c1f54728abd75bd752", "wrong pinned source hash")
     check(donor.get("summary", {}).get("mappedNonTransparentCells") == 305, "donor does not prove 305 mapped cells")
@@ -88,13 +89,13 @@ def main() -> int:
     world_text = WORLD.read_text(encoding="utf-8")
     authority_text = AUTHORITY.read_text(encoding="utf-8")
     pcc_text = PCC.read_text(encoding="utf-8")
-    check(re.search(r"Havenwild — Bevy Studio v0\.\d+\.\d+", main_text) is not None, "Studio 0.x version marker missing")
+    check(studio_title_uses_cargo_version(main_text), "Studio package-version title marker missing")
     check("World Properties" in main_text and "Paint on canvas" in main_text, "friendly world-properties collision workflow missing")
     check("TraversalMode::Wadeable" in main_text and "TraversalMode::Swimmable" in main_text, "traversal workflow incomplete")
     check("clamp(0.125, 16.0)" in main_text, "16x world zoom missing")
     check("resolved_visual_parts_with_authority" in world_text, "shared exact-source visual resolver missing")
     check("worldgen_plan::terrain_role(seed, world)" in world_text, "purpose-first generated terrain-role wiring missing")
-    check("corner_composites" in authority_text and "1..=7" in authority_text, "v7 extended authority is not accepted by runtime")
+    check("corner_composites" in authority_text and "1..=8" in authority_text, "v8 owner-side authority is not accepted by runtime")
     check("ONE-PASS Native -> Bevy Summer authority convergence" in pcc_text, "PCC one-pass command missing")
 
     print("M2D080 NATIVE SUMMER AUTHORITY SELFTEST: PASS")

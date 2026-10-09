@@ -1,0 +1,11 @@
+{
+  "schema": "havenwild.source.checkpoint.v1",
+  "checkpoint": "M2D095F",
+  "sourceVersion": "0.10.15",
+  "parentCheckpoint": "M2D095E",
+  "parentSourceVersion": "0.10.14",
+  "purpose": "Centralize Studio package-version title validation across historical milestone gates after 0.10.14 Windows Full Gate exposed M2D081 stale exact-source assertion.",
+  "runtimeBehaviorChanged": false,
+  "terrainBehaviorChanged": false,
+  "windowsEvidence": "0.10.14 Full Gate: M2D080 PASS, M2D081 FAIL only on stale Studio package-version title marker assertion."
+}

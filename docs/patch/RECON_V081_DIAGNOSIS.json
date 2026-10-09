@@ -1,0 +1,62 @@
+{
+  "schema": "havenwild.bevy.barrel_gate_diagnosis.v1",
+  "generatedUtc": "2026-10-08T13:25:12.273108+00:00",
+  "root": "/mnt/data/_havenwild_oct1_reference",
+  "sourceVersion": "0.8.1",
+  "status": "MISSING_TEMPLATE",
+  "checks": {
+    "manifest_exact_one_barrel": true,
+    "hydrated_image_matches_manifest": null,
+    "hydrated_image_bytecount_matches_manifest": null,
+    "runtime_image_registered_once": true,
+    "manifest_runtime_image_identity_matches": true,
+    "canonical_full_height_region_exists": false,
+    "reviewed_barrel_template_exists": false,
+    "reviewed_template_full_32x64_sprite": false,
+    "reviewed_template_canonical_region_matches": false,
+    "lane_runtime_barrel_template_consistent": true,
+    "runtime_lane_hash_consistent": true,
+    "object_template_count_consistent": true,
+    "summer_seed_contains_barrel": false,
+    "builder_is_seed_only_for_templates": true,
+    "failing_test_present": false
+  },
+  "evidence": {
+    "sourceManifest": {
+      "id": "elizawy:Objects/Furniture/Barrel.png",
+      "path": "Objects/Furniture/Barrel.png",
+      "sha256": "d6416ffdb15762f572a9a850b155207d05d50e2fe6c66bcdbd9a2dfc79df20d2",
+      "bytes": 5452,
+      "imageSizePx": [
+        160,
+        64
+      ]
+    },
+    "sourceRevision": "0.8.1",
+    "localHydratedImagePresent": false,
+    "runtimeImage": {
+      "sourcePath": "Objects/Furniture/Barrel.png",
+      "sourceSha256": "d6416ffdb15762f572a9a850b155207d05d50e2fe6c66bcdbd9a2dfc79df20d2",
+      "imageSizePx": [
+        160,
+        64
+      ]
+    },
+    "canonicalBarrelRegionRects": [],
+    "runtimeBarrelTemplates": [],
+    "laneActualSha256": "515d51b7f925d89ec223e826ea3068f878592f26376c9d06aad83f20e83b023e",
+    "runtimeDeclaredLaneSha256": "515d51b7f925d89ec223e826ea3068f878592f26376c9d06aad83f20e83b023e",
+    "laneBarrelTemplates": [],
+    "runtimeTemplateCount": 20,
+    "declaredRuntimeTemplateCount": 20,
+    "summerSeedBarrelObjects": [],
+    "builderHasTemplateSeedLoop": true,
+    "builderReferencesOtherObjectTemplateSource": false
+  },
+  "nextActions": [
+    "Register one reviewed barrel template in the builder's canonical inputs; do not manually edit generated runtime index alone.",
+    "Use a source-verified complete 32x64 column of the original 160x64 barrel sheet; do not guess a variant or split it into 32x32 halves.",
+    "Legacy seed-only builder pattern detected. Add a separate source-reviewed object-template registry rather than creating a bogus placed seed object.",
+    "After a source-backed fix: regenerate both authority JSONs; run builder --check, targeted cargo test, cargo fmt --check, cargo test --all-targets, then the PCC full gate."
+  ]
+}
