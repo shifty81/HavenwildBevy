@@ -1,6 +1,6 @@
 # Havenwild Bevy — Standalone Game and Studio
 
-**Source:** 0.10.44 / M2D126 recovered integrated authoring workspace and resizable bottom Library after M2D125 gate repair  
+**Source:** 0.10.48 / M2D130 Rust 2021 source-compatibility repair after M2D129 gate repair  
 **Engine:** Bevy 0.19.0 (Rust >=1.95)  
 **Project Control Center:** `PCC.cmd`  
 **Backend:** `ForgePY.py` / **Studio:** `Studio.cmd`
@@ -10,7 +10,7 @@ Havenwild is an independent cozy life-sim / adventure game with a native Bevy wo
 ## Windows setup
 
 1. Extract this repository-root ZIP into a **new, empty folder**; do not overlay a separate game project.
-2. Start `PCC.cmd`; ensure the displayed source version is **0.10.44**.
+2. Start `PCC.cmd`; ensure the displayed source version is **0.10.48**.
 3. Use PCC asset hydration / verification for the canonical ElizaWy content. Hydrate the optional LPC character collection when testing character PIE.
 4. Run **Full Quality Gate** before publishing or claiming a certified build.
 5. Launch Vulkan Studio from PCC and test world and authored-scene editing / PIE.
@@ -57,3 +57,32 @@ M2D123 previously compared a literal Rust iterator expression, leading to an opa
 ## M2D126 recovered GUI workspace
 
 Tooling, active tool context, and their draggable vertical splitter have been restored as a unified left authoring workspace adjacent to the vector icon rail. The workspace opens once on migration from the previous reduced layout, then respects user collapse/reopen. The bottom Library is a single shared, source-backed, undockable tray; its visible top grip can be dragged upward to expand or downward to shrink, and its collapsed header remains available. Layers remain individual unboxed canvas controls. Original asset mappings, generated worlds, authored rooms, and PIE are unchanged. Pixel stroke backend, color wheel, and unfinished asset classifications have **not** been claimed as complete.
+
+### M2D127 — Three-section Tooling / Context / Library restoration
+
+The single left authoring panel now stacks Tooling, Tool Context and Library/Palette with independent drag splitters. The same Library can dock left, dock bottom or float. Floating resize uses a visible bottom-right corner handle with persisted width/height. Bottom drag-up resizing is preserved. Unboxed canvas Layers and all gameplay/asset source mapping code remain unchanged. Native Windows compilation and visual acceptance required.
+
+## M2D128 Studio convergence (first working integration slice)
+
+- Permanent bottom timeline controls the existing source-backed world water animation preview clock (play/pause/scrub/step). Selecting an animated terrain vertex displays original source frame thumbnails and durations. This is a viewer/preview authority, **not** a finished animation editor.
+- Three independent left workspaces: Pixel Studio (color/palette, non-destructive authoring contract), Game Tools (existing semantic/source/object tools), Scene Navigator (real world chunk/object/door link selection) with stacked resize.
+- One shared contextual Asset Browser defaults to the lower Inspector with resizable split and optional left/bottom/floating destinations; no duplicate source catalog.
+- Unboxed canvas Layers strip, existing asset mappings, terrain rules, world saves and PIE remain unchanged.
+- Direct world pixel painting, onion skinning, editable animation clips, full RGB color wheel, and production animation events are **not** implemented in this slice. Do not mistake new UI labels for those backends.
+
+Run native Windows Full Quality Gate before considering this build certified.
+
+## M2D129 — Historical GUI gate compatibility
+
+- M2D114 and M2D124 static regression checks now validate the existing Asset Browser / Pixel Studio responsibilities, not retired strings from the bottom Library or old pixel-backend warning.
+- M2D128 acceptance checks remain valid for future source versions; the test no longer requires `0.10.46` exactly.
+- Original source-backed sprites, world data, render mappings, animation preview clock and PIE are unchanged. The repair does not implement derived-image pixel painting or animation clip authoring.
+- Native Windows Cargo check, tests, build and visual acceptance remain mandatory after applying.
+
+## M2D130 — Rust 2021 GUI color-wheel build repair
+
+Fix the original-color-wheel pointer interaction using nested Rust 2021 conditionals
+without changing its behavior or mutating ElizaWy art. The cargo-free Rust structural
+audit now rejects the edition-2024-only `&& let` / `|| let` syntax in all source files
+before PCC's long native compile. Full Windows Cargo formatting, check, tests and
+visual Studio acceptance remain the final gate.

@@ -2,6 +2,11 @@
 """M2D120 static/document contract tests; cannot replace a native Windows Cargo build."""
 from __future__ import annotations
 import json
+import re
+
+def rust_compact(text: str) -> str:
+    return re.sub(r"\s+", "", text)
+
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
 main=(root/'src/main.rs').read_text(encoding='utf8')
@@ -39,7 +44,7 @@ for needle in (
  'let stones = state.world_doc.generated_objects().filter(',
  'room wall tint',
 ):
- if needle not in main:
+ if rust_compact(needle) not in rust_compact(main):
   raise AssertionError(f'Room canvas missing {needle}')
 for needle in (
  'pub enum RoomTool', 'pub struct RoomEditor', 'pub fn stroke_begin(',

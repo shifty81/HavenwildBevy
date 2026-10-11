@@ -78,6 +78,24 @@ def main() -> int:
         # source check is a structural guard; Cargo validates actual syntax.
         return re.sub(r"\s+", "", token) in re.sub(r"\s+", "", haystack)
 
+    # M2D130: Rust 2024-only let chains do not parse in our pinned 2021 edition.
+    # Catch the confirmed syntax failure before spending minutes on a Cargo build.
+    # Whitespace/newline agnostic, but intentionally limited to the `&& let` and
+    # `|| let` forms involved in this regression. Cargo remains syntax authority.
+    chain_pattern = re.compile(r"(?:&&|\|\|)\s*let\s+[A-Za-z_(]")
+    if not chain_pattern.search("if ready && let Some(x) = value { }"):
+        fail(errors, "M2D130 Rust edition guard failed its positive fixture")
+    if chain_pattern.search("if ready { if let Some(x) = value { } }"):
+        fail(errors, "M2D130 Rust edition guard rejected legal Rust 2021 fixture")
+    if chain_pattern.search("if ready &&\n  let Some(x) = value { }") is None:
+        fail(errors, "M2D130 Rust edition guard missed multiline fixture")
+    if str(package.get("edition", "")) == "2021":
+        for rs_path in sorted(SRC.rglob("*.rs")):
+            rs_text = rs_path.read_text(encoding="utf-8")
+            for match in chain_pattern.finditer(rs_text):
+                line = rs_text.count("\n", 0, match.start()) + 1
+                fail(errors, f"Rust 2024-only let chain at {rs_path.relative_to(ROOT)}:{line} while edition=2021")
+
     main_path = SRC / "main.rs"
     try:
         main_text = main_path.read_text(encoding="utf-8")
@@ -313,7 +331,7 @@ def main() -> int:
     for required in (
         'mod project_root;', 'mod historical_evidence;', 'mod world_chunks;',
         'project_root::resolve()', 'fn draw_historical_source_review(',
-        'fn draw_structural_panel(', 'fn draw_structural_overlay(',
+        'fn draw_world_properties_contents(', 'fn draw_structural_overlay(',
         'SceneCommand::SetStructuralCell', 'PlaySession::start_with_collision(',
         'state.layered_scene.structural_cells',
     ):
@@ -354,10 +372,10 @@ def main() -> int:
         'egui::Panel::top("havenwild.action.chrome")',
         'egui::Panel::top("havenwild.command.toolbar")',
         'egui::Panel::bottom("havenwild.status.chrome")',
-        'egui::Panel::left("havenwild.tool.rail")',
+        'egui::Panel::left("havenwild.tool.context")',
         'egui::Panel::right("havenwild.inspector.rail")',
         'egui::Window::new("Terrain Studio · ElizaWy Authority")',
-        'egui::Window::new("World Properties")',
+        'fn draw_world_properties_contents(',
         'egui::Window::new("Havenwild Tools")',
     ):
         if not has_token(main_text, required_panel):
@@ -369,8 +387,21 @@ def main() -> int:
     ):
         if forbidden_reserving_panel in main_text:
             fail(errors, f"M2D06 feature panel still reserves canvas real estate: {forbidden_reserving_panel}")
+    # M2D131A intentionally retired the redundant Apps rail icon. Verify the
+    # actual launcher routes instead of demanding its obsolete rail tooltip.
+    for launcher_route in (
+        'ui.menu_button("Tools", |ui| {',
+        '.button("Havenwild Tool Launcher    Ctrl+Space")',
+        'ctx.input(|input| input.modifiers.ctrl && input.key_pressed(egui::Key::Space))',
+        'state.launcher_open = !state.launcher_open;',
+        'fn draw_app_launcher(ctx: &egui::Context, state: &mut Studio)',
+        'draw_app_launcher(ctx, &mut state);',
+    ):
+        if not has_token(main_text, launcher_route):
+            fail(errors, f"M2D131A Tools/keyboard launcher route missing: {launcher_route}")
+    if has_token(main_text, 'rail_icon_button(ui, RailIcon::Apps'):
+        fail(errors, "M2D131A duplicate Apps rail control returned")
     for required_shell in (
-        'command_tooltip(StudioCommand::ToggleLauncher)',
         'input.key_pressed(egui::Key::Q)',
         'input.key_pressed(egui::Key::B)',
         'input.key_pressed(egui::Key::E)',

@@ -68,10 +68,12 @@ def verify_world_placement(source, mutation_probes=False):
             else:
                 raise AssertionError("Missing safety guard went undetected: " + label)
         # A harmless formatting change must not fail the same semantic test.
-        reformatted = source.replace("authority.object_templates.iter()",
-                                     "authority\n  .object_templates\n  .iter()", 1)
-        ensure("authority\n  .object_templates" in reformatted,
-               "Formatting resilience probe could not be constructed")
+        search = re.search(r"\bauthority\s*\.\s*object_templates\s*\.\s*iter\s*\(", source)
+        ensure(search is not None, "Formatting resilience probe prerequisite missing")
+        reformatted = (source[:search.start()]
+                       + "authority\n    .object_templates\n    .iter("
+                       + source[search.end():])
+        ensure(reformatted != source, "Formatting resilience probe could not be constructed")
         # Avoid recursive probes: check the normalized requirement directly.
         ensure("authority.object_templates" in compact(reformatted[method_start:]),
                "Whitespace normalization regression")

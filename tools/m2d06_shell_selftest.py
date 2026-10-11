@@ -12,10 +12,10 @@ required_main = [
     'fn draw_layer_rail(',
     'fn draw_inspector_rail(',
     'fn draw_app_launcher(',
-    'egui::Panel::left("havenwild.tool.rail")',
+    'egui::Panel::left("havenwild.tool.context")',
     'egui::Panel::right("havenwild.inspector.rail")',
     'egui::Panel::top("havenwild.command.toolbar")',
-    'egui::Window::new("World Properties")',
+    'fn draw_world_properties_contents(',
     'egui::Window::new("Terrain Studio · ElizaWy Authority")',
     'egui::Window::new("Havenwild Tools")',
     'fn draw_world_generator_panel(',
@@ -59,4 +59,4 @@ for token in (
 for retired in ('pub layers_open: bool', 'pub scene_layers_compact: bool', 'pub asset_authority_open: bool', 'pub chunk_manager_open: bool'):
     assert retired not in layout, retired
 
-print('M2D06 SHELL SELFTEST: PASS / permanent direct-tool + authoritative layer rails, one launcher, Terrain Studio + World Properties + Generated World as canonical apps, duplicate legacy panels retired')
+print('M2D06 SHELL SELFTEST: PASS / three-section docked tools + authoritative canvas layer rail, one launcher, Terrain Studio + World Properties + Generated World as canonical apps, duplicate legacy panels retired')

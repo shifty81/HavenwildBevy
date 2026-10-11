@@ -3,6 +3,11 @@
 These do NOT replace native Cargo/PIE visual verification."""
 from pathlib import Path
 import json
+import re
+
+def rust_compact(text: str) -> str:
+    return re.sub(r",(?=\))", "", re.sub(r"\s+", "", text))
+
 r=Path(__file__).resolve().parents[1]
 main=(r/'src/main.rs').read_text()
 world=(r/'src/world_doc.rs').read_text()
@@ -16,7 +21,7 @@ for s in ('ui.button("Edit Interior")', 'ui.button("Map Doorway → Scene")',
           'state.room_authoring_object = Some(object_id.to_owned())',
           'state.world_doc.structure_doors.values()', 'state.world_dirty = true;',
           'room_scene::RoomScene::load_template(source_path)'):
- assert s in main,s
+ assert rust_compact(s) in rust_compact(main),s
 assert 'ui.button("Edit House Room")' not in main
 for s in ('pub struct StructureDoorLink', 'pub structure_doors: BTreeMap<String, StructureDoorLink>',
     '#[serde(default)]', 'pub fn doorway_borders_footprint(', 'pub fn map_structure_door(',

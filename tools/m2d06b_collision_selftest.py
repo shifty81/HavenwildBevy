@@ -8,7 +8,8 @@ checks = {
     'pixel precedence': ('src/playtest.rs', 'start_with_collision'),
     'red overlay': ('src/main.rs', 'draw_collision_overlay'),
     'world pixel edit': ('src/main.rs', 'collision_pixel_under_pointer'),
-    'layer rail': ('src/main.rs', '"COL"'),
+    'collision editor brush': ('src/main.rs', 'state.collision_brush_radius'),
+    'explicit collision edit toggle': ('src/main.rs', 'Paint on canvas'),
     'mask editor': ('src/main.rs', 'draw_collision_mask_editor'),
 }
 errors=[]

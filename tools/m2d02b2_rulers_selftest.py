@@ -12,7 +12,7 @@ compact=re.sub(r'\s+',' ',main)
 assert 'canvas_rulers::draw(' in main and '&painter' in main and 'canvas, scene, px' in compact
 assert 'canvas_rulers::blocks_scene_edit(' in main and 'state.canvas_rect' in main
 assert 'state.canvas_selection_rect' not in main, 'selection chrome cannot overlap ruler/canvas hit testing'
-assert 'canvas.top() + ruler_inset.y' in main
+assert 'canvas_chrome::overlay_geometry(canvas, ruler_inset.y)' in main, 'scene canvas overlays must respect the ruler top inset'
 assert 'fn major_tile_step(' in rulers
 assert 'fn blocks_scene_edit(' in rulers
 assert 'tile_screen_px >= 12.0' in rulers

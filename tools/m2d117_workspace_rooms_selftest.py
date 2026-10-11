@@ -2,6 +2,11 @@
 """M2D117 source-contract checks; native Rust compilation and visual PIE acceptance remain required."""
 from pathlib import Path
 import json
+import re
+
+def rust_compact(text: str) -> str:
+    return re.sub(r"\s+", "", text)
+
 root=Path(__file__).resolve().parents[1]
 main=(root/'src/main.rs').read_text(encoding='utf8')
 layout=(root/'src/editor_layout.rs').read_text(encoding='utf8')
@@ -20,12 +25,14 @@ for item in ('fn draw_library_dock(', 'fn draw_floating_library(', 'egui::Panel:
              'let raw_atlas =', 'ui.selectable_label(state.editor_layout.library_view == view, view)',
              'if list_mode', 'choose_brush(state, BrushMode::Tile)',
              'state.canvas_layers_rect = egui::Rect::NOTHING;'):
-    assert item in main, item
+    assert rust_compact(item) in rust_compact(main), item
 layers=main.split('fn draw_layer_rail(',1)[1].split('fn docked_overlay_window(',1)[0]
 assert 'Order::Foreground' not in layers and 'egui::Area' not in layers
 assert 'canvas_layer_rect' in main
 assert main.index('draw_layer_rail(ui, &mut state);') > main.index('egui::CentralPanel::default()')
-assert 'RailIcon::Library' in main and 'RailIcon::Layers' in main
+assert 'RailIcon::Library' in main
+assert 'draw_layer_rail(ui, &mut state);' in main
+assert 'rail_icon_button(ui, RailIcon::Layers' not in main  # Layers are canvas-owned
 assert 'Library,' in icons and 'Layers,' in icons
 assert 'fn library_and_canvas_layers_have_persistent_state()' in layout
 assert 'mod room_scene;' in main

@@ -11,7 +11,7 @@ assert f'version = "{manifest["sourceVersion"]}"' in (ROOT/'Cargo.toml').read_te
 assert f'version = "{manifest["sourceVersion"]}"' in (ROOT/'Cargo.lock').read_text('utf8')
 for token in ('authoring_top_height','authoring_middle_height','authoring_context_width','authoring_library_tab','pixel_palette_color'):
     assert token in layout
-for token in ('"havenwild.authoring.active_tool"','"havenwild.library.bottom"','fn draw_authoring_tooling','fn draw_authoring_brush_settings','fn draw_authoring_library'):
+for token in ('"havenwild.studio.mode_tools"','"havenwild.library.bottom"','fn draw_authoring_tooling','fn draw_authoring_brush_settings','fn draw_authoring_library','fn draw_pixel_studio','fn draw_scene_navigator'):
     assert token in main,token
 assert 'egui::Sense::drag()' in main
 assert 'fn draw_authoring_atlas' in main
@@ -25,8 +25,9 @@ assert 'Source Browser' in main # advanced browser remains; no destructive remov
 assert 'state.pending_source_sheet = Some(path);' in main
 assert 'fn zoom_canvas_at(' in main and 'fn zoom_canvas_by(' in main
 assert main.count('zoom_canvas_by(state, pointer, canvas, (wheel / 240.0).exp())')==2
-assert main.count('zoom_canvas_by(state, canvas.center(), canvas, 1.25);')==2
-assert main.count('zoom_canvas_by(state, canvas.center(), canvas, 1.0 / 1.25);')==2
+assert 'fn draw_canvas_view_controls(' in main
+assert 'zoom_canvas_by(state, canvas.center(), canvas, 1.25);' in main
+assert 'zoom_canvas_by(state, canvas.center(), canvas, 0.8);' in main
 assert 'Key::Num1' in main and 'Key::Num2' in main and 'Key::Num3' in main
 assert 'Key::Plus' in main and 'Key::Equals' in main and 'Key::Minus' in main
 assert 'mod unified_canvas_zoom_tests' in main

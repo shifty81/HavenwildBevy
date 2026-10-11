@@ -7,6 +7,7 @@ that RGB must not be submitted straight to a premultiplied-alpha renderer.
 from __future__ import annotations
 import hashlib
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,7 +18,7 @@ def verify():
     assert 'fn premultiply_elizawy_sheet_color' in MAIN
     assert 'fn premultiply_elizawy_sheet_texture' in MAIN
     assert 'fn prepare_elizawy_egui_textures' in MAIN
-    assert '(hydrate_pending_source, prepare_elizawy_egui_textures, draw_ui).chain()' in MAIN
+    assert re.search(r'\(\s*hydrate_pending_source\s*,\s*prepare_elizawy_egui_textures\s*,\s*draw_ui\s*,?\s*\)\s*\.chain\(\)', MAIN)
     assert 'sheet.premultiplied_for_egui' in MAIN
     assert 'sheet.texture = if sheet.premultiplied_for_egui' in MAIN
     assert 'Color::LinearRgba(linear)' in MAIN

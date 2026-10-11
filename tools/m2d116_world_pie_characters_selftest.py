@@ -2,20 +2,27 @@
 """Cargo-free wiring guards: these are NOT native Rust or visual certifications."""
 from pathlib import Path
 import json
+import re
+
+
+def rust_compact(text: str) -> str:
+    """Normalize formatting, not the order or names of Rust call arguments."""
+    return re.sub(r",(?=\))", "", re.sub(r"\s+", "", text))
+
 root = Path(__file__).resolve().parents[1]
 m = (root / 'src/main.rs').read_text(encoding='utf8')
 w = (root / 'src/world_pie.rs').read_text(encoding='utf8')
 p = (root / 'src/playtest.rs').read_text(encoding='utf8')
 assert 'mod world_pie;' in m and 'world_playtest: Option<WorldPlaySession>' in m
-assert 'WorldPlaySession::start(&state.world_doc, &state.asset_authority, state.world_selected)' in m
-assert 'draw_pie_character(&painter' in m and 'if state.world_playtest.is_none()' in m
+assert 'WorldPlaySession::start(&state.world_doc,&state.asset_authority,state.world_selected)' in rust_compact(m)
+assert 'draw_pie_character(&painter' in rust_compact(m) and 'ifstate.world_playtest.is_none()' in rust_compact(m)
 assert 'return; // No editor paint, object drag, deletion or other authoring while playing.' in m
 assert 'state.world_playtest = Some(world_play);' in m
 assert 'ctx.input(|input| input.key_pressed(egui::Key::Escape))' in m
 assert 'state.world_playtest.take().is_some()' in m
 assert '"World PIE · pending"' not in m
 assert 'PLAYER_WALK_SHEET' in m and 'sheet.size != [512, 256]' in m
-assert 'draw_pie_character(&painter, state, center, px, play.facing_row, play.elapsed, play.moving)' in m
+assert 'draw_pie_character(&painter,state,center,px,play.facing_row,play.elapsed,play.moving)' in rust_compact(m)
 assert 'pub facing_row: u32' in p and 'pub moving: bool' in p
 assert 'pub fn effective_traversal(' in (root / 'src/world_doc.rs').read_text(encoding='utf8')
 assert 'world.effective_collision_mask(cell, authority)' in w

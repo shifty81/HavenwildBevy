@@ -10,7 +10,8 @@ layout = (ROOT / 'src/editor_layout.rs').read_text(encoding='utf-8')
 alpha = (ROOT / 'tools/m2d106_egui_source_alpha_selftest.py').read_text(encoding='utf-8')
 project = json.loads((ROOT / 'project/forgepy.project.json').read_text(encoding='utf-8'))
 assert tuple(map(int, project['sourceVersion'].split('.'))) >= (0, 10, 28)
-assert 'const RAIL_WIDTH: f32 = 62.0;' in main
+assert 'fn draw_tool_rail(ui: &mut egui::Ui, state: &mut Studio)' in main
+assert 'draw_tool_rail(ui, state);' in main
 assert 'egui::Panel::left("havenwild.tool.context")' in main
 assert 'state.editor_layout.tool_context_open' in main
 assert 'fn draw_tool_context(' in main
@@ -45,4 +46,4 @@ assert 'premultiply_elizawy_sheet_texture' in main
 assert 'PREMULTIPLIED-ALPHA CONTRACT' in alpha
 assert main.count('egui::Panel::right("havenwild.inspector.rail")') == 1
 assert 'fn canvas_layer_rect(' in main and 'draw_layer_rail(ui, &mut state);' in main
-print('M2D107 CANVAS/BRUSH CONTRACT: PASS / fixed 62px rail; independent context; typed Pixel/Tile/Terrain; tile visual-only; terrain semantic; guarded Pixel; shared stroke; M2D106 alpha retained')
+print('M2D107 CANVAS/BRUSH CONTRACT: PASS / one resizable three-section rail; integrated context; typed Pixel/Tile/Terrain; tile visual-only; terrain semantic; guarded Pixel; shared stroke; M2D106 alpha retained')

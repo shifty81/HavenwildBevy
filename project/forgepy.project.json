@@ -64,7 +64,7 @@
   },
   "forgepyVersion": "0.4.10",
   "pcc": {
-    "version": "1.3.5",
+    "version": "1.3.6",
     "logs": ".pcc/logs",
     "receipts": ".pcc/receipts",
     "debugBundles": ".pcc/debug",
@@ -101,5 +101,5 @@
     "tiledPromotion": "M2D097B / source 0.10.19 retains the exact Tiled/native-Wang visible cutover, removes the chase-light per-cell phase gradient, restricts terrain animation to mixed water-boundary Wang tiles while homogeneous water fills stay static, slows coast/river/pond cycles by 4x/5x/7x, persists waterContext on generated cells, and advances Generated World to v12 for ecology/prop rematerialization.",
     "waterContext": "src/worldgen_plan.rs::WaterContext = None/Ocean/Coast/River/PondLake; generated cells persist the semantic; ecology rules consume it directly instead of overloading RiverWater."
   },
-  "sourceVersion": "0.10.44"
+  "sourceVersion": "0.10.63"
 }

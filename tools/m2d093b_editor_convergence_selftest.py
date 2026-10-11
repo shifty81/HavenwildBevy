@@ -29,7 +29,8 @@ def main() -> int:
     req('RailIcon::Eye' in main_rs and 'RailIcon::EyeOff' in main_rs, "layer visibility icons missing")
     req('state.editor_layout.world_layer_visibility[slot] = !visible' in main_rs,
         "layer eye does not toggle persisted visibility")
-    req('state.editor_layout.world_layer_visibility = [false; 7]' in main_rs,
+    isolate = (ROOT / "src/layer_overlay.rs").read_text(encoding="utf-8")
+    req(re.search(r'state\s*\.\s*layer_isolate\s*\.\s*toggle\s*\(', main_rs) is not None and '*visibility = [false; 7]' in isolate,
         "Shift-isolate layer behavior missing")
     req('if !world_layer_visible(state, layer.id)' in main_rs,
         "authored visual rendering ignores layer visibility")
@@ -59,7 +60,7 @@ def main() -> int:
         "shared professional icon palette not imported")
     for glyph in ('Pixel', 'Tile', 'Terrain', 'Erase', 'Sample', 'Bridge', 'Panel', 'EyeOff'):
         req(f'RailIcon::{glyph}' in icon_rs, f"unified vector icon missing: {glyph}")
-    req('RailIcon::Panel, state.editor_layout.tool_context_open' in main_rs,
+    req(re.search(r'RailIcon::Panel\s*,\s*state\.editor_layout\.tool_context_open', main_rs) is not None,
         "context panel must not reuse a layer icon")
 
     # Terrain/asset authority and chunk diagnostics are folded into their canonical apps.

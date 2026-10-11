@@ -1,5 +1,18 @@
-Havenwild Bevy M2D126 · Source v0.10.44
+# Havenwild Bevy 0.10.48 — M2D130 Rust 2021 native build repair
 
-From M2D125 v0.10.43, this governed update restores the earlier integrated GUI authoring workspace with real tool tabs, an active tool context, and a draggable divider. The bottom Asset Library has an explicit drag-up resize grip and collapsible header; original source assets and World PIE are unchanged.
+This release preserves M2D128 Studio's Pixel Studio, Game Tools, Scene Navigator,
+Inspector Asset Browser, canvas Layers and animation preview timeline, and the
+M2D129 gate-test repairs. The source is standalone Havenwild.
 
-Install through PCC into an unmodified v0.10.43 project, or extract the complete source rollup into a clean folder. Run Full Quality Gate on Windows before relying on the editor. Existing source-backed scene and asset work remains; the LPC character archive and original hydrated assets are optional external downloads. Keep Havenwild as a standalone project; do not import unrelated source trees.
+## Windows instructions
+
+1. For a current 0.10.47 checkout, put the M2D130 .pccpatch.zip at the project root
+   and approve it in `PCC.cmd` (keep authored saves and hydrated assets).
+2. Alternatively extract the M2D130 complete-source ZIP into a separate clean folder.
+3. Confirm **0.10.48**, hydrate original core assets if needed, and run **Full Quality Gate**.
+4. If green, run Vulkan Studio; verify dragging/clicking the Pixel Studio color wheel,
+   shared Inspector Library and timeline playback in the generated world.
+
+The repair removes Rust 2024-only let-chain syntax from 2021-edition code.
+No asset mapping, world generation, scene data or PIE logic was altered.
+Native Windows compilation is not verified by the source-only package audit.

@@ -1,9 +1,10 @@
 //! Non-document canvas chrome: pan/zoom-aware tile rulers embedded over the full canvas.
 //! Rulers are display-only. They do not modify scene pixels, tile IDs, metadata, or layout size.
+//! Scene coordinates are local; generated-world labels use persistent signed world cells.
 use bevy_egui::egui;
 
 pub const TOP: f32 = 24.0;
-pub const LEFT: f32 = 32.0;
+pub const LEFT: f32 = 48.0;
 
 /// Focus Mode intentionally hides all ruler chrome, without changing the user's preference.
 pub fn visible(preference: bool, focus_mode: bool) -> bool {
@@ -43,7 +44,9 @@ pub fn draw(
     scene: egui::Rect,
     tile_screen_px: f32,
     pointer: Option<egui::Pos2>,
-    selected: Option<[usize; 2]>,
+    selected: Option<[i64; 2]>,
+    origin: [i64; 2],
+    theme: &str,
 ) {
     if !tile_screen_px.is_finite()
         || tile_screen_px <= 0.0
@@ -58,15 +61,31 @@ pub fn draw(
         egui::pos2(canvas.left() + LEFT, canvas.bottom()),
     );
     let corner = egui::Rect::from_min_size(canvas.min, egui::vec2(LEFT, TOP));
-    let background = egui::Color32::from_rgba_unmultiplied(26, 34, 36, 212);
+    // Match the native CanvasChrome palette; fully opaque at every zoom.
+    let background = crate::canvas_chrome::panel_fill(theme);
     painter.rect_filled(top, 0.0, background);
     painter.rect_filled(left, 0.0, background);
-    painter.rect_filled(
-        corner,
-        0.0,
-        egui::Color32::from_rgba_unmultiplied(31, 43, 45, 231),
-    );
-    let border = egui::Stroke::new(0.8, egui::Color32::from_gray(95));
+    painter.rect_filled(corner, 0.0, background);
+    let (ink, tick_ink, edge) = if theme == "High Contrast" {
+        (
+            egui::Color32::WHITE,
+            egui::Color32::from_gray(190),
+            egui::Color32::from_gray(215),
+        )
+    } else if theme == "Slate" {
+        (
+            egui::Color32::from_gray(222),
+            egui::Color32::from_gray(160),
+            egui::Color32::from_rgb(91, 104, 120),
+        )
+    } else {
+        (
+            egui::Color32::from_gray(220),
+            egui::Color32::from_gray(150),
+            egui::Color32::from_rgb(62, 85, 95),
+        )
+    };
+    let border = egui::Stroke::new(1.0, edge);
     painter.line_segment(
         [
             egui::pos2(canvas.left(), top.bottom()),
@@ -84,14 +103,12 @@ pub fn draw(
     painter.text(
         corner.center(),
         egui::Align2::CENTER_CENTER,
-        "T",
+        "XY",
         egui::FontId::monospace(11.0),
-        egui::Color32::from_gray(220),
+        ink,
     );
 
     let step = major_tile_step(tile_screen_px);
-    let ink = egui::Color32::from_gray(202);
-    let tick_ink = egui::Color32::from_gray(145);
     let top_painter = painter.with_clip_rect(egui::Rect::from_min_max(
         egui::pos2(left.right(), top.top()),
         top.max,
@@ -106,7 +123,7 @@ pub fn draw(
     let last_y = ((left.bottom() - scene.top()) / tile_screen_px).ceil() as i64;
     if tile_screen_px >= 12.0 {
         for tile in first_x..=last_x {
-            if tile.rem_euclid(step) == 0 {
+            if tile.saturating_add(origin[0]).rem_euclid(step) == 0 {
                 continue;
             }
             let x = scene.left() + tile as f32 * tile_screen_px;
@@ -119,7 +136,7 @@ pub fn draw(
             );
         }
         for tile in first_y..=last_y {
-            if tile.rem_euclid(step) == 0 {
+            if tile.saturating_add(origin[1]).rem_euclid(step) == 0 {
                 continue;
             }
             let y = scene.top() + tile as f32 * tile_screen_px;
@@ -132,7 +149,7 @@ pub fn draw(
             );
         }
     }
-    let mut x_tile = first_x.div_euclid(step) * step;
+    let mut x_tile = first_x.saturating_add(origin[0]).div_euclid(step) * step - origin[0];
     while x_tile <= last_x {
         let x = scene.left() + x_tile as f32 * tile_screen_px;
         top_painter.line_segment(
@@ -145,13 +162,13 @@ pub fn draw(
         top_painter.text(
             egui::pos2(x + 3.0, top.top() + 7.0),
             egui::Align2::LEFT_CENTER,
-            x_tile.to_string(),
+            x_tile.saturating_add(origin[0]).to_string(),
             egui::FontId::monospace(10.0),
             ink,
         );
         x_tile += step;
     }
-    let mut y_tile = first_y.div_euclid(step) * step;
+    let mut y_tile = first_y.saturating_add(origin[1]).div_euclid(step) * step - origin[1];
     while y_tile <= last_y {
         let y = scene.top() + y_tile as f32 * tile_screen_px;
         left_painter.line_segment(
@@ -164,7 +181,7 @@ pub fn draw(
         left_painter.text(
             egui::pos2(left.right() - 9.0, y + 6.0),
             egui::Align2::RIGHT_CENTER,
-            y_tile.to_string(),
+            y_tile.saturating_add(origin[1]).to_string(),
             egui::FontId::monospace(10.0),
             ink,
         );
@@ -172,8 +189,8 @@ pub fn draw(
     }
     // Selected-cell markers are independent of hover and remain stable across pan/zoom.
     if let Some([sx, sy]) = selected {
-        let x = scene.left() + (sx as f32 + 0.5) * tile_screen_px;
-        let y = scene.top() + (sy as f32 + 0.5) * tile_screen_px;
+        let x = scene.left() + ((sx - origin[0]) as f32 + 0.5) * tile_screen_px;
+        let y = scene.top() + ((sy - origin[1]) as f32 + 0.5) * tile_screen_px;
         let selected_ink = egui::Stroke::new(2.0, egui::Color32::from_rgb(235, 195, 95));
         top_painter.line_segment(
             [
@@ -229,6 +246,22 @@ mod tests {
                     [1, 2, 5].contains(&test)
                 }
             );
+        }
+    }
+    #[test]
+    fn signed_world_labels_keep_major_ticks_aligned_to_global_zero() {
+        let origin = [-19_i64, 13_i64];
+        let first = 2_i64;
+        let step = major_tile_step(32.0);
+        let first_global_major = first.saturating_add(origin[0]).div_euclid(step) * step;
+        let local_major = first_global_major - origin[0];
+        assert_eq!((local_major + origin[0]).rem_euclid(step), 0);
+        assert!(local_major >= first - step);
+    }
+    #[test]
+    fn ruler_theme_backing_is_solid() {
+        for theme in crate::canvas_chrome::THEME_NAMES {
+            assert_eq!(crate::canvas_chrome::panel_fill(theme).a(), 255);
         }
     }
     #[test]

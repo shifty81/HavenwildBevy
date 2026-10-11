@@ -45,7 +45,7 @@ for item in (
     'Audit shoreline topology', 'Outline missing coast recipes',
     'snapped_scene_edge(region.min.x, ox', 'fn foliage_variation(',
     'fn draw_foliage_uv_variant(', 'state.editor_layout.metrics_drawer_open',
-    'havenwild.world.view.controls',
+    'fn draw_canvas_view_controls(',
 ):
     if re.sub(r"\s+", "", item) not in re.sub(r"\s+", "", main): raise AssertionError(f'Editor contract missing: {item}')
 for item in ('pub metrics_drawer_open: bool', 'pub shoreline_audit_overlay: bool', 'metrics_drawer_open: false'):

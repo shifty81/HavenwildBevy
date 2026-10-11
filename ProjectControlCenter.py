@@ -36,7 +36,7 @@ import traceback
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-PCC_VERSION = "1.3.5"
+PCC_VERSION = "1.3.6"
 STATE_ROOT = ROOT / ".pcc"
 LOG_ROOT = STATE_ROOT / "logs"
 RECEIPT_ROOT = STATE_ROOT / "receipts"
@@ -46,6 +46,8 @@ ROLLBACK_ROOT = STATE_ROOT / "rollback"
 STAGING_ROOT = STATE_ROOT / "staging"
 LAST_JOB = STATE_ROOT / "last_job.json"
 LAST_GATE = STATE_ROOT / "last_gate.json"
+LAST_FAILURE = STATE_ROOT / "last_failure.json"
+LAST_FAILURE_REPORT = STATE_ROOT / "LAST_FAILURE.txt"
 ACTIVE_JOB = STATE_ROOT / "active_job.json"
 PUBLISH_STATE = STATE_ROOT / "git_publish_state.json"
 UPDATE_ROOT = ROOT / "updates"
@@ -96,6 +98,8 @@ GIT_PUBLISH_ALLOWED_ASSET_FILES = {"assets/README.md"}
 
 _SESSION_PATH: Path | None = None
 _SESSION_HANDLE = None
+_LATEST_DEBUG_BUNDLE: Path | None = None
+_IN_FULL_GATE = False
 
 
 def now_id() -> str:
@@ -430,7 +434,7 @@ def run_stream(command: list[str], *, label: str, env: dict[str, str] | None = N
         f"END {label}: {receipt['result']} ({rc}) in {elapsed:.1f}s"
     )
     pcc_print(f"RECEIPT: {receipt_path}")
-    if rc != 0 and debug_on_fail:
+    if rc != 0 and debug_on_fail and not _IN_FULL_GATE:
         try:
             bundle = make_debug_bundle(
                 reason=f"job-failure:{label}", job_log=log_path, receipt=receipt_path
@@ -1095,6 +1099,122 @@ def environment_snapshot() -> str:
     return "\n".join(rows) + "\n"
 
 
+def _failed_log_excerpt(log_path: Path | None, *, limit: int = 110) -> str:
+    """Extract actionable compiler/traceback diagnostics without dumping every gate phase."""
+    if log_path is None or not log_path.is_file():
+        return "No job log available; see the PCC session and debug bundle."
+    lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+    markers = (
+        "error[", "error:", "error ", "fatal error", "traceback (most recent", 
+        "exception:", "failed to", "could not compile", "patch failed", "update blocked",
+    )
+    indices = [i for i, line in enumerate(lines) if any(token in line.lower() for token in markers)]
+    if not indices:
+        return "\n".join(lines[-min(limit, 65):])
+    captured: set[int] = set()
+    for index in indices[:16]:
+        for i in range(max(0, index - 2), min(len(lines), index + 9)):
+            captured.add(i)
+            if len(captured) >= limit:
+                break
+        if len(captured) >= limit:
+            break
+    return "\n".join(f"{i + 1}: {lines[i]}" for i in sorted(captured))
+
+
+def _safe_failure_log_path(*, gate_failure: bool) -> Path | None:
+    if gate_failure:
+        gate = read_json(LAST_GATE, {}) or {}
+        phases = gate.get("phases") or []
+        failed = next((phase for phase in reversed(phases) if phase.get("result") == "FAIL"), None)
+        rel = failed.get("jobLog") if failed else None
+        if rel and (ROOT / str(rel)).is_file():
+            return ROOT / str(rel)
+    last = read_json(LAST_JOB, {}) or {}
+    # A rejected patch/menu operation may not spawn a job. Never display a
+    # previous successful job as the current error; use the live session log.
+    if last.get("result") == "FAIL":
+        rel = last.get("jobLog")
+        if rel and (ROOT / str(rel)).is_file():
+            return ROOT / str(rel)
+    return _SESSION_PATH if _SESSION_PATH and _SESSION_PATH.is_file() else None
+
+
+def open_failure_artifacts(report: Path, bundle: Path | None) -> bool:
+    """Open the actual errors and select the ZIP on Windows; never block PCC."""
+    if os.name != "nt" or os.environ.get("HAVENWILD_PCC_NO_AUTO_OPEN", "").lower() in {"1", "true", "yes"}:
+        return False
+    launched = False
+    try:
+        subprocess.Popen(["notepad.exe", str(report)], cwd=str(ROOT))
+        launched = True
+    except OSError as exc:
+        pcc_print("OPEN FAILURE REPORT: could not start Notepad:", exc)
+    if bundle and bundle.is_file():
+        try:
+            subprocess.Popen(["explorer.exe", f"/select,{bundle}"], cwd=str(ROOT))
+            launched = True
+        except OSError as exc:
+            pcc_print("OPEN DEBUG BUNDLE: could not start Explorer:", exc)
+    return launched
+
+
+def show_failure_handoff(exit_code: int, *, gate_failure: bool = False) -> Path:
+    """One readable failure handoff per menu action; uses the existing ZIP when possible."""
+    global _LATEST_DEBUG_BUNDLE
+    ensure_dirs()
+    log = _safe_failure_log_path(gate_failure=gate_failure)
+    bundle = _LATEST_DEBUG_BUNDLE if _LATEST_DEBUG_BUNDLE and _LATEST_DEBUG_BUNDLE.is_file() else None
+    if bundle is None:
+        try:
+            bundle = make_debug_bundle(reason=f"interactive-failure:{exit_code}", job_log=log)
+        except Exception as exc:
+            pcc_print("DEBUG BUNDLE CREATION FAILED:", exc)
+    gate = (read_json(LAST_GATE, {}) or {}) if gate_failure else {}
+    failed = next((ph for ph in reversed(gate.get("phases") or []) if ph.get("result") == "FAIL"), {})
+    summary = [
+        "HAVENWILD PCC — LAST FAILURE", "=" * 72,
+        f"Time        : {iso_now()}",
+        f"Exit code   : {exit_code}",
+        f"PCC         : {PCC_VERSION}",
+        f"Source      : {installed_patch_state().get('source', '?')}",
+        f"Failed phase: {failed.get('name', 'See last job or PCC session')}",
+        f"Job log     : {log or 'Unavailable'}",
+        f"Gate receipt: {LAST_GATE if gate_failure else 'Not a Full Gate failure'}",
+        f"Debug ZIP   : {bundle or 'Unavailable'}",
+        f"PCC session : {_SESSION_PATH or 'Unavailable'}",
+        "", "COMPILER / JOB ERRORS", "-" * 72,
+        _failed_log_excerpt(log), "",
+        "If needed, attach the debug ZIP to the Havenwild project chat.",
+        "The ZIP is diagnostics, not an installable PCC patch.", "",
+    ]
+    LAST_FAILURE_REPORT.write_text("\n".join(summary), encoding="utf-8")
+    write_json(LAST_FAILURE, {
+        "schema": "havenwild.bevy.pcc.failure_handoff.v1", "time": iso_now(),
+        "exitCode": exit_code, "failedPhase": failed.get("name"),
+        "jobLog": str(log) if log else None,
+        "debugBundle": str(bundle) if bundle else None,
+        "report": str(LAST_FAILURE_REPORT),
+    })
+    pcc_print("FAILURE REPORT:", LAST_FAILURE_REPORT)
+    pcc_print("FAILED JOB LOG:", log or "Unavailable")
+    pcc_print("DEBUG BUNDLE:", bundle or "Unavailable")
+    open_failure_artifacts(LAST_FAILURE_REPORT, bundle)
+    return LAST_FAILURE_REPORT
+
+
+def reopen_last_failure() -> None:
+    info = read_json(LAST_FAILURE, {}) or {}
+    report = Path(info.get("report", str(LAST_FAILURE_REPORT)))
+    bundle = Path(info["debugBundle"]) if info.get("debugBundle") else None
+    if not report.is_file():
+        pcc_print("No saved failure report. Run a failing job or Full Gate first.")
+        return
+    pcc_print("FAILURE REPORT:", report)
+    pcc_print("DEBUG BUNDLE:", bundle or "Unavailable")
+    open_failure_artifacts(report, bundle)
+
+
 def make_debug_bundle(*, reason: str = "manual", job_log: Path | None = None,
                       receipt: Path | None = None) -> Path:
     """Create a diagnostics ZIP containing source/config/log evidence only."""
@@ -1110,8 +1230,12 @@ def make_debug_bundle(*, reason: str = "manual", job_log: Path | None = None,
             z.write(LAST_JOB, "bundle/last_job.json")
         if LAST_GATE.is_file():
             z.write(LAST_GATE, "bundle/last_gate.json")
-        if job_log and job_log.is_file():
-            z.write(job_log, f"logs/{job_log.name}")
+        # Always include a human-readable error extract. For Full Gate failures
+        # the caller has already written the gate receipt and its failed phase.
+        failed_log = job_log or _safe_failure_log_path(gate_failure=True)
+        z.writestr("bundle/ERROR_SUMMARY.txt", _failed_log_excerpt(failed_log) + "\n")
+        if failed_log and failed_log.is_file():
+            z.write(failed_log, f"logs/{failed_log.name}")
         if receipt and receipt.is_file():
             z.write(receipt, f"receipts/{receipt.name}")
         if _SESSION_PATH and _SESSION_PATH.is_file():
@@ -1167,6 +1291,8 @@ def make_debug_bundle(*, reason: str = "manual", job_log: Path | None = None,
         fixture_root = ROOT / "content" / "terrain" / "fixtures"
         for p in sorted(fixture_root.glob("*.json")) if fixture_root.is_dir() else []:
             z.write(p, f"source/content/terrain/fixtures/{p.name}")
+    global _LATEST_DEBUG_BUNDLE
+    _LATEST_DEBUG_BUNDLE = bundle
     return bundle
 
 
@@ -2025,6 +2151,9 @@ def audit_gate() -> int:
         ("M2D123 review-only vs reviewed-object placement regression", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d123_asset_review_placement_selftest.py")],
             label="m2d123-reviewed-placement", debug_on_fail=False)),
+        ("M2D127 unified three-section Tooling / Context / Library and floating resize", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d127_three_section_docking_selftest.py")],
+            label="m2d127-three-section-docking-selftest", debug_on_fail=False)),
         ("M2D118 standalone Havenwild identity boundary", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/havenwild_identity_boundary_selftest.py")],
             label="havenwild-identity-boundary-selftest", debug_on_fail=False)),
@@ -2134,7 +2263,7 @@ def audit_gate() -> int:
     return 0
 
 
-def full_gate() -> int:
+def _full_gate_impl() -> int:
     gate_id = f"{now_id()}_full"
     started_at = iso_now()
     started = time.monotonic()
@@ -2350,6 +2479,9 @@ def full_gate() -> int:
         ("M2D123 review-only vs reviewed-object placement regression", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/m2d123_asset_review_placement_selftest.py")],
             label="m2d123-reviewed-placement", debug_on_fail=False)),
+        ("M2D127 unified three-section Tooling / Context / Library and floating resize", lambda: run_stream(
+            [python_cmd(), str(ROOT / "tools/m2d127_three_section_docking_selftest.py")],
+            label="m2d127-three-section-docking-selftest", debug_on_fail=False)),
         ("M2D118 standalone Havenwild identity boundary", lambda: run_stream(
             [python_cmd(), str(ROOT / "tools/havenwild_identity_boundary_selftest.py")],
             label="havenwild-identity-boundary-selftest", debug_on_fail=False)),
@@ -2537,6 +2669,15 @@ def full_gate() -> int:
     pcc_print("FULL GATE: PASS")
     pcc_print("GATE RECEIPT:", receipt)
     return 0
+
+def full_gate() -> int:
+    global _IN_FULL_GATE
+    _IN_FULL_GATE = True
+    try:
+        return _full_gate_impl()
+    finally:
+        _IN_FULL_GATE = False
+
 
 def build_job() -> int:
     rc = updates_apply_all()
@@ -2975,6 +3116,7 @@ def diagnostics_menu() -> int:
         pcc_print(" 5. Show log locations")
         pcc_print(" 6. Environment snapshot")
         pcc_print(" 7. Prune retained PCC history")
+        pcc_print(" 8. Open last failure report / debug bundle")
         pcc_print(" 0. Back")
         choice = input("> ").strip()
         if choice == "0": return 0
@@ -3008,6 +3150,8 @@ def diagnostics_menu() -> int:
         elif choice == "7":
             prune_state()
             pcc_print("PCC retention cleanup complete.")
+        elif choice == "8":
+            reopen_last_failure()
         input("Press Enter...")
 
 
@@ -3050,7 +3194,11 @@ def studio_menu() -> int:
             "6": lambda: run_job("vulkan", verbose_gpu=True),
         }.get(choice)
         if action:
-            action()
+            global _LATEST_DEBUG_BUNDLE
+            _LATEST_DEBUG_BUNDLE = None
+            rc = action()
+            if rc:
+                show_failure_handoff(rc)
             input("Press Enter...")
 
 
@@ -3129,6 +3277,8 @@ def menu() -> int:
             }.get(choice)
             if action is None:
                 continue
+            global _LATEST_DEBUG_BUNDLE
+            _LATEST_DEBUG_BUNDLE = None
             try:
                 rc = action()
             except KeyboardInterrupt:
@@ -3144,6 +3294,11 @@ def menu() -> int:
                     pcc_print(traceback.format_exc())
                 rc = 251
             pcc_print(f"RESULT: {'PASS' if rc == 0 else 'FAIL'} ({rc})")
+            if rc:
+                try:
+                    show_failure_handoff(rc, gate_failure=(action is full_gate))
+                except Exception as exc:
+                    pcc_print("FAILURE HANDOFF ERROR:", exc)
             input("Press Enter to return to PCC...")
         except KeyboardInterrupt:
             pcc_print("\nPCC menu interrupt; choose 0 to exit.")

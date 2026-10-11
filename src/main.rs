@@ -4,6 +4,7 @@
 mod asset_authority;
 mod asset_review;
 mod atomic_file;
+mod canvas_chrome;
 mod canvas_rulers;
 mod document;
 mod editor_commands;
@@ -11,6 +12,7 @@ mod editor_icons;
 mod editor_layout;
 mod elizawy_review;
 mod historical_evidence;
+mod layer_overlay;
 mod playtest;
 mod project_root;
 mod render_asset_sync;
@@ -24,6 +26,7 @@ mod terrain;
 mod terrain_mapper;
 mod terrain_resolver;
 mod tiled_terrain;
+mod workspace_layout;
 mod world_chunks;
 mod world_doc;
 mod world_pie;
@@ -354,6 +357,7 @@ struct Studio {
     scene_needs_initial_save: bool,
     legacy_base_path: PathBuf,
     active_layer: LayerId,
+    layer_isolate: layer_overlay::LayerIsolateState,
     playtest_layered: Option<SceneV2>,
     playtest: Option<PlaySession>,
     world_playtest: Option<WorldPlaySession>,
@@ -388,6 +392,8 @@ struct Studio {
     world_mode: bool,
     world_dirty: bool,
     world_selected: [i64; 2],
+    /// Position captured by the context menu without changing canvas selection.
+    world_context_cell: Option<[i64; 2]>,
     world_selected_object: Option<String>,
     world_dragging_object: Option<(String, [i64; 2])>,
     world_drag_preview_anchor: Option<[i64; 2]>,
@@ -440,7 +446,11 @@ struct Studio {
     canvas_rect: egui::Rect,
     scene_rect: egui::Rect,
     canvas_controls_rect: egui::Rect,
+    canvas_grid_rect: egui::Rect,
     canvas_layers_rect: egui::Rect,
+    canvas_animation_rect: egui::Rect,
+    /// Editor-only elapsed animation clock; no gameplay clock or authored frames modified.
+    animation_preview_ms: f64,
     display_fps: f32,
     atlas_rect: egui::Rect,
     structural_rect: egui::Rect,
@@ -451,6 +461,10 @@ struct Studio {
     redo: Vec<Scene>,
     dirty: bool,
     message: String,
+    /// Session-only diagnostics; intentionally never serialized with a world or scene.
+    console_history: VecDeque<String>,
+    console_last_message: String,
+    console_tab: String,
     theme: ForgeTheme,
     creator_visuals_applied: bool,
     terrain_mapper: TerrainMapper,
@@ -826,6 +840,7 @@ fn startup(
         scene_needs_initial_save,
         legacy_base_path,
         active_layer: LayerId::Objects,
+        layer_isolate: layer_overlay::LayerIsolateState::default(),
         playtest_layered: None,
         playtest: None,
         world_playtest: None,
@@ -855,6 +870,7 @@ fn startup(
         world_mode: true,
         world_dirty: generated_world_initialized || repaired_world_rules > 0 || quarantined_world_objects > 0,
         world_selected: [0, 0],
+        world_context_cell: None,
         world_selected_object: None,
         world_dragging_object: None,
         world_drag_preview_anchor: None,
@@ -906,8 +922,11 @@ fn startup(
         canvas_rect: egui::Rect::NOTHING,
         scene_rect: egui::Rect::NOTHING,
         canvas_controls_rect: egui::Rect::NOTHING,
+        canvas_grid_rect: egui::Rect::NOTHING,
         canvas_layers_rect: egui::Rect::NOTHING,
+        canvas_animation_rect: egui::Rect::NOTHING,
         display_fps: 0.0,
+        animation_preview_ms: 0.0,
         atlas_rect: egui::Rect::NOTHING,
         structural_rect: egui::Rect::NOTHING,
         world_generator_rect: egui::Rect::NOTHING,
@@ -919,6 +938,9 @@ fn startup(
         undo: Vec::new(),
         redo: Vec::new(),
         dirty: false,
+        console_history: VecDeque::new(),
+        console_last_message: String::new(),
+        console_tab: "Console".into(),
         message: if repaired_world_rules > 0 || quarantined_world_objects > 0 {
             format!(
                 "Generated World safety repair: {repaired_world_rules} unsafe learned rule(s) repaired; {quarantined_world_objects} uncertified large generated object(s) quarantined. The four-season archipelago is now the primary authoring map."
@@ -1183,7 +1205,9 @@ fn world_at(state: &Studio, pointer: egui::Pos2) -> Option<[usize; 2]> {
             canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
         )
         || state.canvas_controls_rect.contains(pointer)
+        || state.canvas_grid_rect.contains(pointer)
         || state.canvas_layers_rect.contains(pointer)
+        || state.canvas_animation_rect.contains(pointer)
         || (state.editor_layout.terrain_mapper.visible && state.atlas_rect.contains(pointer))
         || (state.editor_layout.structural_open && state.structural_rect.contains(pointer))
         || (state.launcher_open && state.launcher_rect.contains(pointer))
@@ -1962,8 +1986,15 @@ fn world_pointer_cell(
 ) -> Option<([i64; 2], [usize; 2])> {
     if !state.canvas_rect.contains(pointer)
         || !region.contains(pointer)
+        || canvas_rulers::blocks_scene_edit(
+            state.canvas_rect,
+            pointer,
+            canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+        )
         || state.canvas_controls_rect.contains(pointer)
+        || state.canvas_grid_rect.contains(pointer)
         || state.canvas_layers_rect.contains(pointer)
+        || state.canvas_animation_rect.contains(pointer)
         || (state.editor_layout.terrain_mapper.visible && state.atlas_rect.contains(pointer))
         || (state.editor_layout.structural_open && state.structural_rect.contains(pointer))
         || (state.editor_layout.world_generator_open
@@ -2681,16 +2712,43 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
     let available = ui.available_size().max(egui::vec2(200.0, 160.0));
     let (canvas, response) = ui.allocate_exact_size(available, egui::Sense::click_and_drag());
     state.canvas_rect = canvas;
+    state.canvas_animation_rect =
+        if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some() {
+            egui::Rect::NOTHING
+        } else {
+            canvas_animation_control_rect(
+                canvas,
+                canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+            )
+        };
     state.canvas_layers_rect =
         if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some() {
             egui::Rect::NOTHING
         } else {
-            canvas_layer_rect(canvas, state.editor_layout.layers_dock_open)
+            canvas_layer_rect(
+                canvas,
+                state.editor_layout.layers_dock_open,
+                canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+            )
         };
-    state.canvas_controls_rect = egui::Rect::from_min_size(
-        egui::pos2(canvas.right() - 285.0, canvas.top() + 8.0),
-        egui::vec2(285.0, 40.0),
-    );
+    let overlays = if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some()
+    {
+        canvas_chrome::OverlayGeometry {
+            grid: egui::Rect::NOTHING,
+            zoom: egui::Rect::NOTHING,
+        }
+    } else {
+        canvas_chrome::overlay_geometry(
+            canvas,
+            if canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode) {
+                canvas_rulers::TOP
+            } else {
+                0.0
+            },
+        )
+    };
+    state.canvas_controls_rect = overlays.zoom;
+    state.canvas_grid_rect = overlays.grid;
     let painter = ui.painter().with_clip_rect(canvas);
     painter.rect_filled(canvas, 0.0, egui::Color32::from_rgb(20, 29, 27));
     if state
@@ -2744,13 +2802,14 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
             .pointer_hover_pos()
             .and_then(|pointer| world_pointer_cell(state, pointer, region, origin, size, px))
         {
-            state.world_selected = world;
-            state.selection_active = true;
-            state.world_selected_object = world_object_at(state, world);
+            // Opening a context menu must not mutate selection, active layer,
+            // brush, or the current object's transform. A chosen action owns
+            // any subsequent selection or world edit.
+            state.world_context_cell = Some(world);
         }
     }
     response.context_menu(|ui| {
-        let cell = state.world_selected;
+        let cell = state.world_context_cell.unwrap_or(state.world_selected);
         ui.strong(format!("World cell {}, {}", cell[0], cell[1]));
         if let Some(role) = state.world_doc.resolved_role(cell) {
             ui.small(format!("Terrain: {role}"));
@@ -2780,6 +2839,8 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
         }
         ui.separator();
         if ui.button("Select object at cell").clicked() {
+            state.world_selected = cell;
+            state.selection_active = true;
             state.world_selected_object = world_object_at(state, cell);
             state.tool = CanvasTool::Select;
             ui.close();
@@ -2831,7 +2892,8 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
 
         {
             let mut terrain_mesh: Option<(egui::TextureId, egui::Mesh)> = None;
-            let elapsed_ms = ui.input(|input| (input.time.max(0.0) * 1000.0).round() as u64);
+            // Shared timeline preview drives the existing Tiled/source frame resolver.
+            let elapsed_ms = state.animation_preview_ms.round() as u64;
             let mut animated_visible = false;
             let mut shoreline_fallback_markers: Vec<(egui::Rect, bool)> = Vec::new();
             prepare_world_visual_cache(state);
@@ -3460,54 +3522,22 @@ fn draw_world_workspace(ui: &mut egui::Ui, state: &mut Studio) {
             }
         }
     }
-    egui::Area::new(egui::Id::new("havenwild.world.view.controls"))
-        .fixed_pos(egui::pos2(canvas.right() - 280.0, canvas.top() + 8.0))
-        .show(ui.ctx(), |ui| {
-            egui::Frame::NONE
-                .fill(egui::Color32::from_rgba_unmultiplied(25, 33, 37, 232))
-                .show(ui, |ui| {
-                    ui.horizontal(|ui| {
-                        if ui.small_button("Fit world").clicked() {
-                            let fx = canvas.width() / size[0] as f32 / 32.0;
-                            let fy = canvas.height() / size[1] as f32 / 32.0;
-                            state.zoom = fx.min(fy).clamp(0.125, 16.0) * 0.92;
-                            state.pan = egui::Vec2::ZERO;
-                        }
-                        if ui.small_button("+").on_hover_text("Zoom in").clicked() {
-                            zoom_canvas_by(state, canvas.center(), canvas, 1.25);
-                        }
-                        if ui.small_button("-").on_hover_text("Zoom out").clicked() {
-                            zoom_canvas_by(state, canvas.center(), canvas, 1.0 / 1.25);
-                        }
-                        ui.small(format!(
-                            "{:.0}%  ·  {:.0} FPS",
-                            state.zoom * 100.0,
-                            state.display_fps
-                        ));
-                        if state.collision_world_pixel_edit {
-                            ui.separator();
-                            ui.label("COL");
-                            if ui
-                                .small_button("-")
-                                .on_hover_text("Smaller collision brush")
-                                .clicked()
-                            {
-                                state.collision_brush_radius =
-                                    state.collision_brush_radius.saturating_sub(1).max(1);
-                            }
-                            ui.label(format!("{}px", state.collision_brush_radius));
-                            if ui
-                                .small_button("+")
-                                .on_hover_text("Larger collision brush")
-                                .clicked()
-                            {
-                                state.collision_brush_radius =
-                                    (state.collision_brush_radius + 1).min(8);
-                            }
-                        }
-                    });
-                });
-        });
+    // Paint over generated-world textures/objects using signed *world* coordinates.
+    // The ruler occupies only the canvas border and never changes the document.
+    if state.world_playtest.is_none()
+        && canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode)
+    {
+        canvas_rulers::draw(
+            &painter,
+            canvas,
+            region,
+            px,
+            ui.ctx().pointer_hover_pos(),
+            state.selection_active.then_some(state.world_selected),
+            origin,
+            &state.editor_layout.editor_theme,
+        );
+    }
 }
 
 /// Room document editing lives in the same Studio canvas and bottom Library,
@@ -3673,8 +3703,19 @@ fn draw_room_authoring_workspace(ui: &mut egui::Ui, state: &mut Studio) {
     let size = ui.available_size().max(egui::vec2(200.0, 150.0));
     let (canvas, response) = ui.allocate_exact_size(size, egui::Sense::click_and_drag());
     state.canvas_rect = canvas;
+    state.canvas_animation_rect =
+        if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some() {
+            egui::Rect::NOTHING
+        } else {
+            canvas_animation_control_rect(
+                canvas,
+                canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+            )
+        };
     state.canvas_layers_rect = egui::Rect::NOTHING;
+    state.canvas_animation_rect = egui::Rect::NOTHING;
     state.canvas_controls_rect = egui::Rect::NOTHING;
+    state.canvas_grid_rect = egui::Rect::NOTHING;
     let painter = ui.painter().with_clip_rect(canvas);
     painter.rect_filled(canvas, 0.0, egui::Color32::from_rgb(18, 24, 27));
     let Some(edit) = state.room_authoring.as_mut() else {
@@ -3817,11 +3858,24 @@ fn draw_world(ui: &mut egui::Ui, state: &mut Studio) {
     let available = ui.available_size().max(egui::vec2(200.0, 160.0));
     let (canvas, response) = ui.allocate_exact_size(available, egui::Sense::click_and_drag());
     state.canvas_rect = canvas;
+    state.canvas_animation_rect =
+        if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some() {
+            egui::Rect::NOTHING
+        } else {
+            canvas_animation_control_rect(
+                canvas,
+                canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+            )
+        };
     state.canvas_layers_rect =
         if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some() {
             egui::Rect::NOTHING
         } else {
-            canvas_layer_rect(canvas, state.editor_layout.layers_dock_open)
+            canvas_layer_rect(
+                canvas,
+                state.editor_layout.layers_dock_open,
+                canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+            )
         };
     // Rulers are painted inside the allocated canvas; no dock, layout shrink or extra scene layer.
     let ruler_inset =
@@ -3830,10 +3884,17 @@ fn draw_world(ui: &mut egui::Ui, state: &mut Studio) {
         } else {
             egui::Vec2::ZERO
         };
-    state.canvas_controls_rect = egui::Rect::from_min_size(
-        egui::pos2(canvas.right() - 285.0, canvas.top() + ruler_inset.y + 6.0),
-        egui::vec2(285.0, 40.0),
-    );
+    let overlays = if state.focus_mode || state.playtest.is_some() || state.world_playtest.is_some()
+    {
+        canvas_chrome::OverlayGeometry {
+            grid: egui::Rect::NOTHING,
+            zoom: egui::Rect::NOTHING,
+        }
+    } else {
+        canvas_chrome::overlay_geometry(canvas, ruler_inset.y)
+    };
+    state.canvas_controls_rect = overlays.zoom;
+    state.canvas_grid_rect = overlays.grid;
     let painter = ui.painter().with_clip_rect(canvas);
     painter.rect_filled(canvas, 0.0, egui::Color32::from_rgb(20, 29, 27));
     if state.playtest.is_none() && state.world_playtest.is_none() && response.hovered() {
@@ -4064,7 +4125,11 @@ fn draw_world(ui: &mut egui::Ui, state: &mut Studio) {
             scene,
             px,
             ui.ctx().pointer_hover_pos(),
-            state.selection_active.then_some(state.selected_world),
+            state
+                .selection_active
+                .then_some(state.selected_world.map(|v| v as i64)),
+            [0, 0],
+            &state.editor_layout.editor_theme,
         );
     }
     // Capture SELECT on initial pointer press, before egui's drag threshold moves
@@ -4192,47 +4257,6 @@ fn draw_world(ui: &mut egui::Ui, state: &mut Studio) {
         if !remove_selected_object(state) && !hide_selected_visual_sample(state, pos) {
             erase_source(state, pos);
         }
-    }
-    // These view controls are canvas chrome, not a separate dock or inspector.
-    let control_pos = egui::pos2(canvas.right() - 278.0, canvas.top() + ruler_inset.y + 9.0);
-    if state.playtest.is_none() {
-        egui::Area::new(egui::Id::new("havenwild.canvas.view.controls"))
-            .fixed_pos(control_pos)
-            .show(ui.ctx(), |ui| {
-                egui::Frame::NONE
-                    .fill(egui::Color32::from_rgba_unmultiplied(25, 33, 37, 232))
-                    .show(ui, |ui| {
-                        ui.horizontal(|ui| {
-                            if ui
-                                .small_button("Fit")
-                                .on_hover_text("Fit current Summer scene to canvas")
-                                .clicked()
-                            {
-                                let size = state.scene.size;
-                                focus_mapping_zone(state, [0, 0], size);
-                            }
-                            if ui
-                                .small_button("+")
-                                .on_hover_text("Zoom at viewport center · Ctrl+=")
-                                .clicked()
-                            {
-                                zoom_canvas_by(state, canvas.center(), canvas, 1.25);
-                            }
-                            if ui
-                                .small_button("-")
-                                .on_hover_text("Zoom at viewport center · Ctrl+-")
-                                .clicked()
-                            {
-                                zoom_canvas_by(state, canvas.center(), canvas, 1.0 / 1.25);
-                            }
-                            ui.small(format!(
-                                "{:.0}%  ·  {:.0} FPS",
-                                state.zoom * 100.0,
-                                state.display_fps
-                            ));
-                        });
-                    });
-            });
     }
     if let Some(play) = state.playtest.as_ref() {
         egui::Area::new(egui::Id::new("havenwild.pie.canvas.status"))
@@ -4550,7 +4574,14 @@ fn draw_recipe_output_preview(
 }
 
 fn save_editor_layout(state: &mut Studio) {
-    if let Err(error) = state.editor_layout.save(&state.layout_path) {
+    // Shift-isolate is view-only and session-local. Persist the user's actual
+    // pre-isolation visibility even when a theme, dock or tool setting is saved
+    // while isolation is active. An eye-button edit cancels isolation first.
+    let mut disk_layout = state.editor_layout.clone();
+    disk_layout.world_layer_visibility = state
+        .layer_isolate
+        .persisted_visibility(state.editor_layout.world_layer_visibility);
+    if let Err(error) = disk_layout.save(&state.layout_path) {
         state.message = format!("Editor layout save failed: {error}");
     }
 }
@@ -6924,66 +6955,29 @@ fn draw_world_structural_contents(ui: &mut egui::Ui, state: &mut Studio) {
 
 // An authored structural cell is separate from the immutable original artwork.
 // Edit commands use the same scene-v2 undo/redo/save path as visual changes.
-fn draw_structural_panel(viewport_ui: &mut egui::Ui, state: &mut Studio) {
-    if !state.editor_layout.structural_open {
-        state.structural_rect = egui::Rect::NOTHING;
-        return;
+/// The single Inspector World tab owns collision, traversal and elevation.
+/// This is the original authoring body formerly rendered in a floating window.
+/// All edits retain their existing undo/history authority.
+fn draw_world_properties_contents(ui: &mut egui::Ui, state: &mut Studio) {
+    let mut compact = state.editor_layout.structural_compact;
+    if ui
+        .selectable_label(compact, if compact { "Compact" } else { "Full" })
+        .on_hover_text("Show quick collision/elevation edits or the full semantic metadata editor")
+        .clicked()
+    {
+        compact = !compact;
+        state.editor_layout.structural_compact = compact;
+        save_editor_layout(state);
     }
-    let ctx = viewport_ui.ctx().clone();
-    let dock = state.editor_layout.structural_dock;
-    let compact = state.editor_layout.structural_compact;
-    let mut open = true;
-    let mut window = egui::Window::new("World Properties")
-        .id(egui::Id::new("havenwild.structural.editor.overlay"))
-        .open(&mut open)
-        .resizable(true)
-        .min_width(if compact { 240.0 } else { 285.0 });
-    window = match dock {
-        SurfaceDock::Left => window.anchor(egui::Align2::LEFT_TOP, [60.0, 62.0]),
-        SurfaceDock::Right => window.anchor(egui::Align2::RIGHT_TOP, [-58.0, 62.0]),
-        SurfaceDock::Bottom => window.anchor(egui::Align2::CENTER_BOTTOM, [0.0, -30.0]),
-        SurfaceDock::Floating | SurfaceDock::Center => window.default_pos(egui::pos2(1020.0, 96.0)),
-    };
-    let response = window.show(&ctx, |ui| {
-        let mut requested_dock = None;
-        let mut requested_compact = compact;
-        ui.horizontal_wrapped(|ui| {
-            for (candidate, label) in [
-                (SurfaceDock::Left, "Dock L"),
-                (SurfaceDock::Right, "Dock R"),
-                (SurfaceDock::Bottom, "Dock B"),
-                (SurfaceDock::Floating, "Float"),
-            ] {
-                if ui.selectable_label(dock == candidate, label).clicked() {
-                    requested_dock = Some(candidate);
-                }
-            }
-            ui.separator();
-            if ui
-                .selectable_label(requested_compact, if requested_compact { "Compact" } else { "Full" })
-                .on_hover_text("Compact keeps only immediate collision/elevation controls. Full exposes semantic terrain and connector metadata.")
-                .clicked()
-            {
-                requested_compact = !requested_compact;
-            }
-        });
-        if let Some(candidate) = requested_dock {
-            state.editor_layout.structural_dock = candidate;
-            save_editor_layout(state);
-        }
-        if requested_compact != state.editor_layout.structural_compact {
-            state.editor_layout.structural_compact = requested_compact;
-            save_editor_layout(state);
-        }
-        ui.small("Explicit scene metadata, never inferred from sprite alpha. Ctrl+Z / Ctrl+Y and Save Scene use the same transaction history.");
-        if ui
+    ui.small("Explicit scene metadata, never inferred from sprite alpha. Ctrl+Z / Ctrl+Y and Save Scene use the same transaction history.");
+    if ui
             .checkbox(&mut state.editor_layout.collision_overlay, "Collision overlay · red = impassable")
             .on_hover_text("Show the effective collision layer over the world. Automatic/coarse blocked cells are translucent red; authored 32x32 masks show their exact blocked pixels.")
             .changed()
         {
             save_editor_layout(state);
         }
-        if !state.editor_layout.structural_compact
+    if !state.editor_layout.structural_compact
             && ui
                 .checkbox(&mut state.editor_layout.structural_overlay, "Structural metadata outline")
                 .on_hover_text("Show elevation/traversal metadata outlines separately from the red collision overlay.")
@@ -6991,20 +6985,23 @@ fn draw_structural_panel(viewport_ui: &mut egui::Ui, state: &mut Studio) {
         {
             save_editor_layout(state);
         }
-        ui.separator();
-        if state.world_mode { draw_world_structural_contents(ui, state); return; }
-        if !state.selection_active {
-            ui.label("Select a scene cell with Select (Q) first.");
-            return;
-        }
-        let pos = state.selected_world;
-        let Some(index) = state.scene.index(pos[0], pos[1]) else {
-            return;
-        };
-        ui.strong(format!("Cell {},{}", pos[0], pos[1]));
-        ui.separator();
-        ui.strong("Collision layer");
-        ui.horizontal_wrapped(|ui| {
+    ui.separator();
+    if state.world_mode {
+        draw_world_structural_contents(ui, state);
+        return;
+    }
+    if !state.selection_active {
+        ui.label("Select a scene cell with Select (Q) first.");
+        return;
+    }
+    let pos = state.selected_world;
+    let Some(index) = state.scene.index(pos[0], pos[1]) else {
+        return;
+    };
+    ui.strong(format!("Cell {},{}", pos[0], pos[1]));
+    ui.separator();
+    ui.strong("Collision layer");
+    ui.horizontal_wrapped(|ui| {
             if ui
                 .selectable_label(state.collision_brush_blocked, "Block")
                 .on_hover_text("Collision brush writes impassable red pixels.")
@@ -7022,168 +7019,193 @@ fn draw_structural_panel(viewport_ui: &mut egui::Ui, state: &mut Studio) {
             ui.checkbox(&mut state.collision_world_pixel_edit, "Edit on world canvas")
                 .on_hover_text("When enabled, a primary click on the world edits the exact 1/32-cell collision pixel under the cursor instead of painting artwork. Zoom in for precise correction.");
         });
-        if state.collision_world_pixel_edit && !state.editor_layout.collision_overlay {
-            state.editor_layout.collision_overlay = true;
-            save_editor_layout(state);
-        }
-        if state.editor_layout.structural_compact {
-            let explicit = state.layered_scene.collision_mask(index).cloned();
-            ui.small(format!(
-                "{} · {} blocked pixels",
-                if explicit.is_some() { "Authored 32×32 mask" } else { "Automatic/coarse collision" },
-                explicit.as_ref().map(|mask| mask.blocked_count()).unwrap_or(if automatic_cell_blocked(state, index) { 1024 } else { 0 })
-            ));
-            ui.horizontal_wrapped(|ui| {
-                if ui.button("Full blocked").clicked() {
-                    set_collision_mask(state, index, Some(CollisionMask32::full()));
-                }
-                if ui.button("Full clear").clicked() {
-                    set_collision_mask(state, index, Some(CollisionMask32::empty()));
-                }
-                if ui
-                    .add_enabled(explicit.is_some(), egui::Button::new("Automatic"))
-                    .clicked()
-                {
-                    set_collision_mask(state, index, None);
-                }
-            });
-        } else {
-            draw_collision_mask_editor(ui, state, index);
-        }
-        ui.separator();
-        ui.strong("Cell / elevation metadata");
-        let previous = state
-            .layered_scene
-            .structural_cells
-            .iter()
-            .find(|v| v.index == index)
-            .cloned();
-        let mut cell = previous.clone().unwrap_or(StructuralCell {
-            index,
-            elevation: None,
-            terrain_kind: None,
-            water_flow: None,
-            blocks_traversal: None,
-            connector: None,
-        });
-        let mut changed = false;
-        ui.label("Traversal override:");
+    if state.collision_world_pixel_edit && !state.editor_layout.collision_overlay {
+        state.editor_layout.collision_overlay = true;
+        save_editor_layout(state);
+    }
+    if state.editor_layout.structural_compact {
+        let explicit = state.layered_scene.collision_mask(index).cloned();
+        ui.small(format!(
+            "{} · {} blocked pixels",
+            if explicit.is_some() {
+                "Authored 32×32 mask"
+            } else {
+                "Automatic/coarse collision"
+            },
+            explicit
+                .as_ref()
+                .map(|mask| mask.blocked_count())
+                .unwrap_or(if automatic_cell_blocked(state, index) {
+                    1024
+                } else {
+                    0
+                })
+        ));
         ui.horizontal_wrapped(|ui| {
-            for (label, value) in [
-                ("Unknown", None),
-                ("Walkable", Some(false)),
-                ("Blocked", Some(true)),
-            ] {
-                if ui.selectable_label(cell.blocks_traversal == value, label).clicked() {
-                    cell.blocks_traversal = value;
-                    changed = true;
-                }
+            if ui.button("Full blocked").clicked() {
+                set_collision_mask(state, index, Some(CollisionMask32::full()));
+            }
+            if ui.button("Full clear").clicked() {
+                set_collision_mask(state, index, Some(CollisionMask32::empty()));
+            }
+            if ui
+                .add_enabled(explicit.is_some(), egui::Button::new("Automatic"))
+                .clicked()
+            {
+                set_collision_mask(state, index, None);
             }
         });
-        ui.label("Elevation: sea = 0, land = 1..30");
-        if let Some(mut height) = cell.elevation {
-            ui.horizontal(|ui| {
-                if ui
-                    .add(egui::DragValue::new(&mut height).range(0..=30).prefix("H "))
-                    .changed()
-                {
-                    cell.elevation = Some(height);
-                    changed = true;
-                }
-                if ui.small_button("Clear").clicked() {
-                    cell.elevation = None;
-                    changed = true;
-                }
-            });
-        } else if ui.button("Set explicit H0").clicked() {
-            cell.elevation = Some(0);
-            changed = true;
-        }
-
-        if !state.editor_layout.structural_compact {
-            ui.separator();
-            ui.label("Semantic terrain hint:");
-            let mut terrain = cell.terrain_kind.clone().unwrap_or_default();
-            egui::ComboBox::from_id_salt("havenwild.structural.terrain.kind")
-                .selected_text(if terrain.is_empty() {
-                    "Unspecified".to_owned()
-                } else {
-                    terrain.clone()
-                })
-                .show_ui(ui, |ui| {
-                    for label in ["", "grass", "dirt", "sand", "water", "cliff", "road", "rock"] {
-                        ui.selectable_value(
-                            &mut terrain,
-                            label.to_string(),
-                            if label.is_empty() { "Unspecified" } else { label },
-                        );
-                    }
-                });
-            if cell.terrain_kind.as_deref().unwrap_or("") != terrain {
-                cell.terrain_kind = if terrain.is_empty() { None } else { Some(terrain) };
+    } else {
+        draw_collision_mask_editor(ui, state, index);
+    }
+    ui.separator();
+    ui.strong("Cell / elevation metadata");
+    let previous = state
+        .layered_scene
+        .structural_cells
+        .iter()
+        .find(|v| v.index == index)
+        .cloned();
+    let mut cell = previous.clone().unwrap_or(StructuralCell {
+        index,
+        elevation: None,
+        terrain_kind: None,
+        water_flow: None,
+        blocks_traversal: None,
+        connector: None,
+    });
+    let mut changed = false;
+    ui.label("Traversal override:");
+    ui.horizontal_wrapped(|ui| {
+        for (label, value) in [
+            ("Unknown", None),
+            ("Walkable", Some(false)),
+            ("Blocked", Some(true)),
+        ] {
+            if ui
+                .selectable_label(cell.blocks_traversal == value, label)
+                .clicked()
+            {
+                cell.blocks_traversal = value;
                 changed = true;
-            }
-            ui.label("Authored connector (preview metadata):");
-            let mut connector = cell.connector.clone().unwrap_or_default();
-            egui::ComboBox::from_id_salt("havenwild.structural.connector")
-                .selected_text(if connector.is_empty() {
-                    "None".to_owned()
-                } else {
-                    connector.clone()
-                })
-                .show_ui(ui, |ui| {
-                    for label in ["", "ramp", "stairs", "ladder", "cliff_vines"] {
-                        ui.selectable_value(
-                            &mut connector,
-                            label.to_string(),
-                            if label.is_empty() { "None" } else { label },
-                        );
-                    }
-                });
-            if cell.connector.as_deref().unwrap_or("") != connector {
-                cell.connector = if connector.is_empty() { None } else { Some(connector) };
-                changed = true;
-            }
-            ui.separator();
-            ui.small("PIE honors explicitly authored traversal overrides over provisional River/Grass hints. Cliff connector travel, footprints and hydrology remain separate certification work.");
-        }
-
-        if ui.button("Clear this cell's structural overrides").clicked() {
-            cell.elevation = None;
-            cell.terrain_kind = None;
-            cell.water_flow = None;
-            cell.blocks_traversal = None;
-            cell.connector = None;
-            changed = true;
-        }
-        if changed {
-            let empty = cell.elevation.is_none()
-                && cell.terrain_kind.is_none()
-                && cell.water_flow.is_none()
-                && cell.blocks_traversal.is_none()
-                && cell.connector.is_none();
-            let update = SceneCommand::SetStructuralCell {
-                index,
-                after: if empty { None } else { Some(cell) },
-            };
-            match state.layered_history.execute(&mut state.layered_scene, update) {
-                Ok(()) => {
-                    state.message = format!(
-                        "Updated explicit collision/elevation for cell {},{}; save scene to persist.",
-                        pos[0], pos[1]
-                    )
-                }
-                Err(error) => state.message = format!("Structural edit not applied: {error}"),
             }
         }
     });
-    state.structural_rect = response
-        .as_ref()
-        .map(|response| response.response.rect)
-        .unwrap_or(egui::Rect::NOTHING);
-    if !open {
-        state.editor_layout.structural_open = false;
-        save_editor_layout(state);
+    ui.label("Elevation: sea = 0, land = 1..30");
+    if let Some(mut height) = cell.elevation {
+        ui.horizontal(|ui| {
+            if ui
+                .add(egui::DragValue::new(&mut height).range(0..=30).prefix("H "))
+                .changed()
+            {
+                cell.elevation = Some(height);
+                changed = true;
+            }
+            if ui.small_button("Clear").clicked() {
+                cell.elevation = None;
+                changed = true;
+            }
+        });
+    } else if ui.button("Set explicit H0").clicked() {
+        cell.elevation = Some(0);
+        changed = true;
+    }
+
+    if !state.editor_layout.structural_compact {
+        ui.separator();
+        ui.label("Semantic terrain hint:");
+        let mut terrain = cell.terrain_kind.clone().unwrap_or_default();
+        egui::ComboBox::from_id_salt("havenwild.structural.terrain.kind")
+            .selected_text(if terrain.is_empty() {
+                "Unspecified".to_owned()
+            } else {
+                terrain.clone()
+            })
+            .show_ui(ui, |ui| {
+                for label in [
+                    "", "grass", "dirt", "sand", "water", "cliff", "road", "rock",
+                ] {
+                    ui.selectable_value(
+                        &mut terrain,
+                        label.to_string(),
+                        if label.is_empty() {
+                            "Unspecified"
+                        } else {
+                            label
+                        },
+                    );
+                }
+            });
+        if cell.terrain_kind.as_deref().unwrap_or("") != terrain {
+            cell.terrain_kind = if terrain.is_empty() {
+                None
+            } else {
+                Some(terrain)
+            };
+            changed = true;
+        }
+        ui.label("Authored connector (preview metadata):");
+        let mut connector = cell.connector.clone().unwrap_or_default();
+        egui::ComboBox::from_id_salt("havenwild.structural.connector")
+            .selected_text(if connector.is_empty() {
+                "None".to_owned()
+            } else {
+                connector.clone()
+            })
+            .show_ui(ui, |ui| {
+                for label in ["", "ramp", "stairs", "ladder", "cliff_vines"] {
+                    ui.selectable_value(
+                        &mut connector,
+                        label.to_string(),
+                        if label.is_empty() { "None" } else { label },
+                    );
+                }
+            });
+        if cell.connector.as_deref().unwrap_or("") != connector {
+            cell.connector = if connector.is_empty() {
+                None
+            } else {
+                Some(connector)
+            };
+            changed = true;
+        }
+        ui.separator();
+        ui.small("PIE honors explicitly authored traversal overrides over provisional River/Grass hints. Cliff connector travel, footprints and hydrology remain separate certification work.");
+    }
+
+    if ui
+        .button("Clear this cell's structural overrides")
+        .clicked()
+    {
+        cell.elevation = None;
+        cell.terrain_kind = None;
+        cell.water_flow = None;
+        cell.blocks_traversal = None;
+        cell.connector = None;
+        changed = true;
+    }
+    if changed {
+        let empty = cell.elevation.is_none()
+            && cell.terrain_kind.is_none()
+            && cell.water_flow.is_none()
+            && cell.blocks_traversal.is_none()
+            && cell.connector.is_none();
+        let update = SceneCommand::SetStructuralCell {
+            index,
+            after: if empty { None } else { Some(cell) },
+        };
+        match state
+            .layered_history
+            .execute(&mut state.layered_scene, update)
+        {
+            Ok(()) => {
+                state.message = format!(
+                    "Updated explicit collision/elevation for cell {},{}; save scene to persist.",
+                    pos[0], pos[1]
+                )
+            }
+            Err(error) => state.message = format!("Structural edit not applied: {error}"),
+        }
     }
 }
 
@@ -7272,87 +7294,121 @@ fn choose_brush(state: &mut Studio, mode: BrushMode) {
     };
 }
 
-fn draw_tool_rail(viewport_ui: &mut egui::Ui, state: &mut Studio) {
-    // Compact action rail and adjacent recovered authoring workspace share the
-    // same surface. No second Layers sidebar; Library is below the canvas.
-    const RAIL_WIDTH: f32 = 62.0;
-    egui::Panel::left("havenwild.tool.rail")
-        .resizable(false)
-        .default_size(RAIL_WIDTH)
-        .frame(egui::Frame::NONE.fill(egui::Color32::from_rgb(27, 34, 39)))
-        .show(viewport_ui, |ui| {
-            ui.set_min_width(RAIL_WIDTH);
-            ui.set_max_width(RAIL_WIDTH);
-            ui.add_space(7.0);
-            ui.small("EDIT");
-            if rail_icon_button(ui, RailIcon::Select, state.tool == CanvasTool::Select && !state.world_bridge_tool,
-                &command_tooltip(StudioCommand::Select), [43.0, 33.0]).clicked() {
-                state.tool = CanvasTool::Select;
-                state.world_bridge_tool = false;
-                state.world_bridge_drag = None;
-                // Selection stays canvas-first. Do not leave an empty options slab open.
-                state.editor_layout.tool_context_open = false;
-                save_editor_layout(state);
-            }
-            for (mode, icon) in [
-                (BrushMode::Pixel, RailIcon::Pixel),
-                (BrushMode::Tile, RailIcon::Tile),
-                (BrushMode::Terrain, RailIcon::Terrain),
-            ] {
-                let hover = format!("{} · {}", mode.label(), match mode {
+/// One set of authoring tools inside the single 15% left dock. No extra
+/// fixed-width rail competes with the three contextual tool sections.
+fn draw_tool_rail(ui: &mut egui::Ui, state: &mut Studio) {
+    ui.horizontal_wrapped(|ui| {
+        ui.add_space(7.0);
+        ui.small("EDIT");
+        if rail_icon_button(
+            ui,
+            RailIcon::Select,
+            state.tool == CanvasTool::Select && !state.world_bridge_tool,
+            &command_tooltip(StudioCommand::Select),
+            [43.0, 33.0],
+        )
+        .clicked()
+        {
+            state.tool = CanvasTool::Select;
+            state.world_bridge_tool = false;
+            state.world_bridge_drag = None;
+            // Keep the unified authoring workspace available; Select has
+            // its own context controls and Library, not a blank slab.
+        }
+        for (mode, icon) in [
+            (BrushMode::Pixel, RailIcon::Pixel),
+            (BrushMode::Tile, RailIcon::Tile),
+            (BrushMode::Terrain, RailIcon::Terrain),
+        ] {
+            let hover = format!(
+                "{} · {}",
+                mode.label(),
+                match mode {
                     BrushMode::Pixel => "Derived artwork (editing backend pending)",
                     BrushMode::Tile => "Place an exact source tile",
                     BrushMode::Terrain => "Paint semantic terrain",
-                });
-                if rail_icon_button(ui, icon,
-                    state.tool == CanvasTool::Paint && state.brush_mode == mode,
-                    &hover, [43.0, 33.0]).clicked() { choose_brush(state, mode); }
-            }
-            ui.add_space(4.0);
-            ui.separator();
-            for (tool, icon) in [(CanvasTool::Erase, RailIcon::Erase), (CanvasTool::Sample, RailIcon::Sample)] {
-                if rail_icon_button(ui, icon, state.tool == tool,
-                    &command_tooltip(tool_command(tool)), [43.0, 33.0]).clicked() {
-                    state.tool = tool;
-                    state.world_bridge_tool = false;
-                    state.editor_layout.tool_context_open = true;
-                    save_editor_layout(state);
                 }
+            );
+            if rail_icon_button(
+                ui,
+                icon,
+                state.tool == CanvasTool::Paint && state.brush_mode == mode,
+                &hover,
+                [43.0, 33.0],
+            )
+            .clicked()
+            {
+                choose_brush(state, mode);
             }
-            if rail_icon_button(ui, RailIcon::Bridge, state.world_bridge_tool,
-                "Bridge Span: drag between two land banks; source-verified horizontal orientation only",
-                [43.0, 33.0]).clicked() && state.world_mode {
-                state.world_bridge_tool = !state.world_bridge_tool;
-                state.tool = CanvasTool::Select;
-                state.active_layer = LayerId::Structures;
-                state.editor_layout.tool_context_open = state.world_bridge_tool;
+        }
+        ui.add_space(4.0);
+        ui.separator();
+        for (tool, icon) in [
+            (CanvasTool::Erase, RailIcon::Erase),
+            (CanvasTool::Sample, RailIcon::Sample),
+        ] {
+            if rail_icon_button(
+                ui,
+                icon,
+                state.tool == tool,
+                &command_tooltip(tool_command(tool)),
+                [43.0, 33.0],
+            )
+            .clicked()
+            {
+                state.tool = tool;
+                state.world_bridge_tool = false;
+                state.editor_layout.tool_context_open = true;
                 save_editor_layout(state);
             }
-            ui.add_space(4.0);
-            ui.separator();
-            if rail_icon_button(ui, RailIcon::Panel, state.editor_layout.tool_context_open,
-                "Collapse/expand integrated Tooling and Tool Context", [43.0, 33.0]).clicked() {
-                state.editor_layout.tool_context_open = !state.editor_layout.tool_context_open;
-                save_editor_layout(state);
+        }
+        if rail_icon_button(
+            ui,
+            RailIcon::Bridge,
+            state.world_bridge_tool,
+            "Bridge Span: drag between two land banks; source-verified horizontal orientation only",
+            [43.0, 33.0],
+        )
+        .clicked()
+            && state.world_mode
+        {
+            state.world_bridge_tool = !state.world_bridge_tool;
+            state.tool = CanvasTool::Select;
+            state.active_layer = LayerId::Structures;
+            state.editor_layout.tool_context_open = state.world_bridge_tool;
+            save_editor_layout(state);
+        }
+        ui.add_space(4.0);
+        ui.separator();
+        if rail_icon_button(
+            ui,
+            RailIcon::Panel,
+            state.editor_layout.tool_context_open,
+            "Collapse/expand integrated Tooling and Tool Context",
+            [43.0, 33.0],
+        )
+        .clicked()
+        {
+            state.editor_layout.tool_context_open = !state.editor_layout.tool_context_open;
+            save_editor_layout(state);
+        }
+        if rail_icon_button(
+            ui,
+            RailIcon::Library,
+            state.editor_layout.library_open,
+            "Show/hide the shared Asset Browser",
+            [43.0, 33.0],
+        )
+        .clicked()
+        {
+            state.editor_layout.library_open = !state.editor_layout.library_open;
+            if state.editor_layout.library_open && state.editor_layout.library_in_left_workspace {
+                state.editor_layout.tool_context_open = true;
             }
-            if rail_icon_button(ui, RailIcon::Layers, state.editor_layout.layers_dock_open,
-                "Expand/collapse canvas Layers controls", [43.0, 33.0]).clicked() {
-                state.editor_layout.layers_dock_open = !state.editor_layout.layers_dock_open;
-                save_editor_layout(state);
-            }
-            if rail_icon_button(ui, RailIcon::Library, state.editor_layout.library_open,
-                "Show/hide bottom Asset Library", [43.0, 33.0]).clicked() {
-                state.editor_layout.library_open = !state.editor_layout.library_open;
-                save_editor_layout(state);
-            }
-            ui.with_layout(egui::Layout::bottom_up(egui::Align::Center), |ui| {
-                if rail_icon_button(ui, RailIcon::Apps, state.launcher_open,
-                    &command_tooltip(StudioCommand::ToggleLauncher), [43.0, 35.0]).clicked() {
-                    state.launcher_open = !state.launcher_open;
-                }
-                ui.small("APPS");
-            });
-        });
+            save_editor_layout(state);
+        }
+        // M2D131: Apps is only in Tools / Ctrl+Space; never duplicate its launcher on the rail.
+    });
 }
 
 /// Persistent, non-destructive atlas selection. Every complete 32x32 source cell
@@ -7709,105 +7765,33 @@ fn draw_authoring_atlas(ui: &mut egui::Ui, state: &mut Studio) {
 /// M2D126: Recovered M2D112 authoring workspace. The active tool, family, and
 /// brush properties share one column next to the vector icon rail. Do not
 /// substitute a text-only help panel for this real workflow.
+/// Context details only; tool selection is authoritative in the Mode & Tools
+/// icon strip directly above. No second Select/Paint/Erase/Bridge command set.
 fn draw_authoring_tooling(ui: &mut egui::Ui, state: &mut Studio) {
     ui.horizontal(|ui| {
-        ui.strong("TOOLING");
-        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-            if ui
-                .small_button("‹")
-                .on_hover_text("Collapse authoring workspace to icon rail")
-                .clicked()
-            {
-                state.editor_layout.tool_context_open = false;
-                save_editor_layout(state);
-            }
-        });
-    });
-    ui.horizontal_wrapped(|ui| {
+        ui.strong("ACTIVE TOOL");
         if ui
-            .selectable_label(
-                state.tool == CanvasTool::Select
-                    && !state.world_bridge_tool
-                    && state.world_template_placement.is_none(),
-                "Select",
-            )
-            .clicked()
-        {
-            state.tool = CanvasTool::Select;
-            state.world_bridge_tool = false;
-            state.world_bridge_drag = None;
-            state.world_template_placement = None;
-        }
-        for (mode, label) in [
-            (BrushMode::Pixel, "Pixel"),
-            (BrushMode::Tile, "Tile"),
-            (BrushMode::Terrain, "Terrain"),
-        ] {
-            if ui
-                .selectable_label(
-                    state.tool == CanvasTool::Paint && state.brush_mode == mode,
-                    label,
-                )
-                .clicked()
-            {
-                choose_brush(state, mode);
-            }
-        }
-        if ui
-            .selectable_label(state.world_template_placement.is_some(), "Objects")
+            .button("Browse Objects")
+            .on_hover_text("Find reviewed objects in the shared right Asset Browser")
             .clicked()
         {
             state.world_bridge_tool = false;
             state.tool = CanvasTool::Select;
             state.editor_layout.library_open = true;
             state.editor_layout.library_floating = false;
+            state.editor_layout.library_in_inspector = true;
+            state.editor_layout.library_in_left_workspace = false;
             state.editor_layout.authoring_library_tab = "Assets".into();
             save_editor_layout(state);
         }
     });
     ui.separator();
-    ui.horizontal_wrapped(|ui| {
-        if ui
-            .selectable_label(state.tool == CanvasTool::Erase, "Erase")
-            .clicked()
-        {
-            state.tool = CanvasTool::Erase;
-            state.world_bridge_tool = false;
-        }
-        if ui
-            .selectable_label(state.tool == CanvasTool::Sample, "Sample")
-            .clicked()
-        {
-            state.tool = CanvasTool::Sample;
-            state.world_bridge_tool = false;
-        }
-        if state.world_mode
-            && ui
-                .selectable_label(state.world_bridge_tool, "Bridge")
-                .clicked()
-        {
-            state.world_bridge_tool = !state.world_bridge_tool;
-            state.tool = CanvasTool::Select;
-            state.active_layer = LayerId::Structures;
-        }
-    });
-    ui.separator();
     ui.label(format!("Active: {}", active_tool_label(state)));
     if state.tool == CanvasTool::Paint && state.brush_mode == BrushMode::Pixel {
-        ui.small("Derived image color · immutable original PNGs");
-        let rgba = state.editor_layout.pixel_palette_color;
-        let mut color = egui::Color32::from_rgba_unmultiplied(rgba[0], rgba[1], rgba[2], rgba[3]);
-        ui.horizontal(|ui| {
-            ui.label("Color");
-            if ui.color_edit_button_srgba(&mut color).changed() {
-                state.editor_layout.pixel_palette_color = color.to_array();
-                save_editor_layout(state);
-            }
-        });
-        ui.small("Pixel editing backend unavailable · color picker only.");
+        ui.small("Color wheel and palette are in Pixel Studio below. Derived-image painting remains disabled until a project-owned pixel layer exists.");
     } else if state.tool == CanvasTool::Paint && state.brush_mode == BrushMode::Terrain {
         ui.small(format!(
-            "Material: {} · choose in bottom Library",
+            "Material: {} · choose in Asset Browser",
             state.world_terrain_brush.label()
         ));
         if ui.small_button("Open terrain palette").clicked() {
@@ -7839,19 +7823,8 @@ fn draw_authoring_brush_settings(ui: &mut egui::Ui, state: &mut Studio) {
     } else if state.tool == CanvasTool::Paint {
         match state.brush_mode {
             BrushMode::Pixel => {
-                ui.label("Pencil size (derived image)");
-                if ui
-                    .add(egui::Slider::new(
-                        &mut state.editor_layout.pixel_brush_size_px,
-                        1..=32,
-                    ))
-                    .changed()
-                {
-                    save_editor_layout(state);
-                }
-                ui.small(
-                    "Image-pixel strokes are disabled until a derived-image document is connected.",
-                );
+                ui.small("Pixel brush size and source color are controlled by Pixel Studio below.");
+                ui.small("Image-pixel strokes require a derived-image document before enabling world painting.");
             }
             BrushMode::Tile => {
                 ui.label("Exact source stamp");
@@ -7940,15 +7913,35 @@ fn draw_authoring_library(ui: &mut egui::Ui, state: &mut Studio) {
             }
         }
         ui.separator();
-        if ui
-            .small_button(if state.editor_layout.library_floating {
-                "Dock bottom"
-            } else {
-                "Undock"
-            })
-            .clicked()
+        let is_left = state.editor_layout.library_in_left_workspace
+            && !state.editor_layout.library_floating
+            && !state.editor_layout.library_in_inspector;
+        let is_bottom = !state.editor_layout.library_in_left_workspace
+            && !state.editor_layout.library_floating
+            && !state.editor_layout.library_in_inspector;
+        if !is_left && ui.small_button("Dock left").clicked() {
+            state.editor_layout.library_in_left_workspace = true;
+            state.editor_layout.library_in_inspector = false;
+            state.editor_layout.library_floating = false;
+            state.editor_layout.tool_context_open = true;
+            save_editor_layout(state);
+        }
+        if !is_bottom && ui.small_button("Dock bottom").clicked() {
+            state.editor_layout.library_in_left_workspace = false;
+            state.editor_layout.library_in_inspector = false;
+            state.editor_layout.library_floating = false;
+            save_editor_layout(state);
+        }
+        if !state.editor_layout.library_in_inspector && ui.small_button("Dock Inspector").clicked()
         {
-            state.editor_layout.library_floating = !state.editor_layout.library_floating;
+            state.editor_layout.library_in_inspector = true;
+            state.editor_layout.library_in_left_workspace = false;
+            state.editor_layout.library_floating = false;
+            state.editor_layout.library_open = true;
+            save_editor_layout(state);
+        }
+        if !state.editor_layout.library_floating && ui.small_button("Undock").clicked() {
+            state.editor_layout.library_floating = true;
             save_editor_layout(state);
         }
         if ui.small_button("Collapse").clicked() {
@@ -8001,7 +7994,10 @@ fn draw_authoring_library(ui: &mut egui::Ui, state: &mut Studio) {
 /// Panel::bottom's implicit resize affordance was effectively invisible, so
 /// resize is explicit and persisted when released rather than each frame.
 fn draw_library_dock(viewport_ui: &mut egui::Ui, state: &mut Studio) {
-    if state.editor_layout.library_floating {
+    if state.editor_layout.library_floating
+        || state.editor_layout.library_in_inspector
+        || (state.editor_layout.library_in_left_workspace && state.editor_layout.tool_context_open)
+    {
         return;
     }
     let available = viewport_ui.available_height();
@@ -8014,7 +8010,7 @@ fn draw_library_dock(viewport_ui: &mut egui::Ui, state: &mut Studio) {
     egui::Panel::bottom("havenwild.library.bottom")
         .resizable(false)
         .exact_size(preferred)
-        .frame(egui::Frame::NONE.fill(egui::Color32::from_rgb(27, 34, 39)))
+        .frame(egui::Frame::NONE.fill(canvas_chrome::panel_fill(&state.editor_layout.editor_theme)))
         .show(viewport_ui, |ui| {
             ui.horizontal(|ui| {
                 let width = (ui.available_width() - 200.0).max(65.0);
@@ -8057,6 +8053,20 @@ fn draw_library_dock(viewport_ui: &mut egui::Ui, state: &mut Studio) {
                     state.editor_layout.library_open = !state.editor_layout.library_open;
                     save_editor_layout(state);
                 }
+                if ui.small_button("Dock left").clicked() {
+                    state.editor_layout.library_in_left_workspace = true;
+                    state.editor_layout.library_in_inspector = false;
+                    state.editor_layout.tool_context_open = true;
+                    state.editor_layout.library_open = true;
+                    save_editor_layout(state);
+                }
+                if ui.small_button("Dock Inspector").clicked() {
+                    state.editor_layout.library_in_inspector = true;
+                    state.editor_layout.library_in_left_workspace = false;
+                    state.editor_layout.library_floating = false;
+                    state.editor_layout.library_open = true;
+                    save_editor_layout(state);
+                }
                 if ui.small_button("Undock").clicked() {
                     state.editor_layout.library_floating = true;
                     state.editor_layout.library_open = true;
@@ -8074,13 +8084,62 @@ fn draw_floating_library(ctx: &egui::Context, state: &mut Studio) {
         return;
     }
     let mut open = true;
+    // egui's native window edge hit zone was unreliable with the scroll-heavy
+    // atlas. Use one visible, input-owned lower-right drag handle instead.
+    // The size persists across restarts and cannot be lost behind the canvas.
+    let size = state.editor_layout.library_floating_size;
     egui::Window::new("Havenwild Asset Library")
         .id(egui::Id::new("havenwild.library.floating"))
         .open(&mut open)
-        .resizable(true)
-        .default_size(egui::vec2(710.0, 325.0))
-        .min_size(egui::vec2(360.0, 160.0))
-        .show(ctx, |ui| draw_authoring_library(ui, state));
+        .resizable(false)
+        .fixed_size(egui::vec2(size[0], size[1]))
+        .show(ctx, |ui| {
+            let inner_height = (ui.available_height() - 26.0).max(120.0);
+            ui.allocate_ui(egui::vec2(ui.available_width(), inner_height), |ui| {
+                draw_authoring_library(ui, state);
+            });
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                let (rect, response) =
+                    ui.allocate_exact_size(egui::vec2(30.0, 20.0), egui::Sense::drag());
+                let color = if response.hovered() || response.dragged() {
+                    egui::Color32::from_rgb(110, 191, 190)
+                } else {
+                    egui::Color32::from_gray(146)
+                };
+                for step in 0..3 {
+                    let d = step as f32 * 5.0;
+                    ui.painter().line_segment(
+                        [
+                            egui::pos2(rect.right() - 4.0 - d, rect.bottom() - 3.0),
+                            egui::pos2(rect.right() - 4.0, rect.bottom() - 3.0 - d),
+                        ],
+                        egui::Stroke::new(1.5, color),
+                    );
+                }
+                let response = response
+                    .on_hover_cursor(egui::CursorIcon::ResizeNwSe)
+                    .on_hover_text(
+                        "Drag the corner to resize the floating Library (width and height)",
+                    );
+                if response.dragged() {
+                    let delta = response.drag_delta();
+                    state.editor_layout.library_floating_size[0] =
+                        (state.editor_layout.library_floating_size[0] + delta.x)
+                            .clamp(420.0, 1600.0);
+                    state.editor_layout.library_floating_size[1] =
+                        (state.editor_layout.library_floating_size[1] + delta.y)
+                            .clamp(260.0, 1080.0);
+                    ui.ctx().request_repaint();
+                }
+                if response.drag_stopped() {
+                    save_editor_layout(state);
+                }
+                ui.small(format!(
+                    "Floating Library · {:.0} × {:.0} · drag corner to resize",
+                    size[0], size[1]
+                ));
+            });
+        });
     if !open {
         state.editor_layout.library_open = false;
         save_editor_layout(state);
@@ -8114,43 +8173,691 @@ fn authoring_splitter(ui: &mut egui::Ui, position: &mut f32, minimum: f32, maxim
 /// The M2D112 tooling + context panes are one coherent authoring workspace.
 /// Their dividing grip is draggable, sizes persist, and the workspace can be
 /// collapsed to the 62px tool rail without hiding the canvas or the Library.
+fn pixel_hsv_to_rgb(h: f32, saturation: f32, value: f32) -> [u8; 3] {
+    let h = h.rem_euclid(1.0) * 6.0;
+    let c = value * saturation;
+    let x = c * (1.0 - ((h % 2.0) - 1.0).abs());
+    let (r, g, b) = if h < 1.0 {
+        (c, x, 0.0)
+    } else if h < 2.0 {
+        (x, c, 0.0)
+    } else if h < 3.0 {
+        (0.0, c, x)
+    } else if h < 4.0 {
+        (0.0, x, c)
+    } else if h < 5.0 {
+        (x, 0.0, c)
+    } else {
+        (c, 0.0, x)
+    };
+    let m = value - c;
+    [r, g, b].map(|channel| ((channel + m).clamp(0.0, 1.0) * 255.0).round() as u8)
+}
+
+fn pixel_rgb_to_hsv(rgb: [u8; 3]) -> (f32, f32, f32) {
+    let [r, g, b] = rgb.map(|channel| f32::from(channel) / 255.0);
+    let max = r.max(g).max(b);
+    let min = r.min(g).min(b);
+    let delta = max - min;
+    if delta <= 0.0001 {
+        return (0.0, 0.0, max);
+    }
+    let hue = if max == r {
+        ((g - b) / delta).rem_euclid(6.0)
+    } else if max == g {
+        (b - r) / delta + 2.0
+    } else {
+        (r - g) / delta + 4.0
+    };
+    (hue / 6.0, delta / max, max)
+}
+
+/// Canvas-owned color wheel with an HSV saturation/value square; this changes
+/// only the editor's selected pixel color, never the original source PNG.
+fn draw_pixel_color_wheel(ui: &mut egui::Ui, state: &mut Studio) {
+    use std::f32::consts::TAU;
+    let (rect, response) =
+        ui.allocate_exact_size(egui::vec2(126.0, 126.0), egui::Sense::click_and_drag());
+    let center = rect.center();
+    let rgba = state.editor_layout.pixel_palette_color;
+    let (mut hue, mut saturation, mut value) = pixel_rgb_to_hsv([rgba[0], rgba[1], rgba[2]]);
+    for i in 0..72 {
+        let start = i as f32 / 72.0;
+        let end = (i + 1) as f32 / 72.0;
+        let angles = [start * TAU, end * TAU];
+        let points = [
+            egui::pos2(
+                center.x + 57.0 * angles[0].cos(),
+                center.y + 57.0 * angles[0].sin(),
+            ),
+            egui::pos2(
+                center.x + 57.0 * angles[1].cos(),
+                center.y + 57.0 * angles[1].sin(),
+            ),
+            egui::pos2(
+                center.x + 43.0 * angles[1].cos(),
+                center.y + 43.0 * angles[1].sin(),
+            ),
+            egui::pos2(
+                center.x + 43.0 * angles[0].cos(),
+                center.y + 43.0 * angles[0].sin(),
+            ),
+        ];
+        let rgb = pixel_hsv_to_rgb(start, 1.0, 1.0);
+        ui.painter().add(egui::Shape::convex_polygon(
+            points.to_vec(),
+            egui::Color32::from_rgb(rgb[0], rgb[1], rgb[2]),
+            egui::Stroke::NONE,
+        ));
+    }
+    // The inner square supplies saturation (X) and brightness (Y).
+    let square = egui::Rect::from_center_size(center, egui::vec2(57.0, 57.0));
+    for y in 0..12 {
+        for x in 0..12 {
+            let sw = square.width() / 12.0;
+            let sh = square.height() / 12.0;
+            let rgb = pixel_hsv_to_rgb(hue, x as f32 / 11.0, 1.0 - y as f32 / 11.0);
+            let cell = egui::Rect::from_min_size(
+                square.min + egui::vec2(x as f32 * sw, y as f32 * sh),
+                egui::vec2(sw + 0.5, sh + 0.5),
+            );
+            ui.painter()
+                .rect_filled(cell, 0.0, egui::Color32::from_rgb(rgb[0], rgb[1], rgb[2]));
+        }
+    }
+    let marker = egui::pos2(
+        square.left() + saturation * square.width(),
+        square.bottom() - value * square.height(),
+    );
+    ui.painter()
+        .circle_stroke(marker, 3.0, egui::Stroke::new(1.3, egui::Color32::BLACK));
+    let angle = hue * TAU;
+    ui.painter().circle_stroke(
+        egui::pos2(center.x + angle.cos() * 50.0, center.y + angle.sin() * 50.0),
+        4.0,
+        egui::Stroke::new(1.5, egui::Color32::WHITE),
+    );
+    // Rust 2021 does not permit `&& let` chains. Keep the same drag/click
+    // behavior and preserve original source-pixel immutability.
+    if response.dragged() || response.clicked() {
+        if let Some(pointer) = response.interact_pointer_pos() {
+            let offset = pointer - center;
+            let distance = offset.length();
+            if (41.0..=62.0).contains(&distance) {
+                hue = offset.y.atan2(offset.x).rem_euclid(TAU) / TAU;
+            } else if square.contains(pointer) {
+                saturation = ((pointer.x - square.left()) / square.width()).clamp(0.0, 1.0);
+                value = ((square.bottom() - pointer.y) / square.height()).clamp(0.0, 1.0);
+            }
+            let rgb = pixel_hsv_to_rgb(hue, saturation, value);
+            state.editor_layout.pixel_palette_color = [rgb[0], rgb[1], rgb[2], rgba[3]];
+            if response.clicked() {
+                save_editor_layout(state);
+            }
+        }
+    }
+    if response.drag_stopped() {
+        save_editor_layout(state);
+    }
+}
+
+/// A real editor color picker and project-local palette state. Editing source pixels
+/// requires the future derived-image backend; these controls never mutate ElizaWy PNGs.
+fn draw_pixel_studio(ui: &mut egui::Ui, state: &mut Studio) {
+    ui.horizontal(|ui| {
+        ui.strong("PIXEL STUDIO");
+        if ui.small_button("Pixel mode").clicked() {
+            choose_brush(state, BrushMode::Pixel);
+        }
+    });
+    let rgba = state.editor_layout.pixel_palette_color;
+    let mut color = egui::Color32::from_rgba_unmultiplied(rgba[0], rgba[1], rgba[2], rgba[3]);
+    ui.horizontal(|ui| {
+        draw_pixel_color_wheel(ui, state);
+        ui.vertical(|ui| {
+            ui.label("Color");
+            if ui.color_edit_button_srgba(&mut color).changed() {
+                state.editor_layout.pixel_palette_color = color.to_array();
+                save_editor_layout(state);
+            }
+            ui.colored_label(color, "■■");
+            ui.small(format!("R {} G {} B {}", color.r(), color.g(), color.b()));
+        });
+    });
+    ui.horizontal_wrapped(|ui| {
+        for (name, rgb) in [
+            ("Ink", [32, 48, 62]),
+            ("Ocean", [27, 105, 143]),
+            ("Water", [65, 172, 190]),
+            ("Grass", [91, 145, 87]),
+            ("Leaf", [151, 187, 109]),
+            ("Sand", [225, 196, 135]),
+            ("Earth", [146, 99, 72]),
+            ("Stone", [121, 119, 135]),
+            ("Snow", [218, 239, 240]),
+            ("White", [255, 255, 255]),
+        ] {
+            let chip = egui::Color32::from_rgb(rgb[0], rgb[1], rgb[2]);
+            if ui
+                .add(egui::Button::new("   ").fill(chip))
+                .on_hover_text(name)
+                .clicked()
+            {
+                state.editor_layout.pixel_palette_color = [rgb[0], rgb[1], rgb[2], 255];
+                save_editor_layout(state);
+            }
+        }
+    });
+    if ui
+        .add(
+            egui::Slider::new(&mut state.editor_layout.pixel_brush_size_px, 1..=32)
+                .text("Brush px"),
+        )
+        .changed()
+    {
+        save_editor_layout(state);
+    }
+    ui.small("Source pixels stay immutable. Direct pixel strokes require a derived-asset layer (not yet connected).");
+}
+
+/// Scene Navigator is a real selection view over the SAME WorldDocument and
+/// SceneV2 as the canvas and inspector; it does not create shadow scene state.
+fn draw_scene_navigator(ui: &mut egui::Ui, state: &mut Studio) {
+    ui.strong("SCENE NAVIGATOR");
+    if let Some(edit) = state.room_authoring.as_ref() {
+        ui.label(format!(
+            "Room · {}×{}",
+            edit.scene.dimensions()[0],
+            edit.scene.dimensions()[1]
+        ));
+        ui.small("Floor and wall topology · portals");
+        return;
+    }
+    if state.world_mode {
+        ui.small(format!(
+            "World · {} · {} chunks",
+            state.world_doc.season,
+            state.world_doc.chunks.len()
+        ));
+        let chunk_rows: Vec<_> = state
+            .world_doc
+            .chunks
+            .iter()
+            .map(|chunk| (chunk.coord, chunk.generated_objects.len()))
+            .collect();
+        let mut selected_chunk = None;
+        for (coord, count) in chunk_rows {
+            let label = format!("Chunk {},{} · {count} objects", coord[0], coord[1]);
+            if ui.selectable_label(false, label).clicked() {
+                selected_chunk = Some(coord);
+            }
+        }
+        if let Some(coord) = selected_chunk {
+            state.world_selected = [
+                coord[0] * state.world_doc.chunk_side as i64,
+                coord[1] * state.world_doc.chunk_side as i64,
+            ];
+            state.world_selected_object = None;
+            state.message = format!("Navigator selected chunk {},{}", coord[0], coord[1]);
+        }
+        ui.separator();
+        let objects: Vec<_> = state
+            .world_doc
+            .generated_objects()
+            .map(|object| {
+                (
+                    object.id.clone(),
+                    object.label.clone(),
+                    state.world_doc.object_anchor(object),
+                )
+            })
+            .collect();
+        egui::CollapsingHeader::new(format!("Structures / objects ({})", objects.len()))
+            .id_salt("havenwild.navigator.world.objects")
+            .show(ui, |ui| {
+                for (id, label, at) in objects.iter().take(200) {
+                    if ui
+                        .selectable_label(
+                            state.world_selected_object.as_ref() == Some(id),
+                            format!("{label} · {},{}", at[0], at[1]),
+                        )
+                        .clicked()
+                    {
+                        state.world_selected_object = Some(id.clone());
+                        state.world_selected = *at;
+                        state.active_layer = LayerId::Objects;
+                    }
+                }
+                if objects.len() > 200 {
+                    ui.small("Showing first 200; select others on the canvas.");
+                }
+            });
+        ui.separator();
+        let links: Vec<_> = state
+            .world_doc
+            .structure_doors
+            .values()
+            .map(|link| (link.object_id.clone(), link.destination_scene.clone()))
+            .collect();
+        egui::CollapsingHeader::new(format!("Doorway scene links ({})", links.len()))
+            .id_salt("havenwild.navigator.portal.links")
+            .show(ui, |ui| {
+                for (object, destination) in links {
+                    if ui
+                        .selectable_label(false, format!("{object} → {destination}"))
+                        .clicked()
+                    {
+                        state.world_selected_object = Some(object);
+                    }
+                }
+            });
+    } else {
+        ui.small("Authored scene · live visual layers");
+        for id in LayerId::ORDERED {
+            if ui
+                .selectable_label(state.active_layer == id, format!("{:?}", id))
+                .clicked()
+            {
+                state.active_layer = id;
+            }
+        }
+        ui.small(format!(
+            "Selected: {}",
+            state.selected_object_id.as_deref().unwrap_or("None")
+        ));
+    }
+}
+
+/// M2D131: bottom Console owns lightweight editor/runtime diagnostics, not authored files.
+/// PIE keeps this bottom dock accessible after all authoring docks collapse.
+fn draw_console_dock(viewport_ui: &mut egui::Ui, state: &mut Studio) {
+    if state.message != state.console_last_message {
+        state.console_last_message = state.message.clone();
+        if !state.message.is_empty() {
+            state.console_history.push_back(state.message.clone());
+            while state.console_history.len() > 256 {
+                state.console_history.pop_front();
+            }
+        }
+    }
+    let expanded = state.editor_layout.workspace.bottom.open;
+    let height = if expanded {
+        state
+            .editor_layout
+            .workspace
+            .bottom
+            .extent
+            .clamp(90.0, 450.0)
+    } else {
+        27.0
+    };
+    egui::Panel::bottom("havenwild.console.bottom")
+        .resizable(false)
+        .exact_size(height)
+        .frame(egui::Frame::NONE.fill(canvas_chrome::panel_fill(&state.editor_layout.editor_theme)))
+        .show(viewport_ui, |ui| {
+            ui.horizontal(|ui| {
+                if ui.small_button(if expanded { "▾ Console" } else { "▴ Console" }).clicked() {
+                    state.editor_layout.workspace.bottom.open = !expanded;
+                    save_editor_layout(state);
+                }
+                for tab in ["Console", "Problems", "Jobs", "Debug"] {
+                    if ui.selectable_label(state.console_tab == tab, tab).clicked() {
+                        state.console_tab = tab.to_owned();
+                        state.editor_layout.workspace.bottom.open = true;
+                        save_editor_layout(state);
+                    }
+                }
+                if ui.small_button("Clear").on_hover_text("Clear this session's Console history only").clicked() {
+                    state.console_history.clear();
+                    state.console_last_message.clear();
+                }
+            });
+            if !expanded { return; }
+            let available_height = ui.available_height();
+            egui::ScrollArea::vertical()
+                .id_salt("havenwild.console.scroll")
+                .max_height(available_height)
+                .stick_to_bottom(true)
+                .show(ui, |ui| match state.console_tab.as_str() {
+                    "Problems" => {
+                        if state.runtime_asset_sync_failures.is_empty() { ui.small("No runtime asset-sync errors reported this session."); }
+                        for (path, reason) in &state.runtime_asset_sync_failures {
+                            ui.colored_label(egui::Color32::YELLOW, format!("{path}: {reason}"));
+                        }
+                    }
+                    "Jobs" => {
+                        ui.small(format!("Asset load queue: {} pending", state.runtime_asset_sync_queue.len()));
+                        for job in &state.runtime_asset_sync_queue { ui.small(job); }
+                        ui.small("Other PCC/build jobs appear in the external PCC logs until job streaming is connected.");
+                    }
+                    "Debug" => {
+                        ui.small(format!("FPS: {:.0} · zoom: {:.2}x · backend: see PCC launch logs", state.display_fps, state.zoom));
+                        ui.small(format!("World: {} · render sheets: {} · awaiting textures: {}", state.world_mode,
+                            state.sheets.len(), state.sheets.iter().filter(|sheet| sheet.texture.is_none()).count()));
+                    }
+                    _ => {
+                        for line in &state.console_history { ui.label(line); }
+                    }
+                });
+            let grip = ui.allocate_response(egui::vec2(ui.available_width(), 9.0), egui::Sense::drag())
+                .on_hover_cursor(egui::CursorIcon::ResizeVertical)
+                .on_hover_text("Drag to resize the Console");
+            if grip.dragged() {
+                state.editor_layout.workspace.bottom.extent =
+                    (state.editor_layout.workspace.bottom.extent - grip.drag_delta().y).clamp(90.0, 450.0);
+                ui.ctx().request_repaint();
+            }
+            if grip.drag_stopped() { save_editor_layout(state); }
+        });
+}
+
+/// One ownership path for top-center Grid/Chunks and top-right Fit/Zoom.
+/// Drawing occurs inside the central canvas Ui so independent dialogs retain
+/// their z-order. Geometry was reserved before world input processing.
+fn draw_canvas_view_controls(ui: &mut egui::Ui, state: &mut Studio) {
+    let canvas = state.canvas_rect;
+    if canvas.width() < 330.0 || canvas.height() < 150.0 {
+        return;
+    }
+    let ruler = if canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode) {
+        canvas_rulers::TOP
+    } else {
+        0.0
+    };
+    let zones = canvas_chrome::overlay_geometry(canvas, ruler);
+    let theme = state.editor_layout.editor_theme.clone();
+    if zones.grid != egui::Rect::NOTHING {
+        ui.scope_builder(egui::UiBuilder::new().max_rect(zones.grid), |ui| {
+            canvas_chrome::tool_group(ui, &theme, |ui| {
+                ui.horizontal(|ui| {
+                    if canvas_chrome::toggle(
+                        ui,
+                        "Grid",
+                        state.editor_layout.tile_grid_visible,
+                        "Show or hide the authored 32px terrain-cell grid (view only)",
+                        &theme,
+                    ) {
+                        state.editor_layout.tile_grid_visible =
+                            !state.editor_layout.tile_grid_visible;
+                        save_editor_layout(state);
+                    }
+                    if canvas_chrome::toggle(
+                        ui,
+                        "Chunks",
+                        state.editor_layout.chunk_grid_visible,
+                        "Show or hide chunk outlines and coordinates (view only)",
+                        &theme,
+                    ) {
+                        state.editor_layout.chunk_grid_visible =
+                            !state.editor_layout.chunk_grid_visible;
+                        save_editor_layout(state);
+                    }
+                    if canvas_chrome::toggle(
+                        ui,
+                        "Rulers",
+                        state.editor_layout.rulers_visible,
+                        "Show/hide opaque pan/zoom-aware X/Y rulers in the canvas (view only)",
+                        &theme,
+                    ) {
+                        state.editor_layout.rulers_visible = !state.editor_layout.rulers_visible;
+                        save_editor_layout(state);
+                    }
+                });
+            });
+        });
+    }
+    if zones.zoom != egui::Rect::NOTHING {
+        ui.scope_builder(egui::UiBuilder::new().max_rect(zones.zoom), |ui| {
+            canvas_chrome::tool_group(ui, &theme, |ui| {
+                ui.horizontal(|ui| {
+                    if canvas_chrome::action(
+                        ui,
+                        "Fit",
+                        "Fit the current world/scene to the canvas",
+                        &theme,
+                    ) {
+                        if state.world_mode {
+                            if let Some((_, size)) = state.world_doc.materialized_bounds() {
+                                let fx = canvas.width() / size[0] as f32 / 32.0;
+                                let fy = canvas.height() / size[1] as f32 / 32.0;
+                                state.zoom = fx.min(fy).clamp(0.125, 16.0) * 0.92;
+                                state.pan = egui::Vec2::ZERO;
+                            }
+                        } else {
+                            let size = state.scene.size;
+                            focus_mapping_zone(state, [0, 0], size);
+                        }
+                    }
+                    if canvas_chrome::action(ui, "−", "Zoom out · Ctrl+-", &theme) {
+                        zoom_canvas_by(state, canvas.center(), canvas, 0.8);
+                    }
+                    ui.small(format!("{:.0}%", state.zoom * 100.0));
+                    if canvas_chrome::action(ui, "+", "Zoom in · Ctrl+=", &theme) {
+                        zoom_canvas_by(state, canvas.center(), canvas, 1.25);
+                    }
+                });
+            });
+        });
+    }
+}
+
+fn canvas_animation_control_rect(canvas: egui::Rect, rulers: bool) -> egui::Rect {
+    let x = canvas.left() + 8.0 + if rulers { canvas_rulers::LEFT } else { 0.0 };
+    egui::Rect::from_min_size(
+        egui::pos2(x, canvas.bottom() - 33.0),
+        egui::vec2(108.0, 27.0),
+    )
+}
+
+// One compact canvas-owned Animation control, bottom-left and never over gameplay.
+fn draw_canvas_animation_toggle(ui: &mut egui::Ui, state: &mut Studio) {
+    let rect = state.canvas_rect;
+    if rect.width() < 200.0 || rect.height() < 100.0 {
+        return;
+    }
+    let anchor = canvas_animation_control_rect(
+        rect,
+        canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+    );
+    // Keep theme styling independent from the mutable layout state used by the toggle.
+    let theme = state.editor_layout.editor_theme.clone();
+    ui.scope_builder(egui::UiBuilder::new().max_rect(anchor), |ui| {
+        canvas_chrome::tool_group(ui, &theme, |ui| {
+            if canvas_chrome::toggle(
+                ui,
+                if state.editor_layout.timeline_open {
+                    "▾ Animation"
+                } else {
+                    "▴ Animation"
+                },
+                state.editor_layout.timeline_open,
+                "Expand or collapse the source-backed animation timeline below the canvas",
+                &theme,
+            ) {
+                state.editor_layout.timeline_open = !state.editor_layout.timeline_open;
+                save_editor_layout(state);
+            }
+        });
+    });
+}
+
+/// Shared bottom timeline owns preview time, not the asset document or game clock.
+/// Selecting a source-backed animated terrain vertex exposes actual frame art
+/// and durations from the same cache used by the world renderer.
+fn draw_animation_timeline(viewport_ui: &mut egui::Ui, state: &mut Studio) {
+    if !state.editor_layout.timeline_open {
+        return;
+    }
+    let height = state.editor_layout.timeline_height;
+    egui::Panel::bottom("havenwild.animation.timeline")
+        .resizable(false)
+        .exact_size(height)
+        .frame(egui::Frame::NONE.fill(canvas_chrome::panel_fill(&state.editor_layout.editor_theme)))
+        .show(viewport_ui, |ui| {
+            ui.horizontal(|ui| {
+                ui.strong("Animation Timeline");
+                if canvas_chrome::action(
+                    ui,
+                    if state.editor_layout.timeline_open { "▾" } else { "▴" },
+                    "Collapse/expand the canvas-owned animation timeline",
+                    &state.editor_layout.editor_theme,
+                ) {
+                    state.editor_layout.timeline_open = !state.editor_layout.timeline_open;
+                    save_editor_layout(state);
+                }
+                if canvas_chrome::action(ui, "|◀", "Rewind animation preview", &state.editor_layout.editor_theme) {
+                    state.animation_preview_ms = 0.0;
+                }
+                if canvas_chrome::toggle(ui, if state.editor_layout.timeline_playing { "Pause" } else { "Play" }, state.editor_layout.timeline_playing, "Pause/play the editor world-animation preview", &state.editor_layout.editor_theme) {
+                    state.editor_layout.timeline_playing = !state.editor_layout.timeline_playing;
+                    save_editor_layout(state);
+                }
+                if canvas_chrome::action(ui, "▶|", "Advance preview 200 ms", &state.editor_layout.editor_theme) {
+                    state.editor_layout.timeline_playing = false;
+                    state.animation_preview_ms = (state.animation_preview_ms + 200.0).rem_euclid(60_000.0);
+                    save_editor_layout(state);
+                }
+                ui.small(format!("{:.0} ms", state.animation_preview_ms));
+                if !state.editor_layout.timeline_open { ui.small("· source-backed preview"); }
+            });
+            if !state.editor_layout.timeline_open { return; }
+            let grip = ui.allocate_response(egui::vec2(ui.available_width(), 9.0), egui::Sense::drag())
+                .on_hover_cursor(egui::CursorIcon::ResizeVertical)
+                .on_hover_text("Drag the timeline upper edge to resize");
+            ui.painter().hline(grip.rect.left()..=grip.rect.right(), grip.rect.center().y,
+                egui::Stroke::new(2.0, egui::Color32::from_gray(100)));
+            if grip.dragged() {
+                state.editor_layout.timeline_height = (state.editor_layout.timeline_height
+                    - grip.drag_delta().y).clamp(100.0, 400.0);
+                ui.ctx().request_repaint();
+            }
+            if grip.drag_stopped() { save_editor_layout(state); }
+            let mut preview = state.animation_preview_ms;
+            if ui.add(egui::Slider::new(&mut preview, 0.0..=10_000.0)
+                .text("Scrub ms")).changed() {
+                state.animation_preview_ms = preview;
+                state.editor_layout.timeline_playing = false;
+                save_editor_layout(state);
+            }
+            let selected_vertex = state.world_selected;
+            let preview_parts = if state.world_mode {
+                cached_world_vertex_visual(state, selected_vertex)
+                    .into_iter().flat_map(|visual| visual.parts)
+                    .filter_map(|part| part.animation).collect::<Vec<_>>()
+            } else { Vec::new() };
+            if let Some(animation) = preview_parts.first() {
+                ui.horizontal(|ui| {
+                    ui.small(format!("World cell {},{} · {} source frames · {} ms loop",
+                        state.world_selected[0], state.world_selected[1],
+                        animation.frames.len(), animation.total_duration_ms));
+                });
+                egui::ScrollArea::horizontal().id_salt("havenwild.timeline.frames").show(ui, |ui| {
+                    ui.horizontal(|ui| {
+                        let mut frame_start = 0u64;
+                        for (index, frame) in animation.frames.iter().enumerate() {
+                            let (rect, response) = ui.allocate_exact_size(egui::vec2(48.0, 42.0), egui::Sense::click());
+                            if let Some(texture) = state.sheets[frame.sheet_index].texture {
+                                ui.painter().image(texture, rect.shrink(3.0),
+                                    source_uv(frame.source_rect, state.sheets[frame.sheet_index].size),
+                                    egui::Color32::WHITE);
+                            }
+                            ui.painter().rect_stroke(rect, 2.0, egui::Stroke::new(1.0,
+                                egui::Color32::from_gray(100)), egui::StrokeKind::Inside);
+                            if response.clicked() {
+                                state.animation_preview_ms = (frame_start + animation.total_duration_ms
+                                    - animation.phase_ms % animation.total_duration_ms) as f64
+                                    % animation.total_duration_ms as f64;
+                                state.editor_layout.timeline_playing = false;
+                            }
+                            response.on_hover_text(format!("Frame {} · {} ms · click to preview", index + 1, frame.duration_ms));
+                            frame_start += u64::from(frame.duration_ms);
+                        }
+                    });
+                });
+            } else {
+                ui.small("Select an animated water/shore vertex to inspect its original frames. Playback uses source-authored timings.");
+            }
+        });
+}
+
 fn draw_tool_context(viewport_ui: &mut egui::Ui, state: &mut Studio) {
     if !state.editor_layout.tool_context_open {
         return;
     }
+    // One resizable dock contains exactly three sections: mode-specific tools,
+    // Pixel Studio, and Scene Navigator. No parallel 62px tool rail exists.
+    let preferred_width = state.editor_layout.authoring_context_width;
     egui::Panel::left("havenwild.tool.context")
         .resizable(true)
-        .default_size(state.editor_layout.authoring_context_width)
-        .min_size(240.0)
-        .max_size(352.0)
-        .frame(egui::Frame::NONE.fill(egui::Color32::from_rgb(27, 34, 39)))
+        .default_size(preferred_width)
+        .min_size(210.0)
+        .max_size(490.0)
+        .frame(egui::Frame::NONE.fill(canvas_chrome::panel_fill(&state.editor_layout.editor_theme)))
         .show(viewport_ui, |ui| {
-            let height = ui.available_height().max(140.0);
-            let max_top = (height - 105.0).max(120.0);
+            let height = ui.available_height().max(330.0);
             let top_height = state
                 .editor_layout
                 .authoring_top_height
-                .clamp(105.0, max_top);
+                .clamp(125.0, (height - 260.0).max(125.0));
             ui.allocate_ui(egui::vec2(ui.available_width(), top_height), |ui| {
                 egui::ScrollArea::vertical()
-                    .id_salt("havenwild.authoring.tooling")
-                    .show(ui, |ui| draw_authoring_tooling(ui, state));
+                    .id_salt("havenwild.studio.mode_tools")
+                    .auto_shrink([false, false])
+                    .show(ui, |ui| {
+                        ui.strong("MODE & TOOLS");
+                        draw_tool_rail(ui, state);
+                        ui.separator();
+                        draw_authoring_tooling(ui, state);
+                        draw_authoring_brush_settings(ui, state);
+                    });
             });
-            let adjusted = authoring_splitter(
+            if authoring_splitter(
                 ui,
                 &mut state.editor_layout.authoring_top_height,
-                105.0,
-                max_top,
-            );
-            if adjusted {
+                125.0,
+                (height - 260.0).max(125.0),
+            ) {
                 save_editor_layout(state);
             }
-            ui.strong("TOOL CONTEXT");
+            let middle_height = state
+                .editor_layout
+                .authoring_middle_height
+                .clamp(120.0, (height - top_height - 120.0).max(120.0));
+            ui.allocate_ui(egui::vec2(ui.available_width(), middle_height), |ui| {
+                egui::ScrollArea::vertical()
+                    .id_salt("havenwild.studio.pixel")
+                    .auto_shrink([false, false])
+                    .show(ui, |ui| {
+                        draw_pixel_studio(ui, state);
+                    });
+            });
+            if authoring_splitter(
+                ui,
+                &mut state.editor_layout.authoring_middle_height,
+                120.0,
+                (height - top_height - 120.0).max(120.0),
+            ) {
+                save_editor_layout(state);
+            }
             egui::ScrollArea::vertical()
-                .id_salt("havenwild.authoring.active_tool")
-                .show(ui, |ui| draw_authoring_brush_settings(ui, state));
+                .id_salt("havenwild.studio.navigator")
+                .show(ui, |ui| {
+                    draw_scene_navigator(ui, state);
+                    // Legacy optional Library destination remains available for
+                    // layouts intentionally configured this way. One browser only.
+                    if state.editor_layout.library_in_left_workspace
+                        && state.editor_layout.library_open
+                        && !state.editor_layout.library_floating
+                        && !state.editor_layout.library_in_inspector
+                    {
+                        ui.separator();
+                        egui::CollapsingHeader::new("LIBRARY / PALETTE")
+                            .show(ui, |ui| draw_authoring_library(ui, state));
+                    }
+                });
             let width = ui.max_rect().width();
-            if (width - state.editor_layout.authoring_context_width).abs() > 2.0 && width >= 240.0 {
+            if (width - state.editor_layout.authoring_context_width).abs() > 2.0 && width >= 210.0 {
                 state.editor_layout.authoring_context_width = width;
                 save_editor_layout(state);
             }
@@ -8158,20 +8865,66 @@ fn draw_tool_context(viewport_ui: &mut egui::Ui, state: &mut Studio) {
 }
 
 fn draw_inspector_rail(viewport_ui: &mut egui::Ui, state: &mut Studio) {
-    let width = (viewport_ui.ctx().viewport_rect().width() * 0.15).max(100.0);
+    if !state.editor_layout.workspace.right.open {
+        return;
+    }
+    let width = state
+        .editor_layout
+        .workspace
+        .right
+        .extent
+        .clamp(180.0, 700.0);
+    let mut measured_width = width;
     egui::Panel::right("havenwild.inspector.rail")
-        .resizable(false)
+        .resizable(true)
         .default_size(width)
+        .size_range(180.0..=700.0)
         .frame(egui::Frame::NONE.fill(egui::Color32::from_rgb(27, 34, 39)))
         .show(viewport_ui, |ui| {
-            ui.set_min_width(width);
-            ui.set_max_width(width);
+            measured_width = ui.max_rect().width();
             let drawer_height = if state.editor_layout.metrics_drawer_open { 228.0 } else { 0.0 };
-            let content_height = (ui.available_height() - drawer_height - 10.0).max(80.0);
-            egui::ScrollArea::vertical().max_height(content_height).show(ui, |ui| {
+            let library_here = state.editor_layout.library_in_inspector && state.editor_layout.library_open
+                && !state.editor_layout.library_floating;
+            let split_available = (ui.available_height() - drawer_height - 32.0).max(240.0);
+            let library_height = if library_here {
+                split_available * (1.0 - state.editor_layout.inspector_split_ratio)
+            } else { 0.0 };
+            let content_height = if library_here {
+                split_available - library_height
+            } else {
+                (ui.available_height() - drawer_height - 28.0).max(80.0)
+            };
+            // Reserve the Inspector's full half even when its content is short.
+            // Otherwise the browser shifts up instead of forming a 50/50 dock.
+            egui::ScrollArea::vertical().max_height(content_height)
+                .auto_shrink([false, false]).show(ui, |ui| {
                 ui.add_space(6.0);
                 ui.heading("Inspector");
+                ui.horizontal_wrapped(|ui| {
+                    for tab in ["Inspect", "World", "Terrain"] {
+                        if ui.selectable_label(state.editor_layout.inspector_tab == tab, tab).clicked() {
+                            state.editor_layout.inspector_tab = tab.to_owned();
+                            // Pixel collision strokes require the explicit World
+                            // authoring tab; the adjacent HUD eye is display-only.
+                            state.editor_layout.structural_open = tab == "World";
+                            if tab != "World" {
+                                state.collision_world_pixel_edit = false;
+                            }
+                            save_editor_layout(state);
+                        }
+                    }
+                });
                 ui.separator();
+                if state.editor_layout.inspector_tab == "World" {
+                    draw_world_properties_contents(ui, state);
+                } else if state.editor_layout.inspector_tab == "Terrain" {
+                    ui.small("Semantic terrain and source-backed Wang rule diagnostics.");
+                    if ui.button("Open Terrain Rules").clicked() {
+                        open_mapper_tab(state, "patterns");
+                    }
+                    ui.small(format!("Selected cell: {},{}", state.world_selected[0], state.world_selected[1]));
+                    ui.small(&state.shoreline_audit_summary);
+                } else {
                 ui.small(format!("Edit: {}", active_tool_label(state)));
                 ui.small(format!("Layer: {:?}", state.active_layer));
                 ui.separator();
@@ -8304,7 +9057,39 @@ fn draw_inspector_rail(viewport_ui: &mut egui::Ui, state: &mut Studio) {
                 } else {
                     ui.small("Select a scene object to inspect its instance and position.");
                 }
+                } // Inspector Inspect tab
             });
+            if state.editor_layout.library_in_inspector && !state.editor_layout.library_floating {
+                ui.separator();
+                ui.horizontal(|ui| {
+                    if ui.small_button(if state.editor_layout.library_open { "▾ Assets" } else { "▴ Assets" }).clicked() {
+                        state.editor_layout.library_open = !state.editor_layout.library_open;
+                        save_editor_layout(state);
+                    }
+                    ui.small("Contextual Asset Browser");
+                });
+                if state.editor_layout.library_open {
+                    let (grip_rect, grip) = ui.allocate_exact_size(
+                        egui::vec2(ui.available_width(), 9.0), egui::Sense::drag());
+                    ui.painter().hline(grip_rect.left()..=grip_rect.right(), grip_rect.center().y,
+                        egui::Stroke::new(1.5, egui::Color32::from_gray(110)));
+                    let grip = grip.on_hover_cursor(egui::CursorIcon::ResizeVertical)
+                        .on_hover_text("Drag up/down to resize Inspector asset browser");
+                    if grip.dragged() {
+                        state.editor_layout.inspector_split_ratio =
+                            (state.editor_layout.inspector_split_ratio
+                                + grip.drag_delta().y / split_available).clamp(0.20, 0.80);
+                        ui.ctx().request_repaint();
+                    }
+                    if grip.drag_stopped() { save_editor_layout(state); }
+                    ui.allocate_ui(egui::vec2(ui.available_width(), library_height.max(110.0)), |ui| {
+                        egui::ScrollArea::vertical().id_salt("havenwild.inspector.asset_library")
+                            .max_height(library_height.max(110.0))
+                            .auto_shrink([false, false])
+                            .show(ui, |ui| draw_authoring_library(ui, state));
+                    });
+                }
+            }
             // Reserving inspector-only height keeps the diagnostics below its content,
             // rather than floating over the world canvas or stealing a third dock.
             if state.editor_layout.metrics_drawer_open {
@@ -8369,15 +9154,31 @@ fn draw_inspector_rail(viewport_ui: &mut egui::Ui, state: &mut Studio) {
                 }
             }
         });
+    // Persist only after resizing completes; world/asset state is untouched.
+    if viewport_ui
+        .ctx()
+        .input(|input| input.pointer.any_released())
+        && (measured_width - state.editor_layout.workspace.right.extent).abs() > 1.0
+    {
+        state.editor_layout.workspace.right.extent = measured_width.clamp(180.0, 700.0);
+        save_editor_layout(state);
+    }
 }
 
 /// Pixel-space exclusion zone for the canvas-integrated Layers controls.
 /// World/object hit tests use the same rectangle before accepting a stroke.
-fn canvas_layer_rect(canvas: egui::Rect, expanded: bool) -> egui::Rect {
-    let width = if expanded { 70.0 } else { 40.0 };
-    let height = if expanded { 336.0 } else { 40.0 };
+fn canvas_layer_rect(canvas: egui::Rect, expanded: bool, rulers: bool) -> egui::Rect {
+    // Two independent buttons share the same top row, and only this small
+    // opaque, click-owned cluster excludes strokes from the world canvas.
+    let width = 84.0;
+    let height = if expanded { 282.0 } else { 40.0 };
+    let inset = if rulers {
+        egui::vec2(canvas_rulers::LEFT, canvas_rulers::TOP)
+    } else {
+        egui::Vec2::ZERO
+    };
     egui::Rect::from_min_size(
-        canvas.min + egui::vec2(10.0, 10.0),
+        canvas.min + inset + egui::vec2(10.0, 10.0),
         egui::vec2(width, height),
     )
 }
@@ -8391,7 +9192,11 @@ fn draw_layer_rail(canvas_ui: &mut egui::Ui, state: &mut Studio) {
         return;
     }
     let expanded = state.editor_layout.layers_dock_open;
-    let rect = canvas_layer_rect(canvas, expanded);
+    let rect = canvas_layer_rect(
+        canvas,
+        expanded,
+        canvas_rulers::visible(state.editor_layout.rulers_visible, state.focus_mode),
+    );
     state.canvas_layers_rect = rect;
     canvas_ui.scope_builder(
         egui::UiBuilder::new()
@@ -8399,28 +9204,45 @@ fn draw_layer_rail(canvas_ui: &mut egui::Ui, state: &mut Studio) {
             .layout(egui::Layout::top_down(egui::Align::Min)),
         |ui| {
             ui.set_clip_rect(canvas);
-            let toggle_rect = ui.cursor();
+            // Canvas overlay: Layers expands the strip; Collision is view-only.
+            // A solid backing makes these tools readable over shoreline art.
+            // Both stay visible even when the layers themselves are collapsed.
+            let header = ui.cursor();
             ui.painter().rect_filled(
-                egui::Rect::from_min_size(toggle_rect.min, egui::vec2(36.0, 31.0)),
+                egui::Rect::from_min_size(header.min, egui::vec2(84.0, 33.0)),
                 5.0,
-                egui::Color32::from_black_alpha(175),
+                canvas_chrome::panel_fill(&state.editor_layout.editor_theme),
             );
-            if rail_icon_button(
-                ui,
-                RailIcon::Layers,
-                expanded,
-                if expanded {
-                    "Collapse canvas Layers"
-                } else {
-                    "Expand canvas Layers"
-                },
-                [36.0, 31.0],
-            )
-            .clicked()
-            {
-                state.editor_layout.layers_dock_open = !expanded;
-                save_editor_layout(state);
-            }
+            ui.horizontal(|ui| {
+                if rail_icon_button(
+                    ui,
+                    RailIcon::Layers,
+                    expanded,
+                    if expanded {
+                        "Collapse canvas Layers"
+                    } else {
+                        "Expand canvas Layers"
+                    },
+                    [36.0, 31.0],
+                )
+                .clicked()
+                {
+                    state.editor_layout.layers_dock_open = !expanded;
+                    save_editor_layout(state);
+                }
+                if rail_icon_button(
+                    ui,
+                    RailIcon::Collision,
+                    state.editor_layout.collision_overlay,
+                    "Show/hide collision visualization only — no edit mode or dialog",
+                    [36.0, 31.0],
+                )
+                .clicked()
+                {
+                    state.editor_layout.collision_overlay = !state.editor_layout.collision_overlay;
+                    save_editor_layout(state);
+                }
+            });
             if !expanded {
                 return;
             }
@@ -8460,7 +9282,7 @@ fn draw_layer_rail(canvas_ui: &mut egui::Ui, state: &mut Studio) {
                 ui.painter().rect_filled(
                     egui::Rect::from_min_size(row_rect.min, egui::vec2(62.0, 27.0)),
                     4.0,
-                    egui::Color32::from_black_alpha(155),
+                    canvas_chrome::panel_fill(&state.editor_layout.editor_theme),
                 );
                 ui.horizontal(|ui| {
                     if rail_icon_button(
@@ -8481,6 +9303,7 @@ fn draw_layer_rail(canvas_ui: &mut egui::Ui, state: &mut Studio) {
                     .clicked()
                     {
                         state.editor_layout.world_layer_visibility[slot] = !visible;
+                        state.layer_isolate.cancel();
                         save_editor_layout(state);
                         state.message = format!(
                             "{} layer {}.",
@@ -8499,40 +9322,29 @@ fn draw_layer_rail(canvas_ui: &mut egui::Ui, state: &mut Studio) {
                     {
                         let isolate = ui.input(|input| input.modifiers.shift);
                         state.active_layer = id;
-                        if isolate {
-                            state.editor_layout.world_layer_visibility = [false; 7];
-                            state.editor_layout.world_layer_visibility[slot] = true;
-                        }
+                        let now_isolated = if isolate {
+                            state
+                                .layer_isolate
+                                .toggle(&mut state.editor_layout.world_layer_visibility, slot)
+                        } else {
+                            false
+                        };
                         state.selected_object_id = None;
                         state.dragging_object = None;
                         state.drag_preview_origin = None;
                         state.world_selected_object = None;
                         state.world_dragging_object = None;
                         state.world_drag_preview_anchor = None;
-                        state.message = if isolate {
-                            format!("Isolated {label} layer.")
+                        state.message = if now_isolated {
+                            format!("Isolated {label} layer (Shift-click again to restore).")
+                        } else if isolate {
+                            format!("Restored previous layer visibility; active layer: {label}.")
                         } else {
                             format!("Active visual layer: {label}.")
                         };
                         save_editor_layout(state);
                     }
                 });
-            }
-            ui.add_space(2.0);
-            if rail_icon_button(
-                ui,
-                RailIcon::Collision,
-                state.editor_layout.collision_overlay,
-                "Toggle collision overlay · detailed editing in World Properties",
-                [55.0, 27.0],
-            )
-            .clicked()
-            {
-                state.editor_layout.collision_overlay = !state.editor_layout.collision_overlay;
-                if state.editor_layout.collision_overlay {
-                    state.editor_layout.structural_open = true;
-                }
-                save_editor_layout(state);
             }
         },
     );
@@ -9023,6 +9835,10 @@ mod egui_source_alpha_tests {
 
 fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time>) -> Result {
     let dt = time.delta_secs();
+    if state.editor_layout.timeline_playing && dt.is_finite() {
+        state.animation_preview_ms =
+            (state.animation_preview_ms + f64::from(dt.max(0.0)) * 1000.0).rem_euclid(60_000.0);
+    }
     if dt > 0.001 {
         let fps = 1.0 / dt;
         state.display_fps = if state.display_fps <= 0.0 {
@@ -9046,6 +9862,7 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
     }
     if !state.creator_visuals_applied {
         apply_creator_visuals(ctx, &state.theme);
+        canvas_chrome::apply_theme(ctx, &state.editor_layout.editor_theme);
         state.creator_visuals_applied = true;
     }
     if ctx.input(|input| input.key_pressed(egui::Key::Escape)) {
@@ -9294,8 +10111,19 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                 });
                 if ui.checkbox(&mut state.editor_layout.mapping_status_visible, "Show reviewed-source markers (when present)").changed() { save_editor_layout(&mut state); }
                 if ui.checkbox(&mut state.editor_layout.inspect_alpha, "Inspect selected tile transparency").changed() { save_editor_layout(&mut state); }
-                if ui.checkbox(&mut state.editor_layout.structural_open, "Collision / Elevation panel (overlay)").changed() { save_editor_layout(&mut state); }
-                ui.small("Object properties are always visible in the right Inspector when an object is selected.");
+                if ui.button("World Properties in Inspector").clicked() {
+                    state.editor_layout.workspace.right.open = true;
+                    state.editor_layout.inspector_tab = "World".into();
+                    state.editor_layout.structural_open = true;
+                    save_editor_layout(&mut state);
+                }
+                if ui.checkbox(&mut state.editor_layout.workspace.right.open, "Right Inspector / Asset Browser dock").changed() {
+                    save_editor_layout(&mut state);
+                }
+                if ui.checkbox(&mut state.editor_layout.tool_context_open, "Left three-section tooling dock").changed() {
+                    save_editor_layout(&mut state);
+                }
+                ui.small("Panels can be collapsed independently; drag the Inspector edge to resize it.");
                 if ui.checkbox(&mut state.focus_mode, "Focus canvas     F11").changed() && state.focus_mode {
                     state.tool = CanvasTool::Select;
                 }
@@ -9327,6 +10155,16 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                     state.launcher_open = !state.launcher_open;
                 }
                 ui.small("Editor applications are launched from one authoritative surface.");
+            });
+            ui.menu_button("Theme", |ui| {
+                for preset in canvas_chrome::THEME_NAMES {
+                    if ui.selectable_label(state.editor_layout.editor_theme == preset, preset).clicked() {
+                        state.editor_layout.editor_theme = preset.to_owned();
+                        state.creator_visuals_applied = false;
+                        save_editor_layout(&mut state);
+                        ui.close();
+                    }
+                }
             });
             ui.menu_button("Help", |ui| {
                 ui.label("Active Summer visual study uses original PNGs unchanged over a pinned River-ground fixture; never replace source pixels.");
@@ -9412,22 +10250,6 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                     if state.playtest.is_some() || state.world_playtest.is_some() { stop_playtest(&mut state); } else { start_playtest(&mut state); }
                 }
                 ui.separator();
-                if ui
-                    .selectable_label(state.editor_layout.chunk_grid_visible, "Chunks")
-                    .on_hover_text("Toggle world chunk outlines and coordinates. World mode shows real materialized 32×32 chunk boundaries; Summer scene mode shows authoring coordinates.")
-                    .clicked()
-                {
-                    state.editor_layout.chunk_grid_visible = !state.editor_layout.chunk_grid_visible;
-                    save_editor_layout(&mut state);
-                }
-                if ui
-                    .selectable_label(state.editor_layout.tile_grid_visible, "Tiles")
-                    .on_hover_text("Toggle the logical terrain-cell grid over the authored scene.")
-                    .clicked()
-                {
-                    state.editor_layout.tile_grid_visible = !state.editor_layout.tile_grid_visible;
-                    save_editor_layout(&mut state);
-                }
             });
         });
     }
@@ -9493,6 +10315,8 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                     ));
                 }
                 ui.separator();
+                ui.small(format!("{:.0} FPS", state.display_fps));
+                ui.separator();
                 ui.small(&state.message);
                 ui.separator();
                 if ui
@@ -9526,11 +10350,10 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
     } else if !state.focus_mode && state.playtest.is_none() && state.world_playtest.is_none() {
         draw_inspector_rail(&mut viewport_ui, &mut state);
         draw_library_dock(&mut viewport_ui, &mut state);
-        draw_tool_rail(&mut viewport_ui, &mut state);
         draw_tool_context(&mut viewport_ui, &mut state);
         draw_floating_library(ctx, &mut state);
         // Terrain materials now live in the left tool context, not a floating duplicate.
-        draw_structural_panel(&mut viewport_ui, &mut state);
+        state.structural_rect = egui::Rect::NOTHING;
         draw_mapper_surface(&mut viewport_ui, &mut state);
         draw_world_generator_panel(ctx, &mut state);
         draw_app_launcher(ctx, &mut state);
@@ -9539,6 +10362,15 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
         state.structural_rect = egui::Rect::NOTHING;
         state.world_generator_rect = egui::Rect::NOTHING;
         state.launcher_rect = egui::Rect::NOTHING;
+    }
+
+    // Both bottom surfaces are reserved only from the canvas region between the
+    // left and right docks, never across the entire application viewport.
+    if !state.focus_mode {
+        draw_console_dock(&mut viewport_ui, &mut state);
+        if state.playtest.is_none() && state.world_playtest.is_none() {
+            draw_animation_timeline(&mut viewport_ui, &mut state);
+        }
     }
 
     egui::CentralPanel::default()
@@ -9553,6 +10385,8 @@ fn draw_ui(mut contexts: EguiContexts, mut state: ResMut<Studio>, time: Res<Time
                 && state.room_authoring.is_none()
             {
                 draw_layer_rail(ui, &mut state);
+                draw_canvas_view_controls(ui, &mut state);
+                draw_canvas_animation_toggle(ui, &mut state);
             }
         });
     // Properties belong to the permanent right Inspector dock. No duplicate popup.
